@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usuarios y permisos · Prototipo en código</title>
+  <meta name="description" content="Prototipo recreado en código del caso Usuarios y permisos. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/casos.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!--
+  data-paso="0" → cargando · data-paso="1" → cuenta sin integrantes (estado inicial del flujo "Agregar integrante").
+  Abrí la página con ?paso=0 para congelar el estado de carga.
+-->
+<body data-paso="0" data-n="0" data-sidebar="colapsado" data-tipo-cuenta="propia">
+  <script>
+    /* Caso particular: ?2fa=off muestra "Usuarios y permisos" bloqueado por tener la autenticación de dos factores desactivada */
+    if (new URLSearchParams(window.location.search).get("2fa") === "off") document.body.setAttribute("data-2fa", "off");
+  </script>
+  <script src="js/sidebar-estado.js"></script>
+  <script src="js/icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <header class="app-header">
+    <button class="btn btn--ghost btn--secondary btn--sm btn--icon header__menu is-muted" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+
+    <a class="header__logo" href="dashboard.html" aria-label="Nubix, ir al inicio">
+      <img src="assets/nubix-logo.svg" alt="" width="73" height="21">
+    </a>
+    <a class="header__promo header__promo--desktop" href="#" data-pending="Referidos: fuera del alcance de este prototipo">
+      <span class="header__promo-text">Comparte y gana hasta <b>USD 250</b></span>
+    </a>
+
+    <div class="header__actions">
+      <a class="header__promo header__promo--mobile" href="#" aria-label="Comparte y gana hasta USD 250" data-pending="Referidos: fuera del alcance de este prototipo">
+        <svg class="header__promo-icon" aria-hidden="true"><use href="#i-loyalty"/></svg>
+      </a>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Regalos" data-pending="Regalos: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-card-giftcard"/></svg>
+        </button>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Carrito, 2 productos" data-pending="Carrito: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Notificaciones, 2 sin leer" data-pending="Notificaciones: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-notifications"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <button class="header__avatar" type="button" aria-label="Menú de la cuenta de Matías Roldán" aria-haspopup="true" aria-expanded="false" aria-controls="account-pop" style="background:none;border:0;padding:0;border-radius:50%;cursor:pointer">
+        <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+      </button>
+    </div>
+  </header>
+
+  <!-- Popover de la cuenta (Popover · Cuenta): se abre desde el avatar del header. Tres variantes según body[data-tipo-cuenta]:
+       propia (con "Usuarios y permisos") · con-cuentas (la propia + "Cambiar cuenta" al hub; no está en Figma) · sin-asociadas (sin esa opción: la cuenta no tiene integrantes ni invitaciones y el usuario no aceptó ninguna cuenta ajena; lo calcula app.js en body[data-asociada]) · invitada (estás dentro de la cuenta de otra persona; se usará con esas pantallas) -->
+  <div class="account-pop" id="account-pop" role="group" aria-label="Menú de la cuenta" hidden>
+    <div class="account-pop__body pop-own">
+      <div class="pop-head">
+        <p class="pop-name">Matías Roldán</p>
+        <p class="pop-client">Nº cliente: 204817<button class="pop-copy" type="button" aria-label="Copiar número de cliente" data-copiar="204817"><svg class="icon icon--13" aria-hidden="true"><use href="#i-content-copy"/></svg></button></p>
+      </div>
+      <div class="pop-sep"></div>
+      <ul class="pop-group">
+        <li><a class="menu-item" href="#" data-pending="Datos personales: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg><span class="menu-item__label">Datos personales</span></a></li>
+        <li><a class="menu-item" href="#" data-pending="Seguridad y accesos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-key"/></svg><span class="menu-item__label">Seguridad y accesos</span></a></li>
+        <li class="pop-usuarios"><a class="menu-item" href="#" data-pop-usuarios><svg class="icon" aria-hidden="true"><use href="#i-supervisor-account"/></svg><span class="menu-item__label">Usuarios y permisos</span></a></li>
+      </ul>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <!-- Variante "con-cuentas" (no está en Figma): quien tiene cuentas ajenas aceptadas vuelve al hub para cambiar de cuenta -->
+        <a class="menu-item pop-item--hug pop-cambiar" href="hub.html"><svg class="icon" aria-hidden="true"><use href="#i-swap-horiz"/></svg><span class="menu-item__label">Cambiar cuenta</span></a>
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+    <div class="account-pop__body pop-guest">
+      <div class="pop-head pop-head--guest">
+        <p class="pop-caption">Estás en la cuenta de:</p>
+        <p class="pop-name">Valeria Cardozo</p>
+        <p class="pop-client">Nº cliente: 847213<button class="pop-copy" type="button" aria-label="Copiar número de cliente" data-copiar="847213"><svg class="icon icon--13" aria-hidden="true"><use href="#i-content-copy"/></svg></button></p>
+        <p class="pop-role">Tu rol: Gestión técnica</p>
+      </div>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <a class="menu-item pop-item--hug" href="hub.html"><svg class="icon" aria-hidden="true"><use href="#i-swap-horiz"/></svg><span class="menu-item__label">Cambiar cuenta</span></a>
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <!-- Secciones y subítems: los del sistema de diseño (Sidebar desktop / mobile). Colapsado: solo íconos, tooltip al pasar el mouse y popover con los subítems al hacer clic.
+           Expandido (desktop) y drawer (mobile): lista completa con acordeón. -->
+      <div class="sidebar__head">
+        <a class="sidebar__logo" href="dashboard.html" aria-label="Nubix, ir al inicio"><img src="assets/nubix-logo.svg" alt="" width="71" height="20"></a>
+        <button class="btn btn--ghost btn--secondary btn--sm btn--icon sidebar__close" type="button" id="sidebar-close" aria-label="Cerrar menú"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <ul class="sidebar__list" id="sidebar-list">
+        <li><a class="menu-item" href="dashboard.html" data-nav="inicio"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="menu-item__label">Inicio</span></a></li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-productos"><svg class="icon" aria-hidden="true"><use href="#i-grid-view"/></svg><span class="menu-item__label">Mis productos</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-productos" role="group" aria-label="Mis productos" hidden>
+            <p class="subnav__title" aria-hidden="true">Mis productos</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="dominios" data-pending="Mis productos › Dominios: fuera del alcance de este prototipo">Dominios</a></li>
+            <li><a class="sub-item" href="#" data-nav="web-hosting" data-pending="Mis productos › Web Hosting: fuera del alcance de este prototipo">Web Hosting</a></li>
+            <li><a class="sub-item" href="#" data-nav="ssl" data-pending="Mis productos › Certificados SSL: fuera del alcance de este prototipo">Certificados SSL</a></li>
+            <li><a class="sub-item" href="#" data-nav="cloud" data-pending="Mis productos › Cloud: fuera del alcance de este prototipo">Cloud</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-catalogo"><svg class="icon" aria-hidden="true"><use href="#i-dashboard-customize"/></svg><span class="menu-item__label">Catálogo</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-catalogo" role="group" aria-label="Catálogo" hidden>
+            <p class="subnav__title" aria-hidden="true">Catálogo</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="sitiolisto" data-pending="Catálogo › SitioListo: fuera del alcance de este prototipo">SitioListo</a></li>
+            <li><a class="sub-item" href="#" data-nav="flowmail" data-pending="Catálogo › FlowMail: fuera del alcance de este prototipo">FlowMail</a></li>
+            <li><a class="sub-item" href="#" data-nav="escudo-web" data-pending="Catálogo › Escudo Web: fuera del alcance de este prototipo">Escudo Web</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a class="menu-item" href="#" data-nav="facturas" data-pending="Facturas y pagos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-monetization-on"/></svg><span class="menu-item__label">Facturas y pagos</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="ayuda" data-pending="Centro de ayuda: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-question-answer"/></svg><span class="menu-item__label">Centro de ayuda</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="partners" data-pending="Partners: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-work"/></svg><span class="menu-item__label">Partners</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="documentacion" data-pending="Documentación: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-handyman"/></svg><span class="menu-item__label">Documentación</span></a></li>
+      </ul>
+      <button class="sidebar__toggle" type="button" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-list" aria-label="Expandir menú lateral">
+        <svg class="icon icon--16 i-expand" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <svg class="icon icon--16 i-collapse" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+      </button>
+    </aside>
+
+    <!-- Menú de acciones mobile (Sidebar mobile · Service=Cuenta): "Secciones" = el menú contextual de Mi cuenta, que en mobile no tiene lugar en pantalla.
+         Se abre desde el ⋮ del título. La lista se copia del menú contextual al iniciar (menu.js). -->
+    <div class="drawer-ctx" id="drawer-secciones" role="dialog" aria-modal="true" aria-labelledby="drawer-secciones-title">
+      <div class="drawer-ctx__head">
+        <h2 class="drawer-ctx__title" id="drawer-secciones-title">Secciones</h2>
+        <button class="drawer-ctx__close" type="button" id="drawer-secciones-close" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <nav class="drawer-ctx__body" aria-label="Mi cuenta"></nav>
+    </div>
+
+    <div class="app-body">
+      <nav class="contextual" aria-label="Mi cuenta">
+        <ul>
+          <li><a class="menu-item" href="#" data-pending="Datos personales: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg><span class="menu-item__label">Datos personales</span></a></li>
+          <li><a class="menu-item" href="#" data-pending="Seguridad y accesos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-key"/></svg><span class="menu-item__label">Seguridad y accesos</span></a></li>
+          <li><a class="menu-item" href="#" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-group"/></svg><span class="menu-item__label">Usuarios y permisos</span></a></li>
+          <li><a class="menu-item" href="#" data-pending="Sesiones activas: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-computer"/></svg><span class="menu-item__label">Sesiones activas</span></a></li>
+          <li><a class="menu-item" href="#" data-pending="Información de pago: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-request-quote"/></svg><span class="menu-item__label">Información de pago</span></a></li>
+          <li><a class="menu-item" href="#" data-pending="Servicios contratados: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-mark-email-read"/></svg><span class="menu-item__label">Servicios contratados</span></a></li>
+        </ul>
+      </nav>
+
+      <main class="service" id="main">
+        <!-- Vista 1: Usuarios y permisos (lista) -->
+        <div class="vista" id="vista-lista">
+        <div class="identity">
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <ol>
+              <li><a href="dashboard.html">Inicio</a><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></li>
+              <li aria-current="page">Usuarios y permisos</li>
+            </ol>
+          </nav>
+          <div class="identity__row">
+            <h1 class="identity__title">Usuarios y permisos</h1>
+            <button class="btn btn--ghost btn--sm btn--icon identity__more" type="button" aria-label="Más acciones" aria-haspopup="dialog" aria-controls="drawer-secciones" data-secciones>
+              <svg class="icon icon--16" aria-hidden="true"><use href="#i-more-vert"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Caso particular · 2FA desactivado (Figma: "Gestión de usuarios · Bloqueado (2FA desactivado)"): reemplaza a las pestañas y al contenido -->
+        <section class="card gate gate--2fa" id="gate-2fa" aria-labelledby="gate-2fa-title">
+          <div class="ev">
+            <div class="ev__body">
+              <span class="ev__icon" aria-hidden="true"><svg viewBox="8 8 32 32"><path d="M23.0668 11.0141L15.0668 14.0141C14.0268 14.4141 13.3335 15.4007 13.3335 16.5207V22.7874C13.3335 29.5207 17.8802 35.8007 24.0002 37.3341C30.1202 35.8007 34.6668 29.5207 34.6668 22.7874V16.5207C34.6668 15.4141 33.9735 14.4141 32.9335 14.0274L24.9335 11.0274C24.3335 10.7874 23.6668 10.7874 23.0668 11.0141ZM24.0002 29.3341C23.2668 29.3341 22.6668 28.7341 22.6668 28.0007C22.6668 27.2674 23.2668 26.6674 24.0002 26.6674C24.7335 26.6674 25.3335 27.2674 25.3335 28.0007C25.3335 28.7341 24.7335 29.3341 24.0002 29.3341ZM24.0002 24.0007C23.2668 24.0007 22.6668 23.4007 22.6668 22.6674V18.6674C22.6668 17.9341 23.2668 17.3341 24.0002 17.3341C24.7335 17.3341 25.3335 17.9341 25.3335 18.6674V22.6674C25.3335 23.4007 24.7335 24.0007 24.0002 24.0007Z"/></svg></span>
+              <div class="ev__text-group">
+                <h2 class="ev__title" id="gate-2fa-title">Necesitas activar la autenticación de dos factores</h2>
+                <p class="ev__text">Actívala para gestionar tu equipo y las cuentas a las que tienes acceso.</p>
+              </div>
+            </div>
+            <div class="ev__actions">
+              <button class="btn btn--solid btn--primary" type="button" data-pending="Activar autenticación: fuera del alcance de este prototipo">Activar autenticación</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="service__body">
+          <div class="tabs" role="tablist" aria-label="Vista de usuarios y permisos">
+            <button class="tab" type="button" role="tab" id="tab-mi-cuenta" aria-selected="true" aria-controls="panel-mi-cuenta">Mi cuenta</button>
+            <button class="tab" type="button" role="tab" id="tab-asignado" aria-selected="false" aria-controls="panel-otras" tabindex="-1">Asignado a otras cuentas</button>
+          </div>
+
+          <div class="stack" id="panel-mi-cuenta" role="tabpanel" aria-labelledby="tab-mi-cuenta" aria-busy="true">
+            <section class="card banner" aria-labelledby="banner-title">
+              <div class="banner__text">
+                <div class="banner__title-row">
+                  <h2 class="banner__title" id="banner-title">Integrantes de tu cuenta</h2>
+                  <span class="badge badge--info-solid" id="contador">0 / 10</span>
+                  <span class="sr-only" id="contador-sr">integrantes invitados</span>
+                </div>
+                <p class="banner__desc">Invita hasta diez integrantes a tu cuenta. Elige la función de cada uno.</p>
+              </div>
+              <button class="btn btn--solid btn--primary btn--block-mobile" type="button" id="btn-agregar" aria-controls="vista-agregar">
+                <svg class="icon" aria-hidden="true"><use href="#i-add"/></svg>Agregar integrante
+              </button>
+              <div class="loading" aria-hidden="true"><span class="spinner"></span></div>
+            </section>
+
+            <section class="card data-card" aria-label="Integrantes">
+              <div class="titular">
+                <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+                <div class="titular__info">
+                  <div class="titular__name-row">
+                    <span class="titular__name">Matías Roldán</span>
+                    <span class="badge badge--info-light">Titular</span>
+                  </div>
+                  <span class="titular__email">matias.roldan@ejemplo.com</span>
+                </div>
+              </div>
+              <div class="empty">
+                <div class="empty__body">
+                  <span class="empty__icon" aria-hidden="true"><svg class="icon icon--32"><use href="#i-group-add"/></svg></span>
+                  <h3 class="empty__title">Cuenta sin integrantes</h3>
+                  <p class="empty__desc">No tienes integrantes en tu cuenta. Cuando agregues el primero, su información aparecerá aquí.</p>
+                </div>
+                <div class="loading" aria-hidden="true"><span class="spinner"></span></div>
+              </div>
+
+              <!-- Integrantes invitados: desktop = tabla, mobile = una tarjeta por integrante (se rellenan desde js/app.js) -->
+              <div class="members" id="members">
+                <table class="tabla" id="tabla">
+                  <caption class="sr-only">Integrantes invitados a tu cuenta</caption>
+                  <colgroup><col><col><col><col class="col-estado"><col class="col-acciones"></colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col" aria-sort="none"><button class="th__sort" type="button" data-orden="nombre"><span>Integrante</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-import-export"/></svg></button></th>
+                      <th scope="col" aria-sort="none"><button class="th__sort" type="button" data-orden="rol"><span>Rol</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-import-export"/></svg></button></th>
+                      <th scope="col">Acceso a soporte</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col"><span class="sr-only">Acciones</span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody"></tbody>
+                </table>
+                <ul class="cards" id="cards" aria-label="Integrantes invitados a tu cuenta"></ul>
+              </div>
+            </section>
+          </div>
+
+          <!-- Pestaña 2: cuentas ajenas donde el usuario participa (se rellena desde js/app.js) -->
+          <div class="stack" id="panel-otras" role="tabpanel" aria-labelledby="tab-asignado" aria-busy="true" hidden>
+            <section class="card otras-card" aria-labelledby="otras-title">
+              <h2 class="otras-card__title" id="otras-title">Cuentas donde participas</h2>
+              <p class="otras-card__desc">Observa a qué cuentas te invitaron y qué función desempeñas en cada una.</p>
+              <div class="empty">
+                <div class="empty__body">
+                  <span class="empty__icon" aria-hidden="true"><svg class="icon icon--32"><use href="#i-group-add"/></svg></span>
+                  <h3 class="empty__title">Todavía no participas en ninguna cuenta</h3>
+                  <p class="empty__desc">Cuando aceptes una invitación, la información aparecerá aquí.</p>
+                </div>
+                <div class="loading" aria-hidden="true"><span class="spinner"></span></div>
+              </div>
+              <div class="otras-lista">
+                <table class="tabla tabla--otras" id="tabla-otras">
+                  <caption class="sr-only">Cuentas donde participas</caption>
+                  <colgroup><col class="col-cliente"><col><col><col><col class="col-estado"><col class="col-acciones"></colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col"># Cliente</th>
+                      <th scope="col" aria-sort="none"><button class="th__sort" type="button" data-orden-otras="titular"><span>Titular</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-import-export"/></svg></button></th>
+                      <th scope="col" aria-sort="none"><button class="th__sort" type="button" data-orden-otras="rol"><span>Rol</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-import-export"/></svg></button></th>
+                      <th scope="col">Acceso a soporte</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col"><span class="sr-only">Acciones</span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-otras"></tbody>
+                </table>
+                <ul class="cards" id="cards-otras" aria-label="Cuentas donde participas"></ul>
+              </div>
+            </section>
+          </div>
+        </div>
+        </div>
+
+        <!-- Vista 2: Agregar integrante (se llega desde el botón "Agregar integrante") -->
+        <div class="vista" id="vista-agregar" hidden>
+          <div class="page-title">
+            <div class="page-title__main">
+              <button class="btn btn--solid btn--secondary btn--sm btn--icon" type="button" id="btn-volver" aria-label="Volver a Usuarios y permisos">
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-back"/></svg>
+              </button>
+              <h1 class="identity__title" id="agregar-title" tabindex="-1">Agregar integrante</h1>
+            </div>
+            <button class="btn btn--ghost btn--sm btn--icon identity__more" type="button" aria-label="Más acciones" aria-haspopup="dialog" aria-controls="drawer-secciones" data-secciones>
+              <svg class="icon icon--16" aria-hidden="true"><use href="#i-more-vert"/></svg>
+            </button>
+          </div>
+
+          <form class="card form-card" id="form-agregar" novalidate aria-labelledby="agregar-title">
+            <p class="form-card__desc">Ingresa el correo del integrante que quieres invitar. Elige qué rol va a tener en la cuenta.</p>
+
+            <div class="form">
+              <div class="form__block">
+                <div class="field" id="field-email">
+                  <div class="field__box">
+                    <input class="field__input" id="email" name="email" type="email" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder=" " aria-describedby="email-ayuda">
+                    <label class="field__label" for="email">Email</label>
+                  </div>
+                  <p class="field__help" id="email-ayuda"></p>
+                </div>
+                <div class="alert alert--info" role="note">
+                  <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+                  <p>Si el email no tiene cuenta en Nubix, la creamos cuando el invitado acepte la invitación.</p>
+                </div>
+              </div>
+
+              <section class="form__section" aria-labelledby="rol-title">
+                <h2 class="section-title" id="rol-title">Rol en la cuenta</h2>
+                <div class="options" role="radiogroup" aria-labelledby="rol-title">
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol" value="administrador" checked>
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Administrador</span></span>
+                    <span class="option-card__desc">Administra servicios y hace compras con los métodos de pago agregados.</span>
+                  </label>
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol" value="facturacion">
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Factura y pagos</span></span>
+                    <span class="option-card__desc">Administra medios de pago y facturación. No puede modificar servicios.</span>
+                  </label>
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol" value="tecnica">
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Gestión técnica</span></span>
+                    <span class="option-card__desc">Administra servicios. No puede realizar compras.</span>
+                  </label>
+                </div>
+              </section>
+
+              <section class="form__section" aria-labelledby="soporte-title">
+                <h2 class="section-title" id="soporte-title">Acceso a soporte</h2>
+                <label class="toggle-card">
+                  <input class="toggle-card__input" type="checkbox" role="switch" name="soporte" checked>
+                  <span class="toggle-card__row"><span class="switch" aria-hidden="true"></span><span class="toggle-card__label">Permitir tickets en soporte</span></span>
+                  <span class="toggle-card__desc">Si activas esta opción, el integrante podrá ver el historial completo y crear tickets.</span>
+                </label>
+              </section>
+            </div>
+
+            <div class="form-card__actions">
+              <button class="btn btn--solid btn--primary" type="submit" id="btn-enviar">Enviar invitación</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Vista 3: Editar integrante (se llega desde el ícono de editar de la lista; solo integrantes ACTIVOS) -->
+        <div class="vista" id="vista-editar" hidden>
+          <div class="page-title">
+            <div class="page-title__main">
+              <button class="btn btn--solid btn--secondary btn--sm btn--icon" type="button" id="btn-volver-editar" aria-label="Volver a Usuarios y permisos">
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-back"/></svg>
+              </button>
+              <h1 class="identity__title" id="editar-title" tabindex="-1">Editar integrante</h1>
+            </div>
+            <button class="btn btn--ghost btn--sm btn--icon identity__more" type="button" aria-label="Más acciones" aria-haspopup="dialog" aria-controls="drawer-secciones" data-secciones>
+              <svg class="icon icon--16" aria-hidden="true"><use href="#i-more-vert"/></svg>
+            </button>
+          </div>
+
+          <form class="card form-card" id="form-editar" novalidate aria-labelledby="editar-title">
+            <p class="form-card__desc">Modifica el rol del integrante de la cuenta. Decide qué funciones puede desempeñar.</p>
+
+            <div class="form">
+              <div class="email-locked">
+                <span class="email-locked__icon" aria-hidden="true"><svg class="icon icon--32"><use href="#i-mail"/></svg></span>
+                <div class="email-locked__text">
+                  <p class="email-locked__email" id="editar-email"></p>
+                  <p class="email-locked__note">No puedes editar el email. Quita al integrante y vuelve a agregarlo.</p>
+                </div>
+              </div>
+
+              <section class="form__section" aria-labelledby="ed-rol-title">
+                <h2 class="section-title" id="ed-rol-title">Rol en la cuenta</h2>
+                <div class="options" role="radiogroup" aria-labelledby="ed-rol-title">
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol-ed" value="administrador">
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Administrador</span><span class="badge badge--primary-solid" data-rol-actual="administrador" hidden>Rol actual</span></span>
+                    <span class="option-card__desc">Administra servicios y hace compras con los métodos de pago agregados.</span>
+                  </label>
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol-ed" value="facturacion">
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Factura y pagos</span><span class="badge badge--primary-solid" data-rol-actual="facturacion" hidden>Rol actual</span></span>
+                    <span class="option-card__desc">Administra medios de pago y facturación. No puede modificar servicios.</span>
+                  </label>
+                  <label class="option-card">
+                    <input class="option-card__input" type="radio" name="rol-ed" value="tecnica">
+                    <span class="option-card__row"><span class="radio" aria-hidden="true"></span><span class="option-card__label">Gestión técnica</span><span class="badge badge--primary-solid" data-rol-actual="tecnica" hidden>Rol actual</span></span>
+                    <span class="option-card__desc">Administra servicios. No puede realizar compras.</span>
+                  </label>
+                </div>
+              </section>
+
+              <section class="form__section" aria-labelledby="ed-soporte-title">
+                <h2 class="section-title" id="ed-soporte-title">Acceso a soporte</h2>
+                <label class="toggle-card">
+                  <input class="toggle-card__input" type="checkbox" role="switch" name="soporte-ed">
+                  <span class="toggle-card__row"><span class="switch" aria-hidden="true"></span><span class="toggle-card__label">Permitir tickets en soporte</span></span>
+                  <span class="toggle-card__desc">Si activas esta opción, el integrante podrá ver el historial completo y crear tickets.</span>
+                </label>
+              </section>
+            </div>
+
+            <div class="form-card__actions">
+              <button class="btn btn--solid btn--primary" type="submit" id="btn-guardar" aria-disabled="true">Guardar cambios</button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Herramienta del prototipo (no es parte del producto): lleva el formulario a cada estado diseñado -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" id="probar-agregar" role="group" aria-label="Estados del formulario" hidden>
+        <p class="probar__title">Estados del formulario</p>
+        <button type="button" data-estado="vacio">Vacío</button>
+        <button type="button" data-estado="ok">Email válido</button>
+        <button type="button" data-estado="requerido">Campo requerido</button>
+        <button type="button" data-estado="formato">Email inválido</button>
+        <button type="button" data-estado="noexiste">Email inexistente</button>
+        <button type="button" data-estado="generico">Error genérico</button>
+        <button type="button" data-estado="duplicado">Email repetido</button>
+      </div>
+      <div class="probar__group" id="probar-editar" role="group" aria-label="Estados de la edición" hidden>
+        <p class="probar__title">Estados de la edición</p>
+        <button type="button" data-edicion="sin">Sin cambios</button>
+        <button type="button" data-edicion="con">Con cambios</button>
+      </div>
+      <div class="probar__group" id="probar-otras" role="group" aria-label="Cuentas donde participas" hidden>
+        <p class="probar__title">Cuentas donde participas</p>
+        <button type="button" data-otras="cargando">Cargando</button>
+        <button type="button" data-otras="0">Sin cuentas</button>
+        <button type="button" data-otras="3">Con datos · 3 ejemplos</button>
+        <p class="probar__title">Modales</p>
+        <button type="button" data-modal="aceptar">Aceptar invitación</button>
+        <button type="button" data-modal="rechazar">Rechazar invitación</button>
+        <button type="button" data-modal="abandonar">Abandonar cuenta</button>
+        <button type="button" data-modal="eliminar-recibida">Eliminar invitación</button>
+      </div>
+      <div class="probar__group" id="probar-lista" role="group" aria-label="Integrantes de la cuenta" hidden>
+        <p class="probar__title">Integrantes de la cuenta</p>
+        <button type="button" data-integrantes="cargando">Cargando</button>
+        <button type="button" data-integrantes="0">Sin integrantes · 0 / 10</button>
+        <button type="button" data-integrantes="1">Un integrante · 1 / 10</button>
+        <button type="button" data-integrantes="5">Cinco integrantes · 5 / 10</button>
+        <button type="button" data-integrantes="9">Casi completa · 9 / 10</button>
+        <button type="button" data-integrantes="10">Cuenta completa · 10 / 10</button>
+        <p class="probar__title">Modales</p>
+        <button type="button" data-modal="reenviar">Reenviar invitación</button>
+        <button type="button" data-modal="eliminar">Eliminar integrante</button>
+        <button type="button" data-modal="eliminar-invitacion">Eliminar invitación</button>
+      </div>
+      <div class="probar__group" id="probar-casos" role="group" aria-label="Casos particulares">
+        <p class="probar__title">Casos particulares</p>
+        <a href="index.html" data-caso="normal">Volver a Usuarios y permisos</a>
+        <a href="index.html?2fa=off" data-caso="2fa">2FA desactivado</a>
+        <a href="sin-permiso.html" data-caso="sin-permiso">Sin permiso · cuenta invitada</a>
+        <a href="invitacion-aceptada.html" data-caso="aceptada">Invitación aceptada</a>
+        <a href="invitacion-expirada.html" data-caso="expirada">Invitación vencida</a>
+        <a href="invitacion-cuenta-equivocada.html" data-caso="equivocada">Cuenta equivocada</a>
+      </div>
+      <div class="probar__group" id="probar-cuenta" role="group" aria-label="Menú de la cuenta">
+        <p class="probar__title">Menú de la cuenta (avatar)</p>
+        <button type="button" data-tipo-demo="auto">Según la cuenta (automático)</button>
+        <button type="button" data-tipo-demo="propia">Cuenta propia</button>
+        <button type="button" data-tipo-demo="con-cuentas">Cuenta propia + Cambiar cuenta</button>
+        <button type="button" data-tipo-demo="sin-asociadas">Sin cuentas asociadas</button>
+        <button type="button" data-tipo-demo="invitada">Cuenta invitada</button>
+      </div>
+      <div class="probar__group" id="probar-menu" role="group" aria-label="Menú lateral">
+        <p class="probar__title">Menú lateral</p>
+        <button type="button" data-menu="colapsado">Desktop · colapsado</button>
+        <button type="button" data-menu="expandido">Desktop · expandido</button>
+        <button type="button" data-menu="popover">Desktop · popover abierto</button>
+        <button type="button" data-menu="drawer">Mobile · abrir menú</button>
+        <button type="button" data-menu="secciones">Mobile · menú Secciones (⋮)</button>
+        <button type="button" data-nav-demo="">Sin ítem seleccionado</button>
+        <button type="button" data-nav-demo="inicio">Seleccionado: Inicio</button>
+        <button type="button" data-nav-demo="web-hosting">Seleccionado: Web Hosting</button>
+        <button type="button" data-nav-demo="flowmail">Seleccionado: FlowMail</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menú mobile: fondo oscuro detrás del drawer y tooltip del sidebar colapsado (Feedback/Tooltip · Derecha) -->
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+  <div class="tooltip" id="tooltip" aria-hidden="true"><span class="tooltip__arrow"></span><span class="tooltip__text"></span></div>
+
+  <!-- Modal de confirmación (reenviar, eliminar integrante / invitación, aceptar, rechazar, abandonar cuenta) -->
+  <dialog class="modal" id="modal" aria-labelledby="modal-title" aria-describedby="modal-text">
+    <div class="modal__box">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title"></h2>
+        <button class="modal__close" type="button" id="modal-cerrar" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <p class="modal__text" id="modal-text"></p>
+      <div class="infobox" id="modal-info" hidden>
+        <p class="infobox__label" id="modal-info-label"></p>
+        <dl class="infobox__rows" id="modal-rows"></dl>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--solid btn--secondary" type="button" id="modal-cancelar">Cancelar</button>
+        <button class="btn btn--solid btn--primary" type="button" id="modal-confirmar">Confirmar</button>
+      </div>
+    </div>
+  </dialog>
+  <div class="menu" id="menu" role="menu" aria-label="Acciones del integrante" hidden></div>
+
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <!-- Feedback/Toast · success: aparece al enviar una invitación -->
+  <div class="toast-ok" id="toast-ok" role="status" aria-live="polite"><span id="toast-ok-msg"></span></div>
+  <script src="js/app.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/cuenta.js"></script>
+</body>
+</html>

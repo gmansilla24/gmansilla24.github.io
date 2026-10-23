@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pantallas · Sistema de diseño · Prototipo en código</title>
+  <meta name="description" content="Pantallas completas armadas con el sistema de diseño Nubix, en desktop y mobile.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/sistema.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<body class="ds">
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/sis-icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+  <header class="ds-top">
+    <a class="ds-top__logo" href="index.html" aria-label="Sistema de diseño Nubix, inicio"><img src="assets/nubix-logo.svg" alt="" width="73" height="21"></a>
+    <span class="ds-top__title">Sistema de diseño</span>
+    <nav class="ds-top__nav" aria-label="Secciones del prototipo"><a href="index.html">Inicio</a><a href="fundamentos.html">Fundamentos</a><a href="componentes.html">Componentes</a><a href="pantallas.html" aria-current="page">Pantallas</a></nav>
+    <button class="ds-top__menu" type="button" id="ds-menu-btn" aria-expanded="false" aria-controls="ds-menu" aria-label="Menú del sistema de diseño"><svg class="icon ds-top__open" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icon ds-top__close" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </header>
+  <div class="ds-menu" id="ds-menu" hidden>
+    <nav aria-label="Menú del prototipo"><p class="ds-menu__t">Prototipo</p><a href="index.html">Inicio</a><a href="fundamentos.html">Fundamentos</a><a href="componentes.html">Componentes</a><a href="pantallas.html" aria-current="page">Pantallas</a><p class="ds-menu__t">En esta página</p><a href="#dashboard">Dashboard</a><a href="#servicio">Servicio</a><a href="#listado">Lista de servicios</a></nav>
+  </div>
+
+  <div class="ds-wrap">
+    <nav class="ds-toc" aria-label="En esta página"><p>En esta página</p><a href="#dashboard">Dashboard</a><a href="#servicio">Servicio</a><a href="#listado">Lista de servicios</a></nav>
+    <main class="ds-main" id="main" tabindex="-1">
+      <div class="ds-hero"><h1>Pantallas</h1><p>Tres pantallas completas armadas con los componentes del catálogo, en desktop y mobile (Figma · página <b>Ejemplos de pantallas completas</b>). Son prototipos reales, con datos inventados; cada vista previa es la pantalla funcionando.</p></div>
+      <section class="ds-sec" id="dashboard" aria-labelledby="dashboard-t">
+        <div class="ds-sec__head"><h2 class="ds-sec__title" id="dashboard-t">Dashboard</h2><p class="ds-sec__ref">Inicio de la cuenta: productos, carrito y vencimientos.</p></div>
+        <div class="pv-actions"><a class="btn btn--solid btn--primary btn--sm" href="dashboard.html" target="_blank" rel="noopener noreferrer">Abrir dashboard<span class="sr-only"> (se abre en una pestaña nueva)</span></a></div>
+        <div class="pv">
+          <div><div class="pv__d"><iframe src="dashboard.html" title="Dashboard en desktop" loading="lazy" tabindex="-1"></iframe></div><p class="pv__cap">Desktop (1280 px, reducido). El menú lateral se expande y contrae; el avatar abre el popover de la cuenta y la campana, el panel de notificaciones.</p></div>
+          <div><div class="pv__m"><iframe src="dashboard.html" title="Dashboard en mobile (360 px)" loading="lazy"></iframe></div><p class="pv__cap">Mobile (360 px). Se puede usar: abre el menú, el panel y los controles.</p></div>
+        </div>
+      </section>
+      <section class="ds-sec" id="servicio" aria-labelledby="servicio-t">
+        <div class="ds-sec__head"><h2 class="ds-sec__title" id="servicio-t">Servicio</h2><p class="ds-sec__ref">Detalle de un Web Hosting: plan, uso de recursos y características.</p></div>
+        <div class="pv-actions"><a class="btn btn--solid btn--primary btn--sm" href="servicio.html" target="_blank" rel="noopener noreferrer">Abrir servicio<span class="sr-only"> (se abre en una pestaña nueva)</span></a></div>
+        <div class="pv">
+          <div><div class="pv__d"><iframe src="servicio.html" title="Servicio en desktop" loading="lazy" tabindex="-1"></iframe></div><p class="pv__cap">Desktop (1280 px, reducido). Menú contextual del servicio a la izquierda; en mobile se abre como drawer «Secciones» desde el ⋮ del título.</p></div>
+          <div><div class="pv__m"><iframe src="servicio.html" title="Servicio en mobile (360 px)" loading="lazy"></iframe></div><p class="pv__cap">Mobile (360 px). Se puede usar: abre el menú, el panel y los controles.</p></div>
+        </div>
+      </section>
+      <section class="ds-sec" id="listado" aria-labelledby="listado-t">
+        <div class="ds-sec__head"><h2 class="ds-sec__title" id="listado-t">Lista de servicios</h2><p class="ds-sec__ref">Búsqueda, orden y paginación sobre doce servicios.</p></div>
+        <div class="pv-actions"><a class="btn btn--solid btn--primary btn--sm" href="listado.html" target="_blank" rel="noopener noreferrer">Abrir lista de servicios<span class="sr-only"> (se abre en una pestaña nueva)</span></a></div>
+        <div class="pv">
+          <div><div class="pv__d"><iframe src="listado.html" title="Lista de servicios en desktop" loading="lazy" tabindex="-1"></iframe></div><p class="pv__cap">Desktop (1280 px, reducido). Prueba buscar «tienda», ordenar o mostrar 10 por página; con «zzz» aparece el estado vacío.</p></div>
+          <div><div class="pv__m"><iframe src="listado.html" title="Lista de servicios en mobile (360 px)" loading="lazy"></iframe></div><p class="pv__cap">Mobile (360 px). Se puede usar: abre el menú, el panel y los controles.</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/select-lista.js"></script>
+  <script src="js/popover.js"></script>
+  <script src="js/sistema.js"></script>
+  <script src="js/componentes.js"></script>
+  <script src="js/notificaciones.js"></script>
+</body>
+</html>

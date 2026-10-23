@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio · Sistema de diseño · Prototipo en código</title>
+  <meta name="description" content="Prototipo en código del sistema de diseño Nubix: fundamentos, componentes y pantallas completas.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/sistema.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<body class="ds">
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/sis-icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+  <header class="ds-top">
+    <a class="ds-top__logo" href="index.html" aria-label="Sistema de diseño Nubix, inicio"><img src="assets/nubix-logo.svg" alt="" width="73" height="21"></a>
+    <span class="ds-top__title">Sistema de diseño</span>
+    <nav class="ds-top__nav" aria-label="Secciones del prototipo"><a href="index.html" aria-current="page">Inicio</a><a href="fundamentos.html">Fundamentos</a><a href="componentes.html">Componentes</a><a href="pantallas.html">Pantallas</a></nav>
+    <button class="ds-top__menu" type="button" id="ds-menu-btn" aria-expanded="false" aria-controls="ds-menu" aria-label="Menú del sistema de diseño"><svg class="icon ds-top__open" aria-hidden="true"><use href="#i-menu"/></svg><svg class="icon ds-top__close" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </header>
+  <div class="ds-menu" id="ds-menu" hidden>
+    <nav aria-label="Menú del prototipo"><p class="ds-menu__t">Prototipo</p><a href="index.html" aria-current="page">Inicio</a><a href="fundamentos.html">Fundamentos</a><a href="componentes.html">Componentes</a><a href="pantallas.html">Pantallas</a></nav>
+  </div>
+
+  <div class="ds-wrap" style="grid-template-columns:1fr;max-width:1100px">
+    <main class="ds-main" id="main" tabindex="-1">
+      <div class="ds-hero"><h1>Sistema de diseño Nubix</h1><p>Prototipo en código del sistema de diseño: los fundamentos, los componentes con sus variantes y estados, y tres pantallas completas armadas con ellos. Todo se ve y funciona desde el navegador, con datos inventados. <b>Base técnica:</b> el sistema está basado en <b>Bootstrap 5.2</b>; los <b>inputs y los selects</b>, en <b>Tailwind</b>. Este prototipo no carga ninguna de las dos librerías: reproduce los componentes con CSS propio sobre los tokens.</p></div>
+      <section class="ds-sec" aria-labelledby="t1"><div class="ds-sec__head"><h2 class="ds-sec__title" id="t1">Catálogo</h2></div><div class="ds-link-cards"><a class="ds-link-card" href="fundamentos.html"><h3>Fundamentos</h3><p>Colores, tipografía, espaciado, radios, sombras, íconos y grilla.</p><span class="ds-go">Abrir →</span></a><a class="ds-link-card" href="componentes.html"><h3>Componentes</h3><p>Botones, badges, alertas, tabs, campos, selects, controles, paginación y más, con variantes y estados.</p><span class="ds-go">Abrir →</span></a></div></section>
+      <section class="ds-sec" aria-labelledby="t2"><div class="ds-sec__head"><h2 class="ds-sec__title" id="t2">Pantallas completas</h2><p class="ds-sec__ref">Figma · página <b>Ejemplos de pantallas completas</b></p></div><div class="ds-link-cards ds-link-cards--3"><a class="ds-link-card" href="dashboard.html"><h3>Dashboard</h3><p>Inicio de la cuenta: productos, carrito y vencimientos.</p><span class="ds-go">Abrir →</span></a><a class="ds-link-card" href="servicio.html"><h3>Servicio</h3><p>Detalle de un Web Hosting: plan, uso de recursos y características.</p><span class="ds-go">Abrir →</span></a><a class="ds-link-card" href="listado.html"><h3>Lista de servicios</h3><p>Búsqueda, orden y paginación sobre doce servicios.</p><span class="ds-go">Abrir →</span></a></div>
+        <p class="ds-note">Cada pantalla tiene versión desktop y mobile (cambia a 1024 px); en <a href="pantallas.html">Pantallas</a> se ven las dos lado a lado. El menú lateral se expande y se contrae, y en mobile se abre como drawer. El botón <b>Probar estados</b>, abajo a la izquierda, lleva a los estados que no salen solos.</p></section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/sistema.js"></script>
+</body>
+</html>

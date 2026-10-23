@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invitación aceptada · Prototipo en código</title>
+  <meta name="description" content="Prototipo recreado en código de la pantalla que se ve al aceptar una invitación desde el correo. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/casos.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!--
+  Caso particular · Invitación aceptada (Figma ALC: 859:29687 Desktop · 859:29692 Mobile). Página sola, sin header ni menú:
+  es a donde llega quien acepta la invitación desde el correo. "Ver mis cuentas" lleva al hub; "Usuarios y permisos" (enlace del texto)
+  lleva a la pestaña "Asignado a otras cuentas" (inferido: Figma no dice a dónde va).
+-->
+<body data-pagina="invitacion">
+  <script src="js/icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <main class="invitacion" id="main">
+    <div class="ev ev--h5-medium">
+      <div class="ev__body">
+        <span class="ev__icon ev__icon--ok" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12.0005 21.5998L7.33382 16.9331C6.81382 16.4131 5.98715 16.4131 5.46715 16.9331C4.94715 17.4531 4.94715 18.2798 5.46715 18.7998L11.0538 24.3864C11.5738 24.9064 12.4138 24.9064 12.9338 24.3864L27.0671 10.2664C27.5871 9.74643 27.5871 8.91977 27.0671 8.39977C26.5471 7.87977 25.7205 7.87977 25.2005 8.39977L12.0005 21.5998Z"/></svg></span>
+        <div class="ev__text-group">
+          <h1 class="ev__title">Ya formas parte de la cuenta</h1>
+          <p class="ev__text">Adminístrala junto a su equipo desde <a href="index.html#otras-cuentas">Usuarios y permisos</a>.</p>
+        </div>
+      </div>
+      <div class="ev__actions">
+        <a class="btn btn--solid btn--primary" href="hub.html">Ver mis cuentas</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Herramienta del prototipo (fuera del producto) -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" id="probar-casos" role="group" aria-label="Casos particulares">
+        <p class="probar__title">Casos particulares</p>
+        <a href="index.html" data-caso="volver">Volver a Usuarios y permisos</a>
+        <a href="index.html?2fa=off" data-caso="2fa">2FA desactivado</a>
+        <a href="sin-permiso.html" data-caso="sin-permiso">Sin permiso · cuenta invitada</a>
+        <a href="invitacion-aceptada.html" data-caso="aceptada" aria-current="true">Invitación aceptada</a>
+        <a href="invitacion-expirada.html" data-caso="expirada">Invitación vencida</a>
+        <a href="invitacion-cuenta-equivocada.html" data-caso="equivocada">Cuenta equivocada</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/casos.js"></script>
+</body>
+</html>

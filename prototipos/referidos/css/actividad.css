@@ -1,0 +1,249 @@
+/* Referidos y recompensas · pestaña "Actividad y pagos"
+   Medidas leídas de Figma (ALC): "… · Desktop · Sidebar colapsado · Tab Actividad y pagos · Sin datos" (478:19147) y "· Cargando" (499:27070);
+   mobile "… · Mobile · Cerrado · Tab Actividad y pagos · …" (478:19167 y 499:27090).
+   Regla de Figma para los bordes: el trazo va hacia adentro y no suma tamaño → en CSS, borde de 1 + padding (diseño − 1).
+   Esta hoja se suma a producto.css y referidos.css. */
+
+.icon--24 { width: 24px; height: 24px; }
+.icon--48 { width: 48px; height: 48px; }
+
+/* Con "Actividad y pagos" abierta no se ven los bloques de "Recomendar y ganar" (pasos, servicios, cifras y aviso legal) */
+.ref__content[data-tab="actividad"] > :not(.ref__tabs-section) { display: none; }
+
+.ap { display: flex; flex-direction: column; gap: 24px; container-type: inline-size; }   /* tablas o tarjetas según el ancho del panel, no el de la ventana */
+.ap[hidden] { display: none; }
+
+/* ---------- Tarjeta base (Card / …): 16 de padding con trazo hacia adentro ---------- */
+.ap-card { position: relative; overflow: hidden; padding: 15px; background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12); }
+.ap-card__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 23px; }   /* Figma: 1,25 × 18 = 22,5, que el auto-layout redondea a 23 */
+.ap-tile { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius-8); background: var(--primary-50); color: var(--primary-500); }
+
+/* ---------- Comisiones por referidos (Card / Pago de comisión por referidos) ---------- */
+.ap-com { display: flex; flex-direction: column; gap: 20px; }
+.ap-com__text { margin: 0; font-size: 14px; line-height: 22px; color: var(--text-muted); }
+.ap-br { display: none; }
+.ap-com__stats { display: flex; flex-direction: column; gap: 8px; }
+.ap-com__amount { margin: 0; font-size: 24px; font-weight: 600; line-height: 29px; letter-spacing: -.12px; color: var(--primary-500); }   /* Figma: 1,2 × 24 = 28,8 → 29 */
+.ap-bar { height: 14px; overflow: hidden; border-radius: var(--radius-8); background: var(--secondary-100); }
+.ap-bar__fill { display: block; height: 100%; width: calc(var(--p, 0) * 1%); border-radius: var(--radius-8); background: var(--primary-500); transition: width .9s cubic-bezier(.215, .61, .355, 1); }
+.ap-bar__fill.is-reset { transition: none; }
+@media (prefers-reduced-motion: reduce) { .ap-bar__fill { transition: none; } }
+.ap-com__range { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.ap-com__range p { margin: 0; }
+.ap-com__range b { font-weight: 400; }
+.ap-com__max { color: var(--primary-500); text-align: right; }
+/* Tope alcanzado (Figma 969:27911): el rango se reemplaza por un solo texto */
+.ap-com__tope { display: none; margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.ap[data-datos="tope"] .ap-com__range { display: none; }
+.ap[data-datos="tope"] .ap-com__tope { display: block; }
+.ap-pay { display: flex; flex-direction: column; gap: 12px; }
+.ap-pay__info { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 22px; color: var(--text-muted); }
+.ap-pay__info .icon { color: var(--text-muted); }
+.ap-pay__actions { display: flex; flex-direction: column; gap: 12px; }
+.ap-pay__actions .btn { width: 100%; }
+/* Los botones de cobro deshabilitados: en Figma, 60 % de opacidad y el texto del secundario en #6c757d */
+.btn--solid.btn--secondary:disabled { color: var(--secondary-500); }
+
+/* ---------- Métricas (Card / Estadística de referidos) ---------- */
+.ap-stats { display: flex; flex-direction: column; gap: 24px; }
+.ap-stat { display: flex; align-items: center; gap: 16px; }
+.ap-stat__text { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.ap-stat__text dt { font-size: 16px; line-height: 20px; color: var(--body-color); }
+.ap-stat__text dd { margin: 0; font-size: 24px; line-height: 29px; letter-spacing: -.12px; color: var(--primary-500); }
+
+/* ---------- Tablas vacías (Card / Tabla de referidos · empty-state) ---------- */
+.ap-tabla { display: flex; flex-direction: column; gap: 20px; }
+.ap-tabla__body { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.ap-empty { display: none; flex-direction: column; align-items: center; gap: 20px; padding: 48px 0; text-align: center; }
+.ap-empty__content { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.ap-empty__icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--secondary-100); color: var(--text-muted); }
+.ap-empty__icon .icon { display: block; }
+.ap-empty__copy { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.ap-empty__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 23px; color: var(--body-color); }
+.ap-empty__text { margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+/* Qué se ve en cada tabla, según data-v: vacio · datos · sin-resultados (y el error, que manda sobre todo) */
+.ap-buscar, .ap-datos { display: none; }
+.ap-tabla__body[data-v="vacio"] > .ap-empty--vacio,
+.ap-tabla__body[data-v="sin-resultados"] > .ap-empty--buscar { display: flex; }
+.ap-tabla__body[data-v="datos"] > .ap-datos { display: block; }
+#ap-ref[data-v="datos"] > .ap-buscar, #ap-ref[data-v="sin-resultados"] > .ap-buscar { display: flex; }
+/* Con el cupón generado, la tabla vacía suma el cupón para compartir (Figma: variante "con cupón", +60) */
+.ap-share { display: none; }
+body[data-etapa="cupon"] .ap-share { display: flex; }
+.ap-share .btn--outline.btn--icon { padding: 0; }
+
+/* ---------- Banner de ayuda (activity-pay__help-banner) ---------- */
+.ap-ayuda { display: flex; align-items: flex-start; gap: 16px; }
+.ap-ayuda__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ap-ayuda__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 23px; }
+.ap-ayuda__text p { margin: 0; font-size: 14px; line-height: 22px; color: var(--text-muted); }
+.ap-ayuda__text a { color: var(--link-color); text-decoration: underline; }   /* el link no se distingue solo por color */
+.ap-ayuda__text a:hover { text-decoration: underline; }
+
+/* ---------- Cargando: velo blanco al 80 % + spinner sobre cada bloque (Loading state); en las tablas solo sobre el contenido ---------- */
+.ap-load {
+  position: absolute; inset: -1px; z-index: 2; display: none; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .8); border-radius: var(--radius-12);
+}
+.ap-load--tabla { inset: 57px 15px 16px; }
+.ap.is-loading .ap-load { display: flex; }
+.ap.is-loading .ap-tabla__body { opacity: 0; }
+
+@media (min-width: 1024px) {
+  .ap-br { display: inline; }
+  .ap-com__range, .ap-com__tope { font-size: 14px; line-height: 22px; }
+  .ap-com__range b { font-weight: 600; }
+  .ap-pay { flex-direction: row; align-items: center; gap: 10px; min-height: 40px; }
+  .ap-pay__info { flex: 1; min-width: 0; }
+  .ap-pay__actions { flex-direction: row; gap: 12px; }
+  .ap-pay__actions .btn { width: auto; }
+  .ap-stats { flex-direction: row; }
+  .ap-stat { flex: 1 1 0; min-width: 0; }
+  .ap-empty { padding: 48px 24px; }
+  .ap-empty__content { max-width: 382px; }
+  .ap-ayuda { align-items: center; }
+}
+
+/* ---------- Error al cargar (Figma 990:29525 / 990:29543): las dos tablas pasan a "No pudimos cargar…" + Reintentar ---------- */
+.ap-empty--error { display: none; }
+.ap[data-error] .ap-tabla__body > :not(.ap-empty--error) { display: none !important; }
+.ap[data-error] .ap-tabla__body > .ap-empty--error { display: flex; }
+.ap-empty--error .btn { flex: none; width: 100%; }   /* mobile: Reintentar ocupa todo el ancho (296) */
+@media (min-width: 1024px) { .ap-empty--error .ap-empty__title { max-width: 382px; } .ap-empty--error .btn { width: auto; } }
+
+/* ==========================================================================
+   Con datos (Figma 499:27924 / 499:28680 · búsqueda 499:30356 / 499:29379 · tope 969:27911 / 969:27948)
+   ========================================================================== */
+.badge--secondary-solid { background: var(--secondary-500); color: #fff; }
+
+/* ---------- Buscador (Search input + botón) ---------- */
+.ap-buscar { align-items: center; gap: 8px; width: 100%; }
+.ap-buscar__box {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 7px;
+  background: var(--body-bg); border: 1px solid #a7acb1; border-radius: var(--radius-12); color: var(--text-muted); cursor: text;
+}
+.ap-buscar__box:hover { border-color: var(--border-strong); }
+.ap-buscar__box:focus-within { border-color: var(--primary-600); box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.ap-buscar__box .icon { flex: none; }
+.ap-buscar__box input {
+  flex: 1; min-width: 0; padding: 0; margin: 0; border: 0; background: none; outline: 0;
+  font: inherit; font-size: 14px; line-height: 22px; color: var(--body-color); -webkit-appearance: none; appearance: none;
+}
+.ap-buscar__box input::placeholder { color: var(--text-muted); opacity: 1; }
+.ap-buscar__box input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+.ap-buscar__btn { flex: none; }
+
+/* ---------- Tabla (desktop) ---------- */
+.ap-t-wrap { display: none; }
+.ap-t { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+.ap-t__c1 { width: 200px; }
+.ap-t__cl { width: 150px; }
+.ap-t th {
+  height: 37px; padding: 0 8px; border-bottom: 1px solid var(--secondary-100);
+  color: var(--text-muted); font-size: 14px; font-weight: 400; line-height: 22px; text-align: center; text-transform: uppercase; vertical-align: middle;
+}
+.ap-t td { height: 62px; padding: 0 8px; border-bottom: 1px solid var(--secondary-100); font-size: 12px; line-height: 18px; text-align: center; vertical-align: middle; }
+.ap-t--mov td { height: 44px; }
+.ap-t--mov tr.has-nota td { height: 62px; }
+.ap-t--ref th:nth-child(-n+2), .ap-t--ref td:nth-child(-n+2), .ap-t--mov th:first-child, .ap-t--mov td:first-child { text-align: left; }
+.ap-t th:last-child, .ap-t td:last-child { text-align: right; }
+.ap-sort {
+  display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0; background: none; border: 0; border-radius: var(--radius-4);
+  color: inherit; font: inherit; text-transform: inherit; cursor: pointer;
+}
+.ap-sort:hover, th[aria-sort="ascending"] .ap-sort, th[aria-sort="descending"] .ap-sort { color: var(--secondary-900); }
+.ap-sort:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.ap-cli { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ap-cli strong { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ap-cli__mail { color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ap-t__monto { font-weight: 600; }
+.ap-est { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ap-est__nota { font-size: 12px; line-height: 18px; color: var(--text-muted); }
+
+/* ---------- Tarjetas (mobile) ---------- */
+.ap-cards { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.ap-c { display: flex; flex-direction: column; gap: 12px; padding: 15px; border: 1px solid var(--secondary-100); border-radius: var(--radius-12); }
+.ap-c__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 18px; }
+.ap-c__head strong { min-width: 0; font-size: 14px; font-weight: 600; line-height: 18px; }
+.ap-c__head .ap-est { align-items: flex-end; flex: none; }
+.ap-c__sep { margin: 0; height: 1px; border: 0; background: var(--secondary-100); }
+.ap-c__dl { display: flex; flex-direction: column; gap: 8px; margin: 0; font-size: 12px; line-height: 18px; }
+.ap-c__dl > div { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ap-c__dl dt { margin: 0; color: var(--text-muted); }
+.ap-c__dl dd { margin: 0; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.ap-c__dl dd.is-strong { font-weight: 600; }
+
+/* ---------- Paginación ---------- */
+.ap-pager { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 20px; }
+.ap-pager__izq { display: flex; flex-direction: column; align-items: center; }
+.ap-mostrar { display: none; }
+.ap-pager__rango { margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.ap-pager__nav { display: flex; align-items: center; gap: 2px; }
+.ap-pager__btn {
+  display: grid; place-items: center; width: 32px; height: 32px; padding: 0; background: none; border: 0; border-radius: var(--radius-8);
+  color: var(--text-muted); cursor: pointer;
+}
+.ap-pager__btn:hover:not(:disabled) { background: var(--secondary-50); color: var(--secondary-900); }
+.ap-pager__btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.ap-pager__btn:disabled { opacity: .4; cursor: default; }
+.ap-pager__pag { margin: 0; padding: 0 8px; font-size: 14px; line-height: 22px; white-space: nowrap; }
+.ap-pager__pag b { font-weight: 600; }
+.ap-mostrar { align-items: center; gap: 4px; font-size: 14px; line-height: 22px; color: var(--text-muted); }
+.ap-mostrar__sel { position: relative; display: inline-flex; align-items: center; gap: 4px; border-radius: var(--radius-4); }
+.ap-mostrar__val { font-size: 14px; font-weight: 600; line-height: 22px; color: var(--body-color); }
+.ap-mostrar__sel .icon { color: var(--text-muted); }
+/* El select real va encima y transparente: así el "5" y la flecha se ven como en Figma; la lista que se abre es la del sistema (js/select-lista.js) */
+.ap-mostrar__sel select { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; opacity: 0; cursor: pointer; font-size: 16px; }
+.ap-mostrar__sel:has(select:focus-visible) { box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+
+/* ---------- Tabla o tarjetas según el ancho del panel ---------- */
+@container (min-width: 600px) {
+  .ap-buscar { width: 300px; }
+}
+@container (min-width: 900px) {
+  .ap-t-wrap { display: block; }
+  .ap-cards { display: none; }
+  .ap-pager { flex-direction: row; justify-content: space-between; gap: 24px; height: 56px; margin-top: 0; padding: 12px 16px; }
+  .ap-pager__izq { flex-direction: row; gap: 24px; }
+  .ap-mostrar { display: flex; }
+}
+
+/* ==========================================================================
+   Overlay/Modal - Solicitud de cobro (Figma 499:31863 · 499:32876 · 499:32978 · 499:33941): 500 × 350 / 350 / 359 / 377 desktop; 328 de ancho en mobile.
+   Reutiliza .modal y el velo de "Guardando" del modal de cupón (.cmodal__loading).
+   ========================================================================== */
+.cobro__vista { display: none; flex-direction: column; gap: 20px; }
+.cobro[data-vista="revision"] .cobro__vista[data-v="revision"],
+.cobro[data-vista="exito"] .cobro__vista[data-v="exito"],
+.cobro[data-vista="error"] .cobro__vista[data-v="error"] { display: flex; }
+.cobro__body { display: flex; flex-direction: column; gap: 20px; }
+.cobro__resumen-wrap { display: flex; flex-direction: column; gap: 4px; }
+.cobro__resumen { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 15px; border: 1px solid var(--secondary-100); border-radius: var(--radius-8); }
+.cobro__fila { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cobro__fila dt { margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.cobro__fila dd { margin: 0; font-size: 12px; font-weight: 600; line-height: 18px; color: var(--body-color); text-align: right; }
+.cobro__fila--monto { padding-bottom: 11px; border-bottom: 1px solid var(--secondary-100); }
+.cobro__fila--monto dd { font-size: 16px; line-height: 20px; color: var(--primary-500); }   /* Heading/H6: 16 / 1,25 */
+.cobro__nota { margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.cobro__footer { gap: 10px; }
+
+/* Resultado (cobro solicitado / error): icono de 48 en círculo, título de 17,5 y texto de 12 */
+.cobro__resultado { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 0; text-align: center; }
+.cobro__icono { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; color: #fff; }
+.cobro__icono--exito { background: var(--success-500); }
+.cobro__icono--error { background: var(--danger-500); }
+.cobro__icono .icon { display: block; }
+.cobro__copy { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.cobro__titulo { margin: 0; font-size: 17.5px; font-weight: 500; line-height: 21px; color: #212529; }
+.cobro__texto { margin: 0; font-size: 12px; line-height: 18px; color: var(--text-muted); }
+
+/* Lista desplegable de los selects (js/select-lista.js): mismo panel que el dropdown de acciones.
+   Panel: fondo body-bg, padding 8, gap 4, radio 8, sombra 0 8 16 al 12%; opciones de 32 de alto con radio 4.
+   La opción elegida usa el mismo estado "seleccionado" que el menú (primary-50 con texto primary-700). */
+.sel-list { position: fixed; z-index: 200; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; max-width: min(360px, calc(100vw - 16px)); overflow-y: auto; overscroll-behavior: contain; padding: 8px; background: var(--body-bg); border-radius: var(--radius-8); box-shadow: 0 8px 16px rgba(0, 0, 0, .12); font-size: 14px; line-height: 22px; font-weight: 400; text-align: left; }
+.sel-list__opt { flex: none; display: flex; align-items: center; min-height: 32px; box-sizing: border-box; padding: 5px 8px; border-radius: var(--radius-4); color: var(--body-color); white-space: nowrap; cursor: pointer; }
+.sel-list__opt.is-active { background: var(--secondary-50); }
+.sel-list.is-kbd .sel-list__opt.is-active { box-shadow: inset 0 0 0 2px var(--primary-500); }
+.sel-list__opt[aria-selected="true"] { background: var(--primary-50); color: var(--primary-700); }
+.sel-list__opt[aria-selected="true"].is-active { background: var(--primary-100); }
+.sel-list__opt[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }

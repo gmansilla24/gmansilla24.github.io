@@ -1,0 +1,92 @@
+/* Casos particulares · 2FA desactivado, sin permiso e invitaciones (aceptada, vencida, cuenta equivocada).
+   Medidas leídas de Figma (ALC): "Gestión de usuarios · Bloqueado (2FA desactivado)", "Acceso restringido · Página completa" y
+   las tres pantallas de invitación (859:29687 · 859:29831 · 859:29895), cada una en Desktop y Mobile.
+   Regla de Figma para los bordes: el trazo va hacia adentro y no suma tamaño → en CSS, borde de 1 + padding (diseño − 1).
+   Esta hoja se suma a producto.css. Todo lo de acá es el "empty-state" de Figma (.ev) y las dos formas de ubicarlo:
+   dentro de una tarjeta (2FA y sin permiso) o solo en la página (invitaciones). */
+
+:root { --success-500: #2d8500; }
+
+/* ---------- Estado vacío (empty-state) ---------- */
+.ev { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 48px 24px; text-align: center; }
+.ev__body { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 382px; }
+.ev__icon {
+  flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--secondary-100); color: var(--text-muted);   /* los glifos de Figma son #565e64 sobre #e2e3e5 */
+}
+.ev__icon svg { display: block; width: 32px; height: 32px; fill: currentColor; }
+.ev__icon--ok { background: var(--success-500); color: #fff; }
+.ev__icon--danger { background: var(--danger-500); color: #fff; }
+.ev__text-group { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.ev__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 23px; color: var(--body-color); }   /* Figma: 1,25 × 18 = 22,5, que el auto-layout redondea a 23 */
+.ev__text { margin: 0; font-size: 12px; line-height: 1.5; color: var(--text-muted); }
+.ev__text a { color: var(--link-color); }
+.ev__text a:hover { text-decoration: underline; }
+
+/* Figma dibuja los títulos de "aceptada" y "vencida" con el H5 anterior (17,5 / Medium / 21, #212529); el de "cuenta equivocada"
+   ya usa el actual (18 / SemiBold). Se respeta cada uno tal cual está dibujado. */
+.ev--h5-medium .ev__title { font-size: 17.5px; font-weight: 500; line-height: 21px; color: #212529; }
+
+.ev__role { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ev__role .badge { text-transform: none; }
+
+.ev__actions { display: flex; align-items: flex-start; justify-content: center; gap: 12px; }
+
+/* Caja con el correo al que se envió la invitación */
+.ev__info {
+  margin: 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; width: 100%; max-width: 382px;
+  padding: 11px; text-align: left; white-space: nowrap;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-8);
+  font-size: 12px; line-height: 1.5;
+}
+.ev__info dt { color: var(--text-muted); }
+.ev__info dd { margin: 0; font-weight: 600; color: var(--body-color); text-align: right; }
+
+/* ---------- Dentro de una tarjeta: 2FA desactivado y sin permiso ---------- */
+.gate { padding: 15px; }
+.gate .ev { padding-inline: 24px; }
+
+/* 2FA desactivado: solo existe dentro de "Usuarios y permisos"; reemplaza a las pestañas y al contenido */
+.gate--2fa { display: none; }
+body[data-2fa="off"] .gate--2fa { display: block; margin-top: 20px; }
+body[data-2fa="off"] #vista-lista .service__body { display: none; }
+/* …y los grupos de "Probar estados" de la lista/formularios no tienen nada que mostrar */
+body[data-2fa="off"] #probar-lista,
+body[data-2fa="off"] #probar-otras,
+body[data-2fa="off"] #probar-agregar,
+body[data-2fa="off"] #probar-editar { display: none !important; }
+
+@media (max-width: 1023px) {
+  .gate .ev { padding-inline: 0; }   /* mobile: 48 0 */
+  .gate .ev__actions .btn, .ev__actions--stack .btn { width: 100%; }
+}
+
+#probar-casos [data-caso="normal"] { display: none; }
+body[data-2fa="off"] #probar-casos [data-caso="normal"] { display: flex; }
+
+/* ---------- Página "sin permiso": header + aviso de cuenta invitada, y sin menú lateral en desktop ---------- */
+.solo-main { padding: 32px 16px 48px; }
+.solo-main:focus { outline: none; }
+.solo-card { max-width: 808px; margin-inline: auto; }
+@media (min-width: 1024px) {
+  body[data-pagina="sin-permiso"] .app-shell { display: block; }
+  body[data-pagina="sin-permiso"] .sidebar { display: none; }
+  .solo-main { padding: 32px var(--bare-pad) 48px; }   /* Bare: 20 / 24 / 28 */
+  .solo-card { max-width: var(--bare-8col); }          /* 8 de las 12 columnas: 648 / 760 / 808 */
+}
+
+/* ---------- Invitaciones: página blanca, sin header ni menú, con el estado vacío centrado ---------- */
+body[data-pagina="invitacion"] { background: var(--body-bg); }
+.invitacion { min-height: 100vh; display: grid; place-items: center; padding: 32px; }
+.invitacion .ev { width: 100%; max-width: 430px; padding-inline: 0; }
+.invitacion .ev__body { max-width: 382px; }
+@media (min-width: 1024px) {
+  .invitacion .ev { padding-inline: 24px; }
+}
+@media (max-width: 599px) {
+  .invitacion .ev { max-width: 296px; }
+  .ev__actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .ev__actions .btn { width: 100%; }
+  .ev__info { flex-direction: column; justify-content: flex-start; gap: 0; height: 64px; }   /* Figma: 40 de filas + 2·12 de padding, pegadas arriba y abajo */
+  .ev__info dd { text-align: left; }
+}

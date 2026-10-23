@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invitación vencida · Prototipo en código</title>
+  <meta name="description" content="Prototipo recreado en código de la pantalla que se ve al abrir una invitación que ya expiró. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/casos.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!--
+  Caso particular · Invitación vencida (Figma ALC: 859:29831 Desktop · 859:29835 Mobile). Página sola, sin header ni menú.
+  "Ver mis cuentas" lleva al hub; "Soporte" todavía no tiene destino (avisa con el toast de "pendiente").
+-->
+<body data-pagina="invitacion">
+  <script src="js/icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <main class="invitacion" id="main">
+    <div class="ev ev--h5-medium">
+      <div class="ev__body">
+        <span class="ev__icon ev__icon--danger" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16.0003 9.33268C16.7337 9.33268 17.3337 9.93268 17.3337 10.666V15.9993C17.3337 16.7327 16.7337 17.3327 16.0003 17.3327C15.267 17.3327 14.667 16.7327 14.667 15.9993V10.666C14.667 9.93268 15.267 9.33268 16.0003 9.33268ZM15.987 2.66602C8.62699 2.66602 2.66699 8.63935 2.66699 15.9993C2.66699 23.3593 8.62699 29.3327 15.987 29.3327C23.3603 29.3327 29.3337 23.3593 29.3337 15.9993C29.3337 8.63935 23.3603 2.66602 15.987 2.66602ZM16.0003 26.666C10.107 26.666 5.33366 21.8927 5.33366 15.9993C5.33366 10.106 10.107 5.33268 16.0003 5.33268C21.8937 5.33268 26.667 10.106 26.667 15.9993C26.667 21.8927 21.8937 26.666 16.0003 26.666ZM17.3337 22.666H14.667V19.9993H17.3337V22.666Z"/></svg></span>
+        <div class="ev__text-group">
+          <h1 class="ev__title">La invitación expiró</h1>
+          <p class="ev__text">Pide al administrador una invitación nueva, o escribe a <a href="#" data-pending="Soporte: fuera del alcance de este prototipo">Soporte</a> si necesitas ayuda.</p>
+        </div>
+      </div>
+      <div class="ev__actions">
+        <a class="btn btn--solid btn--primary" href="hub.html">Ver mis cuentas</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Herramienta del prototipo (fuera del producto) -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" id="probar-casos" role="group" aria-label="Casos particulares">
+        <p class="probar__title">Casos particulares</p>
+        <a href="index.html" data-caso="volver">Volver a Usuarios y permisos</a>
+        <a href="index.html?2fa=off" data-caso="2fa">2FA desactivado</a>
+        <a href="sin-permiso.html" data-caso="sin-permiso">Sin permiso · cuenta invitada</a>
+        <a href="invitacion-aceptada.html" data-caso="aceptada">Invitación aceptada</a>
+        <a href="invitacion-expirada.html" data-caso="expirada" aria-current="true">Invitación vencida</a>
+        <a href="invitacion-cuenta-equivocada.html" data-caso="equivocada">Cuenta equivocada</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/casos.js"></script>
+</body>
+</html>

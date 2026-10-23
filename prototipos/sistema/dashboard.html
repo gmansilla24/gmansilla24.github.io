@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · Sistema de diseño · Prototipo en código</title>
+  <meta name="description" content="Prototipo en código de la pantalla Dashboard del sistema de diseño Nubix. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/sistema.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!-- Pantalla completa del sistema de diseño: "Dashboard · Desktop / Mobile". -->
+<body data-sidebar="colapsado" data-tipo-cuenta="propia" data-nav-actual="inicio">
+  <script src="js/sidebar-estado.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/sis-icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <header class="app-header">
+    <button class="btn btn--ghost btn--secondary btn--sm btn--icon header__menu is-muted" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+
+    <a class="header__logo" href="dashboard.html" aria-label="Nubix, ir al inicio">
+      <img src="assets/nubix-logo.svg" alt="" width="73" height="21">
+    </a>
+    <a class="header__promo header__promo--desktop" href="#" data-pending="Referidos: fuera del alcance de este prototipo">
+      <span class="header__promo-text">Comparte y gana hasta <b>USD 250</b></span>
+    </a>
+
+    <div class="header__actions">
+      <a class="header__promo header__promo--mobile" href="#" aria-label="Comparte y gana hasta USD 250" data-pending="Referidos: fuera del alcance de este prototipo">
+        <svg class="header__promo-icon" aria-hidden="true"><use href="#i-loyalty"/></svg>
+      </a>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Regalos" data-pending="Regalos: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-card-giftcard"/></svg>
+        </button>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Carrito, 2 productos" data-pending="Carrito: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Notificaciones, 2 sin leer" aria-haspopup="dialog" aria-expanded="false" aria-controls="drawer-notif" data-notif-bell>
+          <svg class="icon" aria-hidden="true"><use href="#i-notifications"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <button class="header__avatar" type="button" aria-label="Menú de la cuenta de Matías Roldán" aria-haspopup="true" aria-expanded="false" aria-controls="account-pop" style="background:none;border:0;padding:0;border-radius:50%;cursor:pointer">
+        <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+      </button>
+    </div>
+  </header>
+
+  <!-- Popover de la cuenta (Figma: Header · Popover=Open, variante de cuenta propia). Se abre desde el avatar. -->
+  <div class="account-pop" id="account-pop" role="region" aria-label="Menú de la cuenta" hidden>
+    <div class="account-pop__body pop-own">
+      <div class="pop-head">
+        <p class="pop-name">Matías Roldán</p>
+        <p class="pop-client">Nº cliente: 204817<button class="pop-copy" type="button" aria-label="Copiar número de cliente" data-copiar="204817"><svg class="icon icon--13" aria-hidden="true"><use href="#i-content-copy"/></svg></button></p>
+      </div>
+      <div class="pop-sep"></div>
+      <ul class="pop-group">
+        <li><a class="menu-item" href="#" data-pending="Datos personales: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg><span class="menu-item__label">Datos personales</span></a></li>
+        <li><a class="menu-item" href="#" data-pending="Seguridad y accesos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-key"/></svg><span class="menu-item__label">Seguridad y accesos</span></a></li>
+        <li><a class="menu-item" href="#" data-pending="Usuarios y permisos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-supervisor-account"/></svg><span class="menu-item__label">Usuarios y permisos</span></a></li>
+      </ul>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <!-- Secciones y subítems: los del sistema de diseño (Sidebar desktop / mobile). Colapsado: solo íconos, tooltip al pasar el mouse y popover con los subítems al hacer clic.
+           Expandido (desktop) y drawer (mobile): lista completa con acordeón. -->
+      <div class="sidebar__head">
+        <a class="sidebar__logo" href="dashboard.html" aria-label="Nubix, ir al inicio"><img src="assets/nubix-logo.svg" alt="" width="71" height="20"></a>
+        <button class="btn btn--ghost btn--secondary btn--sm btn--icon sidebar__close" type="button" id="sidebar-close" aria-label="Cerrar menú"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <ul class="sidebar__list" id="sidebar-list">
+        <li><a class="menu-item" href="dashboard.html" data-nav="inicio"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="menu-item__label">Inicio</span></a></li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-productos"><svg class="icon" aria-hidden="true"><use href="#i-grid-view"/></svg><span class="menu-item__label">Mis productos</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-productos" role="group" aria-label="Mis productos" hidden>
+            <p class="subnav__title" aria-hidden="true">Mis productos</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="dominios" data-pending="Mis productos › Dominios: fuera del alcance de este prototipo">Dominios</a></li>
+            <li><a class="sub-item" href="listado.html" data-nav="web-hosting">Web Hosting</a></li>
+            <li><a class="sub-item" href="#" data-nav="ssl" data-pending="Mis productos › Certificados SSL: fuera del alcance de este prototipo">Certificados SSL</a></li>
+            <li><a class="sub-item" href="#" data-nav="cloud" data-pending="Mis productos › Cloud: fuera del alcance de este prototipo">Cloud</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-catalogo"><svg class="icon" aria-hidden="true"><use href="#i-dashboard-customize"/></svg><span class="menu-item__label">Catálogo</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-catalogo" role="group" aria-label="Catálogo" hidden>
+            <p class="subnav__title" aria-hidden="true">Catálogo</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="sitiolisto" data-pending="Catálogo › SitioListo: fuera del alcance de este prototipo">SitioListo</a></li>
+            <li><a class="sub-item" href="#" data-nav="flowmail" data-pending="Catálogo › FlowMail: fuera del alcance de este prototipo">FlowMail</a></li>
+            <li><a class="sub-item" href="#" data-nav="escudo-web" data-pending="Catálogo › Escudo Web: fuera del alcance de este prototipo">Escudo Web</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a class="menu-item" href="#" data-nav="facturas" data-pending="Facturas y pagos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-monetization-on"/></svg><span class="menu-item__label">Facturas y pagos</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="ayuda" data-pending="Centro de ayuda: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-question-answer"/></svg><span class="menu-item__label">Centro de ayuda</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="partners" data-pending="Partners: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-work"/></svg><span class="menu-item__label">Partners</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="documentacion" data-pending="Documentación: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-handyman"/></svg><span class="menu-item__label">Documentación</span></a></li>
+      </ul>
+      <button class="sidebar__toggle" type="button" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-list" aria-label="Expandir menú lateral">
+        <svg class="icon icon--16 i-expand" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <svg class="icon icon--16 i-collapse" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+      </button>
+    </aside>
+
+    <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+    <div class="dash">
+      <main class="dash__main" id="main" tabindex="-1">
+        <div class="dash__body">
+          <h1 class="dash__greeting">¡Hola Matías!</h1>
+
+          <section class="dash__section" aria-labelledby="t-productos">
+            <h2 class="dash__title" id="t-productos">Mis productos</h2>
+            <ul class="prod-grid">
+          <li>
+            <a class="tile" href="#" data-pending="Dominios: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-dominios"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Dominios</span>
+              <span class="badge badge--neutral">3 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="SitioListo: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-sitiolisto"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">SitioListo</span>
+              <span class="badge badge--neutral">2 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Correo profesional: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-correo"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Correo profesional</span>
+              <span class="badge badge--neutral">6 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="listado.html">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-webhosting"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Web Hosting</span>
+              <span class="badge badge--neutral">4 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Hosting Partners: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-partners"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Hosting Partners</span>
+              <span class="badge badge--neutral">2 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Cloud: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-cloud"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Cloud</span>
+              <span class="badge badge--neutral">5 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Email Marketing: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-emailmarketing"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Email Marketing</span>
+              <span class="badge badge--neutral">3 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="FlowMail: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-flowmail"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">FlowMail</span>
+              <span class="badge badge--neutral">4 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Certificados SSL: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-ssl"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Certificados SSL</span>
+              <span class="badge badge--neutral">6 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Licencias de panel: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-licencias"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Licencias de panel</span>
+              <span class="badge badge--neutral">2 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Radio Streaming: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-radio"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Radio Streaming</span>
+              <span class="badge badge--neutral">3 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Escudo Web: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-escudo"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Escudo Web</span>
+              <span class="badge badge--neutral">4 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Otros servicios: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-otros"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Otros servicios</span>
+              <span class="badge badge--neutral">2 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Servicios técnicos: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-tecnicos"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Servicios técnicos</span>
+              <span class="badge badge--neutral">5 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="DNS dinámico: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-dns"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">DNS dinámico</span>
+              <span class="badge badge--neutral">3 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Marketing digital: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-marketing"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Marketing digital</span>
+              <span class="badge badge--neutral">4 servicios</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Recuperar servicios: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-recuperar"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Recuperar servicios</span>
+              <span class="badge badge--neutral">2 servicios</span>
+              </span>
+            <span class="tile__alert" role="img" aria-label="Requiere atención"><svg class="icon" aria-hidden="true"><use href="#i-warn-20"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="tile" href="#" data-pending="Nuevos servicios: fuera del alcance de este prototipo">
+              <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-nuevos"/></svg></span>
+              <span class="tile__info">
+                <span class="tile__name">Nuevos servicios</span>
+              </span>
+            </a>
+          </li>
+            </ul>
+          </section>
+
+          <!-- Solo en la cuenta propia: el rol de la cuenta invitada no incluye facturación (Figma no dibuja estas secciones ahí) -->
+          <section class="dash__section dash__section--pend" data-solo="propia" aria-labelledby="t-pendientes">
+            <h2 class="dash__title" id="t-pendientes">Tienes pendientes por resolver</h2>
+            <div class="pend">
+              <section class="dcard cart" aria-labelledby="t-carrito">
+                <div class="cart__head">
+                  <div class="cart__title-row">
+                    <h3 class="cart__title" id="t-carrito">Carrito</h3>
+                    <span class="badge badge--info-light">4 ítems</span>
+                  </div>
+                  <button class="btn btn--outline btn--secondary btn--sm btn--icon" type="button" aria-label="Vaciar el carrito" data-pending="Vaciar el carrito: fuera del alcance de este prototipo"><svg class="icon icon--16" aria-hidden="true"><use href="#i-delete-16"/></svg></button>
+                </div>
+                <div class="cart__body">
+                  <ul class="cart__list">
+              <li class="cart-item">
+                <div class="cart-item__main"><span class="cart-item__name">Dominio (midominio.com)</span><span class="badge badge--info-light">Anual</span></div>
+                <span class="cart-item__price">$ 00.000,00</span>
+              </li>
+              <li class="cart-item">
+                <div class="cart-item__main"><span class="cart-item__name">SitioListo</span><span class="badge badge--info-light">Anual</span></div>
+                <span class="cart-item__price">$ 00.000,00</span>
+              </li>
+              <li class="cart-item">
+                <div class="cart-item__main"><span class="cart-item__name">Certificado SSL</span><span class="badge badge--info-light">Anual</span></div>
+                <span class="cart-item__price">$ 00.000,00</span>
+              </li>
+              <li class="cart-item">
+                <div class="cart-item__main"><span class="cart-item__name">FlowMail (2.500 envíos)</span><span class="cart-item__order">(Orden 0000000000000)</span><a class="cart-item__link" href="#" data-pending="Detalle de la orden: fuera del alcance de este prototipo">Ver detalle</a></div>
+                <span class="cart-item__price">$ 00.000,00</span>
+              </li>
+                  </ul>
+                  <div class="cart__divider" aria-hidden="true"></div>
+                  <div class="cart__total">
+                    <div class="cart__total-stack">
+                      <p class="cart__total-label">Total a pagar</p>
+                      <p class="cart__total-amount">$ 00.000,00</p>
+                      <p class="cart__total-currency">Pesos argentinos</p>
+                    </div>
+                  </div>
+                  <div class="btnrow">
+                    <a class="btn btn--solid btn--sm" href="#" data-pending="Continuar compra: fuera del alcance de este prototipo">Continuar compra<svg class="icon icon--16" aria-hidden="true"><use href="#i-chevron-right-16"/></svg></a>
+                  </div>
+                </div>
+              </section>
+
+              <section class="dcard exp" aria-labelledby="t-venc">
+                <h3 class="exp__title" id="t-venc">Vencimientos</h3>
+                <ul class="exp__list">
+              <li class="exp-item"><span class="exp-item__name">Correo profesional (10 cuentas) - Cuenta principal</span><span class="badge badge--danger-light">venció hace 20 días</span></li>
+              <li class="exp-item"><span class="exp-item__name">Correo profesional (10 cuentas)</span><span class="badge badge--danger-light">venció hace 20 días</span></li>
+              <li class="exp-item"><span class="exp-item__name">Backups Diarios (25 GB) - Sitio institucional</span><span class="badge badge--warning-light">vence en 22 días</span></li>
+              <li class="exp-item"><span class="exp-item__name">Backups Diarios (25 GB)</span><span class="badge badge--warning-light">vence en 22 días</span></li>
+                </ul>
+                <p class="exp__more">Y 26 servicios más.</p>
+                <div class="btnrow">
+                  <a class="btn btn--solid btn--secondary btn--sm" href="#" data-pending="Vencimientos: fuera del alcance de este prototipo">Revisar<svg class="icon icon--16" aria-hidden="true"><use href="#i-chevron-right-16"/></svg></a>
+                </div>
+              </section>
+
+              <div class="link-rows">
+                <a class="linkrow" href="#" data-pending="Pagos y facturas: fuera del alcance de este prototipo">
+                  <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-pagos"/></svg></span>
+                  <span class="linkrow__text">Administra tus pagos y facturas.</span>
+                  <span class="linkrow__go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right-20"/></svg></span>
+                </a>
+                <a class="linkrow" href="#" data-pending="Recuperar servicios: fuera del alcance de este prototipo">
+                  <span class="tile__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-recuperar"/></svg></span>
+                  <span class="linkrow__text">Recupera los servicios que diste de baja.</span>
+                  <span class="linkrow__go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-chevron-right-20"/></svg></span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <section class="promo" aria-label="Talleres Nubix">
+            <div class="promo__card">
+              <div class="promo__item">
+                <div class="promo__copy">
+                  <p class="promo__kicker">¡Impulsa tu crecimiento!</p>
+                  <p class="promo__title">Aprende <span>gratis</span> con nuestros talleres.</p>
+                </div>
+                <a class="btn btn--solid btn--brand" href="#" data-pending="Talleres Nubix: fuera del alcance de este prototipo">Ir a Talleres Nubix</a>
+              </div>
+            </div>
+            <img class="promo__img" src="assets/promo-talleres.webp" alt="" width="414" height="200">
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Herramienta del prototipo (fuera del producto) -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" role="group" aria-label="Pantallas">
+        <p class="probar__title">Pantallas</p>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="listado.html">Lista de servicios</a>
+        <a href="listado.html?vacio=1">Lista · sin resultados</a>
+        <a href="servicio.html">Servicio · Web Hosting</a>
+        <a href="index.html">Catálogo de componentes</a>
+      </div>
+      <div class="probar__group" id="probar-menu" role="group" aria-label="Menú lateral">
+        <p class="probar__title">Menú lateral</p>
+        <button type="button" data-menu="colapsado">Desktop · colapsado</button>
+        <button type="button" data-menu="expandido">Desktop · expandido</button>
+        <button type="button" data-menu="popover">Desktop · popover abierto</button>
+        <button type="button" data-menu="drawer">Mobile · abrir menú</button>
+        
+      </div>
+      <div class="probar__group" role="group" aria-label="Notificaciones">
+        <p class="probar__title">Notificaciones</p>
+        <button type="button" data-notif-open>Abrir el panel</button>
+        <button type="button" data-notif-open="vacio">Panel sin novedades</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" aria-hidden="true"><span class="tooltip__arrow"></span><span class="tooltip__text"></span></div>
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/menu.js"></script>
+  <script src="js/cuenta.js"></script>
+  <script src="js/notificaciones.js"></script>
+  <script src="js/select-lista.js"></script>
+  <script src="js/sistema.js"></script>
+</body>
+</html>

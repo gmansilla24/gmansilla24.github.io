@@ -1,0 +1,276 @@
+/* Referidos y recompensas · Dashboard (con y sin compras) y pestaña "Recomendar y ganar".
+   Medidas leídas de Figma (ALC): "Referidos y recompensas · Desktop · Sidebar colapsado · Tab Recomendar y ganar · …" (1440) y "… · Mobile · Cerrado · …" (360),
+   "Dashboard · Desktop · Sidebar colapsado · Sin compras" y "Dashboard · … · Con productos, carrito y vencimientos".
+   Regla de Figma para los bordes: el trazo va hacia adentro y no suma tamaño → en CSS, borde de 1 + padding (diseño − 1).
+   Esta hoja se suma a producto.css y dashboard.css (tokens, botones, badges, header, sidebar, toast, "Probar estados", tarjetas del dashboard). */
+
+:root {
+  --primary-300: #6ba0da;
+  --primary-900: #021327;
+  --title-dark: #212529;      /* Neutral/Dark: títulos de sección */
+  --gray-900: #1d1e20;        /* Gray-900 (texto 1ro): título de cada servicio */
+  --gray-300: #dee2e6;        /* borde de las tarjetas de servicio */
+  --success-500: #2d8500;
+}
+
+/* ==========================================================================
+   Etapas del flujo (body[data-etapa], lo pone ref-estado.js)
+   ========================================================================== */
+body[data-etapa="sin-compras"] .solo-con { display: none !important; }
+body:not([data-etapa="sin-compras"]) .solo-sin { display: none !important; }
+
+/* ==========================================================================
+   Dashboard · activaciones pendientes y "sin compras"
+   ========================================================================== */
+.act-list { display: flex; flex-direction: column; gap: 16px; }
+.act-item {
+  display: flex; align-items: center; gap: 16px; padding: 15px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.act-item__content { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 16px; }
+.act-item__text { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.act-item__id { font-size: 12px; line-height: 1.5; color: var(--text-muted); }
+.act-item__name { font-size: 14px; font-weight: 600; line-height: 1.5714; }
+.act-item__desc { font-size: 14px; line-height: 1.5714; color: var(--text-muted); }
+.act-item__badge--mobile { display: none; }
+@media (max-width: 599px) {
+  .act-item { flex-direction: column; align-items: stretch; gap: 12px; }
+  .act-item__content { width: 100%; }
+  .act-item__badge--desktop { display: none; }
+  .act-item__badge--mobile { display: inline-flex; }
+  .act-item .btn { width: 100%; }
+}
+
+/* ==========================================================================
+   Referidos y recompensas · estructura
+   ========================================================================== */
+.ref__main:focus { outline: none; }
+.ref__body { display: flex; flex-direction: column; gap: 20px; padding: 32px 16px 16px; }
+.ref__title { font-size: 21px; font-weight: 600; line-height: 26px; }   /* Figma: 1,25 × 21 = 26,25, que el auto-layout redondea a 26 */
+@media (min-width: 1024px) {
+  /* Misma grilla del producto: container 1280 − sidebar → 1224 a 1440 (80 a cada lado) */
+  .ref__body {
+    width: 100%; margin-inline: auto; padding: 24px var(--grid-pad);
+    max-width: calc(var(--grid-max) + 2 * var(--grid-pad));
+  }
+}
+.ref__content { display: flex; flex-direction: column; gap: 48px; }
+.ref__tabs-section { display: flex; flex-direction: column; gap: 20px; }
+
+/* ---------- Pestañas (Tabs / 5: 40 de alto, trazo de 1,5) ---------- */
+.rtabs { display: flex; align-items: flex-start; }
+.rtabs::after { content: ""; flex: 1 1 0; height: 40px; border-bottom: 1.5px solid var(--secondary-200); }
+.rtab {
+  flex: none; display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 16px;
+  background: none; border: 0; border-bottom: 1.5px solid var(--secondary-200);
+  font: inherit; font-size: 14px; font-weight: 600; line-height: 1.5714; color: var(--body-color); white-space: nowrap; cursor: pointer;
+}
+.rtab:hover { color: var(--primary-600); }
+.rtab[aria-selected="true"] { color: var(--primary-500); border-bottom-color: var(--primary-500); cursor: default; }
+.rtab:focus-visible { outline-offset: -3px; }
+@media (max-width: 1023px) {
+  .rtabs::after { display: none; }
+  .rtab { flex: 1 1 0; min-width: 0; }
+}
+
+/* ---------- Tarjeta principal (Tarjetas de contenido · hero-card) ---------- */
+.hero { position: relative; border-radius: var(--radius-12); container: hero / inline-size; }
+.hero__card {
+  position: relative; display: flex; align-items: center; min-height: 200px; padding: 23px; overflow: hidden;
+  background: linear-gradient(to right, #fff 31.731%, #9dc0e7);
+  border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.hero__content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; width: 576px; max-width: 100%; }
+.hero__copy { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+.hero__kicker { font-size: 16px; font-weight: 600; line-height: 1.25; color: var(--text-muted); }
+.hero__title { font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -.12px; }
+.hero__title b { font-weight: inherit; color: var(--brand-400); }
+/* La foto: en Figma 346 × 275 a (738; 13) dentro de la tarjeta de 1224, recortada por ella; acá va ya recortada (346 × 186).
+   Se ancla a la derecha (queda a 141 del borde, como en Figma) en vez de a la izquierda: con el menú lateral expandido la tarjeta
+   es más angosta y, anclada a la izquierda, se corría hasta pegarse al borde y quedar cortada. Nunca pisa el texto (que llega a 600):
+   si no entra, se acerca al borde y, por debajo de 962 de ancho de tarjeta, se oculta. */
+.hero__img { display: none; position: absolute; left: min(max(616px, calc(100% - 487px)), calc(100% - 346px)); top: 12px; width: 346px; height: 186px; max-width: none; pointer-events: none; }
+@media (min-width: 1024px) { .hero__img { display: block; } }
+@container hero (max-width: 961px) { .hero__img { display: none; } }
+
+/* Una variante del texto por etapa */
+.hero__content[data-hero] { display: none; }
+body[data-etapa="sin-compras"] .hero__content[data-hero="sin-servicio"],
+body[data-etapa="con-compras"] .hero__content[data-hero="sin-cupon"],
+body[data-etapa="cupon"] .hero__content[data-hero="cupon"],
+body[data-etapa="referidos"] .hero__content[data-hero="cupon"],
+body[data-etapa="cobrado"] .hero__content[data-hero="cupon"] { display: flex; }
+
+/* Cupón + acciones */
+.hero__share { display: flex; align-items: center; gap: 8px; }
+.hero__share-icons { display: contents; }
+.coupon {
+  display: flex; align-items: center; justify-content: space-between; gap: 4px;
+  width: 276px; height: 40px; padding: 3px 9px;
+  background: var(--body-bg); border: 1px solid var(--secondary-300); border-radius: var(--radius-12);
+}
+.coupon__url { flex: 0 1 210px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; line-height: 1.5714; }
+.coupon__edit { flex: none; }
+.coupon__edit .icon { color: var(--primary-600); }
+.hero .btn--outline.btn--icon { padding: 0; }
+
+/* "Generando cupón": velo blanco al 80% + spinner sobre toda la tarjeta (hero-card__loading-overlay) */
+.hero__loading {
+  position: absolute; inset: 0; z-index: 2; display: none; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .8); border-radius: var(--radius-12);
+}
+.hero.is-loading .hero__loading { display: flex; }
+
+@media (max-width: 1023px) {
+  .hero__content { width: 100%; }
+  .hero__content > .btn { width: 100%; }
+  .hero__share { flex-direction: column; align-items: stretch; width: 100%; }
+  .coupon { width: 100%; }
+  .hero__share > .btn { width: 100%; }
+  .hero__share-icons { display: flex; gap: 8px; }
+  .hero__share-icons .btn { flex: 1 1 0; width: auto; }
+}
+
+/* ---------- Así funciona, en 3 pasos simples ---------- */
+.rsec { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.rsec__title { width: 100%; text-align: center; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -.12px; color: var(--title-dark); }
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; width: 100%; }
+.rstep {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 15px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.rstep__num {
+  flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 100px;
+  background: var(--primary-50); color: var(--primary-600); font-size: 16px; font-weight: 600; line-height: 1.5;
+}
+.rstep__text { font-size: 14px; line-height: 1.5714; text-align: center; color: var(--text-muted); }
+
+/* ---------- Opciones de servicio para tu referido ---------- */
+.rsvc-grid { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.rsvc-col { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.rsvc {
+  display: flex; flex-direction: column; gap: 20px; padding: 15px;
+  background: #fff; border: 1px solid var(--gray-300); border-radius: var(--radius-12);
+}
+.rsvc__head { display: flex; flex-direction: column; gap: 8px; }
+.rsvc__title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rsvc__name { font-size: 21px; font-weight: 600; line-height: 1.25; color: var(--gray-900); }
+.rsvc__icon { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: var(--radius-8); background: var(--primary-50); color: var(--primary-500); }
+.rsvc__icon svg { width: 24px; height: 24px; fill: currentColor; }
+.rsvc__desc { font-size: 14px; line-height: 1.5714; color: var(--text-muted); }
+.rsvc__plan { display: flex; flex-direction: column; gap: 8px; }
+.rsvc__price { font-size: 16px; font-weight: 600; line-height: 1.25; color: var(--text-muted); }
+.rsvc__badges { display: flex; flex-wrap: wrap; gap: 8px 12px; }
+.rsvc__badges .badge { background: var(--primary-50); color: var(--primary-500); }
+.rsvc__foot { display: flex; flex-direction: column; gap: 12px; }
+.rsvc__line { height: 0; box-shadow: 0 -1px 0 var(--secondary-100); }   /* línea de 0 de alto con el trazo hacia arriba, como en Figma */
+.rsvc__gain { font-size: 14px; font-weight: 600; line-height: 1.5714; color: var(--brand-500); }
+
+/* ---------- Barra de cifras ---------- */
+.rstats {
+  display: flex; align-items: center; gap: 24px; height: 150px; padding: 23px;
+  background: var(--primary-900); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.rstats__row { flex: 1; min-width: 0; display: flex; align-items: flex-start; justify-content: center; gap: 24px; }
+.rstat { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.rstat__value { width: 100%; font-size: 42px; font-weight: 400; line-height: 1.15; letter-spacing: -.42px; color: var(--primary-300); }
+.rstat__label { width: 100%; font-size: 16px; font-weight: 600; line-height: 1.25; color: #fff; }
+.rstats__divider { position: relative; align-self: stretch; flex: none; width: 0; }   /* línea blanca de 1 que no ocupa lugar, como en Figma */
+.rstats__divider::before { content: ""; position: absolute; top: 0; bottom: 0; left: -.5px; width: 1px; background: #fff; }
+
+/* ---------- Aviso al pie ---------- */
+.rdisclaimer { text-align: center; font-size: 14px; line-height: 21px; color: var(--text-muted); }
+.rdisclaimer a { color: var(--link-color); }
+.rdisclaimer a:hover { text-decoration: underline; }
+
+/* ---------- Mobile (< 1024) ---------- */
+@media (max-width: 1023px) {
+  .rsteps { grid-template-columns: 1fr; }
+  .rsvc-col { grid-template-columns: 1fr; }
+  .rstats { flex-direction: column; height: auto; align-items: stretch; }
+  .rstats__row { flex-direction: column; align-items: stretch; gap: 24px; }
+  .rstats__divider { display: none; }
+}
+
+/* ---------- Aviso de éxito (Toast · Link copiado) ---------- */
+.toast-stack {
+  position: fixed; z-index: 210; left: 16px; right: 16px; bottom: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s ease, transform .2s ease;
+}
+.toast-stack.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.toast-stack .toast-ok { position: static; opacity: 1; transform: none; width: auto; pointer-events: none; }
+@media (min-width: 1024px) {
+  .toast-stack { left: auto; right: 24px; top: 72px; bottom: auto; width: 296px; transform: translateY(-8px); }
+  .toast-stack.is-visible { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .toast-stack { transition: none; } }
+
+/* ==========================================================================
+   Overlay/Modal - Editar cupón (Figma 112:19328): 500 × 382 desktop, 328 × 442 mobile.
+   Reutiliza .modal de producto.css (<dialog>, 500 de ancho, padding 23 + borde 1 = 24 de Figma).
+   ========================================================================== */
+.cmodal .icon--24 { width: 24px; height: 24px; }
+.cmodal__content { display: flex; flex-direction: column; gap: 24px; }
+
+/* Cupón actual: tarjeta con borde (Figma: padding 12 16, radio 8, etiqueta de 24 + url de 12) */
+.cmodal__actual { padding: 11px 15px; border: 1px solid var(--secondary-100); border-radius: var(--radius-8); background: var(--body-bg); }
+.cmodal__actual-label { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: #212529; font-size: 16px; font-weight: 600; line-height: 24px; }
+.cmodal__actual-label .icon { color: var(--primary-500); }
+.cmodal__actual-url { margin: 0; padding-left: 32px; color: var(--text-muted); font-size: 12px; line-height: 18px; overflow-wrap: anywhere; }
+.cmodal__actual-url b { color: var(--secondary-900); font-weight: 600; }
+
+/* Input group prepend: "regalo-" + campo con etiqueta flotante */
+.cgroup { display: flex; flex-direction: column; }
+.cgroup__row { display: flex; align-items: stretch; height: 48px; }
+.cgroup__prefix {
+  flex: none; box-sizing: border-box; width: 67px; height: 48px; padding: 12px 10px 12px 9px;
+  background: var(--secondary-50); color: var(--secondary-900);
+  border: 1px solid var(--secondary-300); border-right: 0; border-radius: var(--radius-12) 0 0 var(--radius-12);
+  font-size: 14px; line-height: 22px; white-space: nowrap;
+}
+.cgroup__box { position: relative; flex: 1 1 auto; min-width: 0; height: 48px; }
+.cgroup__input {
+  display: block; box-sizing: border-box; width: 100%; height: 48px; margin: 0; padding: 0 9px;
+  background: var(--body-bg); color: var(--secondary-900);
+  border: 1px solid var(--secondary-300); border-radius: 0 var(--radius-12) var(--radius-12) 0;
+  font: inherit; font-size: 14px; line-height: 22px; outline: 0;
+  transition: border-color .15s ease;
+}
+.cgroup__input:hover { border-color: var(--border-strong); }
+.cgroup__input:focus { border-color: var(--primary-600); }
+.cgroup__input:disabled { background: var(--body-bg); }
+.cgroup__label {
+  position: absolute; left: 10px; top: 13px; max-width: calc(100% - 20px);
+  padding: 0; background: transparent; color: var(--text-muted);
+  font-size: 14px; line-height: 22px; white-space: nowrap; pointer-events: none;
+  transition: top .15s ease, left .15s ease, font-size .15s ease, line-height .15s ease, padding .15s ease, background-color .15s ease;
+}
+/* flotante: con foco, con valor o con error (Figma: top -9, left 6, 12 px, caja blanca con 4 de aire) */
+.cgroup__input:focus ~ .cgroup__label,
+.cgroup__input:not(:placeholder-shown) ~ .cgroup__label,
+.cgroup.is-error .cgroup__label {
+  top: -9px; left: 6px; padding: 0 4px; background: var(--body-bg); font-size: 12px; line-height: 16px;
+}
+.cgroup__input:focus ~ .cgroup__label { color: var(--primary-600); }
+
+/* ayuda: ocupa lugar siempre (4 + 18 − 2 = 20 px); en mobile pasa a 2 renglones */
+.cgroup__help { margin: 4px 0 -2px; color: var(--text-muted); font-size: 12px; line-height: 18px; }
+.cgroup.is-error .cgroup__input { border-color: var(--danger-500); }
+.cgroup.is-error .cgroup__label,
+.cgroup.is-error .cgroup__help { color: var(--danger-600); }
+@media (max-width: 540px) { .cgroup__help { margin-top: 6px; } }
+
+/* Guardando (Loading state): velo blanco al 80 % sobre todo el modal */
+.cmodal__loading {
+  position: absolute; inset: 0; z-index: 2; display: none; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .8); border-radius: 11px;
+}
+.cmodal.is-saving .cmodal__loading { display: flex; }
+
+/* Toast de confirmación del cupón: 300 de ancho a 20 del borde y 72 de arriba (Figma 482:29159) */
+@media (min-width: 1024px) { .toast-stack.toast-stack--cupon { right: 20px; width: 300px; } }
+
+/* Al abrir un modal, producto.css saca el scroll de la página (overflow: hidden) y la barra desaparece: el contenido se ensanchaba
+   unos 15 px y "saltaba". Con el hueco de la barra reservado, la página queda quieta. */
+html { scrollbar-gutter: stable; }

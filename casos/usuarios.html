@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es-AR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex"><!-- PRUEBA: sacar esta línea cuando se publique la versión final (ver README) -->
+  <title>Gestión de usuarios y cuentas vinculadas · Gastón M. Mansilla</title>
+  <meta name="description" content="Diseñé cómo varias personas operan una misma cuenta de autogestión sin pasarse la contraseña: roles con acceso parcial, invitaciones que expiran y un cambio de cuenta que deja claro dónde estás parado.">
+  <meta name="theme-color" content="#0961c2">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Gestión de usuarios y cuentas vinculadas">
+  <meta property="og:description" content="Roles con acceso parcial, invitaciones que expiran y un cambio de cuenta que deja claro dónde estás parado, para operar una misma cuenta entre varias personas.">
+
+  <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <script src="../js/analytics.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="../index.html">Gastón M. Mansilla</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="sr-only">Menú</span>
+        <img class="icon-menu" src="../assets/icons/menu.svg" alt="" width="16" height="16">
+        <img class="icon-close" src="../assets/icons/close.svg" alt="" width="16" height="16">
+      </button>
+
+      <nav class="nav" id="menu" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../index.html">Inicio</a></li>
+          <li><a class="nav__link" href="../index.html#casos" aria-current="true">Casos de estudio</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===== Portada del caso ===== -->
+    <section class="case-hero" aria-labelledby="case-title">
+      <div class="container case-hero__inner">
+        <a class="back-link" href="../index.html#casos">
+          <img src="../assets/icons/arrow-left-blue.svg" alt="" width="16" height="16">
+          <span>Todos los casos de estudio</span>
+        </a>
+
+        <div class="case-hero__row">
+          <div class="case-hero__text">
+            <div class="case-hero__intro">
+              <div class="case-hero__heading">
+                <p class="case-hero__eyebrow t-body-strong">Usuarios y permisos</p>
+                <h1 class="case-hero__title t-display-4" id="case-title">Gestión de usuarios y cuentas vinculadas</h1>
+              </div>
+              <p class="case-lead">Diseñé cómo varias personas operan una misma cuenta de autogestión, sin pasarse la contraseña: roles con acceso parcial, invitaciones que expiran y un cambio de cuenta que deja claro dónde estás parado.</p>
+            </div>
+
+            <ul class="tag-list" aria-label="Disciplinas">
+              <li class="tag">Roles y permisos</li>
+              <li class="tag">Control de acceso</li>
+              <li class="tag">Flujos de usuario</li>
+              <li class="tag">Arquetipos</li>
+            </ul>
+
+            <div class="case-hero__cta">
+              <a class="btn btn--primary" href="https://www.figma.com/design/jTGIqppZ19HBSqZ5SWSOgh/ALC?node-id=0-1" target="_blank" rel="noopener noreferrer">
+                <span>Ver en Figma<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+              </a>
+              <a class="btn btn--outline" href="../prototipos/usuarios/hub.html" target="_blank" rel="noopener noreferrer">
+                <span>Ver prototipo<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+              </a>
+              <a class="btn btn--outline" href="../assets/docs/Handoff-Usuarios-y-permisos.pdf" target="_blank" rel="noopener noreferrer">
+                <span>Handoff<span class="sr-only"> (PDF, se abre en una pestaña nueva)</span></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Portada (466 × 356 en desktop; no se muestra en mobile) -->
+          <figure class="case-media case-media--bare case-hero__media">
+            <img src="../assets/img/usuarios/portada.webp" alt="Pantalla Usuarios y permisos del panel, con la tabla de integrantes de la cuenta, sus roles y sus estados" width="1047" height="800" fetchpriority="high" decoding="async">
+          </figure>
+        </div>
+
+        <div class="case-facts">
+          <dl class="meta">
+            <div class="meta__item">
+              <dt class="meta__label">Empresa</dt>
+              <dd class="meta__value">Hosting (confidencial)</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Rol</dt>
+              <dd class="meta__value">Diseñador UX/UI</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Duración</dt>
+              <dd class="meta__value">3 meses, en tandas</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Equipo</dt>
+              <dd class="meta__value">9 a 12 personas</dd>
+            </div>
+          </dl>
+          <p class="case-note">Por un acuerdo de confidencialidad no menciono el nombre real de la empresa ni del producto. Las capturas son adaptaciones de lo que existe en producción.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== En pocas palabras ===== -->
+    <section class="section section--white" aria-labelledby="resumen-title">
+      <div class="container case-split">
+        <div class="case-text">
+          <h2 class="case-h2" id="resumen-title">En pocas palabras</h2>
+          <div class="prose">
+            <p>Buena parte de las cuentas de autogestión de la plataforma no las maneja una sola persona: hay dueños de agencia que reparten el trabajo entre empleados y freelancers que gestionan servidores de varios clientes. El panel no reflejaba eso, así que <strong>darle acceso a otra persona significaba entregarle la contraseña maestra</strong>, sin acceso parcial posible ni forma de saber quién había hecho qué.</p>
+            <p>El pedido vino de arriba y esperó a que cerráramos otros proyectos de seguridad, como el 2FA, antes de tocar algo tan sensible. Definí los roles y los flujos junto con el Product Owner y el analista de negocio, y el diseño cambió a partir de un caso borde que marcó el desarrollador. <strong>No tengo métricas de adopción</strong>: la empresa nunca me compartió datos.</p>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-card__main">
+            <h3 class="summary-card__title t-h4">Qué hice yo</h3>
+            <p class="t-body is-muted">Diseñé la sección Usuarios y permisos, el flujo de invitación y el cambio de cuenta, y definí las reglas con el Product Owner y el analista de negocio.</p>
+          </div>
+          <div class="summary-card__team">
+            <p class="summary-card__label">Con quién trabajé</p>
+            <ul class="badge-list">
+              <li class="badge t-badge">1 diseñador (yo)</li>
+              <li class="badge t-badge">Product Owner</li>
+              <li class="badge t-badge">Líder de desarrollo</li>
+              <li class="badge t-badge">Analista de negocio</li>
+              <li class="badge t-badge">QA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bloque 1 ===== -->
+    <section class="section section--tint" aria-labelledby="h1-title">
+      <div class="container case-block">
+        <div class="case-split">
+          <div class="case-text">
+            <h2 class="case-h2" id="h1-title">Tres niveles de acceso más el Titular</h2>
+            <div class="prose">
+              <p>Para definir los roles nos sentamos con el Product Owner y el analista de negocio a sectorizar qué se podía hacer dentro de la plataforma: había cosas de pago, cosas técnicas y otras de pura gestión de cuenta. De ahí salieron <strong>tres niveles de acceso</strong> (Administrador, Facturación y pagos, Gestión técnica) más el rol de Titular, que no se asigna por invitación porque es inherente a quien creó la cuenta. El acceso a soporte lo tratamos como una capacidad transversal que el Titular puede activar o desactivar sin importar el rol, y lo dejamos fuera de la matriz a propósito para no complicarla sin necesidad.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 2 · matriz de roles y permisos -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La decisión</h3>
+          <p>Tres roles asignables por invitación, un Titular que no se asigna y el acceso a soporte como interruptor aparte, fuera de la matriz.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bloque 2 ===== -->
+    <section class="section section--white" aria-labelledby="h2-title">
+      <div class="container case-block">
+        <div class="case-split case-split--flip">
+          <div class="case-text">
+            <h2 class="case-h2" id="h2-title">Dos perfiles, un mismo flujo de invitación</h2>
+            <div class="prose">
+              <p>No hice entrevistas formales para esto. Lo que tengo son <strong>cuatro años de tickets de mesa de ayuda</strong>, viendo qué problema traía cada perfil de cliente, y de ahí armé dos arquetipos: Matías, dueño de una agencia de diseño web, que necesita delegar sin perder el control, y Sofía, desarrolladora freelance que entra y sale de varias cuentas de clientes, para quien el riesgo real es operar sin darse cuenta en la cuenta equivocada. Son perfiles compuestos, no personas reales entrevistadas.</p>
+              <p>Lo diseñamos en etapas, sin lanzar nada a producción hasta que las secciones, muy relacionadas entre sí, estuvieran terminadas. La primera fue “Usuarios y permisos”, que antes no existía: con el analista y con aprobación del PO definimos qué podía hacer quien invita y quien recibe, y de ahí salió <strong>que las invitaciones expiren</strong>, para no acumular pendientes que no significan nada. Quien invita completa un formulario con el email y el rol (si el email no tiene cuenta, se le crea una al aceptar), la cuenta admite hasta diez integrantes y antes de gestionar usuarios hay un gate de 2FA, que ya exigíamos para otras acciones sensibles. Del lado de Sofía, una segunda pestaña, “Asignado a otras cuentas”, muestra cada invitación recibida para aceptarla, rechazarla o abandonarla cuando termina el trabajo.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 3 · perfiles de Matías y Sofía, y diagrama de estados de la invitación -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La decisión</h3>
+          <p>Invitaciones con tres estados (pendiente, activo, expirado) que vencen solas, un gate de 2FA antes de gestionar usuarios y una pestaña propia para quien recibe.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bloque 3 ===== -->
+    <section class="section section--tint" aria-labelledby="h3-title">
+      <div class="container case-block">
+        <div class="case-split">
+          <div class="case-text">
+            <h2 class="case-h2" id="h3-title">Cambiar de cuenta sin perder de vista dónde estás</h2>
+            <div class="prose">
+              <p>La segunda etapa fue el cambio de cuenta en sí. Pensamos el hub como Netflix: elegís dónde querés estar. Sofía ve ahí la invitación, junto a su cuenta propia y las que le asignaron otros clientes, y pasa a operar en una cuenta que no es la suya, con un rol que no eligió. Por eso decidí que el cambio de contexto fuera <strong>deliberado y visible en cuatro lugares a la vez</strong>: el sidebar se adapta al rol asignado (a alguien con rol Técnico se le ocultan Pagos y Gestión de usuarios), el dashboard muestra solo lo que corresponde a esa cuenta, una barra explicita que se está en una cuenta invitada y el popup deja de mostrar los datos propios de Sofía para indicar en qué cuenta está operando.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 4 · hub de cuentas, dashboard en cuenta invitada y sidebar según el rol -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La decisión</h3>
+          <p>El contexto como información de primer nivel: cuatro señales simultáneas (sidebar, dashboard, barra y popup) para que nunca quede duda de en qué cuenta y con qué rol se está operando.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Bloque 4 ===== -->
+    <section class="section section--white" aria-labelledby="h4-title">
+      <div class="container case-block">
+        <div class="case-split case-split--flip">
+          <div class="case-text">
+            <h2 class="case-h2" id="h4-title">El caso borde que ocultar no resolvía</h2>
+            <div class="prose">
+              <p>Mi primera versión de “no tenés permiso” era más simple: ocultar esas secciones del sidebar y nada más. Charlando con el desarrollador, marcó un caso borde real que no habíamos contemplado: entrar por un link externo, o que te cambien el rol con una sección ya abierta, donde ocultar no alcanzaba. <strong>De ahí salió el modal de Acceso Restringido</strong>: si Sofía igual entra a una sección que no le corresponde, por URL directa o con la sesión abierta antes del cambio de rol, se encuentra con una pantalla que nombra el rol necesario en vez de un error genérico.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 5 · modal de Acceso Restringido -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La decisión</h3>
+          <p>Un modal de Acceso Restringido que nombra el rol necesario y cubre los accesos por URL directa y los cambios de rol con la sesión abierta, donde ocultar la sección del sidebar no llegaba.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Diseño final ===== -->
+    <section class="section section--tint" aria-labelledby="diseno-title">
+      <div class="container case-block case-block--gallery">
+        <h2 class="case-h2" id="diseno-title">Diseño final</h2>
+        <div class="case-gallery">
+          <!-- IMAGEN 6, 7 y 8 · tabla de usuarios con el indicador de cupo, formulario de invitación y pestaña "Asignado a otras cuentas" -->
+          <figure class="case-media" aria-hidden="true"></figure>
+          <figure class="case-media" aria-hidden="true"></figure>
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Impacto y métricas ===== -->
+    <section class="section section--white" aria-labelledby="impacto-title">
+      <div class="container case-text">
+        <h2 class="case-h2" id="impacto-title">Impacto y métricas</h2>
+        <div class="process">
+          <div class="process__row">
+            <h3 class="process__label">Evidencia</h3>
+            <p>No tengo métricas de este proyecto: la empresa nunca me compartió datos de adopción ni de uso. La dinámica ahí es lanzar a producción y ver después qué dicen los usuarios, algo que como UX no recomiendo, pero ahí llegan mis limitaciones. Tampoco hicimos un test de usabilidad formal.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Estado real e iteración</h3>
+            <p>Un ejemplo concreto de las idas y vueltas: el tope de diez integrantes era invisible hasta que el intento número 11 fallaba, y lo corregimos con un indicador de cupo visible desde el principio.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Lo que no sé</h3>
+            <p>No sé si las invitaciones se aceptan o se dejan vencer, ni si el Acceso Restringido redujo las consultas a soporte. Además, Matías y Sofía son perfiles compuestos a partir de tickets, así que no puedo confirmar cuánto se parecen a los usuarios reales.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Qué medir</h3>
+            <p>Si tuviera los datos, mediría cuántas invitaciones se aceptan contra las que se dejan vencer, y cuántos tickets de soporte sobre “no encuentro tal sección” bajan una vez que el Acceso Restringido explica por qué.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Lo que aprendí ===== -->
+    <section class="section section--tint" aria-labelledby="aprendi-title">
+      <div class="container case-text">
+        <h2 class="case-h2" id="aprendi-title">Lo que aprendí</h2>
+        <div class="learn">
+          <blockquote class="pull-quote">
+            <p>“El contexto (en qué cuenta estás, con qué rol) es información de primer nivel, no algo que se da por sabido.”</p>
+          </blockquote>
+          <div class="prose">
+            <p>No alcanza con ocultar o mostrar secciones según el permiso si no hay además una señal clara de dónde estás parado, y ese punto ciego no siempre se ve solo: acá lo vio el desarrollador antes que yo.</p>
+            <p>También me llevo algo que terminé de ver al armar este caso: la evidencia real detrás de todo fueron esos tickets y las charlas de sectorización con negocio, una fuente de research atípica que funcionó. Diseñar para dos roles tan distintos dentro del mismo sistema me obligó a chequear cada decisión desde los dos lados, algo que no habría sido tan evidente pensando en un solo tipo de usuario.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <p class="site-footer__name">Gastón M. Mansilla</p>
+        <p class="site-footer__role t-body-strong">PRODUCT DESIGNER</p>
+      </div>
+
+      <div class="site-footer__cols">
+        <nav class="footer-col" aria-labelledby="footer-links-title">
+          <p class="footer-col__title t-body-strong" id="footer-links-title">ENLACES</p>
+          <ul class="footer-list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../index.html#casos">Casos de estudio</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col">
+          <p class="footer-col__title t-body-strong">CONTACTO</p>
+          <ul class="footer-list footer-list--icons">
+            <li><a href="mailto:gmansilla24@gmail.com"><img src="../assets/icons/mail-white.svg" alt="" width="24" height="24"><span>gmansilla24@gmail.com</span></a></li>
+            <li><a href="https://wa.me/5491158978934" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/whatsapp-white.svg" alt="" width="24" height="24"><span>+54 9 11 58978934<span class="sr-only"> (WhatsApp, se abre en una pestaña nueva)</span></span></a></li>
+            <li><a href="https://www.linkedin.com/in/gmansilla24/" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/linkedin-white.svg" alt="" width="24" height="24"><span>LinkedIn<span class="sr-only"> (se abre en una pestaña nueva)</span></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

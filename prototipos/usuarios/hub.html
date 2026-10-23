@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selección de cuentas · Prototipo en código</title>
+  <meta name="description" content="Prototipo recreado en código de la pantalla de selección de cuentas (hub), previa al dashboard. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/hub.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!--
+  Hub: aparece cuando el usuario tiene cuentas a las que puede entrar como invitado; va antes del dashboard.
+  Contenido: completo (3 invitaciones pendientes + 3 cuentas) o mínimo (1 + 1). Parámetro: ?contenido=completo|minimo
+-->
+<body data-contenido="completo">
+  <script src="js/icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <header class="app-header app-header--hub">
+    <a class="header__logo" href="hub.html" aria-label="Nubix, ir a la selección de cuentas">
+      <img src="assets/nubix-logo.svg" alt="" width="73" height="21">
+    </a>
+    <div class="header__actions">
+      <button class="header__avatar" type="button" aria-label="Menú de la cuenta de Matías Roldán" aria-haspopup="true" aria-expanded="false" aria-controls="account-pop">
+        <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+      </button>
+    </div>
+  </header>
+
+  <!-- Menú del avatar en el hub (no está en Figma; lo definió el diseñador): al no haber una cuenta elegida, solo identifica la sesión y permite cerrarla.
+       Es el mismo popover del producto (account-pop), así que el ancho, la posición y el comportamiento son los de cuenta.js. -->
+  <div class="account-pop" id="account-pop" role="group" aria-label="Menú de la cuenta" hidden>
+    <div class="account-pop__body pop-hub">
+      <div class="pop-head">
+        <p class="pop-name">Matías Roldán</p>
+        <p class="pop-client">matias.roldan@example.com</p>
+      </div>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+  </div>
+
+  <main class="hub" id="main" tabindex="-1">
+    <div class="hub__hero">
+      <h1 class="hub__title">¡Hola Matías!</h1>
+      <p class="hub__subtitle">Elige con qué cuenta quieres trabajar.</p>
+    </div>
+
+    <div class="hub-card">
+      <!-- Tu cuenta -->
+      <section class="hub-own" aria-label="Tu cuenta">
+        <div class="hub-who">
+          <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+          <div class="hub-info hub-info--own">
+            <p class="hub-name">Matías Roldán</p>
+            <span class="badge badge--info-light hub-badge">Tu cuenta</span>
+            <p class="hub-email">matias.roldan@example.com</p>
+          </div>
+        </div>
+        <div class="hub-own__actions">
+          <a class="btn btn--sm btn--outline btn--secondary" href="index.html">Usuarios y permisos</a>
+          <a class="btn btn--sm btn--solid" href="dashboard.html" aria-label="Ingresar a tu cuenta">
+            Ingresar<svg class="icon icon--16" aria-hidden="true"><use href="#i-chevron-right-16"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Banner de invitaciones: el texto y el botón se arman en hub.js según la cantidad.
+           "Responder invitación(es)" lleva a Usuarios y permisos › pestaña "Asignado a otras cuentas", donde se aceptan o rechazan. -->
+      <div class="hub-sep" aria-hidden="true"></div>
+      <section class="hub-banner" id="hub-banner" aria-label="Invitaciones pendientes">
+        <p class="hub-banner__text" id="hub-banner-text"></p>
+        <a class="btn btn--sm btn--outline" id="hub-banner-btn" href="index.html#otras-cuentas"></a>
+      </section>
+      <div class="hub-sep" aria-hidden="true"></div>
+
+      <!-- Cuentas con acceso -->
+      <section class="hub-accounts" aria-labelledby="hub-accounts-title">
+        <h2 class="hub-accounts__title" id="hub-accounts-title">Cuentas con acceso</h2>
+        <ul class="hub-list" id="hub-list"></ul>
+      </section>
+    </div>
+  </main>
+
+  <!-- Herramienta del prototipo (fuera del producto) -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" role="group" aria-label="Contenido del hub">
+        <p class="probar__title">Contenido</p>
+        <button type="button" data-contenido="completo">Completo · 3 invitaciones, 3 cuentas</button>
+        <button type="button" data-contenido="minimo">Mínimo · 1 invitación, 1 cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/cuenta.js"></script>
+  <script src="js/hub.js"></script>
+</body>
+</html>

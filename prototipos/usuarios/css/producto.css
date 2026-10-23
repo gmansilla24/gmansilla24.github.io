@@ -1,0 +1,897 @@
+/* ==========================================================================
+   Prototipo · Usuarios y permisos (producto "Nubix", datos ficticios)
+   Tokens y medidas leídos del archivo de Figma ALC (pantallas 1440×900 y 360×800).
+   Esta hoja NO es la del portfolio: son los tokens del producto.
+   Breakpoint de layout: 1024px (debajo, layout mobile con header de 50px).
+   ========================================================================== */
+
+/* ---------- Tipografía (Nunito variable, la misma autoalojada del sitio) ---------- */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("../../../fonts/nunito-latin-ext-wght-normal.woff2") format("woff2-variations"),
+       url("../../../fonts/nunito-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url("../../../fonts/nunito-latin-wght-normal.woff2") format("woff2-variations"),
+       url("../../../fonts/nunito-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- Tokens (nombres = variables de Figma) ---------- */
+:root {
+  /* Neutros */
+  --common-white: #ffffff;
+  --secondary-50: #f0f1f2;   /* fondo de página */
+  --secondary-100: #e2e3e5;
+  --secondary-200: #c4c8cb;
+  --secondary-300: #a7acb1;
+  --secondary-500: #6c757d;
+  --secondary-600: #565e64;
+  --secondary-900: #161719;
+  --body-bg: #ffffff;
+  --body-color: #161719;
+  --text-muted: #565e64;
+  --link-color: #2b4c9e;
+  --border-header-mobile: #dee2e6;
+
+  /* Primario (acciones) */
+  --primary-50: #e6eff9;
+  --primary-100: #cedff3;
+  --primary-500: #0961c2;   /* action/primary/default */
+  --primary-600: #074e9b;
+  --primary-700: #053a74;   /* action/primary/active */
+
+  /* Marca */
+  --brand-vivid: #ff6600;
+  --brand-50: #f7ece6;
+  --brand-100: #eed8cc;
+  --brand-400: #bd6533;
+  --brand-500: #ac3e00;
+  --brand-600: #8a3200;
+  --brand-700: #672500;
+
+  /* Peligro */
+  --danger-50: #f7e6e8;
+  --danger-100: #efccd0;
+  --danger-500: #ad0014;
+  --danger-600: #8a0010;
+  --danger-700: #68000c;
+
+  /* Info */
+  --info-50: #e7f1f4;
+  --info-500: #0e7490;
+
+  /* Radios */
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+
+  /* Alturas de botón */
+  --btn-sm: 32px;
+  --btn-md: 40px;
+  --btn-lg: 48px;
+
+  /* Grilla de contenido (desktop) */
+  --grid-pad: 16px;      /* LG 1024–1199: gap 16 desde el sidebar + 16 a la derecha */
+}
+/* Ancho del sidebar: 56 colapsado / 248 expandido (Sidebar desktop). Se declara en body para que --grid-max lea el valor del estado actual. */
+body {
+  --sidebar-w: 56px;
+  --sidebar-col: 56px;                          /* lo que el sidebar le saca al contenido (ver el bloque de desktop) */
+  --grid-max: calc(1280px - var(--sidebar-col)); /* contenido máximo: container 1280 − sidebar → 1224 colapsado */
+}
+body[data-sidebar="expandido"] { --sidebar-w: 248px; --sidebar-col: 248px; }   /* expandido empuja el contenido en todos los anchos (Nubix · Grillas · Desktop) */
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--secondary-50);
+  color: var(--body-color);
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5714; /* 22px */
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+img, svg { display: block; }
+:focus-visible { outline: 3px solid rgba(9, 97, 194, .4); outline-offset: 1px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: 16px; top: -48px; z-index: 100;
+  background: var(--primary-500); color: #fff; padding: 8px 16px; border-radius: var(--radius-8);
+}
+.skip-link:focus { top: 8px; }
+
+.icon { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.icon--16 { width: 16px; height: 16px; }
+.icon--32 { width: 32px; height: 32px; }
+
+/* ==========================================================================
+   Botones · Button / Type × Color × Size × State
+   Estados: default / hover / active / focus (anillo 3px al 40%) / disabled (opacidad .6)
+   ========================================================================== */
+.btn {
+  --k-50: var(--primary-50);
+  --k-100: var(--primary-100);
+  --k-500: var(--primary-500);
+  --k-600: var(--primary-600);
+  --k-700: var(--primary-700);
+  --ring: rgba(9, 97, 194, .4);
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: var(--btn-md); padding: 0 16px;
+  border: 1px solid transparent; border-radius: var(--radius-8);
+  font-family: inherit; font-size: 14px; font-weight: 400; line-height: 22px;
+  white-space: nowrap; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.btn:focus-visible, .btn.is-focus { outline: none; box-shadow: 0 0 0 3px var(--ring); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .6; cursor: not-allowed; pointer-events: none; }
+.btn--sm { height: var(--btn-sm); padding: 0 12px; }
+.btn--lg { height: var(--btn-lg); padding: 0 24px; }
+.btn--block { display: flex; width: 100%; }
+.btn--block-mobile { width: 100%; }
+
+.btn--secondary { --k-50: var(--secondary-50); --k-100: var(--secondary-100); --k-500: var(--secondary-500); --k-600: var(--secondary-600); --k-700: var(--secondary-600); --ring: rgba(108, 117, 125, .4); }
+.btn--brand { --k-50: var(--brand-50); --k-100: var(--brand-100); --k-500: var(--brand-500); --k-600: var(--brand-600); --k-700: var(--brand-700); --ring: rgba(172, 62, 0, .4); }
+.btn--danger { --k-50: var(--danger-50); --k-100: var(--danger-100); --k-500: var(--danger-500); --k-600: var(--danger-600); --k-700: var(--danger-700); --ring: rgba(173, 0, 20, .4); }
+.btn--light { --ring: rgba(255, 255, 255, 1); }
+
+/* solid */
+.btn--solid { background: var(--k-500); color: #fff; }
+.btn--solid:is(:hover, .is-hover) { background: var(--k-600); }
+.btn--solid:is(:active, .is-active) { background: var(--k-700); }
+.btn--solid.btn--secondary { background: var(--secondary-100); color: var(--secondary-900); }
+.btn--solid.btn--secondary:is(:hover, .is-hover) { background: var(--secondary-200); }
+.btn--solid.btn--secondary:is(:active, .is-active) { background: var(--secondary-300); }
+.btn--solid.btn--light { background: #fff; color: var(--secondary-900); }
+.btn--solid.btn--light:is(:hover, .is-hover) { background: var(--secondary-100); }
+.btn--solid.btn--light:is(:active, .is-active) { background: var(--secondary-200); }
+
+/* outline: borde 500, texto 600; hover rellena con 500; active con 600 */
+.btn--outline { background: transparent; border-color: var(--k-500); color: var(--k-600); }
+.btn--outline:is(:hover, .is-hover) { background: var(--k-500); color: #fff; }
+.btn--outline:is(:active, .is-active) { background: var(--k-600); border-color: var(--k-600); color: #fff; }
+.btn--outline.btn--light { border-color: #fff; color: #fff; }
+.btn--outline.btn--light:is(:hover, .is-hover) { background: #fff; color: var(--secondary-900); }
+.btn--outline.btn--light:is(:active, .is-active) { background: var(--secondary-100); border-color: var(--secondary-100); color: var(--secondary-900); }
+
+/* ghost: texto 600; hover 50; active 100 */
+.btn--ghost { background: transparent; color: var(--k-600); }
+.btn--ghost:is(:hover, .is-hover) { background: var(--k-50); }
+.btn--ghost:is(:active, .is-active) { background: var(--k-100); }
+.btn--ghost.btn--light { color: #fff; }
+.btn--ghost.btn--light:is(:hover, .is-hover) { background: var(--secondary-50); }
+.btn--ghost.btn--light:is(:active, .is-active) { background: var(--secondary-100); }
+
+/* solo ícono: cuadrado (40 md / 32 sm) */
+.btn--icon { padding: 0; width: var(--btn-md); }
+.btn--icon.btn--sm { width: var(--btn-sm); }
+/* en el header los íconos van en gris texto-muted */
+.btn--icon.is-muted { color: var(--text-muted); }
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 18px; padding: 0 6px; border-radius: var(--radius-4);
+  font-size: 12px; font-weight: 600; line-height: 17px; letter-spacing: .04em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge--info-solid { background: var(--info-500); color: #fff; }
+.badge--info-light { background: var(--info-50); color: var(--info-500); }
+.counter {
+  position: absolute; top: 1px; left: 19px;
+  min-width: 18px; height: 18px; padding: 0 2px;
+  display: grid; place-items: center;
+  background: var(--danger-500); color: #fff; border: 1px solid #fff; border-radius: 20px;
+  font-size: 12px; font-weight: 600; line-height: 17px;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.app-header {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 8px;
+  height: 50px; padding: 0 16px;
+  background: var(--body-bg); border-bottom: 1px solid var(--border-header-mobile);
+}
+.header__menu { flex: none; }
+.header__logo { display: none; }
+.header__logo img { display: block; width: 73px; height: 21px; margin: 0 -1px; }
+.header__promo {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--brand-50); color: var(--body-color); border-radius: 24px;
+  font-size: 12px; font-weight: 600; line-height: 18px; white-space: nowrap;
+}
+.header__promo--mobile { width: 32px; height: 32px; }
+.header__promo--desktop { display: none; height: 34px; padding: 8px 12px; }
+.header__promo-text b { font-weight: 600; color: var(--brand-400); }
+.header__promo-icon { width: 16px; height: 16px; fill: var(--brand-400); }
+.header__actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.header__action { position: relative; display: block; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; display: block; object-fit: cover; flex: none; }
+
+/* ==========================================================================
+   Layout general
+   ========================================================================== */
+.app-shell { display: block; }
+.contextual { display: none; }
+
+/* ==========================================================================
+   Menú lateral (Sidebar desktop / Sidebar mobile del sistema de diseño)
+   Base = mobile: drawer de 268 que entra desde la izquierda. En desktop, ver el bloque ≥1024.
+   ========================================================================== */
+.sidebar, .drawer-ctx {
+  position: fixed; z-index: 90; top: 0; bottom: 0; left: 0; width: 268px;
+  display: flex; flex-direction: column;
+  background: var(--body-bg); border-radius: 0 var(--radius-12) var(--radius-12) 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  transform: translateX(-100%); visibility: hidden;
+  transition: transform .25s ease, visibility 0s linear .25s;
+}
+body[data-drawer] { overflow: hidden; }
+body[data-drawer="abierto"] .sidebar, body[data-drawer="secciones"] .drawer-ctx { transform: none; visibility: visible; transition: transform .25s ease, visibility 0s; }
+.sidebar__head { flex: none; display: flex; align-items: center; justify-content: space-between; height: 59px; padding: 0 12px 0 16px; }
+.sidebar__logo { display: block; }
+.sidebar__logo img { width: 71px; height: 20px; }
+.sidebar__close { opacity: .5; }
+.sidebar__close:hover, .sidebar__close:focus-visible { opacity: 1; }
+.sidebar__list { display: flex; flex-direction: column; gap: 4px; padding: 0 16px 16px; }
+.sidebar__toggle { display: none; }
+.scrim {
+  position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, .5);
+  opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility 0s linear .25s;
+}
+body[data-drawer] .scrim { opacity: 1; visibility: visible; transition: opacity .25s ease, visibility 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .drawer-ctx, body[data-drawer] .sidebar, body[data-drawer] .drawer-ctx, .scrim, body[data-drawer] .scrim { transition: none; }
+}
+
+/* Drawer "Secciones" (Sidebar mobile · Service=Cuenta): entra desde la derecha (el ⋮ está a la derecha) y redondea las esquinas izquierdas (12 0 0 12).
+   Encabezado de 59 con título 18/600 y cierre de 24, lista de ítems de 220 */
+.drawer-ctx { left: auto; right: 0; border-radius: var(--radius-12) 0 0 var(--radius-12); transform: translateX(100%); }
+.drawer-ctx__head { flex: none; display: flex; align-items: center; justify-content: space-between; height: 59px; padding: 0 16px; }
+.drawer-ctx__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.drawer-ctx__close {
+  flex: none; display: grid; place-items: center; width: 24px; height: 24px; padding: 0;
+  background: transparent; color: var(--secondary-900); border: 0; border-radius: var(--radius-8);
+  opacity: .5; cursor: pointer;
+}
+.drawer-ctx__close:hover, .drawer-ctx__close:focus-visible { opacity: 1; }
+.drawer-ctx__body { padding: 0 16px 16px; }
+.drawer-ctx ul { display: flex; flex-direction: column; gap: 4px; }
+.drawer-ctx .menu-item { width: 220px; }
+
+/* Ítems (los usa también el menú contextual de la derecha) */
+.menu-item {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  height: 40px; padding: 8px; border: 0; border-radius: var(--radius-4);
+  background: transparent; color: var(--body-color);
+  font-size: 14px; line-height: 22px; text-align: left; cursor: pointer;
+}
+.menu-item:hover { background: var(--secondary-50); }
+.menu-item[aria-current="page"], .menu-item.is-current { background: var(--primary-50); color: var(--primary-700); }
+.menu-item[aria-current="page"] .icon, .menu-item.is-current > .icon:first-child { color: var(--primary-600); }
+.menu-item__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.menu-item__chev { margin-left: auto; color: var(--body-color); }   /* en Figma el chevron no toma el azul del ítem seleccionado */
+.sidebar .menu-item__label, .drawer-ctx .menu-item__label { position: relative; top: 1px; }   /* en Figma el texto del sidebar mobile y del drawer queda 1 px más abajo que en el menú contextual de desktop */
+.menu-item--section .chev-less, .menu-item--section[aria-expanded="true"] .chev-more { display: none; }
+.menu-item--section[aria-expanded="true"] .chev-less { display: block; }
+
+/* Subítems: acordeón (desktop expandido y drawer mobile) */
+.subnav { margin-top: 4px; }
+.subnav[hidden] { display: none; }
+.subnav__title { display: none; }
+.subnav ul { display: flex; flex-direction: column; gap: 4px; padding-left: 28px; }
+.sub-item {
+  display: flex; align-items: center; height: 40px; padding: 8px; border-radius: var(--radius-4);
+  color: var(--body-color); font-size: 14px; line-height: 22px; white-space: nowrap;
+}
+/* (mismo desfase de 1 px que el label) */
+.sub-item { padding: 9px 8px 7px; }
+.sub-item:hover { background: var(--secondary-50); }
+.sub-item[aria-current="page"] { background: var(--primary-100); color: var(--primary-700); }
+
+/* Tooltip (Feedback/Tooltip · Derecha): #161719, radio 4, padding 4/8, texto 14 blanco, flecha de 6,4 × 12,8 */
+.tooltip {
+  position: fixed; z-index: 140; display: flex; align-items: center; pointer-events: none;
+  opacity: 0; visibility: hidden; transition: opacity .12s ease, visibility 0s linear .12s;
+}
+.tooltip.is-visible { opacity: 1; visibility: visible; transition: opacity .12s ease, visibility 0s; }
+.tooltip__arrow { flex: none; width: 6.4px; height: 12.8px; margin-right: -2px; background: var(--secondary-900); clip-path: polygon(100% 0, 100% 100%, 0 50%); }
+.tooltip__text { padding: 4px 8px; background: var(--secondary-900); color: #fff; border-radius: var(--radius-4); font-size: 14px; line-height: 22px; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .tooltip, .tooltip.is-visible { transition: none; } }
+.service { padding: 32px 16px 48px; min-width: 0; }
+
+/* ---------- Identidad: breadcrumb + título ---------- */
+.identity { display: flex; flex-direction: column; gap: 12px; }
+.breadcrumb ol { display: flex; align-items: center; gap: 4px; font-size: 12px; line-height: 18px; }
+.breadcrumb li { display: flex; align-items: center; gap: 4px; }
+.breadcrumb a { color: var(--link-color); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .icon { fill: var(--secondary-600); }
+.breadcrumb [aria-current="page"] { color: var(--body-color); }
+.identity__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.identity__title { font-size: 21px; font-weight: 600; line-height: 1.25; }
+.identity__more { display: inline-flex; }
+
+/* ---------- Pestañas ---------- */
+.service__body { margin-top: 20px; display: flex; flex-direction: column; gap: 20px; }
+.tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs::after { content: ""; display: none; flex: 1 0 0; border-bottom: 2px solid var(--secondary-200); }
+.tab {
+  flex: none; display: flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 16px; background: none; border: 0;
+  border-bottom: 2px solid var(--secondary-200);
+  color: var(--body-color); font-size: 14px; font-weight: 600; line-height: 22px; cursor: pointer; white-space: nowrap;
+}
+.tab:first-child { flex: 1 0 auto; }
+.tab[aria-selected="true"] { color: var(--primary-500); border-bottom-color: var(--primary-500); }
+.tab:focus-visible { outline-offset: -3px; }
+
+/* ---------- Tarjetas ---------- */
+.stack { display: flex; flex-direction: column; gap: 24px; position: relative; }
+.card {
+  position: relative;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.banner { padding: 15px; display: flex; flex-direction: column; gap: 16px; }
+.banner { position: relative; }
+.banner__title-row { display: flex; align-items: center; gap: 8px; }
+.banner__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.banner__desc { margin-top: 4px; color: var(--text-muted); font-size: 14px; line-height: 22px; }
+
+.data-card { padding: 15px; display: flex; flex-direction: column; gap: 24px; }
+.titular { display: flex; align-items: flex-start; gap: 12px; }
+.titular__info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.titular__name-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.titular__name { font-size: 16px; font-weight: 600; line-height: 20px; }
+.titular__email { color: var(--text-muted); font-size: 12px; line-height: 18px; overflow-wrap: anywhere; }
+
+.empty { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 0; min-height: 227px; }
+.empty__body { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 382px; width: 100%; text-align: center; }
+.empty__icon { width: 48px; height: 48px; display: grid; place-items: center; background: var(--secondary-100); color: var(--secondary-600); border-radius: 50%; }
+.empty__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.empty__desc { color: var(--text-muted); font-size: 12px; line-height: 18px; }
+
+/* ---------- Estado "cargando": velo blanco al 80% + spinner ---------- */
+.loading {
+  position: absolute; inset: 0; z-index: 2;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, .8); border-radius: var(--radius-12);
+}
+[data-paso="0"] #panel-mi-cuenta .loading, #panel-otras[data-paso="0"] .loading { display: flex; }
+[data-paso="0"] #panel-mi-cuenta .empty__body, #panel-otras[data-paso="0"] .empty__body { visibility: hidden; }
+.spinner {
+  width: 32px; height: 32px; border-radius: 50%;
+  /* arco de 270° con aro de ~2.7px, como "Spinner / border" */
+  border: 2.7px solid var(--primary-500); border-right-color: transparent;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2.4s; } }
+
+/* ---------- Aviso de "pantalla pendiente" (solo mientras se arma el prototipo) ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 200;
+  transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+  max-width: calc(100vw - 32px);
+  background: var(--secondary-900); color: #fff; border-radius: var(--radius-8);
+  padding: 12px 16px; font-size: 14px; line-height: 22px;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+
+/* ==========================================================================
+   Desktop ≥ 1024px: header 64, sidebar colapsado 56, menú contextual 240
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .app-header { height: 64px; padding: 0 24px; gap: 16px; }
+  .header__menu { display: none; }
+  .header__logo { display: block; }
+  .header__promo--mobile { display: none; }
+  .header__promo--desktop { display: inline-flex; }
+  .app-shell { display: grid; grid-template-columns: var(--sidebar-col) minmax(0, 1fr); min-height: calc(100vh - 64px); }
+  .scrim, .sidebar__head, .drawer-ctx { display: none; }
+
+  /* Sidebar: columna fija bajo el header. Expandido (248) o colapsado (56). */
+  .sidebar {
+    display: block; position: sticky; top: 64px; z-index: 25; align-self: start;
+    width: var(--sidebar-w); height: calc(100vh - 64px); min-height: 480px;
+    background: var(--body-bg); border-radius: 0; box-shadow: 1px 0 0 var(--secondary-100);   /* el filete queda afuera: los ítems miden 216 / 40 como en Figma */
+    overflow: visible; transform: none; visibility: visible; transition: none;
+  }
+  .sidebar__list { max-height: 100%; overflow-y: auto; padding: 16px; scrollbar-width: thin; }
+  .sidebar__toggle {
+    position: absolute; top: calc(50% - 23px); left: 100%;
+    width: 15px; height: 48px; padding: 0;
+    display: grid; place-items: center;
+    background: var(--body-bg); color: var(--text-muted);
+    border: 1px solid var(--border-header-mobile); border-left: 0; border-radius: 0 var(--radius-8) var(--radius-8) 0;
+    cursor: pointer;
+  }
+  .sidebar__toggle:hover { background: var(--secondary-50); }
+  .sidebar__toggle .icon { margin-left: -3px; }
+  .sidebar__toggle .i-collapse, body[data-sidebar="expandido"] .sidebar__toggle .i-expand { display: none; }
+  body[data-sidebar="expandido"] .sidebar__toggle .i-collapse { display: block; }
+  /* Colapsado: solo íconos (40 × 40), tooltip al pasar el mouse y popover con los subítems al hacer clic */
+  body[data-sidebar="colapsado"] .sidebar__list { padding: 16px 8px; }
+  body[data-sidebar="colapsado"] .sidebar .menu-item { justify-content: center; padding: 0; }   /* solo el sidebar: el menú contextual comparte .menu-item */
+  body[data-sidebar="colapsado"] .sidebar .menu-item__label {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  body[data-sidebar="colapsado"] .sidebar .menu-item__chev { display: none !important; }
+  body[data-sidebar="colapsado"] .sidebar .menu-item--section[aria-expanded="true"] { background: var(--secondary-50); }
+  body[data-sidebar="colapsado"] .sidebar .menu-item--section.is-current[aria-expanded="true"] { background: var(--primary-50); }
+  /* popover-card: 200 de ancho, padding 16, borde #e2e3e5, radio 8, sombra 0 2 4 */
+  body[data-sidebar="colapsado"] .subnav {
+    position: fixed; z-index: 130; width: 200px; margin: 0; padding: 16px;
+    background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .075);
+  }
+  body[data-sidebar="colapsado"] .subnav__title { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 14px; font-weight: 600; line-height: 22px; }
+  body[data-sidebar="colapsado"] .subnav ul { gap: 8px; padding-left: 0; }
+
+  /* Grilla del sistema (Nubix · Grillas · Desktop): ver el bloque "Grilla de contenido" al final de esta hoja */
+  .app-body { display: flex; align-items: flex-start; gap: 24px; width: 100%; padding-inline: var(--grid-pad); margin-inline: auto; max-width: calc(var(--grid-max) + 2 * var(--grid-pad)); }
+  .contextual {
+    display: block; flex: none; width: 240px; margin-top: 24px;
+    position: sticky; top: 88px;   /* queda fija bajo el header (64) + 24 de aire mientras se scrollea el contenido */
+    background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-8);
+    padding: 15px;
+  }
+  .contextual ul { display: flex; flex-direction: column; gap: 4px; }
+  .contextual .menu-item { width: 100%; }
+  .service { flex: 1; padding: 24px 0 48px; container: svc / inline-size; }
+  .service__body { margin-top: 20px; }
+
+  .tabs::after { display: block; }
+  .tab:first-child { flex: none; }
+  .titular__name-row { flex-direction: row; align-items: center; gap: 8px; }
+  .empty { padding: 48px 24px; }
+  .identity__more { display: none; }
+}
+
+/* Tablet (600–1023px): pestañas a su ancho natural, con la línea gris completando la fila */
+@media (min-width: 600px) {
+  .tabs::after { display: block; }
+  .tab:first-child { flex: none; }
+}
+
+/* ==========================================================================
+   Agregar integrante (vista 2) · formulario
+   Medidas leídas de Figma: tarjeta 638 (606 útiles), padding 16, gap 20;
+   secciones gap 32; interior de sección gap 12; option-cards gap 16.
+   ========================================================================== */
+:root {
+  --border-strong: #899197;
+  --info-border: #9fc7d3;
+  --info-text: #0b5d73;
+}
+.vista[hidden] { display: none; }
+
+/* Fila de título con botón "volver" (en mobile suma el menú de acciones a la derecha) */
+.page-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.page-title__main { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.page-title .identity__title { min-width: 0; }
+
+.form-card {
+  margin: 20px auto 0; width: 100%; max-width: 638px;
+  padding: 15px; display: flex; flex-direction: column; gap: 20px;
+}
+.form-card__desc { color: var(--text-muted); font-size: 14px; line-height: 22px; }
+.form { display: flex; flex-direction: column; gap: 32px; }
+.form__block { display: flex; flex-direction: column; gap: 12px; }
+.form__section { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.section-title { font-size: 16px; font-weight: 600; line-height: 1.25; }
+.form-card__actions { display: flex; justify-content: flex-end; }
+
+/* ---------- Text field: etiqueta flotante, helper de 12px ---------- */
+.field { display: flex; flex-direction: column; }
+.field__box { position: relative; height: 48px; }
+.field__input {
+  display: block; width: 100%; height: 48px; padding: 8px 10px; margin: 0;
+  background: var(--body-bg); color: var(--body-color);
+  border: 1px solid var(--secondary-300); border-radius: var(--radius-12);
+  font: inherit; font-size: 14px; line-height: 22px; outline: 0;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.field__input:hover { border-color: var(--border-strong); }
+.field__input:focus { border-color: var(--primary-600); box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.field__label {
+  position: absolute; left: 10px; top: 12px; max-width: calc(100% - 20px);
+  padding: 0; background: transparent; color: var(--text-muted);
+  font-size: 14px; line-height: 22px; pointer-events: none; white-space: nowrap;
+  transition: top .15s ease, left .15s ease, font-size .15s ease, line-height .15s ease, padding .15s ease;
+}
+/* flotante: con foco, con valor o con error */
+.field__input:focus ~ .field__label,
+.field__input:not(:placeholder-shown) ~ .field__label,
+.field.is-error .field__label {
+  top: -9px; left: 6px; padding: 0 4px; background: var(--body-bg);
+  font-size: 12px; line-height: 18px;
+}
+.field__input:focus ~ .field__label { color: var(--primary-600); }
+
+/* helper: reserva 22px (4 + 18) apenas hay foco, valor o error, como en las variantes de Figma */
+.field__help { display: none; margin: 4px 0 0; min-height: 18px; color: var(--danger-600); font-size: 12px; line-height: 18px; }
+.field:focus-within .field__help,
+.field:has(.field__input:not(:placeholder-shown)) .field__help,
+.field.is-error .field__help { display: block; }
+
+.field.is-error .field__input { border-color: var(--danger-500); }
+.field.is-error .field__input:focus { box-shadow: 0 0 0 3px rgba(173, 0, 20, .4); }
+.field.is-error .field__label { color: var(--danger-600); }
+
+/* ---------- Alert inline (info) ---------- */
+.alert {
+  display: flex; align-items: center; gap: 8px;
+  padding: 16px; border: 1px solid; border-radius: var(--radius-8);
+}
+.alert p { font-size: 14px; line-height: 22px; }
+.alert--info { background: var(--info-50); border-color: var(--info-border); color: var(--info-text); }
+
+/* ---------- Option cards + radio ---------- */
+.options { display: flex; flex-direction: column; gap: 16px; }
+.option-card, .toggle-card {
+  position: relative; display: flex; flex-direction: column;
+  padding: 15px; background: var(--body-bg);
+  border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+  cursor: pointer; transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.option-card__input, .toggle-card__input {
+  position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none;
+}
+.option-card__row, .toggle-card__row { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+.option-card__label, .toggle-card__label { font-size: 14px; font-weight: 500; line-height: 22px; }
+.option-card__desc { padding-left: 26px; color: var(--text-muted); font-size: 12px; line-height: 18px; }
+/* el toggle-card de Figma cuenta el borde dentro del layout (82 = 26 + 4 + 18 + 32 + 2): padding 16 + borde 1 */
+.toggle-card { gap: 4px; padding: 16px; }
+.toggle-card__desc { padding-left: 44px; color: var(--text-muted); font-size: 12px; line-height: 18px; }
+
+.option-card:hover { border-color: var(--secondary-200); box-shadow: 0 2px 4px rgba(0, 0, 0, .08); }
+.option-card:has(.option-card__input:checked) { background: var(--primary-50); border-color: var(--primary-500); box-shadow: none; }
+
+.radio {
+  position: relative; flex: none; width: 18px; height: 18px;
+  background: var(--body-bg); border: 1.5px solid var(--secondary-300); border-radius: 50%;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.radio::after {
+  content: ""; position: absolute; inset: 0; margin: auto; width: 8px; height: 8px;
+  border-radius: 50%; background: #fff; transform: scale(0); transition: transform .15s ease;
+}
+.option-card:hover .radio { border-color: var(--border-strong); }
+.option-card__input:checked + .option-card__row .radio { background: var(--primary-500); border-color: var(--primary-500); }
+.option-card__input:checked + .option-card__row .radio::after { transform: scale(1); }
+.option-card__input:focus-visible + .option-card__row .radio { box-shadow: 0 0 0 3px rgba(9, 97, 194, .35); }
+
+/* ---------- Switch + toggle card ---------- */
+.switch {
+  position: relative; flex: none; width: 36px; height: 20px; border-radius: 10px;
+  background: var(--secondary-300); transition: background-color .15s ease, box-shadow .15s ease;
+}
+.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+  border-radius: 50%; background: var(--body-bg); transition: transform .15s ease;
+}
+.toggle-card:hover .switch { background: var(--border-strong); }
+.toggle-card__input:checked + .toggle-card__row .switch { background: var(--primary-500); }
+.toggle-card:hover .toggle-card__input:checked + .toggle-card__row .switch { background: var(--primary-600); }
+.toggle-card__input:checked + .toggle-card__row .switch::after { transform: translateX(16px); }
+.toggle-card__input:focus-visible + .toggle-card__row .switch { box-shadow: 0 0 0 3px rgba(9, 97, 194, .35); }
+
+@media (prefers-reduced-motion: reduce) {
+  .field__input, .field__label, .option-card, .toggle-card, .radio, .radio::after, .switch, .switch::after { transition: none; }
+}
+
+/* ---------- Herramienta del prototipo: "Probar estados" (fuera del producto) ---------- */
+.probar { position: fixed; left: 16px; bottom: 16px; z-index: 150; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.probar[hidden] { display: none; }
+.probar__toggle {
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
+  background: var(--secondary-900); color: #fff; border: 0; border-radius: 16px;
+  font-size: 12px; font-weight: 600; line-height: 18px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .24);
+}
+.probar__toggle:focus-visible { outline: 3px solid rgba(255, 255, 255, .9); outline-offset: 2px; box-shadow: 0 0 0 5px var(--secondary-900); }
+.probar__panel {
+  order: -1; display: flex; flex-direction: column; gap: 4px; min-width: 200px; padding: 12px;
+  background: var(--secondary-900); color: #fff; border-radius: var(--radius-12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .28);
+}
+.probar__panel[hidden] { display: none; }
+/* Con varios grupos el panel es más alto que la pantalla: scroll interno (alto = pantalla − botón − márgenes) */
+.probar__panel { max-height: calc(100vh - 80px); max-height: calc(100dvh - 80px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--secondary-500) transparent; }
+.probar__panel > * { flex: none; }
+.probar__title { margin-bottom: 4px; color: var(--secondary-300); font-size: 12px; font-weight: 600; line-height: 18px; text-transform: uppercase; letter-spacing: .04em; }
+.probar__panel button {
+  height: 32px; padding: 0 8px; text-align: left; background: transparent; color: #fff;
+  border: 0; border-radius: var(--radius-8); font-size: 14px; cursor: pointer;
+}
+.probar__panel button:hover { background: rgba(255, 255, 255, .14); }
+.probar__panel button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.probar__panel button[aria-pressed="true"] { background: rgba(255, 255, 255, .2); font-weight: 600; }
+/* En pantallas chicas queda como botón redondo en la esquina, para no tapar el formulario */
+@media (max-width: 1023px) {
+  .probar { left: auto; right: 12px; bottom: 12px; align-items: flex-end; }
+  .probar__toggle { width: 36px; height: 36px; padding: 0; justify-content: center; border-radius: 50%; }
+  .probar__label {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+}
+@media print { .probar { display: none; } }
+.identity__title:focus { outline: none; }
+
+/* ==========================================================================
+   Grilla de contenido (desktop), leída del sistema de diseño "Nubix · Grillas"
+   El sidebar queda fijo contra el borde izquierdo y el contenido se centra en el espacio restante.
+     Colapsado (sidebar 56):                       Expandido (sidebar 248):
+     LG  1024–1199  gap 16 + pr 16 → 936  (flex 672)    → 744  (flex 480)
+     XL  1200–1439  gap 32 + pr 32 → 1080 (flex 816)    → 888  (flex 624)
+     XXL ≥1440      container 1280 → 1224 (flex 960)    → 1032 (flex 768)
+                    con margen automático a ambos lados: 80px a 1440, 320px a 1920.
+   (flex = ancho junto al menú contextual de 240 + gap 24.)
+   El tope (1224 / 1032) se alcanza a los 1344px; ahí el padding de 32px coincide con el margen automático,
+   así que no hay salto entre XL y XXL.
+   ========================================================================== */
+@media (min-width: 1200px) {
+  :root { --grid-pad: 32px; }
+}
+
+/* ==========================================================================
+   Layout Bare (Nubix · Grillas · Desktop): pantallas sin sidebar, solo con padding a los lados y las 12 columnas dentro.
+   Lo usan el hub de selección de cuentas y "Acceso restringido · Página completa", que centran una tarjeta de 8 columnas.
+   Padding 20 / 24 / 28 (LG / XL / XXL) y 8 columnas = 8 × col + 7 × 24 con col 60 / 74 / 80 → 648 / 760 / 808.
+   Figma dibuja estas pantallas solo a 1440 (808); LG y XL salen de la grilla Bare. Debajo de 1024 siguen el layout mobile.
+   ========================================================================== */
+:root { --bare-pad: 20px; --bare-8col: 648px; }
+@media (min-width: 1200px) { :root { --bare-pad: 24px; --bare-8col: 760px; } }
+@media (min-width: 1440px) { :root { --bare-pad: 28px; --bare-8col: 808px; } }
+
+/* ==========================================================================
+   Lista de integrantes (después de invitar) · medidas leídas de Figma
+   Desktop: tabla de 5 columnas (cabecera 37, fila 62). Mobile: una tarjeta por integrante (159).
+   Estados del badge: ACTIVO verde · PENDIENTE amarillo · EXPIRADO rojo. Contador: azul → amarillo al llegar a 10.
+   ========================================================================== */
+:root {
+  --success-50: #eaf3e6;
+  --success-border: #abce99;
+  --success-500: #2d8500;
+  --success-text: #246a00;
+  --warning-500: #ffc107;
+}
+.badge--success-solid { background: var(--success-500); color: #fff; }
+.badge--warning-solid { background: var(--warning-500); color: var(--secondary-900); }
+.badge--danger-solid { background: var(--danger-500); color: #fff; }
+
+/* Qué se ve según el estado de la página: cargando → esqueleto; 0 integrantes → vacío; 1+ → lista */
+.members { display: none; }
+[data-paso="1"]:not([data-n="0"]) .members { display: block; }
+[data-paso="1"]:not([data-n="0"]) #panel-mi-cuenta .empty { display: none; }
+
+/* --- Tarjetas (mobile y tablet) --- */
+.cards { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.member-card {
+  display: flex; flex-direction: column; gap: 12px; padding: 15px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.member-card__head { display: flex; align-items: center; gap: 12px; min-height: 32px; }
+.member-card__name { flex: 1; min-width: 0; font-size: 14px; font-weight: 500; line-height: 22px; overflow-wrap: anywhere; }
+.member-card__status { display: flex; align-items: center; gap: 8px; flex: none; }
+.member-card__rows { display: flex; flex-direction: column; gap: 8px; margin: 0; padding-top: 12px; border-top: 1px solid var(--secondary-100); }
+.member-card__row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 18px; }
+.member-card__row dt { color: var(--text-muted); flex: none; }
+.member-card__row dd { margin: 0; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+
+/* --- Tabla (desktop) --- */
+.tabla { display: none; width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+.tabla col:first-child { width: 233px; }   /* evita cortar los emails cuando el contenedor se angosta (LG) */
+.tabla .col-estado { width: 150px; }
+.tabla .col-acciones { width: 88px; }
+.tabla th {
+  height: 37px; padding: 0 8px; border-bottom: 1px solid var(--secondary-100);
+  color: var(--text-muted); font-size: 14px; font-weight: 400; line-height: 22px;
+  text-align: center; text-transform: uppercase; vertical-align: middle;
+}
+.tabla td {
+  height: 62px; padding: 0 8px; border-bottom: 1px solid var(--secondary-100);
+  font-size: 12px; line-height: 18px; text-align: center; vertical-align: middle;
+}
+.tabla th:first-child, .tabla td:first-child { text-align: left; }
+.th__sort {
+  display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0;
+  background: none; border: 0; border-radius: var(--radius-4);
+  color: inherit; font: inherit; text-transform: inherit; cursor: pointer;
+}
+.th__sort:hover { color: var(--secondary-900); }
+.th__sort:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.celda-nombre { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.celda-nombre strong { font-weight: 600; }
+.celda-nombre span { color: var(--text-muted); overflow-wrap: anywhere; }
+.acciones { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+/* Con el sidebar expandido el área de contenido puede quedar en 480–672px (Nubix · Grillas: LG expandido = 480, XL = 624).
+   La tabla se diseñó para 672 o más: por debajo, el contenido usa la versión de tarjetas, igual que en mobile.
+   El umbral se mide sobre el contenedor (.service), no sobre la pantalla. */
+@media (min-width: 1024px) {
+  @container svc (min-width: 672px) {
+    .tabla { display: table; }
+    .cards { display: none; }
+    .btn--block-mobile { width: auto; }
+    .banner { flex-direction: row; align-items: center; gap: 16px; }
+    .banner__text { flex: 1; min-width: 0; }
+  }
+}
+
+/* --- Feedback/Toast · success (arriba a la derecha en desktop, abajo en mobile) --- */
+.toast-ok {
+  position: fixed; z-index: 210; left: 16px; right: 16px; bottom: 16px;
+  display: flex; align-items: center; gap: 12px; padding: 16px;
+  background: var(--success-50); border: 1px solid var(--success-border); border-radius: var(--radius-8);
+  color: var(--success-text); font-size: 14px; line-height: 22px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toast-ok.is-visible { opacity: 1; transform: none; }
+@media (min-width: 1024px) {
+  .toast-ok { left: auto; right: 20px; top: 72px; bottom: auto; width: 300px; transform: translateY(-8px); }
+  .toast-ok.is-visible { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .toast-ok { transition: none; } }
+
+/* --- "Probar estados": grupos --- */
+.probar__group { display: flex; flex-direction: column; gap: 4px; }
+.probar__group[hidden] { display: none; }
+/* la última fila no lleva línea inferior (conserva la altura de 62) */
+.tabla tbody tr:last-child td { border-bottom-color: transparent; }
+@media (min-width: 1024px) { @container svc (max-width: 735px) { .tabla .col-estado { width: 120px; } } }
+
+/* ==========================================================================
+   Editar integrante · modales de confirmación · menú de acciones (mobile)
+   ========================================================================== */
+.badge[hidden] { display: none; }
+.badge--primary-solid { background: var(--primary-500); color: #fff; }
+
+/* Email bloqueado: tarjeta gris con ícono (desktop) o solo texto (mobile) */
+.email-locked { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--secondary-50); border-radius: var(--radius-12); }
+.email-locked__icon { display: none; flex: none; width: 48px; height: 48px; place-items: center; background: var(--body-bg); color: var(--primary-500); border-radius: var(--radius-8); }
+.email-locked__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.email-locked__email { font-size: 16px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+.email-locked__note { color: var(--text-muted); font-size: 14px; line-height: 22px; }
+@media (min-width: 1024px) { .email-locked__icon { display: grid; } }
+
+/* Modal de confirmación: <dialog> nativo (foco atrapado, Esc, fondo inerte) */
+.modal {
+  width: 500px; max-width: calc(100vw - 32px); padding: 0;
+  background: var(--body-bg); color: var(--body-color);
+  border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.modal::backdrop { background: rgba(0, 0, 0, .5); }
+.modal__box { display: flex; flex-direction: column; gap: 20px; padding: 23px; }
+.modal__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.modal__title { font-size: 18px; font-weight: 600; line-height: 1.25; }
+.modal__close {
+  flex: none; width: 24px; height: 24px; padding: 0; display: grid; place-items: center;
+  background: none; border: 0; border-radius: var(--radius-8); color: #18181a; opacity: .5; cursor: pointer;
+}
+.modal__close:hover { opacity: 1; background: var(--secondary-50); }
+.modal__close:focus-visible { outline: none; opacity: 1; box-shadow: 0 0 0 3px rgba(9, 97, 194, .4); }
+.modal__text { color: var(--text-muted); font-size: 14px; line-height: 22px; }
+.modal__footer { display: flex; justify-content: flex-end; gap: 8px; }
+body:has(dialog[open]) { overflow: hidden; }
+
+.infobox { display: flex; flex-direction: column; gap: 12px; padding: 11px; border: 1px solid var(--secondary-100); border-radius: var(--radius-8); }
+.infobox[hidden] { display: none; }
+.infobox__label { color: var(--text-muted); font-size: 12px; font-weight: 600; line-height: 17px; letter-spacing: .04em; text-transform: uppercase; }
+.infobox__rows { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.infobox__row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 18px; }
+.infobox__row dt { color: var(--text-muted); flex: none; }
+.infobox__row dd { margin: 0; font-weight: 600; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+@media (max-width: 599px) {
+  .infobox__row { flex-direction: column; gap: 4px; }
+  .infobox__row dd { text-align: left; }
+}
+
+/* Dropdown de acciones (⋮ de las tarjetas mobile) */
+.menu {
+  position: fixed; z-index: 120; width: 240px; padding: 8px;
+  display: flex; flex-direction: column; gap: 4px;
+  background: var(--body-bg); border-radius: var(--radius-8); box-shadow: 0 8px 16px rgba(0, 0, 0, .12);
+}
+.menu[hidden] { display: none; }
+.menu__item {
+  display: flex; align-items: center; gap: 8px; width: 100%; height: 32px; padding: 8px;
+  background: none; border: 0; border-radius: var(--radius-4);
+  color: var(--body-color); font: inherit; font-size: 14px; line-height: 22px; text-align: left; cursor: pointer;
+}
+.menu__item:hover, .menu__item:focus-visible { background: var(--secondary-50); outline: none; }
+.menu__item:focus-visible { box-shadow: inset 0 0 0 2px rgba(9, 97, 194, .4); }
+
+/* ==========================================================================
+   Pestaña "Asignado a otras cuentas"
+   Medidas leídas de Figma: tarjeta 970 (938 útiles), padding 16, gap 20 entre título, descripción y contenido;
+   vacío 209 de alto (padding 48); tabla: # Cliente 120 · Titular / Rol / Soporte repartidos · Estado 120 · acciones 88.
+   ========================================================================== */
+.otras-card { padding: 15px; display: flex; flex-direction: column; gap: 20px; }
+.otras-card__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.otras-card__desc { color: var(--text-muted); font-size: 14px; line-height: 22px; }
+.otras-card .empty { min-height: 0; }
+.otras-lista { display: none; }
+#panel-otras[data-paso="1"]:not([data-n="0"]) .otras-lista { display: block; }
+#panel-otras[data-paso="1"]:not([data-n="0"]) .empty { display: none; }
+.tabla.tabla--otras col.col-cliente { width: 120px; }
+.tabla--otras .col-estado { width: 120px; }
+.tabla--otras th:nth-child(2), .tabla--otras td:nth-child(2) { text-align: left; }
+.otras-lista .cards { gap: 16px; }
+.stack[hidden] { display: none; }
+
+/* ==========================================================================
+   Popover de la cuenta (Popover · Cuenta + Header · Popover=Open)
+   302 de ancho (borde 1 + padding 16), alineado al borde derecho del avatar y 8 px debajo del header.
+   Variantes: propia · sin-asociadas (sin "Usuarios y permisos") · invitada (estás en la cuenta de otra persona).
+   ========================================================================== */
+.icon--13 { width: 13px; height: 13px; }
+.account-pop {
+  position: fixed; z-index: 60; top: 58px; right: 16px;   /* mobile: header 50 + 8, avatar a 16 del borde */
+  width: 302px; max-width: calc(100vw - 32px); padding: 16px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .075);
+}
+.account-pop[hidden] { display: none; }
+.account-pop__body { display: flex; flex-direction: column; gap: 8px; }
+.pop-guest { display: none; }
+body[data-tipo-cuenta="invitada"] .pop-own { display: none; }
+body[data-tipo-cuenta="invitada"] .pop-guest { display: flex; }
+body[data-tipo-cuenta="sin-asociadas"] .pop-usuarios { display: none; }
+.pop-cambiar { display: none; }                         /* solo en la variante "con-cuentas" (la propia + Cambiar cuenta, que no está en Figma) */
+body[data-tipo-cuenta="con-cuentas"] .pop-cambiar { display: flex; }
+.pop-head { display: flex; flex-direction: column; gap: 4px; padding: 0 12px 8px; }
+.pop-head--guest { padding: 0; gap: 4px; }
+.pop-name { font-size: 14px; font-weight: 600; line-height: 22px; }
+.pop-client, .pop-role { display: flex; align-items: center; gap: 5px; color: var(--text-muted); font-size: 12px; line-height: 18px; }
+.pop-caption { color: var(--text-muted); font-size: 12px; font-weight: 600; line-height: 17px; letter-spacing: .04em; text-transform: uppercase; }
+.pop-copy {
+  display: inline-grid; place-items: center; width: 13px; height: 13px; padding: 0;
+  background: none; border: 0; border-radius: 2px; color: var(--link-color); cursor: pointer;
+}
+.pop-copy:focus-visible { outline-offset: 3px; }
+.pop-sep { height: 1px; background: var(--secondary-100); }
+.pop-group { display: flex; flex-direction: column; gap: 4px; }
+.account-pop .menu-item { width: 100%; }
+.pop-item--hug { height: 38px; }                         /* "Cerrar sesión" y "Cambiar cuenta" miden 38 en el diseño; los otros ítems, 40 */
+.pop-item--danger, .pop-item--danger .icon { color: var(--danger-600); }
+@media (min-width: 1024px) {
+  .account-pop { top: 72px; right: 24px; }               /* header 64 + 8, avatar a 24 del borde */
+}
+
+/* ---------- "Probar estados": enlaces a otras pantallas (cuenta del dashboard, casos particulares) ---------- */
+.probar__panel a {
+  display: flex; align-items: center; height: 32px; padding: 0 8px; border-radius: var(--radius-8);
+  color: #fff; font-size: 14px; text-decoration: none;
+}
+.probar__panel a:hover { background: rgba(255, 255, 255, .14); }
+.probar__panel a:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.probar__panel a[aria-current="true"] { background: rgba(255, 255, 255, .2); font-weight: 600; }

@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Referidos y recompensas · Prototipo en código</title>
+  <meta name="description" content="Prototipo recreado en código de Referidos y recompensas de Nubix: recomendar y ganar, cupón y comisiones. Datos ficticios.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/referidos.css">
+  <link rel="stylesheet" href="css/actividad.css">
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<!--
+  Referidos y recompensas · pestaña "Recomendar y ganar" (Figma ALC: "Referidos y recompensas · Desktop · Sidebar colapsado · Tab Recomendar y ganar · …" y "… · Mobile · Cerrado · …").
+  Pestaña "Actividad y pagos" (Figma ALC: "… · Tab Actividad y pagos · Sin datos" y "… · Cargando"; mobile "… · Mobile · Cerrado · Tab Actividad y pagos · …"): con etapa sin-compras o con-compras
+  no hay referidos ni cobros (USD 0, tablas vacías, botones de cobro deshabilitados); con la etapa cupon se suma el cupón para compartir. Entrar a la pestaña muestra "Cargando" 0,8 s.
+  Editar cupón (Figma ALC: "… · Modal Editar cupón · Inicial (vacío) / Escribiendo (valor válido) / Error - Campo requerido / Error - Formato inválido (muy corto) / Error - Cupón en uso / Guardando" y "… · Confirmación - Cupón actualizado (toast)", desktop y mobile):
+  el lápiz del cupón abre el modal; ?modal=cupon&estado=inicial|valido|requerido|formato|uso|guardando lo deja abierto en ese estado (js/cupon.js).
+  "Error al cargar" (Figma ALC: "… · Tab Actividad y pagos · Error al cargar actividad y pagos", desktop y mobile): las dos tablas muestran "No pudimos cargar…" con Reintentar; Reintentar vuelve a cargar y deja la vista de la etapa.
+  Parámetros: ?tab=actividad (abre la pestaña) · ?tab=actividad&cargando=1 (la deja en "Cargando", para comparar contra Figma) · ?tab=actividad&error=1 ("Error al cargar").
+  Con datos (etapa 4; Figma ALC "… · Tab Actividad y pagos · Con datos", "· Búsqueda sin resultados" y "· Tope de comisión alcanzado"): tablas con orden, búsqueda por cliente y paginado (js/actividad-datos.js); datos inventados.
+  Al levantarse el velo de "Cargando" la barra se llena desde 0 y los números cuentan hasta el valor final. Parámetros: ?etapa=referidos&tab=actividad · …&buscar=Roberto%20Gómez · …&tope=1.
+  La tarjeta principal cambia con la etapa del flujo (body[data-etapa], ver js/ref-estado.js):
+    sin-compras → "Sin servicio activo" · con-compras → "Servicio activo, cupón sin generar" (Generar cupón → "Generando cupón" 0,8 s) · cupon / referidos / cobrado → "Cupón generado".
+  Parámetros de URL, para comparar contra Figma: ?etapa=sin-compras|con-compras|cupon|referidos|cobrado · ?sidebar=expandido|colapsado · ?avatar=abierto · ?menu=abierto (mobile).
+-->
+<body data-modo="propia" data-sidebar="colapsado" data-tipo-cuenta="propia" data-tipo-fijo="propia" data-asociada="si" data-ajenas="no" data-nav-actual="" data-etapa="sin-compras">
+  <script src="js/sidebar-estado.js"></script>
+  <script src="js/ref-estado.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/ref-icons.js"></script>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <header class="app-header">
+    <button class="btn btn--ghost btn--secondary btn--sm btn--icon header__menu is-muted" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+
+    <a class="header__logo" href="dashboard.html" aria-label="Nubix, ir al inicio">
+      <img src="assets/nubix-logo.svg" alt="" width="73" height="21">
+    </a>
+    <a class="header__promo header__promo--desktop" href="referidos.html">
+      <span class="header__promo-text">Recomiéndanos y gana hasta <b>USD 250</b></span>
+    </a>
+
+    <div class="header__actions">
+      <a class="header__promo header__promo--mobile" href="referidos.html" aria-label="Recomiéndanos y gana hasta USD 250">
+        <svg class="header__promo-icon" aria-hidden="true"><use href="#i-loyalty"/></svg>
+      </a>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Regalos" data-pending="Regalos: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-card-giftcard"/></svg>
+        </button>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Carrito, 2 productos" data-pending="Carrito: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <span class="header__action">
+        <button class="btn btn--ghost btn--light btn--icon is-muted" type="button" aria-label="Notificaciones, 2 sin leer" data-pending="Notificaciones: fuera del alcance de este prototipo">
+          <svg class="icon" aria-hidden="true"><use href="#i-notifications"/></svg>
+        </button>
+        <span class="counter" aria-hidden="true">2</span>
+      </span>
+      <button class="header__avatar" type="button" aria-label="Menú de la cuenta de Matías Roldán" aria-haspopup="true" aria-expanded="false" aria-controls="account-pop" style="background:none;border:0;padding:0;border-radius:50%;cursor:pointer">
+        <img class="avatar" src="assets/avatar-matias.jpg" alt="" width="32" height="32">
+      </button>
+    </div>
+  </header>
+
+  <!-- Popover de la cuenta (Popover · Cuenta): se abre desde el avatar del header. Tres variantes según body[data-tipo-cuenta]:
+       propia (con "Usuarios y permisos") · con-cuentas (la propia + "Cambiar cuenta" al hub; no está en Figma) · sin-asociadas (sin esa opción: la cuenta no tiene integrantes ni invitaciones y el usuario no aceptó ninguna cuenta ajena; lo calcula app.js en body[data-asociada]) · invitada (estás dentro de la cuenta de otra persona; se usará con esas pantallas) -->
+  <div class="account-pop" id="account-pop" role="group" aria-label="Menú de la cuenta" hidden>
+    <div class="account-pop__body pop-own">
+      <div class="pop-head">
+        <p class="pop-name">Matías Roldán</p>
+        <p class="pop-client">Nº cliente: 204817<button class="pop-copy" type="button" aria-label="Copiar número de cliente" data-copiar="204817"><svg class="icon icon--13" aria-hidden="true"><use href="#i-content-copy"/></svg></button></p>
+      </div>
+      <div class="pop-sep"></div>
+      <ul class="pop-group">
+        <li><a class="menu-item" href="#" data-pending="Datos personales: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-person"/></svg><span class="menu-item__label">Datos personales</span></a></li>
+        <li><a class="menu-item" href="#" data-pending="Seguridad y accesos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-key"/></svg><span class="menu-item__label">Seguridad y accesos</span></a></li>
+        <li class="pop-usuarios"><a class="menu-item" href="#" data-pending="Usuarios y permisos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-supervisor-account"/></svg><span class="menu-item__label">Usuarios y permisos</span></a></li>
+      </ul>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <!-- Variante "con-cuentas" (no está en Figma): quien tiene cuentas ajenas aceptadas vuelve al hub para cambiar de cuenta -->
+        <a class="menu-item pop-item--hug pop-cambiar" href="#" data-pending="Cambiar cuenta: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-swap-horiz"/></svg><span class="menu-item__label">Cambiar cuenta</span></a>
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+    <div class="account-pop__body pop-guest">
+      <div class="pop-head pop-head--guest">
+        <p class="pop-caption">Estás en la cuenta de:</p>
+        <p class="pop-name">Valeria Cardozo</p>
+        <p class="pop-client">Nº cliente: 847213<button class="pop-copy" type="button" aria-label="Copiar número de cliente" data-copiar="847213"><svg class="icon icon--13" aria-hidden="true"><use href="#i-content-copy"/></svg></button></p>
+        <p class="pop-role">Tu rol: Gestión técnica</p>
+      </div>
+      <div class="pop-sep"></div>
+      <div class="pop-group">
+        <a class="menu-item pop-item--hug" href="#" data-pending="Cambiar cuenta: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-swap-horiz"/></svg><span class="menu-item__label">Cambiar cuenta</span></a>
+        <a class="menu-item pop-item--hug pop-item--danger" href="#" data-pending="Cerrar sesión: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-exit-to-app"/></svg><span class="menu-item__label">Cerrar sesión</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Menú principal">
+      <!-- Secciones y subítems: los del sistema de diseño (Sidebar desktop / mobile). Colapsado: solo íconos, tooltip al pasar el mouse y popover con los subítems al hacer clic.
+           Expandido (desktop) y drawer (mobile): lista completa con acordeón. -->
+      <div class="sidebar__head">
+        <a class="sidebar__logo" href="dashboard.html" aria-label="Nubix, ir al inicio"><img src="assets/nubix-logo.svg" alt="" width="71" height="20"></a>
+        <button class="btn btn--ghost btn--secondary btn--sm btn--icon sidebar__close" type="button" id="sidebar-close" aria-label="Cerrar menú"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </div>
+      <ul class="sidebar__list" id="sidebar-list">
+        <li><a class="menu-item" href="dashboard.html" data-nav="inicio"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="menu-item__label">Inicio</span></a></li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-productos"><svg class="icon" aria-hidden="true"><use href="#i-grid-view"/></svg><span class="menu-item__label">Mis productos</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-productos" role="group" aria-label="Mis productos" hidden>
+            <p class="subnav__title" aria-hidden="true">Mis productos</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="dominios" data-pending="Mis productos › Dominios: fuera del alcance de este prototipo">Dominios</a></li>
+            <li><a class="sub-item" href="#" data-nav="web-hosting" data-pending="Mis productos › Web Hosting: fuera del alcance de este prototipo">Web Hosting</a></li>
+            <li><a class="sub-item" href="#" data-nav="ssl" data-pending="Mis productos › Certificados SSL: fuera del alcance de este prototipo">Certificados SSL</a></li>
+            <li><a class="sub-item" href="#" data-nav="cloud" data-pending="Mis productos › Cloud: fuera del alcance de este prototipo">Cloud</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="has-sub">
+          <button class="menu-item menu-item--section" type="button" aria-expanded="false" aria-controls="sub-catalogo"><svg class="icon" aria-hidden="true"><use href="#i-dashboard-customize"/></svg><span class="menu-item__label">Catálogo</span><svg class="icon icon--16 menu-item__chev chev-more" aria-hidden="true"><use href="#i-expand-more"/></svg><svg class="icon icon--16 menu-item__chev chev-less" aria-hidden="true"><use href="#i-expand-less"/></svg></button>
+          <div class="subnav" id="sub-catalogo" role="group" aria-label="Catálogo" hidden>
+            <p class="subnav__title" aria-hidden="true">Catálogo</p>
+            <ul>
+            <li><a class="sub-item" href="#" data-nav="sitiolisto" data-pending="Catálogo › SitioListo: fuera del alcance de este prototipo">SitioListo</a></li>
+            <li><a class="sub-item" href="#" data-nav="flowmail" data-pending="Catálogo › FlowMail: fuera del alcance de este prototipo">FlowMail</a></li>
+            <li><a class="sub-item" href="#" data-nav="escudo-web" data-pending="Catálogo › Escudo Web: fuera del alcance de este prototipo">Escudo Web</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a class="menu-item" href="#" data-nav="facturas" data-pending="Facturas y pagos: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-monetization-on"/></svg><span class="menu-item__label">Facturas y pagos</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="ayuda" data-pending="Centro de ayuda: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-question-answer"/></svg><span class="menu-item__label">Centro de ayuda</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="partners" data-pending="Partners: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-work"/></svg><span class="menu-item__label">Partners</span></a></li>
+        <li><a class="menu-item" href="#" data-nav="documentacion" data-pending="Documentación: fuera del alcance de este prototipo"><svg class="icon" aria-hidden="true"><use href="#i-handyman"/></svg><span class="menu-item__label">Documentación</span></a></li>
+      </ul>
+      <button class="sidebar__toggle" type="button" id="sidebar-toggle" aria-expanded="false" aria-controls="sidebar-list" aria-label="Expandir menú lateral">
+        <svg class="icon icon--16 i-expand" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        <svg class="icon icon--16 i-collapse" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+      </button>
+    </aside>
+
+    <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+    <div class="ref">
+      <main class="ref__main" id="main" tabindex="-1">
+        <div class="ref__body">
+          <h1 class="ref__title">Referidos y recompensas</h1>
+
+          <div class="ref__content" id="ref-content" data-tab="recomendar">
+            <div class="ref__tabs-section">
+              <div class="rtabs" role="tablist" aria-label="Referidos y recompensas">
+                <button class="rtab" role="tab" id="tab-recomendar" aria-selected="true" aria-controls="panel-recomendar" type="button">Recomendar y ganar</button>
+                <button class="rtab" role="tab" id="tab-actividad" aria-selected="false" aria-controls="panel-actividad" tabindex="-1" type="button">Actividad y pagos</button>
+              </div>
+
+              <div id="panel-recomendar" role="tabpanel" aria-labelledby="tab-recomendar" tabindex="-1">
+                <div class="hero" id="hero">
+                  <div class="hero__card">
+                    <!-- Etapa 1 · Sin servicio activo -->
+                    <div class="hero__content" data-hero="sin-servicio">
+                      <div class="hero__copy">
+                        <p class="hero__kicker">¡Comienza a referir!</p>
+                        <p class="hero__title">Activa un servicio y empieza a ganar hasta <b>USD 250</b> por cada referido.</p>
+                      </div>
+                      <button class="btn btn--solid btn--brand" type="button" data-elegir-servicio>Elegir servicio</button>
+                    </div>
+                    <!-- Etapa 2 · Servicio activo, cupón sin generar -->
+                    <div class="hero__content" data-hero="sin-cupon">
+                      <div class="hero__copy">
+                        <p class="hero__kicker">Tienes un servicio activo</p>
+                        <p class="hero__title">Genera tu cupón, compártelo y gana hasta <b>USD 250</b> por cada referido.</p>
+                      </div>
+                      <button class="btn btn--solid btn--brand" type="button" id="generar-cupon">Generar cupón</button>
+                    </div>
+                    <!-- Etapas 3 a 5 · Cupón generado -->
+                    <div class="hero__content" data-hero="cupon">
+                      <div class="hero__copy">
+                        <p class="hero__kicker">Tu cupón ya está listo</p>
+                        <p class="hero__title">Compártelo con tus contactos y gana hasta <b>USD 250</b> por referido.</p>
+                      </div>
+                      <div class="hero__share">
+                        <div class="coupon">
+                          <p class="coupon__url js-cupon-url" id="cupon-url" title="">https://tudominio.com/regalo-mansi2026</p>
+                          <button class="btn btn--ghost btn--secondary btn--sm btn--icon coupon__edit" type="button" id="editar-cupon" aria-label="Editar cupón" aria-haspopup="dialog" data-editar-cupon><svg class="icon icon--16" aria-hidden="true"><use href="#i-edit-16"/></svg></button>
+                        </div>
+                        <button class="btn btn--solid" type="button" id="copiar-cupon" data-copiar-cupon><svg class="icon" aria-hidden="true"><use href="#i-copy-20"/></svg>Copiar cupón</button>
+                        <div class="hero__share-icons">
+                          <button class="btn btn--outline btn--icon" type="button" aria-label="Compartir por WhatsApp" data-pending="Compartir por WhatsApp: abre la app externa (fuera del alcance de este prototipo)"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp-20"/></svg></button>
+                          <button class="btn btn--outline btn--icon" type="button" aria-label="Compartir por email" data-pending="Compartir por email: abre el cliente de correo (fuera del alcance de este prototipo)"><svg class="icon" aria-hidden="true"><use href="#i-mail-20"/></svg></button>
+                        </div>
+                      </div>
+                    </div>
+                    <img class="hero__img" src="assets/hero-referidos.webp" alt="" width="346" height="186">
+                    <div class="hero__loading" aria-hidden="true"><div class="spinner"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div id="panel-actividad" class="ap" role="tabpanel" aria-labelledby="tab-actividad" tabindex="-1" data-datos="sin" hidden>
+              <section class="ap-card ap-com" aria-labelledby="t-comisiones">
+                <h2 class="ap-card__title" id="t-comisiones">Comisiones por referidos</h2>
+                <p class="ap-com__text">Calculamos tus ganancias en USD y las convertimos a moneda local al momento del cobro. <br class="ap-br">Liberamos la comisión 45 días después de la primera compra de tu referido.</p>
+                <div class="ap-com__stats">
+                  <p class="ap-com__amount" id="ap-monto">USD 0</p>
+                  <div class="ap-bar" id="ap-barra" role="progressbar" aria-label="Comisiones acumuladas sobre el máximo de USD 250" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0"><span class="ap-bar__fill" style="--p: 0"></span></div>
+                  <div class="ap-com__range"><p>Cobro mínimo: <b>USD 30</b></p><p class="ap-com__max">USD 250</p></div>
+                  <p class="ap-com__tope">Alcanzaste el máximo acumulable. Cobra tu saldo para seguir sumando comisiones.</p>
+                </div>
+                <div class="ap-pay">
+                  <p class="ap-pay__info"><svg class="icon icon--24" aria-hidden="true"><use href="#i-billetera-24"/></svg><span>Elige cómo cobrar tus comisiones.</span></p>
+                  <div class="ap-pay__actions">
+                    <button class="btn btn--solid btn--secondary" type="button" id="ap-cobrar-transf" disabled data-pending="Cobrar por transferencia bancaria: se gestiona con la mesa de ayuda (fuera del alcance de este prototipo)">Cobrar por transferencia bancaria</button>
+                    <button class="btn btn--solid btn--primary" type="button" id="ap-cobrar-saldo" disabled aria-haspopup="dialog">Cobrar como saldo en Nubix</button>
+                  </div>
+                </div>
+                <div class="ap-load" aria-hidden="true"><div class="spinner"></div></div>
+              </section>
+
+              <div class="ap-stats">
+                <div class="ap-card ap-stat">
+              <span class="ap-tile" aria-hidden="true"><svg class="icon icon--48" aria-hidden="true"><use href="#s-tendencia"/></svg></span>
+              <dl class="ap-stat__text"><dt>Comisiones acumuladas</dt><dd><span aria-hidden="true" data-cuenta="acum">USD 0</span><span class="sr-only" data-cuenta-sr="acum">USD 0</span></dd></dl>
+              <div class="ap-load" aria-hidden="true"><div class="spinner"></div></div>
+            </div>
+                <div class="ap-card ap-stat">
+              <span class="ap-tile" aria-hidden="true"><svg class="icon icon--48" aria-hidden="true"><use href="#s-persona-check"/></svg></span>
+              <dl class="ap-stat__text"><dt>Total de referidos</dt><dd><span aria-hidden="true" data-cuenta="total">0</span><span class="sr-only" data-cuenta-sr="total">0</span></dd></dl>
+              <div class="ap-load" aria-hidden="true"><div class="spinner"></div></div>
+            </div>
+              </div>
+
+              <section class="ap-card ap-tabla" aria-labelledby="t-actividad-ref">
+                <h2 class="ap-card__title" id="t-actividad-ref">Actividad de referidos</h2>
+                <div class="ap-tabla__body" id="ap-ref" data-v="vacio">
+                <form class="ap-buscar" id="ap-buscar" role="search" novalidate>
+                  <label class="ap-buscar__box"><svg class="icon icon--16" aria-hidden="true"><use href="#i-search-16"/></svg><input id="ap-buscar-q" type="search" placeholder="Buscar por cliente" aria-label="Buscar por cliente" autocomplete="off"></label>
+                  <button class="btn btn--outline btn--icon ap-buscar__btn" type="submit" aria-label="Buscar"><svg class="icon" aria-hidden="true"><use href="#i-search-20"/></svg></button>
+                </form>
+                <div class="ap-datos">
+                  <div class="ap-t-wrap">
+                    <table class="ap-t ap-t--ref">
+                      <caption class="sr-only">Actividad de referidos</caption>
+                      <colgroup><col class="ap-t__c1"><col><col><col><col><col class="ap-t__cl"></colgroup>
+                      <thead><tr><th scope="col">Código cupón</th><th scope="col">Cliente referido</th><th scope="col" data-col="uso" aria-sort="ascending"><button class="ap-sort" type="button" data-sort="uso">Fecha de uso<svg class="icon icon--16" aria-hidden="true"><use href="#i-sort-16"/></svg></button></th><th scope="col" data-col="disp" aria-sort="none"><button class="ap-sort" type="button" data-sort="disp">Disponible desde<svg class="icon icon--16" aria-hidden="true"><use href="#i-sort-16"/></svg></button></th><th scope="col">Estado</th><th scope="col">Comisión</th></tr></thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                  <ul class="ap-cards"></ul>
+                  <div class="ap-pager">
+                    <div class="ap-pager__izq">
+                      <div class="ap-mostrar"><label for="ap-ref-tam">Mostrar</label><span class="ap-mostrar__sel"><span class="ap-mostrar__val" aria-hidden="true" data-val>5</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-chevron-down-16"/></svg><select id="ap-ref-tam" data-tam data-lista><option value="5">5</option><option value="10">10</option><option value="20">20</option></select></span></div>
+                      <p class="ap-pager__rango" aria-live="polite" data-rango></p>
+                    </div>
+                    <nav class="ap-pager__nav" aria-label="Paginación de actividad de referidos">
+                      <button class="ap-pager__btn" type="button" data-pag="primera" aria-label="Primera página"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-first-16"/></svg></button><button class="ap-pager__btn" type="button" data-pag="anterior" aria-label="Página anterior"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-prev-16"/></svg></button>
+                      <p class="ap-pager__pag" data-pagina></p>
+                      <button class="ap-pager__btn" type="button" data-pag="siguiente" aria-label="Página siguiente"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-next-16"/></svg></button><button class="ap-pager__btn" type="button" data-pag="ultima" aria-label="Última página"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-last-16"/></svg></button>
+                    </nav>
+                  </div>
+                </div>
+                <div class="ap-empty ap-empty--vacio">
+                  <div class="ap-empty__content">
+                    <span class="ap-empty__icon" aria-hidden="true"><svg class="icon icon--32" aria-hidden="true"><use href="#i-persona-check-32"/></svg></span>
+                    <div class="ap-empty__copy">
+                      <h3 class="ap-empty__title">Todavía no tienes referidos</h3>
+                      <div class="ap-empty__texts"><p class="ap-empty__text">Comparte tu link con amigos o clientes.</p><p class="ap-empty__text">Cuando alguien se registre usando tu código, aparecerá aquí.</p></div>
+                    </div>
+                  </div>
+                  <div class="hero__share ap-share">
+                    <div class="coupon">
+                      <span class="coupon__url js-cupon-url"></span>
+                      <button class="btn btn--ghost btn--secondary btn--sm btn--icon coupon__edit" type="button" aria-label="Editar cupón" aria-haspopup="dialog" data-editar-cupon><svg class="icon icon--16" aria-hidden="true"><use href="#i-edit-16"/></svg></button>
+                    </div>
+                    <button class="btn btn--solid btn--primary" type="button" data-copiar-cupon><svg class="icon" aria-hidden="true"><use href="#i-copy-20"/></svg>Copiar cupón</button>
+                    <div class="hero__share-icons">
+                      <button class="btn btn--outline btn--icon" type="button" aria-label="Compartir por WhatsApp" data-pending="Compartir por WhatsApp: abre la app externa (fuera del alcance de este prototipo)"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp-20"/></svg></button>
+                      <button class="btn btn--outline btn--icon" type="button" aria-label="Compartir por email" data-pending="Compartir por email: abre el cliente de correo (fuera del alcance de este prototipo)"><svg class="icon" aria-hidden="true"><use href="#i-mail-20"/></svg></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="ap-empty ap-empty--buscar">
+                  <div class="ap-empty__content">
+                    <span class="ap-empty__icon" aria-hidden="true"><svg class="icon icon--32" aria-hidden="true"><use href="#i-buscar-32"/></svg></span>
+                    <div class="ap-empty__copy">
+                      <h3 class="ap-empty__title">No encontramos resultados</h3>
+                      <div class="ap-empty__texts"><p class="ap-empty__text">Prueba con otro término de búsqueda.</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ap-empty ap-empty--error">
+                  <div class="ap-empty__content">
+                    <span class="ap-empty__icon" aria-hidden="true"><svg class="icon icon--32" aria-hidden="true"><use href="#i-nube-off-32"/></svg></span>
+                    <div class="ap-empty__copy">
+                      <h3 class="ap-empty__title">No pudimos cargar tu actividad de referidos.</h3>
+                      <div class="ap-empty__texts"><p class="ap-empty__text">Vuelve a intentarlo en unos segundos.</p></div>
+                    </div>
+                  </div>
+                  <button class="btn btn--outline btn--secondary" type="button" data-reintentar><svg class="icon" aria-hidden="true"><use href="#i-refresh-20"/></svg>Reintentar</button>
+                </div>
+                </div>
+                <div class="ap-load ap-load--tabla" aria-hidden="true"><div class="spinner"></div></div>
+              </section>
+
+              <section class="ap-card ap-tabla" aria-labelledby="t-movimientos">
+                <h2 class="ap-card__title" id="t-movimientos">Movimientos de cobros</h2>
+                <div class="ap-tabla__body" id="ap-mov" data-v="vacio">
+                <div class="ap-datos">
+                  <div class="ap-t-wrap">
+                    <table class="ap-t ap-t--mov">
+                      <caption class="sr-only">Movimientos de cobros</caption>
+                      <colgroup><col><col><col><col><col class="ap-t__cl"></colgroup>
+                      <thead><tr><th scope="col" data-col="sol" aria-sort="descending"><button class="ap-sort" type="button" data-sort="sol">Fecha de solicitud<svg class="icon icon--16" aria-hidden="true"><use href="#i-sort-16"/></svg></button></th><th scope="col">Método</th><th scope="col" data-col="acred" aria-sort="none"><button class="ap-sort" type="button" data-sort="acred">Fecha de acreditación<svg class="icon icon--16" aria-hidden="true"><use href="#i-sort-16"/></svg></button></th><th scope="col">Estado</th><th scope="col">Comisión</th></tr></thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                  <ul class="ap-cards"></ul>
+                  <div class="ap-pager">
+                    <div class="ap-pager__izq">
+                      <div class="ap-mostrar"><label for="ap-mov-tam">Mostrar</label><span class="ap-mostrar__sel"><span class="ap-mostrar__val" aria-hidden="true" data-val>5</span><svg class="icon icon--16" aria-hidden="true"><use href="#i-chevron-down-16"/></svg><select id="ap-mov-tam" data-tam data-lista><option value="5">5</option><option value="10">10</option><option value="20">20</option></select></span></div>
+                      <p class="ap-pager__rango" aria-live="polite" data-rango></p>
+                    </div>
+                    <nav class="ap-pager__nav" aria-label="Paginación de movimientos de cobros">
+                      <button class="ap-pager__btn" type="button" data-pag="primera" aria-label="Primera página"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-first-16"/></svg></button><button class="ap-pager__btn" type="button" data-pag="anterior" aria-label="Página anterior"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-prev-16"/></svg></button>
+                      <p class="ap-pager__pag" data-pagina></p>
+                      <button class="ap-pager__btn" type="button" data-pag="siguiente" aria-label="Página siguiente"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-next-16"/></svg></button><button class="ap-pager__btn" type="button" data-pag="ultima" aria-label="Última página"><svg class="icon icon--16" aria-hidden="true"><use href="#i-page-last-16"/></svg></button>
+                    </nav>
+                  </div>
+                </div>
+                <div class="ap-empty ap-empty--vacio">
+                  <div class="ap-empty__content">
+                    <span class="ap-empty__icon" aria-hidden="true"><svg class="icon icon--32" aria-hidden="true"><use href="#i-billetera-32"/></svg></span>
+                    <div class="ap-empty__copy">
+                      <h3 class="ap-empty__title">Todavía no realizaste ningún cobro</h3>
+                      <div class="ap-empty__texts"><p class="ap-empty__text">Una vez que tus comisiones estén acreditadas, podrás solicitar tu primer cobro.</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ap-empty ap-empty--error">
+                  <div class="ap-empty__content">
+                    <span class="ap-empty__icon" aria-hidden="true"><svg class="icon icon--32" aria-hidden="true"><use href="#i-nube-off-32"/></svg></span>
+                    <div class="ap-empty__copy">
+                      <h3 class="ap-empty__title">No pudimos cargar tus movimientos de cobros.</h3>
+                      <div class="ap-empty__texts"><p class="ap-empty__text">Vuelve a intentarlo en unos segundos.</p></div>
+                    </div>
+                  </div>
+                  <button class="btn btn--outline btn--secondary" type="button" data-reintentar><svg class="icon" aria-hidden="true"><use href="#i-refresh-20"/></svg>Reintentar</button>
+                </div>
+                </div>
+                <div class="ap-load ap-load--tabla" aria-hidden="true"><div class="spinner"></div></div>
+              </section>
+
+              <aside class="ap-card ap-ayuda" aria-labelledby="t-dudas">
+                <span class="ap-tile" aria-hidden="true"><svg class="icon icon--48" aria-hidden="true"><use href="#s-info-48"/></svg></span>
+                <div class="ap-ayuda__text">
+                  <h2 class="ap-ayuda__title" id="t-dudas">¿Te quedaron dudas sobre el programa de referidos?</h2>
+                  <p>Resuelve tus dudas sobre comisiones, tiempos de acreditación y formas de cobro en nuestro <a href="#" data-pending="Tutorial del programa de referidos: fuera del alcance de este prototipo">tutorial</a>.</p>
+                </div>
+              </aside>
+            </div>
+            </div>
+
+            <section class="rsec" aria-labelledby="t-pasos">
+              <h2 class="rsec__title" id="t-pasos">Así funciona, en 3 pasos simples</h2>
+              <ol class="rsteps">
+            <li class="rstep"><span class="rstep__num" aria-hidden="true">1</span><p class="rstep__text"><span class="sr-only">Paso 1: </span>Copia tu cupón con un clic. Así asociamos las compras de tus referidos a tu cuenta.</p></li>
+            <li class="rstep"><span class="rstep__num" aria-hidden="true">2</span><p class="rstep__text"><span class="sr-only">Paso 2: </span>Compártelo por WhatsApp, email o redes sociales. Agrégale un descuento para su primera compra.</p></li>
+            <li class="rstep"><span class="rstep__num" aria-hidden="true">3</span><p class="rstep__text"><span class="sr-only">Paso 3: </span>Cuando tu referido compre, recibes la comisión en tu cuenta. Retírala o úsala como saldo en Nubix.</p></li>
+              </ol>
+            </section>
+
+            <section class="rsec" aria-labelledby="t-servicios">
+              <h2 class="rsec__title" id="t-servicios">Opciones de servicio para tu referido</h2>
+              <div class="rsvc-grid">
+                <ul class="rsvc-col">
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">Web Hosting</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-webhosting"/></svg></span></div>
+                <p class="rsvc__desc">Hosting veloz y confiable para tu sitio, con soporte técnico 24/7.</p>
+              </div>
+              <div class="rsvc__plan">
+              <p class="rsvc__price">Desde $ 7.363/mes.</p>
+                <div class="rsvc__badges"><span class="badge">anual</span><span class="badge">bienal</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 10 · Tu referido: 20% OFF</p>
+              </div>
+            </li>
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">Cloud</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-cloud"/></svg></span></div>
+                <p class="rsvc__desc">Servidores en la nube que escalan a tu ritmo, con total flexibilidad.</p>
+              </div>
+              <div class="rsvc__plan">
+                <div class="rsvc__badges"><span class="badge">mensual</span><span class="badge">trimestral</span><span class="badge">semestral</span><span class="badge">anual</span><span class="badge">bienal</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 100 · Tu referido: 60% OFF</p>
+              </div>
+            </li>
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">Email Marketing</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-emailmarketing"/></svg></span></div>
+                <p class="rsvc__desc">Crea y envía tus campañas de email marketing desde una sola plataforma.</p>
+              </div>
+              <div class="rsvc__plan">
+              <p class="rsvc__price">Desde $ 6.859/mes.</p>
+                <div class="rsvc__badges"><span class="badge">mensual</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 150 · Tu referido: 20% OFF</p>
+              </div>
+            </li>
+                </ul>
+                <ul class="rsvc-col">
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">SitioListo</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-sitiolisto"/></svg></span></div>
+                <p class="rsvc__desc">Crea tu sitio web con inteligencia artificial, sin escribir código.</p>
+              </div>
+              <div class="rsvc__plan">
+              <p class="rsvc__price">Desde $ 3.966/mes.</p>
+                <div class="rsvc__badges"><span class="badge">anual</span><span class="badge">bienal</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 10 · Tu referido: 20% OFF</p>
+              </div>
+            </li>
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">Correo profesional</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-correo"/></svg></span></div>
+                <p class="rsvc__desc">Casillas de email profesional con tu propio dominio incluido.</p>
+              </div>
+              <div class="rsvc__plan">
+              <p class="rsvc__price">Desde $ 3.553/mes.</p>
+                <div class="rsvc__badges"><span class="badge">anual</span><span class="badge">bienal</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 10 · Tu referido: 20% OFF</p>
+              </div>
+            </li>
+            <li class="rsvc">
+              <div class="rsvc__head">
+                <div class="rsvc__title-row"><h3 class="rsvc__name">Radio Streaming</h3><span class="rsvc__icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#s-radio"/></svg></span></div>
+                <p class="rsvc__desc">Transmite tu radio por internet con calidad de audio profesional.</p>
+              </div>
+              <div class="rsvc__plan">
+              <p class="rsvc__price">Desde $ 915/mes.</p>
+                <div class="rsvc__badges"><span class="badge">mensual</span><span class="badge">anual</span></div>
+              </div>
+              <div class="rsvc__foot">
+                <div class="rsvc__line" aria-hidden="true"></div>
+                <p class="rsvc__gain">Gana hasta USD 30 · Tu referido: 20% OFF</p>
+              </div>
+            </li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="rstats" aria-label="Cifras del programa de referidos">
+              <div class="rstats__row">
+              <div class="rstat"><p class="rstat__value">+ 12.000</p><p class="rstat__label">cupones canjeados por nuestros clientes referidos.</p></div>
+              <div class="rstats__divider" aria-hidden="true"></div>
+              <div class="rstat"><p class="rstat__value">+ 85 mil</p><p class="rstat__label">USD entregados en comisiones a nuestros clientes.</p></div>
+              <div class="rstats__divider" aria-hidden="true"></div>
+              <div class="rstat"><p class="rstat__value">+ 6.000</p><p class="rstat__label">clientes que ya recomiendan y disfrutan sus recompensas.</p></div>
+              </div>
+            </section>
+
+            <p class="rdisclaimer">Habilitamos tu comisión 45 días después de la primera compra de tu referido.<br><a href="#" data-pending="Términos y condiciones: fuera del alcance de este prototipo">Consulta los Términos y condiciones</a></p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Aviso de éxito (Feedback/Toast · success) -->
+    <div class="toast-stack" id="aviso" role="status" aria-live="polite">
+      <div class="toast-ok is-visible" id="aviso-texto"></div>
+    </div>
+
+    <!-- Overlay/Modal - Editar cupón (Figma 112:19328) -->
+    <dialog class="modal cmodal" id="modal-cupon" aria-labelledby="cmodal-titulo" aria-describedby="cmodal-texto">
+      <form class="modal__box" id="form-cupon" novalidate>
+        <div class="modal__header">
+          <h2 class="modal__title" id="cmodal-titulo">Cambiar cupón</h2>
+          <button class="modal__close" type="button" id="cmodal-cerrar" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+        <div class="cmodal__content">
+          <p class="modal__text" id="cmodal-texto">Cambia tu cupón de referencia por otro que prefieras. El cupón anterior dejará de funcionar.</p>
+          <div class="cmodal__actual">
+            <p class="cmodal__actual-label"><svg class="icon icon--24" aria-hidden="true"><use href="#i-link-24"/></svg>Cupón actual</p>
+            <p class="cmodal__actual-url" id="cmodal-actual"></p>
+          </div>
+          <div class="cgroup" id="cgroup">
+            <div class="cgroup__row">
+              <span class="cgroup__prefix" aria-hidden="true">regalo-</span>
+              <div class="cgroup__box">
+                <input class="cgroup__input" id="cupon-nuevo" name="cupon" type="text" placeholder=" " autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="cupon-ayuda">
+                <label class="cgroup__label" for="cupon-nuevo">Nuevo cupón</label>
+              </div>
+            </div>
+            <p class="cgroup__help" id="cupon-ayuda" aria-live="polite">Debe tener entre 6 y 15 caracteres, solo letras y números.</p>
+          </div>
+        </div>
+        <div class="modal__footer">
+          <button class="btn btn--solid btn--secondary" type="button" id="cmodal-cancelar">Cancelar</button>
+          <button class="btn btn--solid btn--primary" type="submit" id="cmodal-guardar">Guardar</button>
+        </div>
+      </form>
+      <div class="cmodal__loading" id="cmodal-cargando" aria-hidden="true"><span class="spinner"></span></div>
+    </dialog>
+
+    <!-- Overlay/Modal - Solicitud de cobro (Figma 499:31863 revisión · 499:32876 confirmando · 499:32978 cobro solicitado · 499:33941 error) -->
+    <dialog class="modal cmodal cobro" id="modal-cobro" aria-labelledby="cobro-titulo" data-vista="revision">
+      <div class="modal__box">
+        <div class="modal__header">
+          <h2 class="modal__title" id="cobro-titulo">Retiro de comisiones</h2>
+          <button class="modal__close" type="button" id="cobro-cerrar" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+        <div class="cobro__vista" data-v="revision">
+          <div class="cobro__body">
+            <p class="modal__text">Revisa que todo esté correcto antes de confirmar. Después de enviar la solicitud, no vas a poder cancelarla.</p>
+            <div class="cobro__resumen-wrap">
+              <dl class="cobro__resumen">
+                <div class="cobro__fila cobro__fila--monto"><dt>Monto solicitado</dt><dd id="cobro-monto">USD 45</dd></div>
+                <div class="cobro__fila"><dt>Método</dt><dd>Saldo en Nubix</dd></div>
+              </dl>
+              <p class="cobro__nota">La convertimos a tu moneda local, aplicando el tipo de cambio vigente en el momento del pago.</p>
+            </div>
+          </div>
+          <div class="modal__footer cobro__footer">
+            <button class="btn btn--solid btn--secondary" type="button" id="cobro-cancelar">Cancelar</button>
+            <button class="btn btn--solid btn--primary" type="button" id="cobro-confirmar">Confirmar solicitud</button>
+          </div>
+        </div>
+        <div class="cobro__vista" data-v="exito">
+          <div class="cobro__resultado">
+            <span class="cobro__icono cobro__icono--exito" aria-hidden="true"><svg class="icon icon--32"><use href="#i-ok-32"/></svg></span>
+            <div class="cobro__copy">
+              <p class="cobro__titulo">¡Tu cobro va en camino!</p>
+              <p class="cobro__texto">Estamos revisando tu pedido. Puede tomar unos minutos.</p>
+            </div>
+          </div>
+          <div class="modal__footer cobro__footer"><button class="btn btn--solid btn--primary" type="button" data-cobro-cerrar>Entendido</button></div>
+        </div>
+        <div class="cobro__vista" data-v="error">
+          <div class="cobro__resultado">
+            <span class="cobro__icono cobro__icono--error" aria-hidden="true"><svg class="icon icon--32"><use href="#i-error-32"/></svg></span>
+            <div class="cobro__copy">
+              <p class="cobro__titulo">No pudimos procesar tu pedido</p>
+              <p class="cobro__texto">Ocurrió un error al intentar procesar tu cobro. No afectamos tus comisiones.<br>Espera unos minutos y vuelve a intentarlo.</p>
+            </div>
+          </div>
+          <div class="modal__footer cobro__footer"><button class="btn btn--solid btn--primary" type="button" data-cobro-cerrar>Entendido</button></div>
+        </div>
+      </div>
+      <div class="cmodal__loading" id="cobro-cargando" aria-hidden="true"><span class="spinner"></span></div>
+    </dialog>
+  </div>
+
+  <!-- Herramienta del prototipo (fuera del producto) -->
+  <div class="probar" id="probar">
+    <button class="probar__toggle" type="button" id="probar-toggle" aria-expanded="false" aria-controls="probar-panel">
+      <svg class="icon icon--16" aria-hidden="true"><use href="#i-tune"/></svg><span class="probar__label">Probar estados</span>
+    </button>
+    <div class="probar__panel" id="probar-panel" role="group" aria-label="Estados del prototipo" hidden>
+      <div class="probar__group" id="probar-etapa" role="group" aria-label="Etapa del flujo">
+        <p class="probar__title">Etapa del flujo</p>
+        <button type="button" data-etapa-demo="sin-compras" aria-pressed="false">1 · Sin compras</button>
+        <button type="button" data-etapa-demo="con-compras" aria-pressed="false">2 · Compró un servicio, sin cupón</button>
+        <button type="button" data-etapa-demo="cupon" aria-pressed="false">3 · Cupón generado</button>
+        <button type="button" data-etapa-demo="referidos" aria-pressed="false">4 · Referidos registrados y con compras</button>
+        <button type="button" data-etapa-demo="cobrado" aria-pressed="false">5 · Después de cobrar</button>
+      </div>
+      <div class="probar__group" id="probar-tab" role="group" aria-label="Pestaña">
+        <p class="probar__title">Pestaña</p>
+        <button type="button" data-tab-demo="recomendar" aria-pressed="false">Recomendar y ganar</button>
+        <button type="button" data-tab-demo="actividad" aria-pressed="false">Actividad y pagos</button>
+        <button type="button" data-tab-demo="datos" aria-pressed="false">Actividad y pagos · con datos</button>
+        <button type="button" data-tab-demo="sinres" aria-pressed="false">Actividad y pagos · búsqueda sin resultados</button>
+        <button type="button" data-tab-demo="tope" aria-pressed="false">Actividad y pagos · tope de comisión</button>
+        <button type="button" data-tab-demo="cargando" aria-pressed="false">Actividad y pagos · cargando</button>
+        <button type="button" data-tab-demo="error" aria-pressed="false">Actividad y pagos · error al cargar</button>
+      </div>
+      <div class="probar__group" id="probar-cobro" role="group" aria-label="Modal Retiro de comisiones">
+        <p class="probar__title">Modal · Retiro de comisiones</p>
+        <button type="button" data-cobro-demo="revision">Revisión (antes de confirmar)</button>
+        <button type="button" data-cobro-demo="confirmando">Confirmando</button>
+        <button type="button" data-cobro-demo="exito">Cobro solicitado</button>
+        <button type="button" data-cobro-demo="error">Error · no se pudo procesar</button>
+      </div>
+      <div class="probar__group" id="probar-cupon" role="group" aria-label="Modal Editar cupón">
+        <p class="probar__title">Modal · Editar cupón</p>
+        <button type="button" data-cupon-demo="inicial">Inicial (vacío)</button>
+        <button type="button" data-cupon-demo="valido">Escribiendo (valor válido)</button>
+        <button type="button" data-cupon-demo="requerido">Error · campo requerido</button>
+        <button type="button" data-cupon-demo="formato">Error · formato inválido</button>
+        <button type="button" data-cupon-demo="uso">Error · cupón en uso</button>
+        <button type="button" data-cupon-demo="guardando">Guardando</button>
+      </div>
+      <div class="probar__group" id="probar-paginas" role="group" aria-label="Pantalla">
+        <p class="probar__title">Pantalla</p>
+        <a href="dashboard.html" data-pagina-demo="dashboard" aria-current="false">Dashboard</a>
+        <a href="referidos.html" data-pagina-demo="referidos" aria-current="true">Referidos y recompensas</a>
+      </div>
+      <div class="probar__group" id="probar-menu" role="group" aria-label="Menú lateral">
+        <p class="probar__title">Menú lateral</p>
+        <button type="button" data-menu="colapsado">Desktop · colapsado</button>
+        <button type="button" data-menu="expandido">Desktop · expandido</button>
+        <button type="button" data-menu="popover">Desktop · popover abierto</button>
+        <button type="button" data-menu="drawer">Mobile · abrir menú</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" aria-hidden="true"><span class="tooltip__arrow"></span><span class="tooltip__text"></span></div>
+  <p class="sr-only" role="status" id="estado"></p>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/select-lista.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/cuenta.js"></script>
+  <script src="js/casos.js"></script>
+  <script src="js/ref-probar.js"></script>
+  <script src="js/compra.js"></script>
+  <script src="js/referidos.js"></script>
+  <script src="js/actividad-datos.js"></script>
+  <script src="js/actividad.js"></script>
+  <script src="js/cobro.js"></script>
+  <script src="js/cupon.js"></script>
+</body>
+</html>

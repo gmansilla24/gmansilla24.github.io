@@ -1,0 +1,163 @@
+/* Dashboard (inicio) · cuenta propia y cuenta invitada.
+   Medidas leídas de Figma (ALC): "Dashboard · Desktop / Mobile · … (cuenta propia)" y "… (cuenta de Valeria Cardozo, tras cambiar)".
+   Regla de Figma para los bordes: el trazo va hacia adentro y no suma tamaño → en CSS, borde de 1 + padding (diseño − 1).
+   Esta hoja se suma a producto.css (tokens, botones, badges, header, sidebar, popover, toast, "Probar estados"). */
+
+/* ---------- Colores propios del dashboard (no están en producto.css) ---------- */
+:root {
+  --dash-title: #1d1e20;       /* Gray-900 (texto 1ro): saludo */
+  --warning-50: #fff8e6;       /* badge "vence en…" */
+  --warning-text: #9b4600;
+  --alert-icon: #e69800;       /* círculo de atención de los productos */
+}
+
+/* ---------- Estructura ---------- */
+.dash { min-width: 0; }
+.dash__main:focus { outline: none; }
+.dash__body { display: flex; flex-direction: column; gap: 40px; padding: 32px 16px 16px; }
+
+@media (min-width: 1024px) {
+  /* Misma grilla que el resto del producto: container 1280 − sidebar, centrado en el espacio que deja el menú (80px a 1440) */
+  .dash__body {
+    width: 100%; margin-inline: auto; padding: 32px var(--grid-pad) 32px;
+    max-width: calc(var(--grid-max) + 2 * var(--grid-pad));
+  }
+}
+
+/* ---------- Aviso de cuenta invitada (solo en ese modo) ---------- */
+.guest-banner {
+  display: none; padding: 4px 10px;
+  background: var(--primary-600); color: #fff;
+  font-size: 12px; line-height: 18px; text-align: center;
+}
+body[data-modo="invitada"] .guest-banner { display: block; position: sticky; top: 50px; z-index: 19; }   /* fija bajo el header (que también es fijo): no se va al scrollear; z-index justo debajo del header (20) */
+@media (min-width: 1024px) { body[data-modo="invitada"] .guest-banner { top: 64px; } }
+/* La cuenta invitada no ve lo de facturación: ni el carrito ni los vencimientos ni los enlaces de pagos (Figma no los dibuja);
+   y el menú lateral no trae "Facturas y pagos" ni "Partners". */
+body[data-modo="invitada"] [data-solo="propia"] { display: none; }
+body[data-modo="invitada"] .sidebar li:has(> [data-nav="facturas"]),
+body[data-modo="invitada"] .sidebar li:has(> [data-nav="partners"]) { display: none; }
+
+/* ---------- Saludo y títulos ---------- */
+.dash__greeting {
+  text-align: center; color: var(--dash-title);
+  font-size: 28px; font-weight: 700; line-height: 34px;
+}
+.dash__section { display: flex; flex-direction: column; gap: 12px; }
+.dash__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+
+/* ---------- Productos ---------- */
+.prod-grid {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
+}
+@media (min-width: 1200px) { .prod-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .prod-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.tile {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  height: 128px; padding: 15px 7px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+  text-align: center;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.tile:hover { border-color: var(--secondary-200); box-shadow: 0 4px 12px rgba(22, 23, 25, .08); }   /* hover: no está en Figma, se infiere */
+.tile:focus-visible { outline: 3px solid var(--ring); outline-offset: 1px; }
+.tile__icon {
+  flex: none; display: grid; place-items: center; width: 48px; height: 48px;
+  background: var(--primary-50); border-radius: var(--radius-8); color: var(--primary-500);
+}
+.tile__icon svg { width: 48px; height: 48px; fill: currentColor; }
+.tile__info { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; min-width: 0; }
+.tile__name { font-size: 12px; font-weight: 600; line-height: 18px; overflow-wrap: anywhere; }
+.tile__alert { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; color: var(--alert-icon); }   /* Figma: top/right 7 desde el borde exterior = 6 + el borde */
+.tile__alert .icon { display: block; }
+
+.badge--neutral { background: var(--secondary-50); color: var(--text-muted); }
+.badge--danger-light { background: var(--danger-50); color: var(--danger-500); }
+.badge--warning-light { background: var(--warning-50); color: var(--warning-text); }
+
+/* ---------- Pendientes: carrito, vencimientos y enlaces ---------- */
+.pend { display: flex; flex-direction: column; gap: 16px; }
+.dcard {
+  padding: 15px; background: var(--body-bg);
+  border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+
+/* Carrito */
+.cart { display: flex; flex-direction: column; gap: 20px; }
+.cart__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cart__title-row { display: flex; align-items: center; gap: 12px; }
+.cart__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.cart__body { display: flex; flex-direction: column; gap: 16px; }
+.cart__list { display: flex; flex-direction: column; gap: 8px; }
+.cart-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 22px; }
+.cart-item__main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.cart-item__name::before, .exp-item__name::before { content: "• "; }
+.cart-item__name, .exp-item__name { font-size: 14px; line-height: 22px; }
+.cart-item__order { font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.cart-item__link { font-size: 12px; line-height: 18px; color: var(--primary-500); }
+.cart-item__link:hover { text-decoration: underline; }
+.cart-item__price { flex: none; font-size: 14px; font-weight: 600; line-height: 22px; text-align: right; white-space: nowrap; }
+.cart__divider { height: 0; box-shadow: 0 -1px 0 var(--secondary-100); }   /* línea de 0 de alto con el trazo hacia arriba, como en Figma */
+.cart__total { display: flex; justify-content: flex-end; }
+.cart__total-stack { display: flex; flex-direction: column; align-items: flex-end; text-align: right; white-space: nowrap; }
+.cart__total-label { margin-bottom: 4px; font-size: 14px; font-weight: 600; line-height: 22px; color: var(--secondary-500); }
+.cart__total-amount { font-size: 18px; font-weight: 600; line-height: 23px; }
+.cart__total-currency { font-size: 12px; line-height: 18px; color: var(--secondary-500); }
+.btnrow { display: flex; justify-content: flex-end; }
+
+/* Vencimientos */
+.exp { display: flex; flex-direction: column; gap: 16px; }
+.exp__title { font-size: 18px; font-weight: 600; line-height: 23px; }
+.exp__list { display: flex; flex-direction: column; gap: 8px; }
+.exp-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 22px; }
+.exp__more { font-size: 12px; line-height: 18px; color: var(--text-muted); }
+
+/* Enlaces: "Administra tus pagos y facturas" / "Recupera los servicios que diste de baja" */
+.link-rows { display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 1024px) { .link-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+.linkrow {
+  display: flex; align-items: center; gap: 16px; min-height: 80px; padding: 15px;
+  background: var(--body-bg); border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.linkrow:hover { border-color: var(--secondary-200); box-shadow: 0 4px 12px rgba(22, 23, 25, .08); }   /* hover inferido */
+.linkrow:focus-visible { outline: 3px solid var(--ring); outline-offset: 1px; }
+.linkrow__text { flex: 1; min-width: 0; font-size: 16px; font-weight: 600; line-height: 20px; }
+.linkrow__go { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-8); color: var(--primary-500); }
+.linkrow:hover .linkrow__go { background: var(--primary-50); }
+
+/* ---------- Tarjeta de talleres ---------- */
+.promo { position: relative; border-radius: var(--radius-12); overflow: hidden; }
+.promo__card {
+  display: flex; align-items: center; min-height: 190px; padding: 23px;
+  background: linear-gradient(to right, #fff 31.731%, #9dc0e7);
+  border: 1px solid var(--secondary-100); border-radius: var(--radius-12);
+}
+.promo__item { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; width: 676px; max-width: 100%; }
+.promo__copy { display: flex; flex-direction: column; gap: 4px; }
+.promo__kicker { font-size: 16px; font-weight: 600; line-height: 20px; color: var(--text-muted); }
+.promo__title { font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -.12px; }
+.promo__title span { color: var(--brand-400); }
+.promo__img { display: none; position: absolute; top: 0; right: 56px; pointer-events: none; }
+@media (min-width: 1024px) {
+  .promo__card { min-height: 200px; }
+  .promo__img { display: block; }
+}
+@media (max-width: 599px) {
+  .promo__item .btn, .btnrow .btn { width: 100%; }
+  .promo__title { font-size: 24px; }
+}
+
+/* ---------- Mobile (< 600): las filas pasan a columna, como en Figma ---------- */
+@media (max-width: 599px) {
+  .dash__section--pend { gap: 24px; }
+  .cart-item { flex-direction: column; align-items: stretch; gap: 8px; }
+  .cart-item__main { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .cart-item__price { align-self: flex-end; }
+  .exp-item { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
+
+/* Figma ancla la foto un poco más a la derecha en la cuenta invitada (±2 px entre las dos pantallas) */
+@media (min-width: 1024px) { body[data-modo="invitada"] .promo__img { right: 58px; top: 1px; } }
