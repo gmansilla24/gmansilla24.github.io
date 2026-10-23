@@ -11,10 +11,14 @@ index.html            Contenido de la página
 casos/nubix.html      Página del caso Nubix (plantilla para los otros casos)
 casos/referidos.html  Página del caso Referidos
 casos/usuarios.html   Página del caso Usuarios y permisos
+casos/nubix-hoy/      Réplica anonimizada del producto actual (cards, “elegido” y listas) que el caso Nubix incrusta en iframes: `hoy.html` (un fragmento por hash, p. ej. `#hosting`) y `hoy.css` (CSS compilado del producto recortado a lo que se usa). Lleva `noindex`
 css/styles.css        Estilos y tokens (variables al inicio del archivo)
+css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers — y Hallazgo 4 — cards, “elegido”, listas y modales)
 js/main.js            Menú móvil, sección activa, botón "Copiar correo" y aviso (toast)
 js/analytics.js       Estadísticas de visitas con GoatCounter (código gmansilla24; ver "Estadísticas de visitas")
-fonts/                Nunito (autoalojada, licencia OFL)
+js/case-nav.js        Índice fijo de la página del caso (Nubix): resalta la sección que se está leyendo
+js/case-specimens.js  Muestras interactivas del caso (Nubix): configurador de botones, tablas que ordenan y se seleccionan, ajuste de los marcos de celular, de las pantallas del prototipo y de los iframes con alto automático
+fonts/                Nunito (autoalojada, licencia OFL) y un subconjunto de Material Icons (licencia Apache 2.0) para la réplica de las tablas de producción (`nx-old-icons`) y de las cards y listas (`nx-hoy-*`, solo los íconos que se usan)
 assets/icons/         Íconos SVG exportados de Figma
 assets/img/           Foto del hero y capturas de los casos
 assets/docs/          CV y handoffs de los prototipos y del sistema de diseño (Usuarios y permisos, Programa de referidos, Sistema de diseño), en PDF (ver "Antes de publicar")
@@ -42,7 +46,7 @@ y abrí http://localhost:8000. También sirve la extensión Live Server de VS Co
 
 ## Imágenes del caso Nubix (pendiente)
 
-La portada ya tiene su imagen (`assets/img/nubix/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). En `casos/nubix.html` quedan 7 espacios reservados (celestes) con un comentario `IMAGEN n` cada uno: los 4 hallazgos y las 3 pantallas de "El sistema aplicado". Para cargar una, dentro del `<figure class="case-media">` correspondiente:
+La portada ya tiene su imagen (`assets/img/nubix/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). "El sistema aplicado" ya tiene capturas reales del prototipo (`assets/img/nubix/sistema-{inicio,servicio,listado}-{desktop,mobile}.webp`, sacadas de `prototipos/sistema/*.html?embed=1` con el navegador a 1280 × 800 y 360 × 740; si cambia el prototipo hay que volver a sacarlas). Los hallazgos 1 a 4 se arman con piezas en código, no con imágenes. En `casos/nubix.html` puede quedar algún espacio reservado (celeste) con un comentario `IMAGEN n`. Para cargar una, dentro del `<figure class="case-media">` correspondiente:
 
 ```
 <img src="../assets/img/nubix/nombre.webp" alt="Descripción de la captura" width="932" height="712" loading="lazy" decoding="async">
@@ -77,7 +81,7 @@ La portada ya tiene su imagen (`assets/img/usuarios/portada.webp`, 1047 × 800, 
 Usa [GoatCounter](https://www.goatcounter.com), gratis y de código abierto. Según su documentación identifica las visitas únicas sin cookies, con un hash que no identifica a la persona, y por eso no necesita un banner de consentimiento (es lo que dice la herramienta; no es asesoramiento legal).
 
 1. La cuenta ya está creada: el código del sitio es `gmansilla24` y el panel está en `https://gmansilla24.goatcounter.com`.
-2. El código está cargado en `js/analytics.js` (`var CODE = "gmansilla24";`). Ese archivo ya está enlazado en las 21 páginas (inicio, los tres casos y todas las páginas de los prototipos), cada una con su ruta relativa. Si algún día cambia el código, es el único lugar a editar.
+2. El código está cargado en `js/analytics.js` (`var CODE = "gmansilla24";`). Ese archivo ya está enlazado en las 21 páginas (inicio, los tres casos y todas las páginas de los prototipos), cada una con su ruta relativa. Si algún día cambia el código, es el único lugar a editar. Las pantallas del prototipo que el caso Nubix muestra en un iframe se cargan con `?embed`: así no cuentan como visita y no muestran el panel "Probar estados".
 3. Las visitas empiezan a aparecer cuando el sitio esté publicado. Para comprobarlo, abrir el sitio publicado una vez (no desde tu computadora) y mirar el panel.
 
 Qué cuenta: las visitas por página (se ve cuáles casos y prototipos se abren), de dónde llegaron (por ejemplo desde LinkedIn), país, navegador y tamaño de pantalla. Qué no cuenta: las visitas desde tu computadora (localhost o un archivo local), para que las pruebas no ensucien los números. Límite a tener en cuenta: es probable que algunos bloqueadores de anuncios bloqueen el script, así que los números son un mínimo y no el total exacto de visitas.

@@ -12,6 +12,9 @@
   var host = window.location.hostname;
   if (window.location.protocol === "file:" || host === "localhost" || host === "127.0.0.1" || host === "[::1]") return;
 
+  /* Las pantallas del prototipo que se muestran dentro del caso de estudio (?embed) no cuentan como visita aparte. */
+  if (/[?&]embed(=|&|$)/.test(window.location.search)) return;
+
   var script = document.createElement("script");
   script.async = true;
   script.setAttribute("data-goatcounter", "https://" + CODE + ".goatcounter.com/count");

@@ -143,7 +143,11 @@ img, svg { display: block; }
 .btn:focus-visible, .btn.is-focus { outline: none; box-shadow: 0 0 0 3px var(--ring); }
 .btn:disabled, .btn[aria-disabled="true"] { opacity: .6; cursor: not-allowed; pointer-events: none; }
 .btn--sm { height: var(--btn-sm); padding: 0 12px; }
-.btn--lg { height: var(--btn-lg); padding: 0 24px; }
+.btn--lg { height: var(--btn-lg); padding: 0 24px; font-size: 16px; line-height: 24px; }
+/* Ícono dentro del botón: 16 en sm, 20 en md, 24 en lg (Figma · Button) */
+.btn .icon { flex: none; width: 20px; height: 20px; }
+.btn--sm .icon { width: 16px; height: 16px; }
+.btn--lg .icon { width: 24px; height: 24px; }
 .btn--block { display: flex; width: 100%; }
 .btn--block-mobile { width: 100%; }
 
@@ -608,7 +612,7 @@ body[data-drawer] .scrim { opacity: 1; visibility: visible; transition: opacity 
 
 /* ---------- Herramienta del prototipo: "Probar estados" (fuera del producto) ---------- */
 .probar { position: fixed; left: 16px; bottom: 16px; z-index: 150; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
-.probar[hidden] { display: none; }
+.probar[hidden], .is-embed .probar { display: none; }
 .probar__toggle {
   display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px;
   background: var(--secondary-900); color: #fff; border: 0; border-radius: 16px;

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modales: formulario, confirmación e informativo · Sistema de diseño · Prototipo en código</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/sistema.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <style>body{background:transparent;padding:16px} .mg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}@media (max-width:720px){.mg{grid-template-columns:minmax(0,1fr)}} .mg .modal{width:auto!important;max-width:100%} .ds-sub{margin:0 0 8px} .mg .modal__footer{flex-direction:row!important} .mg .modal__footer .btn{width:auto!important}</style>
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<body class="ds">
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/sis-icons.js"></script>
+  <main aria-label="Modales del sistema"><div class="mg"><div><div class="ds-sub">Con cierre · confirmación</div><div class="modal modal--static modal--md" role="group" aria-label="Eliminar cuenta"><div class="modal__box"><div class="modal__header"><h3 class="modal__title">Eliminar cuenta</h3><button class="modal__x" type="button" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="modal__body"><p class="modal__text">Si eliminas tu cuenta, perderás el acceso a todos tus servicios y a tu historial de facturación.</p><div class="fb fb--danger" role="alert"><svg class="icon" aria-hidden="true"><use href="#i-warning"/></svg><p class="fb__text"><span>Esta acción es irreversible.</span></p></div></div><div class="modal__footer"><button class="btn btn--solid btn--secondary" type="button">Cancelar</button><button class="btn btn--solid btn--danger" type="button">Eliminar cuenta</button></div></div></div></div><div><div class="ds-sub">Con cierre · formulario</div><div class="modal modal--static modal--md" role="group" aria-label="Agregar usuario"><div class="modal__box"><div class="modal__header"><h3 class="modal__title">Agregar usuario</h3><button class="modal__x" type="button" aria-label="Cerrar"><svg class="icon icon--16" aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="modal__body"><p class="modal__text">Completa los datos para invitar a una persona a tu cuenta.</p></div><div class="modal__footer"><button class="btn btn--solid btn--secondary" type="button">Cancelar</button><button class="btn btn--solid btn--primary" type="button">Continuar</button></div></div></div></div><div><div class="ds-sub">Sin cierre en el header · informativo</div><div class="modal modal--static modal--md" role="group" aria-label="Tareas de mantenimiento"><div class="modal__box"><div class="modal__header"><h3 class="modal__title">Tareas de mantenimiento</h3></div><div class="modal__body"><p class="modal__text">Cada domingo, de 2:00 a 4:00, hacemos tareas de mantenimiento. Tu sitio puede responder más lento durante ese lapso.</p></div><div class="modal__footer"><button class="btn btn--solid btn--primary" type="button">Cerrar</button></div></div></div></div></div></main>
+<script>/* Dentro de un iframe del caso: avisa su alto real a la página (funciona también abierto en local, donde el padre no puede leer el iframe) */(function(){if(window.parent===window)return;function s(){var h=Math.ceil(document.documentElement.getBoundingClientRect().height);try{window.parent.postMessage({nxFit:h,src:location.pathname.split("/").pop()},"*")}catch(e){}}window.addEventListener("load",function(){s();setTimeout(s,400)});window.addEventListener("resize",s);if(window.ResizeObserver)new ResizeObserver(s).observe(document.documentElement);})();</script>
+</body>
+</html>

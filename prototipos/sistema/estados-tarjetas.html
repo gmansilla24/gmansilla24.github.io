@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tarjetas: hover, foco y seleccionada · Sistema de diseño · Prototipo en código</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/producto.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/sistema.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <style>body{background:transparent;padding:16px} .ds-sub{margin-top:20px} .ds-sub:first-of-type{margin-top:0} .ds-box{background:#fff}</style>
+  <script src="../../js/analytics.js" defer></script>
+</head>
+<body class="ds">
+  <script src="js/icons.js"></script>
+  <script src="js/dash-icons.js"></script>
+  <script src="js/sis-icons.js"></script>
+  <main aria-label="Estados de las tarjetas del sistema">
+<div class="ds-sub">Redirige · tarjeta de servicio</div>
+        <div class="ds-box "><div class="ds-cell"><a class="rc rc--tile" href="#" ><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__info"><span class="rc__name">Web Hosting</span><span class="badge badge--light badge--secondary">3 servicios</span></span></a><span class="ds-cap">Default</span></div><div class="ds-cell"><a class="rc rc--tile is-hover" href="#" ><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__info"><span class="rc__name">Web Hosting</span><span class="badge badge--light badge--secondary">3 servicios</span></span></a><span class="ds-cap">Hover</span></div><div class="ds-cell"><a class="rc rc--tile is-focus" href="#" ><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__info"><span class="rc__name">Web Hosting</span><span class="badge badge--light badge--secondary">3 servicios</span></span></a><span class="ds-cap">Foco</span></div><div class="ds-cell"><a class="rc rc--tile" href="#" ><svg class="icon rc__warn" aria-hidden="true"><use href="#i-error"/></svg><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__info"><span class="rc__name">Web Hosting</span><span class="badge badge--light badge--secondary">3 servicios</span></span></a><span class="ds-cap">Con aviso</span></div></div>
+        <div class="ds-sub">Queda seleccionado · periodo</div>
+        <div class="ds-box "><div class="ds-cell"><label class="sc sc--period"><input type="radio" name="g77"><span class="sc__radio"><span class="sc__r"></span>Tipo de periodo</span><span class="sc__price"><b>$ 4.900</b><span class="badge badge--warning" style="background:var(--warning-50);color:#9b4600">AHORRO 20%</span></span></label><span class="ds-cap">Default</span></div><div class="ds-cell"><label class="sc sc--period is-hover"><input type="radio" name="g77"><span class="sc__radio"><span class="sc__r"></span>Tipo de periodo</span><span class="sc__price"><b>$ 4.900</b><span class="badge badge--warning" style="background:var(--warning-50);color:#9b4600">AHORRO 20%</span></span></label><span class="ds-cap">Hover</span></div><div class="ds-cell"><label class="sc sc--period is-focus"><input type="radio" name="g77"><span class="sc__radio"><span class="sc__r"></span>Tipo de periodo</span><span class="sc__price"><b>$ 4.900</b><span class="badge badge--warning" style="background:var(--warning-50);color:#9b4600">AHORRO 20%</span></span></label><span class="ds-cap">Foco</span></div><div class="ds-cell"><label class="sc sc--period is-selected"><input type="radio" name="g77" checked><span class="sc__radio"><span class="sc__r"></span>Tipo de periodo</span><span class="sc__price"><b>$ 4.900</b><span class="badge badge--warning" style="background:var(--warning-50);color:#9b4600">AHORRO 20%</span></span></label><span class="ds-cap">Seleccionada</span></div></div>
+<div class="ds-sub">Queda seleccionado · opción con descripción</div>
+        <div class="ds-box "><div class="ds-cell"><label class="sc sc--info"><input type="radio" name="g79"><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__txt"><b>Página web</b><span>Crea tu sitio con nuestras herramientas</span></span></label><span class="ds-cap">Default</span></div><div class="ds-cell"><label class="sc sc--info is-hover"><input type="radio" name="g79"><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__txt"><b>Página web</b><span>Crea tu sitio con nuestras herramientas</span></span></label><span class="ds-cap">Hover</span></div><div class="ds-cell"><label class="sc sc--info"><input type="radio" name="g79" checked><span class="rc__ico"><svg class="icon" aria-hidden="true"><use href="#i-web"/></svg></span><span class="rc__txt"><b>Página web</b><span>Crea tu sitio con nuestras herramientas</span></span></label><span class="ds-cap">Seleccionada</span></div></div>
+          </main>
+<script>/* Dentro de un iframe del caso: avisa su alto real a la página (funciona también abierto en local, donde el padre no puede leer el iframe) */(function(){if(window.parent===window)return;function s(){var h=Math.ceil(document.documentElement.getBoundingClientRect().height);try{window.parent.postMessage({nxFit:h,src:location.pathname.split("/").pop()},"*")}catch(e){}}window.addEventListener("load",function(){s();setTimeout(s,400)});window.addEventListener("resize",s);if(window.ResizeObserver)new ResizeObserver(s).observe(document.documentElement);})();</script>
+</body>
+</html>

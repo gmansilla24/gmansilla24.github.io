@@ -16,8 +16,11 @@
 
   <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/case-visuals.css">
   <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
   <script src="../js/analytics.js" defer></script>
+  <script src="../js/case-nav.js" defer></script>
+  <script src="../js/case-specimens.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -114,9 +117,26 @@
       </div>
     </section>
 
+    <!-- ===== Índice de la página (se queda fijo al hacer scroll) ===== -->
+    <nav class="case-nav" aria-label="En esta página">
+      <div class="container">
+        <ul class="case-nav__list">
+          <li><a href="#resumen">Resumen</a></li>
+          <li><a href="#hallazgo-1"><span class="case-nav__n">1</span>Identidad visual</a></li>
+          <li><a href="#hallazgo-2"><span class="case-nav__n">2</span>Tablas</a></li>
+          <li><a href="#hallazgo-3"><span class="case-nav__n">3</span>Headers</a></li>
+          <li><a href="#hallazgo-4"><span class="case-nav__n">4</span>Cards y modales</a></li>
+          <li><a href="#sistema">Sistema aplicado</a></li>
+          <li><a href="#resultado">Resultado real</a></li>
+          <li><a href="#aprendizajes">Aprendizajes</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- ===== En pocas palabras ===== -->
-    <section class="section section--white" aria-labelledby="resumen-title">
-      <div class="container case-split">
+    <section class="section section--white" id="resumen" aria-labelledby="resumen-title">
+      <div class="container case-block">
+       <div class="case-split">
         <div class="case-text">
           <h2 class="case-h2" id="resumen-title">En pocas palabras</h2>
           <div class="prose">
@@ -141,107 +161,778 @@
             </ul>
           </div>
         </div>
+       </div>
+      </div>
+    </section>
+
+    <!-- ===== Cifras de la auditoría (banda oscura) ===== -->
+    <section class="section section--dark on-dark" id="cifras" aria-labelledby="cifras-title">
+      <div class="container case-block">
+        <h2 class="case-h2" id="cifras-title">La auditoría en cuatro cifras</h2>
+        <ul class="stats" aria-label="Cifras de la auditoría">
+          <li class="stat">
+            <p class="stat__num">0,6%</p>
+            <h3 class="stat__title">Color de marca en los botones</h3>
+            <p class="stat__text">Aparece seis veces entre más de 1000 botones relevados.</p>
+            <a class="stat__link" href="#h1-title">Identidad visual</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">47,7%</p>
+            <h3 class="stat__title">Verde y rojo como acción</h3>
+            <p class="stat__text">Casi la mitad de los botones usa un color pensado para éxito o error como llamado a la acción.</p>
+            <a class="stat__link" href="#h1-title">Identidad visual</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">7</p>
+            <h3 class="stat__title">Piezas distintas hacen de header</h3>
+            <p class="stat__text">Barra mobile, barra oscura, breadcrumb, header de lista, header de Cloud, título de sección y menú contextual, cada una con su color y su comportamiento.</p>
+            <a class="stat__link" href="#h3-title">Headers</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">3</p>
+            <h3 class="stat__title">Lugares con el logo</h3>
+            <p class="stat__text">El logo está en tres lugares de la app y te lleva al sitio de marketing, en vez de volver al inicio del panel.</p>
+            <a class="stat__link" href="#h3-title">Headers</a>
+          </li>
+        </ul>
+        <p class="case-note">Cifras de un relevamiento propio del código y de la interfaz en producción. No hubo research con usuarios.</p>
       </div>
     </section>
 
     <!-- ===== Hallazgo 1 ===== -->
-    <section class="section section--tint" aria-labelledby="h1-title">
+    <section class="section section--white" id="hallazgo-1" aria-labelledby="h1-title">
       <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Hallazgo 1 de 4</p>
             <h2 class="case-h2" id="h1-title">Identidad visual, un sistema a medias</h2>
-            <div class="prose">
-              <p>Color, tipografía, sombras e íconos tienen el mismo problema: valores definidos a mano, sin tokens que los conecten. Medí el código y el color de marca aparece en <strong>menos del 1% de los botones</strong>, mientras que un color pensado para éxito o error concentra <strong>casi la mitad de los llamados a la acción</strong>, sin cumplir contraste mínimo (WCAG 1.4.3) ni tamaño de objetivo (WCAG 2.5.8).</p>
-              <p>Un benchmark de cuatro productos del sector (Cloudflare, DigitalOcean, Hostinger y GoDaddy) mostró cómo lo resuelven otros: el color de marca casi nunca es el de acción primaria, cada uno lo reserva para acentos y usa un tono frío o neutro para operar.</p>
-            </div>
           </div>
-          <!-- IMAGEN 2 · identidad visual -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+              <p>Color, tipografía, sombras e íconos tienen el mismo problema: valores definidos a mano, sin tokens que los conecten. Se ve más claro en los botones: medí el código y el color de marca aparece en <strong>menos del 1 % de los botones</strong>, mientras que un color pensado para éxito o error concentra <strong>casi la mitad de los llamados a la acción</strong>. Además, el naranja de marca con texto blanco no llega al contraste mínimo de lectura, ni el azul de los botones con forma de link (3,98:1), y muchos de esos links hacían de botón sin el tamaño mínimo para tocarlos.</p>
+              <p>Un benchmark de cuatro productos del sector (Cloudflare, DigitalOcean, Hostinger y GoDaddy) mostró cómo lo resuelven otros: en Cloudflare y GoDaddy la marca queda para acentos puntuales, y en DigitalOcean y Hostinger marca y acción coinciden. Lo que comparten los cuatro es con qué operan, azul, violeta o negro. Ninguno usa un color de estado ni un naranja como acción primaria.</p>
+          </div>
         </div>
+
+        <div class="stage">
+          <!-- Barras: para qué se usan los botones -->
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Para qué se usan los botones</h3>
+            </div>
+            <ul class="nx-bars">
+            <li class="nx-bar">
+              <span class="nx-bar__label">Semánticos como CTA <span class="nx-bar__sub">success / danger</span></span>
+              <span class="nx-bar__value">47,7%</span>
+              <span class="nx-bar__track" aria-hidden="true"><span class="nx-bar__fill" style="--w:91.7%;--c:var(--success-500)"></span></span>
+            </li>
+            <li class="nx-bar">
+              <span class="nx-bar__label">Bajo énfasis <span class="nx-bar__sub">link / close</span></span>
+              <span class="nx-bar__value">34,8%</span>
+              <span class="nx-bar__track" aria-hidden="true"><span class="nx-bar__fill" style="--w:66.9%;--c:#007bff"></span></span>
+            </li>
+            <li class="nx-bar">
+              <span class="nx-bar__label">Neutros y secundarios <span class="nx-bar__sub">gris</span></span>
+              <span class="nx-bar__value">15,8%</span>
+              <span class="nx-bar__track" aria-hidden="true"><span class="nx-bar__fill" style="--w:30.4%;--c:var(--secondary-500)"></span></span>
+            </li>
+            <li class="nx-bar">
+              <span class="nx-bar__label">Terceros y contextuales <span class="nx-bar__sub">Facebook / Google</span></span>
+              <span class="nx-bar__value">1,2%</span>
+              <span class="nx-bar__track" aria-hidden="true"><span class="nx-bar__fill" style="--w:2.3%;--c:var(--secondary-300)"></span></span>
+            </li>
+            <li class="nx-bar">
+              <span class="nx-bar__label">Marca y primario <span class="nx-bar__sub">naranja #ff8431</span></span>
+              <span class="nx-bar__value">0,6%</span>
+              <span class="nx-bar__track" aria-hidden="true"><span class="nx-bar__fill" style="--w:1.2%;--c:#ff8431"></span></span>
+            </li>
+            </ul>
+            <p class="nx-card__note">Relevamiento de más de 1000 botones del producto. El color de acción por defecto terminó siendo el verde de estado.</p>
+          </div>
+
+        <!-- Links que hacen de botón -->
+        <div class="nx-card">
+          <div class="nx-card__head">
+            <h3 class="nx-card__title">Links que hacen de botón</h3>
+            <p class="nx-card__note">Análisis del HTML de la rama development, sin ejecutar la app. Las cifras son estimaciones (la clasificación se apoya en el nombre del handler), no una auditoría con herramientas.</p>
+          </div>
+          <ul class="nx-facts">
+            <li class="nx-fact"><p class="nx-fact__n">376</p><p class="nx-fact__t">Elementos clicables que no son botón</p><p class="nx-fact__d">270 son enlaces, 42 son bloques genéricos, 31 íconos y 15 filas de tabla.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">~230</p><p class="nx-fact__t">Links que ejecutan una acción</p><p class="nx-fact__d">De 273 enlaces con click, la mayoría no navega: 80 abren o cierran un modal. Es un enlace vacío al que se le cancela la navegación.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">21</p><p class="nx-fact__t">Cierres hechos con link e ícono</p><p class="nx-fact__d">19 quedan fuera del orden del teclado y 20 se anuncian como «Close», en inglés. En otros 58 lugares el cierre sí es un botón.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">31</p><p class="nx-fact__t">Íconos clicables sueltos</p><p class="nx-fact__d">Sin foco de teclado ni nombre accesible. 18 son el ojo para mostrar la contraseña.</p></li>
+          </ul>
+          <p class="nx-card__note">Criterios de WCAG: teclado (2.1.1), nombre y función (4.1.2) y propósito del enlace (2.4.4). Es una lectura a partir del código.</p>
+        </div>
+
+        <!-- Benchmark -->
+        <div class="nx-card nx-card--wide">
+          <div class="nx-card__head">
+            <h3 class="nx-card__title">Benchmark</h3>
+            <p class="nx-card__note">Cuatro productos de gestión e infraestructura, mirando color de acción, color de marca, radio y lenguaje visual.</p>
+          </div>
+          <ul class="nx-bm" aria-label="Benchmark de cuatro productos">
+            <li class="nx-bm__item">
+              <h4 class="nx-bm__name">Cloudflare</h4>
+              <div class="nx-bm__split" aria-hidden="true"><span style="--c:#0051c3;--fg:#ffffff">Acción</span><span style="--c:#f6821f;--fg:#161719">Marca</span></div>
+              <p class="nx-bm__verdict nx-bm__verdict--diff">Marca y acción distintas</p>
+              <dl class="nx-bm__list">
+                <div><dt>Acción</dt><dd>Azul</dd></div>
+                <div><dt>Marca</dt><dd>Naranja (acento puntual, no es color de acción)</dd></div>
+                <div><dt>Radio</dt><dd>Moderado, consistente en todos los componentes</dd></div>
+                <div><dt>Estilo</dt><dd>Minimalista, casi sin ilustraciones en pantallas funcionales</dd></div>
+              </dl>
+            </li>
+            <li class="nx-bm__item">
+              <h4 class="nx-bm__name">DigitalOcean</h4>
+              <div class="nx-bm__split" aria-hidden="true"><span style="--c:#0069ff;--fg:#ffffff">Acción</span><span style="--c:#0069ff;--fg:#ffffff">Marca</span></div>
+              <p class="nx-bm__verdict nx-bm__verdict--same">Marca y acción coinciden</p>
+              <dl class="nx-bm__list">
+                <div><dt>Acción</dt><dd>Azul</dd></div>
+                <div><dt>Marca</dt><dd>Azul (marca y acción coinciden)</dd></div>
+                <div><dt>Radio</dt><dd>Moderado, consistente</dd></div>
+                <div><dt>Estilo</dt><dd>Utilitario, pero con ilustraciones y mascota en pantallas de producto</dd></div>
+              </dl>
+            </li>
+            <li class="nx-bm__item">
+              <h4 class="nx-bm__name">Hostinger</h4>
+              <div class="nx-bm__split" aria-hidden="true"><span style="--c:#673de6;--fg:#ffffff">Acción</span><span style="--c:#673de6;--fg:#ffffff">Marca</span></div>
+              <p class="nx-bm__verdict nx-bm__verdict--same">Coinciden en las pantallas de producto</p>
+              <dl class="nx-bm__list">
+                <div><dt>Acción</dt><dd>Violeta en pantallas de producto<br>Negro en pantallas de venta</dd></div>
+                <div><dt>Marca</dt><dd>Violeta</dd></div>
+                <div><dt>Radio</dt><dd>Moderado a alto</dd></div>
+                <div><dt>Estilo</dt><dd>Mixto: minimalista en producto, muy ilustrado en venta</dd></div>
+              </dl>
+            </li>
+            <li class="nx-bm__item">
+              <h4 class="nx-bm__name">GoDaddy</h4>
+              <div class="nx-bm__split" aria-hidden="true"><span style="--c:#000000;--fg:#ffffff">Acción</span><span style="--c:#0fa9a0;--fg:#161719">Marca</span></div>
+              <p class="nx-bm__verdict nx-bm__verdict--diff">Marca y acción distintas</p>
+              <dl class="nx-bm__list">
+                <div><dt>Acción</dt><dd>Negro</dd></div>
+                <div><dt>Marca</dt><dd>Teal (acento puntual)</dd></div>
+                <div><dt>Radio</dt><dd>Chico y conservador (más cerca del 4px legado del producto que de un radio “generoso”)</dd></div>
+                <div><dt>Estilo</dt><dd>Muy minimalista, sin ilustraciones</dd></div>
+              </dl>
+            </li>
+          </ul>
+        </div>
+
+        </div>
+
         <div class="callout">
           <h3 class="callout__title">La propuesta</h3>
           <p>Una paleta azul calibrada. Es el mismo azul que ya pedían para acercarse a la marca, ajustado para operar como color de acción y menos vívido que el de marketing, y ahí converge todo lo que hoy resuelve el color semántico por defecto.</p>
+        </div>
+
+        <div class="stage">
+        <!-- Los mismos botones, antes y después -->
+        <div class="nx-card">
+          <div class="nx-card__head">
+            <h3 class="nx-card__title">Los mismos botones, antes y después</h3>
+            <p class="nx-card__note">«Del total» es el porcentaje de los más de 1000 botones relevados. La columna «Con el sistema» es una propuesta, no una medición.</p>
+          </div>
+          <div class="nx-mix">
+            <div class="nx-mix__head" aria-hidden="true"><span>Hoy</span><span>Del total</span><span>Con el sistema</span></div>
+            <ul class="nx-mix__list" aria-label="Qué reemplaza a cada tipo de botón">
+              <li class="nx-mix__item">
+                <div class="nx-mix__cell"><span class="nx-mix__tag">Hoy</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:#2d8600"></span><span class="nx-mix__chip" style="--c:#dc3545"></span></span><h4 class="nx-mix__name">Semánticos como CTA</h4><p class="nx-mix__sub">Verde de éxito (unos 450) y rojo de error (unos 35). El verde terminó haciendo de primario.</p></div>
+                <p class="nx-mix__share"><span class="nx-mix__tag">Del total</span>47,7%</p>
+                <div class="nx-mix__cell nx-mix__cell--to"><span class="nx-mix__tag">Con el sistema</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:var(--primary-500)"></span><span class="nx-mix__chip nx-mix__chip--sm" style="--c:var(--success-500)"></span><span class="nx-mix__chip nx-mix__chip--sm" style="--c:#e69800"></span><span class="nx-mix__chip nx-mix__chip--sm" style="--c:var(--danger-500)"></span><span class="nx-mix__chip nx-mix__chip--sm" style="--c:#0e7490"></span></span><p class="nx-mix__to"><strong>Solid primary</strong> La acción principal pasa a ser del color primario, en lugar del verde.</p><p class="nx-mix__to"><strong>Colores semánticos</strong> Éxito, advertencia, error e información quedan para comunicar estado y para acciones destructivas.</p></div>
+              </li>
+              <li class="nx-mix__item">
+                <div class="nx-mix__cell"><span class="nx-mix__tag">Hoy</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip nx-mix__chip--link" style="--c:#007bff"></span></span><h4 class="nx-mix__name">Bajo énfasis (links y cierres)</h4><p class="nx-mix__sub">355 elementos: botones con forma de link, en azul #007bff (3,98:1 sobre blanco), y cierres con ícono. Muchos eran enlaces con función de botón.</p></div>
+                <p class="nx-mix__share"><span class="nx-mix__tag">Del total</span>34,8%</p>
+                <div class="nx-mix__cell nx-mix__cell--to"><span class="nx-mix__tag">Con el sistema</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip nx-mix__chip--ghost" style="--c:var(--primary-700)"></span></span><p class="nx-mix__to"><strong>Botones ghost</strong> Sin borde, como un link, pero con tamaño de objetivo accesible y con énfasis al interactuar. Sirven para texto, ícono o ambos.</p></div>
+              </li>
+              <li class="nx-mix__item">
+                <div class="nx-mix__cell"><span class="nx-mix__tag">Hoy</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:var(--secondary-500)"></span></span><h4 class="nx-mix__name">Neutros y secundarios</h4><p class="nx-mix__sub">Gris.</p></div>
+                <p class="nx-mix__share"><span class="nx-mix__tag">Del total</span>15,8%</p>
+                <div class="nx-mix__cell nx-mix__cell--to"><span class="nx-mix__tag">Con el sistema</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip nx-mix__chip--outline" style="--c:var(--secondary-500)"></span></span><p class="nx-mix__to"><strong>Outline secondary</strong></p></div>
+              </li>
+              <li class="nx-mix__item">
+                <div class="nx-mix__cell"><span class="nx-mix__tag">Hoy</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:var(--secondary-300)"></span></span><h4 class="nx-mix__name">Terceros y contextuales</h4><p class="nx-mix__sub">Facebook y Google. El botón de Facebook usa colores propios del botón de Google.</p></div>
+                <p class="nx-mix__share"><span class="nx-mix__tag">Del total</span>1,2%</p>
+                <div class="nx-mix__cell nx-mix__cell--to"><span class="nx-mix__tag">Con el sistema</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:var(--secondary-300)"></span></span><p class="nx-mix__to"><strong>Sin cambio</strong> Quedan como están.</p></div>
+              </li>
+              <li class="nx-mix__item">
+                <div class="nx-mix__cell"><span class="nx-mix__tag">Hoy</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:#ff8431"></span></span><h4 class="nx-mix__name">Marca y primario</h4><p class="nx-mix__sub">El naranja #ff8431, que debía ser el primario. Con el texto blanco que le forzaron a los botones da 2,4:1.</p></div>
+                <p class="nx-mix__share"><span class="nx-mix__tag">Del total</span>0,6%</p>
+                <div class="nx-mix__cell nx-mix__cell--to"><span class="nx-mix__tag">Con el sistema</span><span class="nx-mix__chipbox" aria-hidden="true"><span class="nx-mix__chip" style="--c:var(--brand-500)"></span></span><p class="nx-mix__to"><strong>Solid brand</strong> Con el naranja calibrado (#AC3E00, contraste 6,1:1).</p></div>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+
+        <!-- Paleta -->
+        <div class="nx-card">
+          <div class="nx-card__head">
+            <h3 class="nx-card__title">Roles semánticos</h3>
+            <p class="nx-card__note">Cada rol apunta a un paso de la escala. El contraste está calculado sobre blanco con la fórmula de WCAG 2.x.</p>
+          </div>
+          <ul class="nx-roles">
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#0961c2" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Acción principal</h4><p class="nx-role__tok">action-primary-default · #0961C2</p><span class="nx-cr nx-cr--ok"><span>6,0:1</span><span>AA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#074e9b" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Acción principal · hover</h4><p class="nx-role__tok">action-primary-hover · #074E9B</p><span class="nx-cr nx-cr--ok"><span>8,2:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#053a74" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Acción principal · active</h4><p class="nx-role__tok">action-primary-active · #053A74</p><span class="nx-cr nx-cr--ok"><span>11,3:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#ac3e00" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Acción de marca</h4><p class="nx-role__tok">action-brand-default · #AC3E00</p><span class="nx-cr nx-cr--ok"><span>6,1:1</span><span>AA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#2b4c9e" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Enlace</h4><p class="nx-role__tok">link-color · #2B4C9E</p><span class="nx-cr nx-cr--ok"><span>8,0:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#161719" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Texto</h4><p class="nx-role__tok">body-color · #161719</p><span class="nx-cr nx-cr--ok"><span>17,9:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#565e64" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Texto secundario</h4><p class="nx-role__tok">text-muted · #565E64</p><span class="nx-cr nx-cr--ok"><span>6,6:1</span><span>AA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#246a00" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Éxito</h4><p class="nx-role__tok">text-success · #246A00</p><span class="nx-cr nx-cr--ok"><span>6,7:1</span><span>AA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#9b4600" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Advertencia</h4><p class="nx-role__tok">text-warning · #9B4600</p><span class="nx-cr nx-cr--ok"><span>6,4:1</span><span>AA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#8a0010" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Peligro</h4><p class="nx-role__tok">text-danger · #8A0010</p><span class="nx-cr nx-cr--ok"><span>10,1:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#0b5d73" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Información</h4><p class="nx-role__tok">text-info · #0B5D73</p><span class="nx-cr nx-cr--ok"><span>7,4:1</span><span>AAA</span></span></div></li>
+            <li class="nx-role"><span class="nx-role__sw" style="--c:#ff6600" aria-hidden="true"></span><div class="nx-role__body"><h4 class="nx-role__name">Naranja de marketing</h4><p class="nx-role__tok">brand-vivid · #FF6600</p><span class="nx-cr nx-cr--no"><span>2,9:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span><p class="nx-role__warn">Solo identidad. Nunca botón ni texto.</p></div></li>
+          </ul>
+        </div>
+
+        <div class="nx-card">
+          <div class="nx-card__head">
+            <h3 class="nx-card__title">Escalas primitivas <span class="nx-pill">50 a 950</span></h3>
+            <p class="nx-card__note">Siete familias con once pasos. El 500 es el valor base y lleva doble marco. El naranja de marketing quedó fuera de la escala.</p>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Primary</h4>
+            <ul class="nx-steps" aria-label="Escala primary"><li class="nx-step"><span class="nx-step__sw" style="--c:#e6eff9" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#E6EFF9</span><span class="nx-cr nx-cr--no"><span>1,2:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#cedff3" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#CEDFF3</span><span class="nx-cr nx-cr--no"><span>1,4:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#9dc0e7" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#9DC0E7</span><span class="nx-cr nx-cr--no"><span>1,9:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#6ba0da" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#6BA0DA</span><span class="nx-cr nx-cr--no"><span>2,7:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#3a81ce" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#3A81CE</span><span class="nx-cr nx-cr--mid"><span>4,0:1</span><span>AA 18+</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#0961c2" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#0961C2</span><span class="nx-cr nx-cr--ok"><span>6,0:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#074e9b" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#074E9B</span><span class="nx-cr nx-cr--ok"><span>8,2:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#053a74" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#053A74</span><span class="nx-cr nx-cr--ok"><span>11,3:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#04274e" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#04274E</span><span class="nx-cr nx-cr--ok"><span>14,9:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#021327" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#021327</span><span class="nx-cr nx-cr--ok"><span>18,7:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#010c17" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#010C17</span><span class="nx-cr nx-cr--ok"><span>19,7:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Brand</h4>
+            <ul class="nx-steps" aria-label="Escala brand"><li class="nx-step"><span class="nx-step__sw" style="--c:#f7ece6" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#F7ECE6</span><span class="nx-cr nx-cr--no"><span>1,2:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#eed8cc" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#EED8CC</span><span class="nx-cr nx-cr--no"><span>1,4:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#deb299" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#DEB299</span><span class="nx-cr nx-cr--no"><span>1,9:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#cd8b66" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#CD8B66</span><span class="nx-cr nx-cr--no"><span>2,8:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#bd6533" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#BD6533</span><span class="nx-cr nx-cr--mid"><span>4,1:1</span><span>AA 18+</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#ac3e00" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#AC3E00</span><span class="nx-cr nx-cr--ok"><span>6,1:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#8a3200" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#8A3200</span><span class="nx-cr nx-cr--ok"><span>8,3:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#672500" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#672500</span><span class="nx-cr nx-cr--ok"><span>11,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#451900" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#451900</span><span class="nx-cr nx-cr--ok"><span>15,1:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#220c00" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#220C00</span><span class="nx-cr nx-cr--ok"><span>18,7:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#150700" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#150700</span><span class="nx-cr nx-cr--ok"><span>19,8:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Info</h4>
+            <ul class="nx-steps" aria-label="Escala info"><li class="nx-step"><span class="nx-step__sw" style="--c:#e7f1f4" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#E7F1F4</span><span class="nx-cr nx-cr--no"><span>1,1:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#cfe3e9" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#CFE3E9</span><span class="nx-cr nx-cr--no"><span>1,3:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#9fc7d3" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#9FC7D3</span><span class="nx-cr nx-cr--no"><span>1,8:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#6eacbc" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#6EACBC</span><span class="nx-cr nx-cr--no"><span>2,5:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#3e90a6" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#3E90A6</span><span class="nx-cr nx-cr--mid"><span>3,7:1</span><span>AA 18+</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#0e7490" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#0E7490</span><span class="nx-cr nx-cr--ok"><span>5,4:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#0b5d73" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#0B5D73</span><span class="nx-cr nx-cr--ok"><span>7,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#084656" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#084656</span><span class="nx-cr nx-cr--ok"><span>10,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#062e3a" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#062E3A</span><span class="nx-cr nx-cr--ok"><span>14,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#03171d" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#03171D</span><span class="nx-cr nx-cr--ok"><span>18,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#020e11" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#020E11</span><span class="nx-cr nx-cr--ok"><span>19,6:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Success</h4>
+            <ul class="nx-steps" aria-label="Escala success"><li class="nx-step"><span class="nx-step__sw" style="--c:#eaf3e6" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#EAF3E6</span><span class="nx-cr nx-cr--no"><span>1,1:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#d5e7cc" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#D5E7CC</span><span class="nx-cr nx-cr--no"><span>1,3:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#abce99" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#ABCE99</span><span class="nx-cr nx-cr--no"><span>1,7:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#81b666" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#81B666</span><span class="nx-cr nx-cr--no"><span>2,4:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#579d33" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#579D33</span><span class="nx-cr nx-cr--mid"><span>3,3:1</span><span>AA 18+</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#2d8500" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#2D8500</span><span class="nx-cr nx-cr--ok"><span>4,7:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#246a00" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#246A00</span><span class="nx-cr nx-cr--ok"><span>6,7:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#1b5000" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#1B5000</span><span class="nx-cr nx-cr--ok"><span>9,6:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#123500" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#123500</span><span class="nx-cr nx-cr--ok"><span>13,7:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#091b00" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#091B00</span><span class="nx-cr nx-cr--ok"><span>18,0:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#051000" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#051000</span><span class="nx-cr nx-cr--ok"><span>19,4:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Warning</h4>
+            <ul class="nx-steps" aria-label="Escala warning"><li class="nx-step"><span class="nx-step__sw" style="--c:#fff8e6" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#FFF8E6</span><span class="nx-cr nx-cr--no"><span>1,1:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#fff3cd" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#FFF3CD</span><span class="nx-cr nx-cr--no"><span>1,1:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#ffe69c" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#FFE69C</span><span class="nx-cr nx-cr--no"><span>1,2:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#ffd44d" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#FFD44D</span><span class="nx-cr nx-cr--no"><span>1,4:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#ffc107" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#FFC107</span><span class="nx-cr nx-cr--no"><span>1,6:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#e69800" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#E69800</span><span class="nx-cr nx-cr--no"><span>2,4:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#c46c00" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#C46C00</span><span class="nx-cr nx-cr--mid"><span>3,8:1</span><span>AA 18+</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#9b4600" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#9B4600</span><span class="nx-cr nx-cr--ok"><span>6,4:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#6b2c00" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#6B2C00</span><span class="nx-cr nx-cr--ok"><span>10,6:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#4a1c00" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#4A1C00</span><span class="nx-cr nx-cr--ok"><span>14,4:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#2a1000" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#2A1000</span><span class="nx-cr nx-cr--ok"><span>17,9:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Danger</h4>
+            <ul class="nx-steps" aria-label="Escala danger"><li class="nx-step"><span class="nx-step__sw" style="--c:#f7e6e8" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#F7E6E8</span><span class="nx-cr nx-cr--no"><span>1,2:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#efccd0" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#EFCCD0</span><span class="nx-cr nx-cr--no"><span>1,5:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#de99a1" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#DE99A1</span><span class="nx-cr nx-cr--no"><span>2,3:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#ce6672" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#CE6672</span><span class="nx-cr nx-cr--mid"><span>3,6:1</span><span>AA 18+</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#bd3343" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#BD3343</span><span class="nx-cr nx-cr--ok"><span>5,6:1</span><span>AA</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#ad0014" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#AD0014</span><span class="nx-cr nx-cr--ok"><span>7,5:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#8a0010" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#8A0010</span><span class="nx-cr nx-cr--ok"><span>10,1:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#68000c" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#68000C</span><span class="nx-cr nx-cr--ok"><span>13,2:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#450008" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#450008</span><span class="nx-cr nx-cr--ok"><span>16,7:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#230004" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#230004</span><span class="nx-cr nx-cr--ok"><span>19,6:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#150002" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#150002</span><span class="nx-cr nx-cr--ok"><span>20,3:1</span><span>AAA</span></span></li></ul>
+          </div>
+          <div class="nx-scale">
+            <h4 class="nx-scale__name">Secondary</h4>
+            <ul class="nx-steps" aria-label="Escala secondary"><li class="nx-step"><span class="nx-step__sw" style="--c:#f0f1f2" aria-hidden="true"></span><span class="nx-step__n">50</span><span class="nx-step__hex">#F0F1F2</span><span class="nx-cr nx-cr--no"><span>1,1:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#e2e3e5" aria-hidden="true"></span><span class="nx-step__n">100</span><span class="nx-step__hex">#E2E3E5</span><span class="nx-cr nx-cr--no"><span>1,3:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#c4c8cb" aria-hidden="true"></span><span class="nx-step__n">200</span><span class="nx-step__hex">#C4C8CB</span><span class="nx-cr nx-cr--no"><span>1,7:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#a7acb1" aria-hidden="true"></span><span class="nx-step__n">300</span><span class="nx-step__hex">#A7ACB1</span><span class="nx-cr nx-cr--no"><span>2,3:1</span><span aria-hidden="true">✕</span><span class="sr-only">no cumple</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#899197" aria-hidden="true"></span><span class="nx-step__n">400</span><span class="nx-step__hex">#899197</span><span class="nx-cr nx-cr--mid"><span>3,2:1</span><span>AA 18+</span></span></li><li class="nx-step is-base"><span class="nx-step__sw" style="--c:#6c757d" aria-hidden="true"></span><span class="nx-step__n">500</span><span class="nx-step__hex">#6C757D</span><span class="nx-cr nx-cr--ok"><span>4,7:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#565e64" aria-hidden="true"></span><span class="nx-step__n">600</span><span class="nx-step__hex">#565E64</span><span class="nx-cr nx-cr--ok"><span>6,6:1</span><span>AA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#41464b" aria-hidden="true"></span><span class="nx-step__n">700</span><span class="nx-step__hex">#41464B</span><span class="nx-cr nx-cr--ok"><span>9,5:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#2b2f32" aria-hidden="true"></span><span class="nx-step__n">800</span><span class="nx-step__hex">#2B2F32</span><span class="nx-cr nx-cr--ok"><span>13,5:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#161719" aria-hidden="true"></span><span class="nx-step__n">900</span><span class="nx-step__hex">#161719</span><span class="nx-cr nx-cr--ok"><span>17,9:1</span><span>AAA</span></span></li><li class="nx-step"><span class="nx-step__sw" style="--c:#0d0e0f" aria-hidden="true"></span><span class="nx-step__n">950</span><span class="nx-step__hex">#0D0E0F</span><span class="nx-cr nx-cr--ok"><span>19,3:1</span><span>AAA</span></span></li></ul>
+          </div>
+        </div>
+
+        <!-- Radios -->
+        <div class="nx-card nx-card--wide">
+          <div class="nx-card__head nx-card__head--stack">
+            <h3 class="nx-card__title">Del radio único a una escala por rol</h3>
+            <p class="nx-card__note">Hoy botón, card, alerta e input comparten 4 px, así que nada distingue una superficie de un control. Solo los badges llevaban 8 px y, por su poca altura, se veían casi como píldoras. La propuesta asigna un paso de la escala a cada rol. Cambiá la vista para ver los mismos componentes del catálogo con cada criterio.</p>
+          </div>
+          <fieldset class="nx-rad">
+            <legend class="sr-only">Vista de los radios</legend>
+            <input class="nx-rad__in nx-rad__in--new sr-only" type="radio" name="rad" id="rad-new" checked>
+            <input class="nx-rad__in nx-rad__in--old sr-only" type="radio" name="rad" id="rad-old">
+            <div class="nx-rad__switch">
+              <label for="rad-new">Propuesta <span>escala por rol</span></label>
+              <label for="rad-old">Hoy <span>4 px, badges en 8 px</span></label>
+            </div>
+            <ul class="nx-rad__cols">
+            <li class="nx-rad__col" style="--r:var(--r-s)">
+              <span class="nx-rad__corner" aria-hidden="true"></span>
+              <h4 class="nx-rad__role">Detalles</h4>
+              <p class="nx-rad__val"><span class="nx-rad__v--new">4 px · radius-4</span><span class="nx-rad__v--old">4 px; el badge, 8 px</span></p>
+              <div class="nx-rad__specs" aria-hidden="true">
+                <span class="nx-rad__badge">Activo</span>
+                <span class="nx-rad__tip">Copiado</span>
+                <span class="nx-rad__check"><svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7"/></svg></span>
+              </div>
+              <p class="nx-rad__uses">Badges, tooltips, checkboxes e ítems de menú.</p>
+            </li>
+            <li class="nx-rad__col" style="--r:var(--r-c)">
+              <span class="nx-rad__corner" aria-hidden="true"></span>
+              <h4 class="nx-rad__role">Controles</h4>
+              <p class="nx-rad__val"><span class="nx-rad__v--new">8 px · radius-8</span><span class="nx-rad__v--old">4 px · radius-4</span></p>
+              <div class="nx-rad__specs" aria-hidden="true">
+                <span class="nx-rad__btn nx-rad__btn--solid">Contratar</span>
+                <span class="nx-rad__btn nx-rad__btn--outline">Cancelar</span>
+                <span class="nx-rad__alert">Tu plan vence en 3 días</span>
+              </div>
+              <p class="nx-rad__uses">Botones, alertas y menús desplegables.</p>
+            </li>
+            <li class="nx-rad__col" style="--r:var(--r-m)">
+              <span class="nx-rad__corner" aria-hidden="true"></span>
+              <h4 class="nx-rad__role">Contenedores y campos</h4>
+              <p class="nx-rad__val"><span class="nx-rad__v--new">12 px · radius-12</span><span class="nx-rad__v--old">4 px · radius-4</span></p>
+              <div class="nx-rad__specs" aria-hidden="true">
+                <span class="nx-rad__input"><small>Dominio</small><span>ejemplo.com.ar</span></span>
+                <span class="nx-rad__card"><strong>Plan Básico</strong><span>Activo hasta el 14/03</span></span>
+              </div>
+              <p class="nx-rad__uses">Cards, inputs, selects, modales y tablas.</p>
+            </li>
+            <li class="nx-rad__col" style="--r:var(--r-l)">
+              <span class="nx-rad__corner" aria-hidden="true"></span>
+              <h4 class="nx-rad__role">Tarjetas de servicio</h4>
+              <p class="nx-rad__val"><span class="nx-rad__v--new">16 px · radius-16</span><span class="nx-rad__v--old">4 px · radius-4</span></p>
+              <div class="nx-rad__specs" aria-hidden="true">
+                <span class="nx-rad__svc"><span class="nx-rad__svc-head"><strong>Mi negocio</strong><span class="nx-rad__badge">Activo</span></span><span class="nx-rad__svc-line">Plan Hosting · ID 000123</span><span class="nx-rad__btn nx-rad__btn--outline">Administrar</span></span>
+              </div>
+              <p class="nx-rad__uses">Tarjetas de servicio del listado.</p>
+            </li>
+            <li class="nx-rad__col" style="--r:var(--r-x)">
+              <span class="nx-rad__corner" aria-hidden="true"></span>
+              <h4 class="nx-rad__role">Píldora promocional</h4>
+              <p class="nx-rad__val"><span class="nx-rad__v--new">24 px · radius-24</span><span class="nx-rad__v--old">Píldora, radio completo</span></p>
+              <div class="nx-rad__specs" aria-hidden="true">
+                <span class="nx-rad__promo">Gana hasta <b>USD 250</b></span>
+              </div>
+              <p class="nx-rad__uses">Aviso de referidos en el header.</p>
+            </li>
+            </ul>
+            <p class="nx-card__note nx-rad__foot">Avatares, radios y switches siguen siendo circulares. Los badges pasan de 8 a 4 px. Los pasos de 16 y 24 px los usan hoy solo la tarjeta de servicio y la píldora del header.</p>
+          </fieldset>
+        </div>
+
+        <!-- El componente completo -->
+        <div class="nx-card nx-card--wide nxk" data-nxk>
+          <div class="nx-card__head nx-card__head--stack">
+            <h3 class="nx-card__title">El componente completo</h3>
+            <p class="nx-card__note">Tres estilos, cuatro colores, tres tamaños y cinco estados. Armá una combinación y mirá sus valores exactos: medidas, colores del catálogo y contraste calculado sobre lo que se está viendo.</p>
+          </div>
+          <div class="nxk__lab">
+            <div class="nxk__stage">
+              <div class="nxk__surface" aria-hidden="true"><button class="nxk-btn nxk-btn--solid nxk-btn--primary" type="button" tabindex="-1" data-nxk-btn></button></div>
+            </div>
+            <form class="nxk__controls" aria-label="Opciones del botón" onsubmit="return false">
+              <fieldset class="nxk__group"><legend>Estilo</legend><div class="nxk__opts"><label><input class="sr-only" type="radio" name="nxk-type" value="solid" checked><span>Solid</span></label><label><input class="sr-only" type="radio" name="nxk-type" value="outline"><span>Outline</span></label><label><input class="sr-only" type="radio" name="nxk-type" value="ghost"><span>Ghost</span></label></div></fieldset>
+              <fieldset class="nxk__group"><legend>Color</legend><div class="nxk__opts"><label><input class="sr-only" type="radio" name="nxk-color" value="primary" checked><span>Primary</span></label><label><input class="sr-only" type="radio" name="nxk-color" value="secondary"><span>Secondary</span></label><label><input class="sr-only" type="radio" name="nxk-color" value="danger"><span>Danger</span></label><label><input class="sr-only" type="radio" name="nxk-color" value="brand"><span>Brand</span></label></div></fieldset>
+              <fieldset class="nxk__group"><legend>Tamaño</legend><div class="nxk__opts"><label><input class="sr-only" type="radio" name="nxk-size" value="sm"><span>sm · 32</span></label><label><input class="sr-only" type="radio" name="nxk-size" value="md" checked><span>md · 40</span></label><label><input class="sr-only" type="radio" name="nxk-size" value="lg"><span>lg · 48</span></label></div></fieldset>
+              <fieldset class="nxk__group"><legend>Contenido</legend><div class="nxk__opts"><label><input class="sr-only" type="radio" name="nxk-content" value="text" checked><span>Texto</span></label><label><input class="sr-only" type="radio" name="nxk-content" value="both"><span>Ícono y texto</span></label><label><input class="sr-only" type="radio" name="nxk-content" value="icon"><span>Solo ícono</span></label></div></fieldset>
+              <fieldset class="nxk__group"><legend>Estado</legend><div class="nxk__opts"><label><input class="sr-only" type="radio" name="nxk-state" value="default" checked><span>Default</span></label><label><input class="sr-only" type="radio" name="nxk-state" value="hover"><span>Hover</span></label><label><input class="sr-only" type="radio" name="nxk-state" value="active"><span>Presionado</span></label><label><input class="sr-only" type="radio" name="nxk-state" value="focus"><span>Foco</span></label><label><input class="sr-only" type="radio" name="nxk-state" value="disabled"><span>Deshabilitado</span></label></div></fieldset>
+            </form>
+            <dl class="nxk__read" aria-live="polite" data-nxk-read></dl>
+          </div>
+          <div class="nxk__sub">
+            <h4 class="nx-sub__title">La familia, con sus estados reales</h4>
+            <p class="nxk__subnote">Pasá el mouse o hacé clic: las muestras responden como los botones del catálogo. En secondary, el solid es gris claro con texto oscuro. El catálogo suma un quinto color, light, para fondos oscuros.</p>
+            <ul class="nxk__fam" aria-hidden="true"><li class="nxk__famrow"><p class="nxk__famlabel">Solid</p><div class="nxk__famgrid"><span class="nxk-btn nxk-btn--solid nxk-btn--primary">Primary</span><span class="nxk-btn nxk-btn--solid nxk-btn--secondary">Secondary</span><span class="nxk-btn nxk-btn--solid nxk-btn--danger">Danger</span><span class="nxk-btn nxk-btn--solid nxk-btn--brand">Brand</span></div></li><li class="nxk__famrow"><p class="nxk__famlabel">Outline</p><div class="nxk__famgrid"><span class="nxk-btn nxk-btn--outline nxk-btn--primary">Primary</span><span class="nxk-btn nxk-btn--outline nxk-btn--secondary">Secondary</span><span class="nxk-btn nxk-btn--outline nxk-btn--danger">Danger</span><span class="nxk-btn nxk-btn--outline nxk-btn--brand">Brand</span></div></li><li class="nxk__famrow"><p class="nxk__famlabel">Ghost <span class="nxk__famnote">sin borde ni fondo en reposo</span></p><div class="nxk__famgrid"><span class="nxk-btn nxk-btn--ghost nxk-btn--primary">Primary</span><span class="nxk-btn nxk-btn--ghost nxk-btn--secondary">Secondary</span><span class="nxk-btn nxk-btn--ghost nxk-btn--danger">Danger</span><span class="nxk-btn nxk-btn--ghost nxk-btn--brand">Brand</span></div></li></ul>
+          </div>
+          <div class="nxk__sub">
+            <h4 class="nx-sub__title">Y también en el catálogo</h4>
+            <ul class="nxk__more" aria-hidden="true">
+              <li><div class="nxk__spec"><span class="nxk-btn nxk-btn--solid nxk-btn--primary nxk-btn--sm nxk-btn--icon"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span><span class="nxk-btn nxk-btn--solid nxk-btn--primary nxk-btn--icon"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span><span class="nxk-btn nxk-btn--solid nxk-btn--primary nxk-btn--lg nxk-btn--icon"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span></div><p class="nxk__capt"><strong>Solo ícono</strong> Cuadrado de 32, 40 o 48 px, con ícono de 16, 20 o 24. Existe en primary, secondary, danger y light, no en brand, y siempre lleva nombre accesible.</p></li>
+              <li><div class="nxk__spec"><span class="nxk-close"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span><span class="nxk-close nxk-close--on"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></span></div><p class="nxk__capt"><strong>Cierre</strong> 24 × 24 px con radio 8. En reposo está al 50% de opacidad y en hover al 75%. Reemplaza a los cierres hechos con link.</p></li>
+              <li><div class="nxk__spec"><span class="nxk-seg"><span class="is-on">Día</span><span>Semana</span><span>Mes</span><span>Año</span></span></div><p class="nxk__capt"><strong>Segmented control</strong> 40 px de alto y borde primary-500. La opción elegida se rellena. Una sola selección por vez.</p></li>
+              <li><div class="nxk__spec"><span class="nxk-grp"><span>Uno</span><span>Dos</span><span>Tres</span><span>Cuatro</span></span></div><p class="nxk__capt"><strong>Button group</strong> Cuatro botones pegados. En outline se superponen los bordes contiguos.</p></li>
+              <li><div class="nxk__spec"><span class="nxk-split"><span class="nxk-btn nxk-btn--solid nxk-btn--primary">Acción</span><span class="nxk-split__chev"><svg class="nxk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></span></span></div><p class="nxk__capt"><strong>Split button</strong> Botón principal más un chevron de 40 × 40 con divisor de 1,5 px.</p></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div class="nx-card nx-card--wide nxd">
+          <div class="nx-card__head nx-card__head--stack">
+            <h3 class="nx-card__title">Badges: de 9,7 px sin contraste a una familia verificada</h3>
+            <p class="nx-card__note">El badge viejo tenía 9,7 px de texto, radio de 8 px (por su poca altura, se veía casi como píldora) y colores heredados de Bootstrap. En el catálogo pasa a 4 px de radio, nunca baja de 12 px de texto y cada color tiene su par solid y light con el contraste verificado.</p>
+          </div>
+          <ul class="nx-facts nxd__facts">
+            <li class="nx-fact"><p class="nx-fact__n">328</p><p class="nx-fact__t">Badges en unos 131 templates</p><p class="nx-fact__d">Sin tokens por estado: el color sale de las utilidades de Bootstrap, y el celeste de “info” sirve para casi todo.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">6</p><p class="nx-fact__t">Tamaños de texto distintos</p><p class="nx-fact__d">De 9,7 px en el global a 14 px. El tamaño base, con mayúsculas, comunica estados importantes.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">5</p><p class="nx-fact__t">Formas de anular las mayúsculas</p><p class="nx-fact__d">Estilo en línea, clases, SCSS y reglas forzadas. Hay «ACTIVO» y «Activo» en el mismo flujo.</p></li>
+            <li class="nx-fact"><p class="nx-fact__n">2</p><p class="nx-fact__t">Sistemas visuales a la vez</p><p class="nx-fact__d">Sólido para estados y suave para etiquetas. En un mismo componente, «vencido» es sólido y los días restantes, suaves.</p></li>
+          </ul>
+          <div class="nxd__sub">
+            <h4 class="nx-sub__title">Antes y ahora, color por color</h4>
+            <p class="nxd__subnote">Contraste del texto sobre su fondo, calculado con la fórmula de WCAG 2.x a partir de los colores del código. En el sólido viejo el texto era blanco sobre colores claros. En el suave, el texto de color caía sobre un fondo (<code>#f8f9fa</code>) que casi no se distingue del de la app: 1,05:1 con el blanco.</p>
+            <h5 class="nxo__group">Sólido, texto blanco</h5>
+            <ul class="nxo__list">
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#ffc107;--fg:#ffffff">Suspendido</span><span class="nxo__cr"><code>bg-warning</code> · 1,6:1 <b>✕</b> · 44 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--warning">Suspendido</span><span class="nxo__cr">Warning solid · 11,0:1 <b>AAA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#3fa9f5;--fg:#ffffff">Nuevo</span><span class="nxo__cr"><code>bg-info</code> · 2,6:1 <b>✕</b> · 48 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--info">Nuevo</span><span class="nxo__cr">Info solid · 5,4:1 <b>AA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#ff8431;--fg:#ffffff">Operador</span><span class="nxo__cr"><code>bg-primary</code> · 2,4:1 <b>✕</b> · 5 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--brand">Operador</span><span class="nxo__cr">Brand solid · 6,1:1 <b>AA</b></span></div>
+                </li>
+            </ul>
+            <h5 class="nxo__group">Suave, texto de color sobre #f8f9fa</h5>
+            <ul class="nxo__list">
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#f8f9fa;--fg:#ffc107">Por vencer</span><span class="nxo__cr"><code>text-warning</code> · 1,5:1 <b>✕</b> · 7 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--light nxd-badge--warning">Por vencer</span><span class="nxo__cr">Warning light · 6,1:1 <b>AA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#f8f9fa;--fg:#3fa9f5">Informativo</span><span class="nxo__cr"><code>text-info</code> · 2,4:1 <b>✕</b> · 5 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--light nxd-badge--info">Informativo</span><span class="nxo__cr">Info light · 4,7:1 <b>AA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#f8f9fa;--fg:#2d8600">Ahorrás 20%</span><span class="nxo__cr"><code>text-success</code> · 4,4:1 <b>AA 18+</b> · 28 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--light nxd-badge--success">Ahorrás 20%</span><span class="nxo__cr">Success light · 5,9:1 <b>AA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#f8f9fa;--fg:#dc3545">Vence hoy</span><span class="nxo__cr"><code>text-danger</code> · 4,3:1 <b>AA 18+</b> · 7 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--light nxd-badge--danger">Vence hoy</span><span class="nxo__cr">Danger light · 6,3:1 <b>AA</b></span></div>
+                </li>
+                <li class="nxo__row">
+                  <div class="nxo__old"><span class="nxo__tag">Antes</span><span class="nxo-badge" style="--bg:#f8f9fa;--fg:#6c757d">Inactivo</span><span class="nxo__cr"><code>text-secondary</code> · 4,4:1 <b>AA 18+</b> · 4 usos</span></div>
+                  <div class="nxo__new"><span class="nxo__tag">Ahora</span><span class="nxd-badge nxd-badge--light nxd-badge--secondary">Inactivo</span><span class="nxo__cr">Secondary light · 5,8:1 <b>AA</b></span></div>
+                </li>
+            </ul>
+          </div>
+          <div class="nxd__sub">
+            <h4 class="nx-sub__title">La familia completa</h4>
+            <p class="nxd__subnote">Siete colores en dos estilos y dos tamaños: 18 px de alto (24 en la variante grande), texto en mayúsculas. Debajo de cada par va el contraste del texto sobre su fondo. Todos pasan AA.</p>
+            <ul class="nxd__list" aria-label="Badges del catálogo">
+              <li class="nxd__row">
+                <p class="nxd__name">Primary</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--primary">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--primary">Activo</span></span><span class="nxd__cr">6,0:1 <b>AA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--primary">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--primary">Activo</span></span><span class="nxd__cr">5,2:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Brand</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--brand">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--brand">Activo</span></span><span class="nxd__cr">6,1:1 <b>AA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--brand">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--brand">Activo</span></span><span class="nxd__cr">5,3:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Secondary</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--secondary">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--secondary">Activo</span></span><span class="nxd__cr">4,7:1 <b>AA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--secondary">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--secondary">Activo</span></span><span class="nxd__cr">5,8:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Success</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--success">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--success">Activo</span></span><span class="nxd__cr">4,7:1 <b>AA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--success">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--success">Activo</span></span><span class="nxd__cr">5,9:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Warning</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--warning">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--warning">Activo</span></span><span class="nxd__cr">11,0:1 <b>AAA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--warning">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--warning">Activo</span></span><span class="nxd__cr">6,1:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Danger</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--danger">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--danger">Activo</span></span><span class="nxd__cr">7,5:1 <b>AAA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--danger">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--danger">Activo</span></span><span class="nxd__cr">6,3:1 <b>AA</b></span></div>
+              </li>
+              <li class="nxd__row">
+                <p class="nxd__name">Info</p>
+                <div class="nxd__cell" data-label="Solid"><span class="nxd__pair"><span class="nxd-badge nxd-badge--info">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--info">Activo</span></span><span class="nxd__cr">5,4:1 <b>AA</b></span></div>
+                <div class="nxd__cell" data-label="Light"><span class="nxd__pair"><span class="nxd-badge nxd-badge--light nxd-badge--info">Activo</span><span class="nxd-badge nxd-badge--lg nxd-badge--light nxd-badge--info">Activo</span></span><span class="nxd__cr">4,7:1 <b>AA</b></span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="nxd__sub">
+            <h4 class="nx-sub__title">Contadores</h4>
+            <div class="nxd__counters" aria-hidden="true"><span class="nxd-badge nxd-badge--danger nxd-badge--count">2</span><span class="nxd-badge nxd-badge--lg nxd-badge--danger nxd-badge--count">2</span><span class="nxd-badge nxd-badge--primary nxd-badge--count">5</span><span class="nxd-badge nxd-badge--lg nxd-badge--primary nxd-badge--count">5</span></div>
+            <p class="nxd__subnote">Circulares, de 18 o 24 px, en danger y primary. Hoy están definidos dos veces, en el sidebar y en las notificaciones. El del header, sobre la campana, es el de danger.</p>
+          </div>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Hallazgo 2 ===== -->
-    <section class="section section--white" aria-labelledby="h2-title">
+    <section class="section section--white" id="hallazgo-2" aria-labelledby="h2-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h2-title">Componentes core, cada uno a su manera</h2>
-            <div class="prose">
-              <p>Inputs, tablas, paginación y stepper funcionan, pero cada uno resuelve el problema a su manera. Las tablas no tienen versión mobile y dependen <strong>100% del scroll horizontal</strong>, un buscador escondido detrás de un ícono reemplaza al selector de orden, la paginación se duplica en pantalla y las filas de servicios muestran dos badges que compiten por la atención, sin jerarquía.</p>
-              <p>El mismo patrón aparece en el detalle más chico. Relevé el código y encontré varias formas distintas de decir “esto está elegido”, <strong>ninguna con foco de teclado definido</strong>, algo que WCAG (2.4.7) exige.</p>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Hallazgo 2 de 4</p>
+            <h2 class="case-h2" id="h2-title">Tablas que se cortan en mobile y acciones difíciles de tocar</h2>
+          </div>
+          <div class="prose">
+              <p>El producto tiene <strong>74 tablas</strong> en 57 pantallas y casi ninguna se pensó para mobile. La solución dominante es el scroll horizontal: 67 están dentro de un contenedor que se desplaza y 7 ni siquiera lo tienen, así que pueden desbordar la página entera. Ocultar columnas según el ancho casi no se usa (24 celdas en todo el producto). A 360 px, la tabla de la zona DNS mide <strong>527 px en un contenedor de 288</strong>: TTL, prioridad y las acciones quedan fuera de la vista, sin una sombra ni un indicador que avise que hay más.</p>
+              <p>La acción de cada fila es lo primero que sale de pantalla, porque la columna de acciones es la última. Y cuando se ve, son <strong>íconos de 18 px dentro de un link, con un área de toque de 20 × 23 px</strong>. 30 tablas tienen acciones y resuelven lo mismo de tres maneras distintas, con dos tamaños de ícono. El orden por columna casi no existe: solo 3 encabezados lo ofrecen.</p>
+          </div>
+        </div>
+
+        <div class="stage nxt">
+          <svg class="nxt-svg" aria-hidden="true" focusable="false"><defs>
+<symbol id="nxt-i-edit" viewBox="0 0 24 24"><path d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></symbol>
+<symbol id="nxt-i-delete" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z"/></symbol>
+<symbol id="nxt-i-sort" viewBox="0 0 24 24"><path d="M8.65 3.35 5.86 6.14c-.32.31-.1.85.35.85H8V13c0 .55.45 1 1 1s1-.45 1-1V6.99h1.79c.45 0 .67-.54.35-.85L9.35 3.35a.501.501 0 0 0-.7 0zM16 17.01V11c0-.55-.45-1-1-1s-1 .45-1 1v6.01h-1.79c-.45 0-.67.54-.35.85l2.79 2.78c.2.19.51.19.71 0l2.79-2.78c.32-.31.09-.85-.35-.85H16z"/></symbol>
+<symbol id="nxt-i-up" viewBox="0 0 24 24"><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0a.996.996 0 0 0 0-1.41l-6.59-6.59a.996.996 0 0 0-1.41 0l-6.6 6.58a.996.996 0 1 0 1.41 1.41L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z"/></symbol>
+<symbol id="nxt-i-down" viewBox="0 0 24 24"><path d="M11 5v11.17l-4.88-4.88c-.39-.39-1.03-.39-1.42 0a.996.996 0 0 0 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0l6.59-6.59a.996.996 0 1 0-1.41-1.41L13 16.17V5c0-.55-.45-1-1-1s-1 .45-1 1z"/></symbol>
+<symbol id="nxt-i-check" viewBox="0 0 24 24"><path d="M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z"/></symbol>
+<symbol id="nxt-i-remove" viewBox="0 0 24 24"><path d="M19 13H5c-.55 0-1-.45-1-1s.45-1 1-1h14c.55 0 1 .45 1 1s-.45 1-1 1z"/></symbol>
+</defs></svg>
+
+          <!-- Cifras -->
+          <div class="nx-card">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">Las tablas, en cifras</h3>
+              <p class="nx-card__note">Análisis del HTML de la rama development, sin ejecutar la app. Los conteos pueden fallar con elementos armados dinámicamente. Los anchos y tamaños salen del render de una réplica a 360 px. Para las columnas se cuenta la primera fila de datos de cada tabla (73 de las 74).</p>
+            </div>
+            <ul class="nx-facts nx-facts--3">
+              <li class="nx-fact"><p class="nx-fact__n">74</p><p class="nx-fact__t">Tablas en 57 pantallas</p><p class="nx-fact__d">67 resuelven mobile con scroll horizontal dentro de un contenedor. Las otras 7 no tienen ninguno y pueden desbordar la página.</p></li>
+              <li class="nx-fact"><p class="nx-fact__n">24</p><p class="nx-fact__t">Celdas que cambian según el ancho</p><p class="nx-fact__d">Son todas las que ocultan una columna por breakpoint en esas 57 pantallas. Reordenar la información casi no se usa: se deja que scrollee.</p></li>
+              <li class="nx-fact"><p class="nx-fact__n">6</p><p class="nx-fact__t">Columnas como máximo</p><p class="nx-fact__d">54 de 73 tablas tienen entre 2 y 4. Todos sus datos caben en una tarjeta como pares etiqueta-valor.</p></li>
+              <li class="nx-fact"><p class="nx-fact__n">30</p><p class="nx-fact__t">Tablas con acciones en la última celda</p><p class="nx-fact__d">Es la columna que primero sale de pantalla. Se arma con botón (12 tablas), ancla y botón (7), ancla con ícono (6) o solo ancla (5).</p></li>
+              <li class="nx-fact"><p class="nx-fact__n">2</p><p class="nx-fact__t">Tamaños de ícono en las acciones</p><p class="nx-fact__d">18 px (55 veces) y 24 px (11 veces, los que no declaran tamaño).</p></li>
+              <li class="nx-fact"><p class="nx-fact__n">3</p><p class="nx-fact__t">Encabezados que ordenan por columna</p><p class="nx-fact__d">En todas las tablas del producto. Cada lista define sus opciones de orden por su cuenta.</p></li>
+            </ul>
+          </div>
+
+          <!-- Hoy y propuesta a 360 px -->
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">La misma tabla en un celular de 360 px</h3>
+              <p class="nx-card__note">A la izquierda, una réplica del marcado y los estilos del producto con datos de ejemplo; deslizala para ver lo que queda afuera. A la derecha, la tabla del sistema: en un contenedor de menos de 700 px cada fila pasa a ser una tarjeta. Las dos se pueden usar.</p>
+            </div>
+            <div class="nxt-pair">
+              <figure class="nxt-ph">
+                <p class="nxt-ph__tag">Hoy · scroll horizontal</p>
+                <div class="nxt-ph__fit">
+                <div class="nxt-phone nxt-old" data-nxt-phone>
+                  <div class="nxt-old__card">
+                    <h4 class="nxt-old__h">Zona DNS</h4>
+                    <div class="nxt-old__scroll" tabindex="0" role="region" aria-label="Tabla de la zona DNS, se desplaza en horizontal">
+                      <table>
+                        <thead><tr><th>Tipo</th><th>Nombre</th><th>Contenido</th><th class="is-c is-w">TTL</th><th class="is-c is-w">Prioridad</th><th class="is-w"><span class="sr-only">Acciones</span></th></tr></thead>
+                        <tbody><tr><td class="is-nw"><small>A</small></td><td><small>example.com</small></td><td><small class="nxt-old__cut">203.0.113.10</small></td><td class="is-c"><small>3600</small></td><td class="is-c"><small>-</small></td><td class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar A example.com"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a" role="img" aria-label="Eliminar A example.com"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></td></tr><tr><td class="is-nw"><small>CNAME</small></td><td><small>www.example.com</small></td><td><small class="nxt-old__cut">example.com</small></td><td class="is-c"><small>3600</small></td><td class="is-c"><small>-</small></td><td class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar CNAME www.example.com"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a" role="img" aria-label="Eliminar CNAME www.example.com"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></td></tr><tr><td class="is-nw"><small>MX</small></td><td><small>example.com</small></td><td><small class="nxt-old__cut">mail.example.com</small></td><td class="is-c"><small>3600</small></td><td class="is-c"><small>10</small></td><td class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar MX example.com"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a" role="img" aria-label="Eliminar MX example.com"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></td></tr><tr><td class="is-nw"><small>TXT</small> <span class="nxt-old__tag" title="El registro SPF creado se muestra como un TXT.">SPF</span></td><td><small>example.com</small></td><td><small class="nxt-old__cut">v=spf1 include:_spf.example.com ~all</small></td><td class="is-c"><small>3600</small></td><td class="is-c"><small>-</small></td><td class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar TXT example.com"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a is-off" role="img" aria-label="Eliminar TXT example.com"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></td></tr><tr><td class="is-nw"><small>NS</small></td><td><small>example.com</small></td><td><small class="nxt-old__cut">ns1.example.net</small></td><td class="is-c"><small>86400</small></td><td class="is-c"><small>-</small></td><td class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar NS example.com"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a" role="img" aria-label="Eliminar NS example.com"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></td></tr></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <figcaption class="nxt-ph__cap"><b>La tabla mide 527 px en un contenedor de 288.</b> TTL, prioridad y las acciones quedan afuera y nada avisa que hay más. Los encabezados siguen en 14 px y mayúsculas mientras las celdas bajan a 12 px, y el texto chico a 10,5 px.</figcaption>
+              </figure>
+              <figure class="nxt-ph">
+                <p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · tarjetas</p>
+                <div class="nxt-ph__fit">
+                <div class="nxt-phone nxt-phone--new" data-nxt-phone>
+                  <h4 class="nxt-new__h">Zona DNS</h4>
+                  <div class="nxt-x" data-nxt>
+                    <div class="nxt-tools"><label for="nxt-sel-1">Ordenar por</label>
+                      <select class="nxt-sel" id="nxt-sel-1" data-sel><option value="">Orden original</option><option value="tipo:asc">Tipo (A a Z)</option><option value="nombre:asc">Nombre (A a Z)</option><option value="ttl:asc">TTL (menor a mayor)</option><option value="ttl:desc">TTL (mayor a menor)</option></select></div>
+                    <div class="nxt-box">
+                      <div class="nxt-bar" data-bar><span data-count><b>0</b> seleccionados</span></div>
+                      <div class="nxt-scroll"><table class="nxt-t"><caption class="sr-only">Registros DNS de ejemplo, ordenables por tipo, nombre y TTL</caption><thead><tr><th class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-all aria-label="Seleccionar todos"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></th><th aria-sort="none"><button class="nxt-sort" type="button" data-k="tipo">Tipo<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th aria-sort="none"><button class="nxt-sort" type="button" data-k="nombre">Nombre<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th>Contenido</th><th class="is-num" aria-sort="none"><button class="nxt-sort" type="button" data-k="ttl">TTL<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th class="is-num">Prioridad</th><th><span class="sr-only">Acciones</span></th></tr></thead><tbody><tr data-i="0" data-tipo="A" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar A example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">A</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">203.0.113.10</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar A example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar A example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="1" data-tipo="CNAME" data-nombre="www.example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar CNAME www.example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">CNAME</span></td><td class="nxt-c-nombre">www.example.com</td><td class="nxt-c-first" data-l="Contenido">example.com</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar CNAME www.example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar CNAME www.example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="2" data-tipo="MX" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar MX example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">MX</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">mail.example.com</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad">10</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar MX example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar MX example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="3" data-tipo="TXT" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar TXT example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">TXT</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">v=spf1 include:_spf.example.com ~all</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar TXT example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar TXT example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="4" data-tipo="NS" data-nombre="example.com" data-ttl="86400"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar NS example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">NS</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">ns1.example.net</td><td class="is-num" data-l="TTL">86400</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar NS example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar NS example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr></tbody></table></div>
+                    </div>
+                    <p class="sr-only" aria-live="polite" data-msg></p>
+                  </div>
+                </div>
+                </div>
+                <figcaption class="nxt-ph__cap"><b>Los cinco datos entran sin scroll lateral.</b> Arriba el tipo y el nombre, al lado las acciones y abajo el resto como pares etiqueta-valor. El valor vacío no ocupa una línea y el orden pasa a un selector.</figcaption>
+              </figure>
             </div>
           </div>
-          <!-- IMAGEN 3 · componentes core -->
-          <figure class="case-media" aria-hidden="true"></figure>
+
+          <!-- Acciones -->
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">Las acciones de cada fila</h3>
+              <p class="nx-card__note">Medidas en el render de la réplica. El área de toque es la del link, no la del ícono.</p>
+            </div>
+            <div class="nxt-act">
+              <div class="nxt-act__col">
+                <p class="nxt-act__tag">Hoy · ícono dentro de un link</p>
+                <div class="nxt-act__demo nxt-act__demo--old"><div class="nxt-old__acts"><span class="nxt-old__a" role="img" aria-label="Editar"><span class="nxt-oi" aria-hidden="true">edit</span></span><span class="nxt-old__a" role="img" aria-label="Eliminar"><span class="nxt-oi" aria-hidden="true">delete_forever</span></span></div></div>
+                <ul class="nxt-list">
+                  <li><b>20 × 23 px</b> de área de toque, con un ícono de 18 px.</li>
+                  <li>Editar y eliminar comparten el azul de los links (<code>#007bff</code>): no se distingue la acción destructiva.</li>
+                  <li>Tres maneras de armar lo mismo: botón, ancla con clase de botón y ancla sola.</li>
+                </ul>
+              </div>
+              <div class="nxt-act__col">
+                <p class="nxt-act__tag nxt-act__tag--new">Con el sistema · botón ghost de ícono</p>
+                <div class="nxt-act__demo"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar (ejemplo)"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar (ejemplo)"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></div>
+                <div class="nxt-states"><figure><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm " type="button" tabindex="-1" aria-label="Editar, Default"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><figcaption>Default</figcaption></figure><figure><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm is-hover" type="button" tabindex="-1" aria-label="Editar, Hover"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><figcaption>Hover</figcaption></figure><figure><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm is-active" type="button" tabindex="-1" aria-label="Editar, Presionado"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><figcaption>Presionado</figcaption></figure><figure><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm is-focus" type="button" tabindex="-1" aria-label="Editar, Foco"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><figcaption>Foco</figcaption></figure></div>
+                <ul class="nxt-list">
+                  <li><b>32 × 32 px</b> de área de toque (tamaño sm), con un ícono de 16 px. En filas más altas, md de 40 px.</li>
+                  <li>Eliminar va en <code>danger</code>: se distingue de editar antes de leer el ícono.</li>
+                  <li>Sin borde como un link, pero con fondo al pasar el mouse y un anillo de foco de 3 px.</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <p class="nxt-act__tag">Área de toque a escala (×3)</p>
+              <div class="nxt-sqs" role="img" aria-label="Áreas de toque a escala: 20 por 23 píxeles hoy, 24 por 24 el mínimo de WCAG 2.5.8, 32 por 32 en el tamaño sm y 40 por 40 en el tamaño md.">
+                <figure class="nxt-sq" style="--w:20;--h:23;--i:18"><span class="nxt-sq__b nxt-sq__b--old" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#nxt-i-edit"/></svg></span><figcaption><b>20 × 23 px</b>Hoy</figcaption></figure>
+                <figure class="nxt-sq" style="--w:24;--h:24;--i:0"><span class="nxt-sq__b nxt-sq__b--min" aria-hidden="true"></span><figcaption><b>24 × 24 px</b>Mínimo de WCAG 2.5.8, con excepciones de espaciado</figcaption></figure>
+                <figure class="nxt-sq" style="--w:32;--h:32;--i:16"><span class="nxt-sq__b " aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#nxt-i-edit"/></svg></span><figcaption><b>32 × 32 px</b>Botón sm</figcaption></figure>
+                <figure class="nxt-sq" style="--w:40;--h:40;--i:20"><span class="nxt-sq__b " aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#nxt-i-edit"/></svg></span><figcaption><b>40 × 40 px</b>Botón md</figcaption></figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla viva -->
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">La misma tabla en desktop</h3>
+              <p class="nx-card__note">Es el mismo componente de la tarjeta de arriba: con más de 700 px de ancho vuelve a ser una tabla. Ordená por tipo, nombre o TTL desde el encabezado y marcá filas para ver el estado seleccionado.</p>
+            </div>
+            <div class="nxt-x" data-nxt>
+                    <div class="nxt-tools"><label for="nxt-sel-2">Ordenar por</label>
+                      <select class="nxt-sel" id="nxt-sel-2" data-sel><option value="">Orden original</option><option value="tipo:asc">Tipo (A a Z)</option><option value="nombre:asc">Nombre (A a Z)</option><option value="ttl:asc">TTL (menor a mayor)</option><option value="ttl:desc">TTL (mayor a menor)</option></select></div>
+                    <div class="nxt-box">
+                      <div class="nxt-bar" data-bar><span data-count><b>0</b> seleccionados</span></div>
+                      <div class="nxt-scroll"><table class="nxt-t"><caption class="sr-only">Registros DNS de ejemplo, ordenables por tipo, nombre y TTL</caption><thead><tr><th class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-all aria-label="Seleccionar todos"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></th><th aria-sort="none"><button class="nxt-sort" type="button" data-k="tipo">Tipo<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th aria-sort="none"><button class="nxt-sort" type="button" data-k="nombre">Nombre<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th>Contenido</th><th class="is-num" aria-sort="none"><button class="nxt-sort" type="button" data-k="ttl">TTL<svg class="nxt-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-sort"/></svg></button></th><th class="is-num">Prioridad</th><th><span class="sr-only">Acciones</span></th></tr></thead><tbody><tr data-i="0" data-tipo="A" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar A example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">A</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">203.0.113.10</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar A example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar A example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="1" data-tipo="CNAME" data-nombre="www.example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar CNAME www.example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">CNAME</span></td><td class="nxt-c-nombre">www.example.com</td><td class="nxt-c-first" data-l="Contenido">example.com</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar CNAME www.example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar CNAME www.example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="2" data-tipo="MX" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar MX example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">MX</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">mail.example.com</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad">10</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar MX example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar MX example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="3" data-tipo="TXT" data-nombre="example.com" data-ttl="3600"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar TXT example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">TXT</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">v=spf1 include:_spf.example.com ~all</td><td class="is-num" data-l="TTL">3600</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar TXT example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar TXT example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr><tr data-i="4" data-tipo="NS" data-nombre="example.com" data-ttl="86400"><td class="nxt-c-ck"><label class="nxt-ck"><input type="checkbox" data-row aria-label="Seleccionar NS example.com"><span class="nxt-ck__box" aria-hidden="true"><svg class="nxt-ic nxt-ic-on" aria-hidden="true" focusable="false"><use href="#nxt-i-check"/></svg><svg class="nxt-ic nxt-ic-mid" aria-hidden="true" focusable="false"><use href="#nxt-i-remove"/></svg></span></label></td><td class="nxt-c-tipo"><span class="nxt-bdg">NS</span></td><td class="nxt-c-nombre">example.com</td><td class="nxt-c-first" data-l="Contenido">ns1.example.net</td><td class="is-num" data-l="TTL">86400</td><td class="is-num" data-l="Prioridad" data-empty>—</td><td class="nxt-c-acts"><div class="nxt-acts"><button class="nxk-btn nxk-btn--ghost nxk-btn--icon nxk-btn--sm" type="button" aria-label="Editar NS example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-edit"/></svg></button><button class="nxk-btn nxk-btn--ghost nxk-btn--danger nxk-btn--icon nxk-btn--sm" type="button" aria-label="Eliminar NS example.com"><svg class="nxk-ic" aria-hidden="true" focusable="false"><use href="#nxt-i-delete"/></svg></button></div></td></tr></tbody></table></div>
+                    </div>
+                    <p class="sr-only" aria-live="polite" data-msg></p>
+                  </div>
+          </div>
         </div>
+
         <div class="callout">
           <h3 class="callout__title">La propuesta</h3>
-          <p>Una librería de componentes más consistente como base de los inputs, con floating labels donde aplica. Las tablas ganan una versión mobile real, con cada fila convertida en su propia tarjeta y sin scroll lateral. La paginación pasa a un único bloque y el buscador queda siempre visible. Un solo criterio de microinteracción rige toda tarjeta: sombra al pasar el mouse, borde más ícono cuando queda elegida y anillo de contorno para quien navega con teclado.</p>
+          <p>Una tabla del sistema que cambia según el ancho. En desktop conserva las columnas, con encabezados que ordenan y filas que se pueden seleccionar. En mobile cada fila pasa a ser una tarjeta con sus datos como pares etiqueta-valor y sin scroll lateral: como ninguna tabla relevada pasa de 6 columnas, todos los datos entran. Las acciones dejan de ser íconos sueltos y pasan a ser botones ghost de ícono de 32 px, con estados y foco.</p>
         </div>
       </div>
     </section>
 
     <!-- ===== Hallazgo 3 ===== -->
-    <section class="section section--tint" aria-labelledby="h3-title">
+    <section class="section section--white" id="hallazgo-3" aria-labelledby="h3-title">
       <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
-            <h2 class="case-h2" id="h3-title">Navegación, varios headers y un logo que saca del producto</h2>
-            <div class="prose">
-              <p><strong>El hallazgo más fuerte.</strong> La plataforma resuelve “dónde estoy parado” con varias estructuras fijas distintas: el header del dashboard, un breadcrumb fijo repetido en decenas de pantallas, un título distinto para las listas y un navbar negro, sin sidebar, exclusivo del pago. El sidebar mezcla navegación con cuenta, notificaciones y promociones en el mismo componente, se colapsa solo sin que el usuario lo pida y el contador de notificaciones llega a duplicarse leyendo el mismo dato.</p>
-              <p>El logo, presente en tres lugares de la app, saca al usuario del producto y lo lleva al sitio de marketing (una de las tres instancias ni siquiera coincide con las otras dos). En el pago, alguien ya había parchado el problema con un link de texto aparte, al lado del logo. En Cloudflare y DigitalOcean el logo vuelve al home del dashboard, que es el comportamiento esperado.</p>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Hallazgo 3 de 4</p>
+            <h2 class="case-h2" id="h3-title">Siete piezas distintas hacen de header</h2>
+          </div>
+          <div class="prose">
+              <p>El producto no tiene un componente “header”. Tiene <strong>siete piezas</strong> que cumplen ese rol, cada una con su color y su comportamiento: una barra naranja que existe solo en mobile, una barra oscura exclusiva de tres pantallas, un breadcrumb fijo en 34, un header para las listas (16 templates), otro para Cloud, un título de sección (77 usos) y un menú contextual (20 pantallas). Ninguna de las piezas se pensó junto con las otras.</p>
+              <p>Los problemas se repiten en cada una. Son <strong>tres colores de barra superior</strong> para el mismo rol. En mobile, los íconos blancos sobre el naranja de marca dan <strong>2,44:1</strong>, por debajo del 3:1 que se pide para elementos de interfaz, y los links del breadcrumb dan 3,98:1 sobre blanco. Crear algo nuevo se resuelve con dos botones de colores distintos según la lista. Y el nombre y el ID del servicio llegan al breadcrumb como texto armado con estilo en línea, reimplementado en 18 archivos. El logo, además, está en tres lugares de la app y saca al usuario del producto: lo lleva al sitio de marketing en vez de volver al inicio del panel.</p>
+          </div>
+        </div>
+
+        <div class="stage nxt nxh">
+          <svg class="nxt-svg" aria-hidden="true" focusable="false"><defs>
+<symbol id="nxh-i-bell" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M256 43C279 43 299 62 299 85H213C213 62 232 43 256 43ZM384 171V277C384 343 349 398 288 412V427C288 444 274 459 256 459C238 459 224 444 224 427V412C163 398 128 343 128 277V171L100 143C87 130 96 107 115 107H396C415 107 425 130 412 143L384 171Z"/></symbol>
+<symbol id="nxh-i-menu" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M64 384H448V341H64ZM64 235V277H448V235ZM64 128V171H448V128Z"/></symbol>
+<symbol id="nxh-i-school" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M256 448 491 320V149H448V297L256 192L21 320ZM107 231 256 149 405 231V145L256 64L107 145Z"/></symbol>
+<symbol id="nxh-i-down" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M158 329 256 231 354 329 384 299 256 171 128 299Z"/></symbol>
+<symbol id="nxh-i-more" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M226.0 158.0Q239 171 256.0 171.0Q273 171 286.0 158.0Q299 145 299.0 128.0Q299 111 286.0 98.0Q273 85 256.0 85.0Q239 85 226.0 98.0Q213 111 213.0 128.0Q213 145 226.0 158.0ZM226.0 286.0Q239 299 256.0 299.0Q273 299 286.0 286.0Q299 273 299.0 256.0Q299 239 286.0 226.0Q273 213 256.0 213.0Q239 213 226.0 226.0Q213 239 213.0 256.0Q213 273 226.0 286.0ZM286.0 354.0Q273 341 256.0 341.0Q239 341 226.0 354.0Q213 367 213.0 384.0Q213 401 226.0 414.0Q239 427 256.0 427.0Q273 427 286.0 414.0Q299 401 299.0 384.0Q299 367 286.0 354.0Z"/></symbol>
+<symbol id="nxh-i-home" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M256 391 363 295V128H320V256H192V128H149V295L256 391ZM256 448 43 256H107V85H235V213H277V85H405V256H469L256 448Z"/></symbol>
+<symbol id="nxh-i-logout" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M363 341 333 311 366 277H192V235H366L333 201L363 171L448 256L363 341ZM107 405H256V448H107C83 448 64 429 64 405V107C64 83 83 64 107 64H256V107H107V405Z"/></symbol>
+<symbol id="nxh-i-lock" viewBox="0 0 512 512"><path transform="translate(0 512) scale(1 -1)" d="M384 341H363V384C363 443 315 491 256 491C197 491 149 443 149 384V341H128C105 341 85 322 85 299V85C85 62 105 43 128 43H384C407 43 427 62 427 85V299C427 322 407 341 384 341ZM192 384C192 419 221 448 256 448C291 448 320 419 320 384V341H192V384ZM384 85H128V299H384V85ZM256 149C279 149 299 169 299 192C299 215 279 235 256 235C233 235 213 215 213 192C213 169 233 149 256 149Z"/></symbol>
+</defs></svg>
+
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">El header, en cifras</h3>
+              <p class="nx-card__note">Relevamiento del código de producción: 210 componentes con ruta, 34 usos de breadcrumb, 16 templates de lista, 77 títulos de sección y 20 pantallas con menú contextual.</p>
+            </div>
+            <ul class="nx-facts nx-facts--3">
+              <li class="nx-fact"><p class="nx-fact__n">7</p><p class="nx-fact__t">Piezas distintas hacen de header</p><p class="nx-fact__d">Barra mobile, barra oscura, breadcrumb, header de lista, header de Cloud, título de sección y menú contextual. A eso se suman 134 headers de modal y 64 de card.</p></li><li class="nx-fact"><p class="nx-fact__n">3</p><p class="nx-fact__t">Colores de barra superior</p><p class="nx-fact__d">Naranja en mobile, oscura en 3 pantallas de escritorio (pagar, chat-bot y cuentas vinculadas) y blanca para el breadcrumb.</p></li><li class="nx-fact"><p class="nx-fact__n">2,44:1</p><p class="nx-fact__t">Contraste de la barra naranja mobile</p><p class="nx-fact__d">Texto e íconos blancos sobre #ff8431. WCAG 1.4.11 pide 3:1 para elementos de interfaz. El contador de notificaciones es un badge del mismo naranja.</p></li><li class="nx-fact"><p class="nx-fact__n">3,98:1</p><p class="nx-fact__t">Contraste de los links del breadcrumb</p><p class="nx-fact__d">#007bff sobre blanco; el mínimo de WCAG 1.4.3 para texto es 4,5:1. Es el mismo azul de las acciones de las tablas.</p></li><li class="nx-fact"><p class="nx-fact__n">18</p><p class="nx-fact__t">Archivos que arman el nombre y el ID como HTML</p><p class="nx-fact__d">El texto de la derecha del breadcrumb es un string con estilo en línea, sin componente común: cada servicio lo reimplementa. En mobile no se muestra.</p></li><li class="nx-fact"><p class="nx-fact__n">33</p><p class="nx-fact__t">Usos de un parámetro que no cambia nada</p><p class="nx-fact__d"><code>fullWidth</code> solo pone <code>margin-left: 0</code> sobre una base que no tiene margen. Los 25 breadcrumbs que lo usan y los 8 que no se ven igual.</p></li>
+            </ul>
+          </div>
+
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">Tres barras superiores para el mismo rol</h3>
+              <p class="nx-card__note">Réplicas del marcado y los estilos del producto a 360 px, con la marca anonimizada y datos de ejemplo.</p>
+            </div>
+            <div class="nxh-trio">
+              <figure class="nxt-ph"><p class="nxt-ph__tag">Toda pantalla con sidebar · menos de 768 px</p><div class="nxt-ph__fit"><div class="nxt-phone nxh-old" data-nxt-phone role="img" aria-label="Réplica de la barra superior naranja de la versión mobile: logo, campana con el contador 3 y botón de menú."><div aria-hidden="true"><div class="nxh-top"><span class="nxh-brand">Nubix</span><span class="nxh-top__a nxh-top__a--bell"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-bell"/></svg><span class="nxh-top__n">3</span></span><span class="nxh-top__a"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-menu"/></svg></span></div><div class="nxh-old__body">contenido de la página</div></div></div></div><figcaption class="nxt-ph__cap"><b>Blanco sobre naranja: 2,44:1.</b> La barra es fija, de 50 px. El contador de notificaciones es un badge del mismo naranja, así que el número queda sin fondo.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag">Pagar, chat-bot y cuentas vinculadas</p><div class="nxt-ph__fit"><div class="nxt-phone nxh-old" data-nxt-phone role="img" aria-label="Réplica de la barra oscura de la versión mobile, con una marca naranja de 50 píxeles, un enlace de inicio y otro para cerrar sesión."><div aria-hidden="true"><div class="nxh-dark nxh-dark--m"><span class="nxh-dark__brand"><span class="nxh-brand">N</span></span><span class="nxh-dark__l"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-home"/></svg><span>Inicio</span></span><span class="nxh-dark__l nxh-dark__r"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-logout"/></svg><span>Cerrar sesión</span></span></div><div class="nxh-old__body">contenido de la página</div></div></div></div><figcaption class="nxt-ph__cap"><b>Oscura, con la marca naranja de 50 px.</b> En desktop la marca mide 220 px. En mobile queda distinta de la barra naranja del resto de la app.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag">Breadcrumb · 34 usos</p><div class="nxt-ph__fit"><div class="nxt-phone nxh-old" data-nxt-phone role="img" aria-label="Réplica del breadcrumb en mobile: Servicios, SSL y Detalle, con los links en azul."><div aria-hidden="true"><div class="nxh-bc nxh-bc--m"><ol><li><span class="nxh-lnk">Servicios</span></li><li><span class="nxh-lnk">SSL</span></li><li><span>Detalle</span></li></ol><div class="nxh-bc__r"><strong>mi-sitio.com</strong><span>|</span><small>#12345</small></div></div><div class="nxh-old__body">contenido de la página</div></div></div></div><figcaption class="nxt-ph__cap"><b>Links a 3,98:1.</b> Es una barra blanca fija de 50 px que en mobile baja para quedar debajo de la naranja. La tipografía se achica a 12, 11 y 9 px en pantallas de hasta 365, 318 y 299 px.</figcaption></figure>
             </div>
           </div>
-          <!-- IMAGEN 4 · navegación -->
-          <figure class="case-media" aria-hidden="true"></figure>
+
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">Crear algo nuevo: dos headers y dos botones</h3>
+              <p class="nx-card__note">Réplicas en desktop, sin el sidebar.</p>
+            </div>
+            <div class="nxh-stack">
+              <figure class="nxt-ph"><p class="nxt-ph__tag">Header de lista · 16 templates</p><div class="nxt-ph__fit"><div class="nxh-d nxh-old" data-nxt-phone data-w="760" role="img" aria-label="Réplica del header de lista en desktop: imagen, título Certificados SSL, enlace Tutoriales y botón Nuevo SSL con borde gris."><div aria-hidden="true"><div class="nxh-lh"><div class="nxh-lh__row"><span class="nxh-ph">img</span><h4>Certificados SSL</h4><div class="nxh-lh__acts"><span class="nxh-btn nxh-btn--link"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-school"/></svg><span>Tutoriales</span></span><span class="nxh-btn nxh-btn--out">Nuevo SSL</span></div></div></div><div class="nxh-old__body nxh-old__body--tall">contenido de la lista</div></div></div></div><figcaption class="nxt-ph__cap"><b>Card blanca con borde inferior y botón <code>outline-secondary</code>.</b> 10 de los 16 muestran un botón principal y solo 7 definen su texto, cada uno redactado distinto: «Nuevo SSL», «Nuevo Host», «Nuevo Dominio», «Crear sitio», «Crear Sitio», «Crear Nuevo Sitio» y «Contratar nuevo». Los demás dicen «Nuevo». En mobile se ocultan la imagen y «Tutoriales».</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag">Header de Cloud · lo hereda todo Cloud</p><div class="nxt-ph__fit"><div class="nxh-d nxh-old" data-nxt-phone data-w="760" role="img" aria-label="Réplica del header de Cloud en desktop: logo, menú Recursos de infraestructura, pestañas y botón verde Agregar con menú desplegable."><div aria-hidden="true"><div class="nxh-cl"><div class="nxh-cl__top"><span class="nxh-ph">logo Cloud</span><span class="nxh-cl__menu">Recursos de infraestructura</span></div><div class="nxh-cl__row"><ul class="nxh-tabs"><li class="is-on">Servidores virtuales</li><li>Servidores dedicados</li><li>Dominio DNS</li></ul><span class="nxh-btn nxh-btn--ok">Agregar<svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-down"/></svg></span></div></div></div></div></div><figcaption class="nxt-ph__cap"><b>Sin superficie propia y con un botón verde.</b> Es la única lista que no es una card blanca, y su acción principal es un <code>btn-success</code> «Agregar» con menú desplegable, donde en las demás es <code>outline-secondary</code>. La misma función, crear algo nuevo, tiene dos colores de botón. En mobile se oculta el menú «Recursos de infraestructura».</figcaption></figure>
+            </div>
+          </div>
+
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">Una pantalla de servicio, antes y después</h3>
+              <p class="nx-card__note">A la izquierda, la réplica de una pantalla de detalle de hoy a 360 px. A la derecha, la pantalla de servicio del prototipo del sistema: también a 360 px y abajo en desktop.</p>
+            </div>
+            <div class="nxt-pair">
+              <figure class="nxt-ph"><p class="nxt-ph__tag">Hoy · cuatro capas antes del contenido</p><div class="nxt-ph__fit"><div class="nxt-phone nxh-old nxh-tall" data-nxt-phone role="img" aria-label="Réplica de una pantalla de detalle de servicio en mobile: barra naranja, breadcrumb, card con el nombre y el ID del servicio, título de sección y una card de contenido."><div aria-hidden="true"><div class="nxh-top"><span class="nxh-brand">Nubix</span><span class="nxh-top__a nxh-top__a--bell"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-bell"/></svg><span class="nxh-top__n">3</span></span><span class="nxh-top__a"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-menu"/></svg></span></div><div class="nxh-bc nxh-bc--m"><ol><li><span class="nxh-lnk">Servicios</span></li><li><span class="nxh-lnk">SSL</span></li><li><span>Detalle</span></li></ol><div class="nxh-bc__r"><strong>mi-sitio.com</strong><span>|</span><small>#12345</small></div></div><div class="nxh-svc"><div class="nxh-svc__card"><div class="nxh-svc__name"><strong>mi-sitio.com</strong><small>#12345</small></div><span class="nxh-svc__more"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-more"/></svg></span></div><div class="nxh-sh"><div class="nxh-sh__t"><svg class="nxh-ic" aria-hidden="true" focusable="false"><use href="#nxh-i-lock"/></svg><h4>Certificado SSL</h4></div><p>Aquí encontrarás todos los datos necesarios para la instalación de tu Certificado SSL.</p></div><div class="nxh-svc__box">contenido</div></div></div></div></div><figcaption class="nxt-ph__cap"><b>Dos barras fijas (100 px), una card y el título.</b> El nombre y el ID del servicio desaparecen del breadcrumb en mobile y, en las pantallas con menú contextual, reaparecen en una card aparte con el ⋮ que lo abre.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · un header, el contexto en el contenido</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone><iframe src="../prototipos/sistema/servicio.html?embed=1" title="Pantalla de servicio del prototipo del sistema, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Un solo header de 50 px.</b> El breadcrumb deja de ser una barra fija: acompaña al título, con el ID del servicio debajo, también en mobile. El ⋮ abre el menú contextual, como hoy. Es el prototipo en código y se puede usar.</figcaption></figure>
+            </div>
+            <figure class="nxt-ph nxh-wide"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · desktop</p><div class="nxh-shot" data-shot style="--h:520"><iframe src="../prototipos/sistema/servicio.html?embed=1" title="Pantalla de servicio del prototipo del sistema, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>En desktop el header mide 64 px y queda fijo al hacer scroll.</b> El sidebar solo navega; el menú contextual del servicio está a la izquierda del contenido; y el breadcrumb, el título y el ID van arriba. Es el prototipo en código, no una captura.</figcaption></figure>
+          </div>
+
+          <div class="nx-card nx-card--wide">
+            <div class="nx-card__head nx-card__head--stack">
+              <h3 class="nx-card__title">De siete piezas a un header</h3>
+              <p class="nx-card__note">Qué pasa con cada pieza en el prototipo del sistema.</p>
+            </div>
+            <dl class="nxh-map"><div><dt>Barra naranja mobile</dt><dd>Un único header blanco en toda la plataforma, con el menú, el logo, regalos, carrito, notificaciones y la cuenta. Mide 64 px en desktop y 50 en mobile, y queda fijo. Los contadores son badges rojos sobre fondo blanco.</dd></div><div><dt>Barra oscura de pagar, chat-bot y cuentas vinculadas</dt><dd>Desaparece: el pago pasa a usar el mismo header que el resto. <small>El prototipo no incluye la pantalla de pago.</small></dd></div><div><dt>Breadcrumb fijo, 34 usos</dt><dd>Pasa al contenido, sobre el título, y deja de ser fijo. Los links dan 7,06:1 sobre el fondo de la página.</dd></div><div><dt>Nombre e ID armados como string, 18 archivos</dt><dd>Van debajo del título, como parte de la pantalla, y se ven también en mobile.</dd></div><div><dt>Header de lista y header de Cloud</dt><dd>Un solo patrón: el título de la página con sus acciones a la derecha, sin una superficie propia, y un único color para el botón principal. En el prototipo, «Agregar hosting».</dd></div><div><dt>Menú contextual, 20 pantallas</dt><dd>Se mantiene: columna a la izquierda del contenido en desktop y un ⋮ que abre un panel en mobile.</dd></div><div><dt>Sidebar</dt><dd>Solo navega. La cuenta, las notificaciones, el carrito y las promociones viven en el header.</dd></div><div><dt>Headers de modal y de card</dt><dd>Se resuelven con el criterio de color del hallazgo 4.</dd></div></dl>
+          </div>
         </div>
+
         <div class="callout">
           <h3 class="callout__title">La propuesta</h3>
-          <p>Separar la navegación (el sidebar, solo eso) de la cuenta, las notificaciones y las promociones, que pasan a un único header consistente en toda la plataforma. El breadcrumb pasa al cuerpo de la página, y el pago usa el mismo header que el resto, como ya hacen Cloudflare y DigitalOcean en el benchmark, sin cambiar de estructura entre secciones.</p>
+          <p>Un único header para toda la plataforma, el mismo también en el pago, con la cuenta, las notificaciones, el carrito y las promociones; el sidebar queda solo para navegar. El breadcrumb deja de ser una barra fija y pasa al contenido, con el título y el ID del servicio debajo, también en mobile. Las listas comparten un título de página con sus acciones, en lugar de dos headers con botones de colores distintos. Y el contraste deja de depender del naranja de marca: íconos oscuros sobre blanco y links del breadcrumb a más de 7:1. Es lo que ya hacen Cloudflare y DigitalOcean en el benchmark, que no cambian de estructura entre secciones.</p>
         </div>
       </div>
     </section>
 
     <!-- ===== Hallazgo 4 ===== -->
-    <section class="section section--white" aria-labelledby="h4-title">
+    <section class="section section--white" id="hallazgo-4" aria-labelledby="h4-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h4-title">Cards y modales con varios criterios de color</h2>
-            <div class="prose">
-              <p>Las cards con encabezado usan varios colores de fondo sin criterio, buena parte de los modales usan el color de marketing donde no debería aparecer y las cards de servicio reparten su contenido en columnas genéricas, sin distinguir qué dato importa más.</p>
-            </div>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Hallazgo 4 de 4</p>
+            <h2 class="case-h2" id="h4-title">Cards, modales y listas sin un criterio común</h2>
           </div>
-          <!-- IMAGEN 5 · cards y modales -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+              <p>Cada pieza se resolvió por su cuenta, y se nota en lo que más se toca. La card de servicio existe como <strong>tres componentes distintos</strong>, más de un tercio de sus combinaciones de color (34 de 90) no llegan al contraste mínimo de lectura, como el amarillo de “Suspendido” (1,63:1), y ninguna de sus acciones alcanza los 44 px de alto recomendados para tocar en mobile.</p>
+              <p>Con los modales pasa lo mismo: de 134 headers, 32 son azules y 102 blancos, y el color no depende del tipo de modal. Además, <strong>62 no tienen botón de cierre</strong> y, en 60 de los 72 que sí lo tienen, el teclado no llega a él.</p>
+              <p>Y en el detalle chico se repite: hay <strong>14 formas distintas de mostrar que algo está elegido</strong>, ninguna con un foco de teclado propio, y en <strong>13 de las 20 listas la paginación aparece dos veces</strong>, arriba y abajo.</p>
+          </div>
         </div>
+
+        <div class="stage nxt nxc">
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">Cards, “elegido” y listas, en cifras</h3><p class="nx-card__note">Relevamiento sobre una réplica del producto en Chromium y un análisis del código de producción (684 templates). Mediciones de contraste con la fórmula de WCAG 2.x.</p></div><ul class="nx-facts nx-facts--3"><li class="nx-fact"><p class="nx-fact__n">3</p><p class="nx-fact__t">Componentes para la misma card de servicio</p><p class="nx-fact__d">Dos se reparten casi todas las pantallas (19 y 12 templates) y un tercero se usa una vez, en Cloud. Ninguno extiende a otro: el estado “Activo” es un badge sólido en uno y texto verde sobre gris claro en los otros.</p></li><li class="nx-fact"><p class="nx-fact__n">34 de 90</p><p class="nx-fact__t">Combinaciones de texto y fondo que no pasan</p><p class="nx-fact__d">En las cards de servicio. “Suspendido” da 1,63:1 y “Pendiente” 2,56:1; el mínimo para texto es 4,5:1 (WCAG 1.4.3).</p></li><li class="nx-fact"><p class="nx-fact__n">14</p><p class="nx-fact__t">Formas distintas de decir “elegido”</p><p class="nx-fact__d">Con tres colores de indicador. Ninguna define su propio foco de teclado y tres directamente no lo reciben.</p></li><li class="nx-fact"><p class="nx-fact__n">2,24:1</p><p class="nx-fact__t">Contraste del borde naranja de “elegido”</p><p class="nx-fact__d">Contra el gris de fondo; el mínimo para elementos de interfaz es 3:1 (WCAG 1.4.11). El anillo de foco del radio da 1,25:1.</p></li><li class="nx-fact"><p class="nx-fact__n">13 de 20</p><p class="nx-fact__t">Listas con la paginación repetida</p><p class="nx-fact__d">Una arriba, junto al filtro, y otra abajo, junto al selector de cantidad. Es el mismo componente, sin etiqueta de navegación para lectores de pantalla.</p></li><li class="nx-fact"><p class="nx-fact__n">62 de 134</p><p class="nx-fact__t">Headers de modal sin botón de cierre</p><p class="nx-fact__d">De los 72 que sí lo tienen, 60 quedan fuera del recorrido del teclado: 41 de 53 botones de cierre y los 19 enlaces con ícono.</p></li></ul><details class="nx-tech"><summary>Detalle técnico</summary><dl><div><dt>Componentes de la card</dt><dd><code>nbx-list-item</code> (19 templates), <code>nbx-list-item-pending</code> (12) y <code>nbx-cloud-list-item</code> (1).</dd></div><div><dt>Indicadores de “elegido”</dt><dd>Tres colores: #ff8431, #2d8600 y #198754. El borde naranja da 2,24:1 contra #f5f5f6; el anillo de foco del radio es naranja al 25 %.</dd></div><div><dt>Cierre de los modales</dt><dd><code>tabindex="-1"</code> en 41 de los 53 <code>btn-close</code> y en los 19 enlaces con ícono.</dd></div><div><dt>Paginación</dt><dd>Sin <code>&lt;nav&gt;</code> ni <code>aria-label</code>.</dd></div></dl></details></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">La card de servicio, hoy y con el sistema</h3><p class="nx-card__note">A la izquierda, réplicas del producto actual con su CSS compilado (marca y datos anonimizados). A la derecha, la pantalla de lista del prototipo del sistema.</p></div><div class="nxt-pair"><figure class="nxt-ph"><p class="nxt-ph__tag">Hoy · 360 px</p><div class="nxt-ph__fit"><div class="nxc-phone" data-nxt-phone style="--h:557;--y:0"><iframe src="nubix-hoy/hoy.html#hosting" title="Réplica de dos cards de servicio de hosting del producto actual, a 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>La segunda columna y el atajo desaparecen.</b> A 360 px se oculta el bloque de complementos y los botones “Correos” y “Panel hosting”. Quedan el plan, el estado, el vencimiento y un botón de 97 × 33 px. El ID mide 16 px de alto y “Ir a renovar”, 15.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · 360 px</p><div class="nxt-ph__fit"><div class="nxc-phone nxc-phone--new" data-nxt-phone style="--h:557;--y:271"><iframe src="../prototipos/sistema/listado.html?embed=1" title="Pantalla de lista del prototipo del sistema a 360 píxeles: dos cards de servicio de hosting" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>El estado va arriba y el vencimiento se lee primero.</b> Los complementos se quedan en mobile y el botón ocupa el ancho de la card, a costa de altura. Es el prototipo en código, no una captura.</figcaption></figure></div><figure class="nxc-wide"><p class="nxt-ph__tag">Hoy · 1280 px</p><div class="nxc-shot" data-shot style="--h:552;--y:0"><iframe src="nubix-hoy/hoy.html#hosting" title="Réplica de dos cards de servicio de hosting del producto actual, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Tres columnas iguales.</b> En la card de hosting la tercera columna está vacía, y el estado del plan, el vencimiento y los complementos se leen con el mismo peso que el plan. Los badges miden 9,7 px.</figcaption></figure><figure class="nxc-wide"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · 1280 px</p><div class="nxc-shot nxc-shot--new" data-shot style="--h:528;--y:190"><iframe src="../prototipos/sistema/listado.html?embed=1" title="Pantalla de lista del prototipo del sistema en desktop: dos cards de servicio de hosting" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Una sola jerarquía.</b> El nombre va a 18 px con el lápiz para editarlo, el estado se separa en una etiqueta arriba a la derecha, el vencimiento va en rojo solo si venció o está por vencer y los complementos tienen su propia franja. Los badges miden 12 px.</figcaption></figure></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">Un estado, varios colores</h3><p class="nx-card__note">Colores medidos sobre la réplica (texto del badge contra su fondo, WCAG 1.4.3: 4,5:1) y sobre el catálogo de badges del prototipo.</p></div><div class="nxc-scroll" role="region" aria-label="Tabla de contraste de los badges" tabindex="0"><table class="nxc-bt"><caption class="sr-only">Contraste de los badges de estado, hoy y con el sistema</caption><thead><tr><th scope="col">Estado</th><th scope="col">Hoy</th><th scope="col" class="is-new">Con el sistema</th></tr></thead><tbody><tr><th scope="row">Activo</th><td><div><span class="nxc-b nxc-b--su">Activo</span> <small>4,64:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div><div><span class="nxc-b nxc-b--l-su">Activo</span> <small>4,41:1</small> <span class="nxc-v nxc-v--no">no llega</span></div></td><td><div><span class="nxc-n nxc-n--su">Activo</span> <small>4,70:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div><div><span class="nxc-n nxc-n--l-su">Activo</span> <small>5,89:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Suspendido</th><td><div><span class="nxc-b nxc-b--wa">Suspendido</span> <small>1,63:1</small> <span class="nxc-v nxc-v--no">no llega</span></div><div><span class="nxc-b nxc-b--l-wa">Suspendido</span> <small>1,55:1</small> <span class="nxc-v nxc-v--no">no llega</span></div></td><td><div><span class="nxc-n nxc-n--wa">Suspendido</span> <small>11,0:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div><div><span class="nxc-n nxc-n--l-wa">Suspendido</span> <small>6,06:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Pendiente</th><td><div><span class="nxc-b nxc-b--in">Pendiente</span> <small>2,56:1</small> <span class="nxc-v nxc-v--no">no llega</span></div></td><td><div><span class="nxc-n nxc-n--in">Pendiente</span> <small>5,36:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Migración en curso</th><td><div><span class="nxc-b nxc-b--l-in">Migración en curso</span> <small>2,43:1</small> <span class="nxc-v nxc-v--no">no llega</span></div></td><td><div><span class="nxc-n nxc-n--l-in">Migración en curso</span> <small>4,67:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Por vencer</th><td><div><span class="nxc-b nxc-b--l-da">Vence en 5 días</span> <small>4,30:1</small> <span class="nxc-v nxc-v--no">no llega</span></div><div><span class="nxc-b nxc-b--wa">Vence en 5 días</span> <small>1,63:1</small> <span class="nxc-v nxc-v--no">no llega</span></div></td><td><div><span class="nxc-n nxc-n--l-da">Vence en 5 días</span> <small>6,26:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Vencido</th><td><div><span class="nxc-b nxc-b--da">Vencido</span> <small>4,53:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td><td><div><span class="nxc-n nxc-n--da">Vencido</span> <small>7,54:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr><tr><th scope="row">Cancelado</th><td><div><span class="nxc-b nxc-b--se">Cancelado</span> <small>4,69:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td><td><div><span class="nxc-n nxc-n--se">Cancelado</span> <small>4,69:1</small> <span class="nxc-v nxc-v--ok">pasa</span></div></td></tr></tbody></table></div><p class="nxt-ph__cap nxc-bcap"><b>Un mismo estado tiene dos o tres colores según la card.</b> En una card “Por vencer” es texto rojo sobre gris claro y en la de Cloud, un badge amarillo con texto blanco; “Activo” es sólido en una y texto verde en las otras. En el prototipo, el amarillo lleva texto oscuro y los claros usan el paso de la familia que supera 4,5:1.</p></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">“Elegido” hoy: 14 patrones, ninguno con su foco</h3><p class="nx-card__note">Nueve de los 14, en la réplica del producto con los estados forzados: reposo, elegido y foco de teclado. La tabla de abajo dice qué se mide en cada fila (contraste del indicador contra su fondo, WCAG 1.4.11: 3:1).</p></div><div class="nxt-ph"><div class="nxc-auto" style="--ah:1350px"><iframe src="nubix-hoy/hoy.html#elegido" title="Réplica de nueve patrones de selección del producto actual, en tres estados: reposo, elegido y foco de teclado" loading="lazy" data-autofit></iframe></div></div><dl class="nxc-pat"><div><dt>Etiqueta con radio, borde naranja<small>14 templates</small></dt><dd><b>Cómo queda elegido</b>El borde pasa de #dee2e6 a #ff8431. Sin fondo, sombra ni check propio.</dd><dd><b>Contraste del indicador</b>2,24:1 contra #f5f5f6 <span class="nxc-v nxc-v--no">no llega</span></dd><dd><b>Foco de teclado</b>Solo el radio recibe foco: anillo naranja al 25 % de opacidad, 1,25:1.</dd></div><div><dt>Tarjeta con <code>role="button"</code>, borde naranja<small>1 template</small></dt><dd><b>Cómo queda elegido</b>Borde, fondo del ícono y título pasan a #ff8431.</dd><dd><b>Contraste del indicador</b>2,24:1 <span class="nxc-v nxc-v--no">no llega</span></dd><dd><b>Foco de teclado</b>No recibe foco: tiene <code>role="button"</code> y no tiene <code>tabindex</code>.</dd></div><div><dt>Tarjeta con <code>role="button"</code>, borde verde<small>1 template</small></dt><dd><b>Cómo queda elegido</b>El borde pasa de #dee2e6 a #2d8600.</dd><dd><b>Contraste del indicador</b>4,26:1 <span class="nxc-v nxc-v--ok">pasa</span></dd><dd><b>Foco de teclado</b>La card no recibe foco; el link de adentro sí, con un anillo gris al 50 %.</dd></div><div><dt>Etiqueta con radio, borde verde y negrita<small>1 template</small></dt><dd><b>Cómo queda elegido</b>Aparece un borde de #2d8600 y el texto pasa a negrita; la caja crece 2 px.</dd><dd><b>Contraste del indicador</b>4,26:1 <span class="nxc-v nxc-v--ok">pasa</span></dd><dd><b>Foco de teclado</b>Solo el radio, con el anillo naranja al 25 %.</dd></div><div><dt>Etiqueta con radio, sombra<small>2 templates</small></dt><dd><b>Cómo queda elegido</b>Fondo blanco, sombra de 16 px y negrita, sin borde.</dd><dd><b>Contraste del indicador</b>1,09:1 <span class="nxc-v nxc-v--no">no llega</span></dd><dd><b>Foco de teclado</b>Radio nativo: contorno por defecto del navegador.</dd></div><div><dt>Fila de lista, borde y fondo verdes<small>2 templates</small></dt><dd><b>Cómo queda elegido</b>Borde de 1,5 px #198754, fondo translúcido y texto verde. El hover aplica el mismo fondo.</dd><dd><b>Contraste del indicador</b>Borde 4,53:1 <span class="nxc-v nxc-v--ok">pasa</span> · fondo 1,21:1 <span class="nxc-v nxc-v--no">no llega</span></dd><dd><b>Foco de teclado</b>La fila no recibe foco; el link de adentro usa el contorno del navegador.</dd></div><div><dt>Botón toggle, verde<small>2 templates</small></dt><dd><b>Cómo queda elegido</b>Borde, fondo translúcido y texto en #198754, un verde distinto del #2d8600 del resto.</dd><dd><b>Contraste del indicador</b>4,53:1 y 4,16:1 <span class="nxc-v nxc-v--ok">pasa</span></dd><dd><b>Foco de teclado</b>Anillo azul al 50 % de <code>.btn-link</code>, no el color del tema.</dd></div><div><dt>Radio sin cambio de caja<small>4 templates</small></dt><dd><b>Cómo queda elegido</b>No cambia nada: el único indicador es el radio.</dd><dd><b>Contraste del indicador</b>Borde del radio sin marcar 1,30:1 <span class="nxc-v nxc-v--no">no llega</span></dd><dd><b>Foco de teclado</b>Anillo naranja al 25 % o contorno del navegador, según el template.</dd></div><div><dt><code>btn-check</code>, fondo gris<small>2 templates</small></dt><dd><b>Cómo queda elegido</b>Fondo #6c757d y texto blanco.</dd><dd><b>Contraste del indicador</b>4,69:1 <span class="nxc-v nxc-v--ok">pasa</span></dd><dd><b>Foco de teclado</b>Anillo gris al 50 % sobre el botón. No lo medí contra el fondo.</dd></div></dl><p class="nxt-ph__cap nxc-bcap">Los otros cinco (una card clickeable con borde naranja, el tile de medio de pago, el fondo invertido, la fila con <code>form-check</code> y la etiqueta con radio sin cambio) están en el relevamiento. En todo el código hay 35 <code>role="button"</code> sin <code>tabindex</code>, 96 <code>(click)</code> sobre elementos que no son interactivos y ningún <code>aria-checked</code>, <code>aria-pressed</code>, <code>aria-selected</code> ni <code>aria-current</code>.</p></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">“Elegido” con el sistema: dos familias</h3><p class="nx-card__note">Tarjetas del catálogo del prototipo con sus estados. Son <code>label</code> con <code>input type="radio"</code> nativo: flechas para moverse en el grupo, espacio para elegir.</p></div><div class="nxt-ph"><div class="nxc-auto nxc-auto--new" style="--ah:720px"><iframe src="../prototipos/sistema/estados-tarjetas.html?embed=1" title="Tarjetas del sistema en reposo, hover, foco y seleccionada" loading="lazy" data-autofit></iframe></div><p class="nxt-ph__cap nxc-bcap"><b>Un criterio por familia.</b> Las que redirigen cambian el borde y suman una sombra suave al pasar el mouse. Las que se eligen pasan a fondo y borde del color primario, con el radio relleno: el borde da 6,0:1 contra el blanco, frente a 2,44:1 del naranja de hoy.</p></div></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">Búsqueda, orden y paginación, hoy y con el sistema</h3><p class="nx-card__note">Réplicas del producto actual (20 templates de lista) y la pantalla de lista del prototipo. El “después” es el prototipo en código, no una captura.</p></div><div class="nxt-pair"><figure class="nxt-ph"><p class="nxt-ph__tag">Hoy · 360 px</p><div class="nxt-ph__fit"><div class="nxc-phone" data-nxt-phone style="--h:560;--y:0"><iframe src="nubix-hoy/hoy.html#lista" title="Réplica de una lista de servicios del producto actual a 360 píxeles: barra naranja, título, barra de herramientas y cards" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>213 px antes de la primera card.</b> Son el 28,8 % de una pantalla de 740 px, y el 46,9 % si aparece la alerta de SSL. La barra tiene una lupa, “Ordenar por” y una paginación compacta en una sola fila.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · 360 px</p><div class="nxt-ph__fit"><div class="nxc-phone nxc-phone--new" data-nxt-phone style="--h:560;--y:0"><iframe src="../prototipos/sistema/listado.html?embed=1" title="Pantalla de lista del prototipo del sistema a 360 píxeles: título, buscador, orden y cantidad" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>El buscador y los selectores siempre visibles.</b> Cuesta espacio: la primera card empieza a 287 px, contra 213 px hoy. La paginación queda abajo.</figcaption></figure></div><div class="nxt-pair nxc-pair-sm"><figure class="nxt-ph"><p class="nxt-ph__tag">Hoy · página 2 a 360 px</p><div class="nxt-ph__fit"><div class="nxc-phone" data-nxt-phone style="--h:72;--y:0"><iframe src="nubix-hoy/hoy.html#barra-p2" title="Réplica de la barra de herramientas de la lista en la página 2 a 360 píxeles: Ordenar por se superpone con Anterior" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>“Ordenar por” se pisa con “Anterior”.</b> El borde derecho del filtro (x = 191 px) pasa al izquierdo de la paginación (x = 151 px), unos 40 px de solape. A 320 px pasa también en la primera página.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag">Hoy · lupa cerrada y abierta</p><div class="nxt-ph__fit"><div class="nxc-phone" data-nxt-phone style="--h:136;--y:0"><iframe src="nubix-hoy/hoy.html#lupa" title="Réplica de la lupa de la lista, cerrada y abierta: al abrirse reemplaza al selector de orden" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Al abrir la lupa desaparece el orden.</b> Una acción reemplaza dos controles, y ni la lupa ni la X tienen <code>aria-label</code> ni <code>aria-expanded</code>. Hay tres lupas distintas en el producto; la de Cloud no reemplaza nada.</figcaption></figure></div><figure class="nxc-wide"><p class="nxt-ph__tag">Hoy · 1280 px</p><div class="nxc-shot" data-shot style="--h:850;--y:0"><iframe src="nubix-hoy/hoy.html#pag" title="Réplica de una lista del producto actual en desktop con la paginación arriba y abajo" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>La misma paginación, dos veces.</b> Arriba, junto al filtro, y abajo, junto a “Listar 10”, en 13 de las 20 listas. La página actual es un botón deshabilitado en vez de <code>aria-current</code>. El orden por defecto no se ve: ninguna opción aparece marcada, y en 9 de 15 listas el menú tiene una sola.</figcaption></figure><figure class="nxc-wide"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · 1280 px</p><div class="nxc-stackshots"><div class="nxc-shot nxc-shot--new" data-shot style="--h:300;--y:64"><iframe src="../prototipos/sistema/listado.html?embed=1" title="Parte superior de la lista del prototipo del sistema: título, buscador, orden y cantidad" loading="lazy"></iframe></div><div class="nxc-shot nxc-shot--new" data-shot style="--h:290;--y:1306"><iframe src="../prototipos/sistema/listado.html?embed=1" title="Parte inferior de la lista del prototipo del sistema: última card y paginación" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Un solo bloque de paginación, al pie.</b> Va dentro de un <code>&lt;nav aria-label="Paginación"&gt;</code>, con la página “1 de 3” y el rango “Mostrando 1 a 5 de 12”. Arriba quedan el buscador, el orden y la cantidad por página.</figcaption></figure></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">Modales: el color no sigue al tipo, sigue al cierre</h3><p class="nx-card__note">134 headers de modal analizados con un parser de etiquetas sobre los templates. El tipo es una clasificación mía por heurística, así que es una inferencia: formulario si hay un <code>&lt;form&gt;</code>, confirmación si el nombre o el pie lo sugieren, wizard si el archivo dice wizard o step.</p></div><h4 class="nxc-sub">Color del header, por tipo de modal</h4><ul class="nxc-legend"><li><i class="nxc-s--w"></i>Header blanco</li><li><i class="nxc-s--b"></i>Header azul del sitio web</li></ul><ul class="nxc-chart"><li><span class="nxc-chart__l">Formulario<small>72 headers · 29 % azules</small></span><div class="nxc-bar" style="--w:100" role="img" aria-label="Formulario: 51 headers blancos y 21 azules"><span class="nxc-s--w" style="flex:51">51</span><span class="nxc-s--b" style="flex:21">21</span></div></li><li><span class="nxc-chart__l">Confirmación<small>41 headers · 17 % azules</small></span><div class="nxc-bar" style="--w:57" role="img" aria-label="Confirmación: 34 headers blancos y 7 azules"><span class="nxc-s--w" style="flex:34">34</span><span class="nxc-s--b" style="flex:7">7</span></div></li><li><span class="nxc-chart__l">Informativo<small>18 headers · 17 % azules</small></span><div class="nxc-bar" style="--w:25" role="img" aria-label="Informativo: 15 headers blancos y 3 azules"><span class="nxc-s--w" style="flex:15">15</span><span class="nxc-s--b" style="flex:3">3</span></div></li><li><span class="nxc-chart__l">Wizard o paso<small>3 headers · 33 % azules</small></span><div class="nxc-bar" style="--w:4" role="img" aria-label="Wizard o paso: 2 headers blancos y 1 azules"><span class="nxc-s--w" style="flex:2">2</span><span class="nxc-s--b" style="flex:1">1</span></div></li></ul><h4 class="nxc-sub">Cierre del header, por color</h4><ul class="nxc-legend"><li><i class="nxc-s--c"></i><code>btn-close</code></li><li><i class="nxc-s--i"></i>Enlace con ícono</li><li><i class="nxc-s--n"></i>Sin cierre en el header</li></ul><ul class="nxc-chart"><li><span class="nxc-chart__l">Header blanco<small>102 headers</small></span><div class="nxc-bar" style="--w:100" role="img" aria-label="Header blanco: 51 con btn-close y 51 sin cierre"><span class="nxc-s--c" style="flex:51">51</span><span class="nxc-s--n" style="flex:51">51</span></div></li><li><span class="nxc-chart__l">Header azul<small>32 headers</small></span><div class="nxc-bar" style="--w:31" role="img" aria-label="Header azul: 2 con btn-close, 19 con enlace con ícono y 11 sin cierre"><span class="nxc-s--c" style="flex:2">2</span><span class="nxc-s--i" style="flex:19">19</span><span class="nxc-s--n" style="flex:11">11</span></div></li></ul><p class="nxt-ph__cap nxc-bcap"><b>El azul aparece en el 17 al 29 % de cada tipo, pero va con el cierre:</b> los 19 enlaces con ícono son todos azules y solo 2 de los 53 <code>btn-close</code> lo son. No verifiqué si los 62 modales sin cierre en el header se cierran con otro botón o con el fondo. En el prototipo hay un solo modal: caja blanca, <code>&lt;dialog&gt;</code> nativo y un botón de cierre con <code>aria-label</code> que sí recibe foco.</p></div>
+<div class="nx-card nx-card--wide"><div class="nx-card__head nx-card__head--stack"><h3 class="nx-card__title">Modales, hoy y con el sistema</h3><p class="nx-card__note">A la izquierda, cuatro headers de modal tomados del producto actual con su CSS compilado (marca y datos anonimizados): se replica el header y el cuerpo, no el pie. A la derecha, los modales del prototipo del sistema.</p></div><div class="nxt-pair"><figure class="nxt-ph"><p class="nxt-ph__tag">Hoy</p><div class="nxc-auto" style="--ah:560px"><iframe src="nubix-hoy/hoy.html#modal" title="Cuatro headers de modal del producto actual: blanco con botón de cierre, blanco sin cierre, azul con enlace con ícono y azul sin cierre" loading="lazy" data-autofit></iframe></div><figcaption class="nxt-ph__cap"><b>Dos colores y tres formas de cerrar.</b> Blanco o azul, con un botón, con un enlace con ícono o sin nada. En 60 de los 72 que tienen cierre, el teclado no llega a él.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema</p><div class="nxc-auto nxc-auto--new" style="--ah:560px"><iframe src="../prototipos/sistema/estados-modales.html?embed=1" title="Tres modales del prototipo del sistema: confirmación, formulario e informativo" loading="lazy" data-autofit></iframe></div><figcaption class="nxt-ph__cap"><b>Un solo header y un solo botón de cierre.</b> Es un botón nativo y recibe foco. El informativo no lleva cierre arriba y se cierra con el botón del pie. Es el prototipo en código, no una captura.</figcaption></figure></div></div>
+        </div>
+
         <div class="callout">
           <h3 class="callout__title">La propuesta</h3>
-          <p>Un criterio único de color por tipo de card, y cards de servicio con jerarquía real: el estado y el vencimiento se distinguen del resto en lugar de competir con él, siguiendo el principio de similitud de la Gestalt.</p>
+          <p>Una sola card de servicio, con jerarquía real: el estado y el vencimiento se distinguen del resto en lugar de competir con él, siguiendo el principio de similitud de la Gestalt, y todos los estados superan 4,5:1 (el amarillo lleva texto oscuro). Para elegir, un criterio por familia: las tarjetas que redirigen cambian el borde y suman una sombra suave al pasar el mouse, y las que se eligen pasan a fondo y borde del color primario, con el radio relleno y radios nativos que se operan con el teclado. Los modales comparten un solo estilo, con un botón de cierre que recibe foco. Y las listas muestran el buscador, el orden y la cantidad siempre a la vista, con un único bloque de paginación al pie.</p>
         </div>
       </div>
     </section>
 
     <!-- ===== El sistema aplicado ===== -->
-    <section class="section section--tint" aria-labelledby="sistema-title">
+    <section class="section section--white" id="sistema" aria-labelledby="sistema-title">
       <div class="container case-block case-block--gallery">
         <h2 class="case-h2" id="sistema-title">El sistema aplicado</h2>
-        <div class="case-gallery">
-          <!-- IMAGEN 6, 7 y 8 · pantallas con el sistema aplicado -->
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
+        <div class="stage">
+          <div class="nxs">
+          <div class="nxs-item">
+            <div class="nxs-row">
+              <figure class="nxs-fig nxs-fig--d"><img src="../assets/img/nubix/sistema-inicio-desktop.webp" width="1920" height="1200" alt="Pantalla de inicio del prototipo, en desktop: saludo y tarjetas de producto con ícono, nombre y cantidad de servicios" loading="lazy" decoding="async"></figure>
+              <figure class="nxs-fig nxs-fig--m"><img src="../assets/img/nubix/sistema-inicio-mobile.webp" width="720" height="1480" alt="Pantalla de inicio del prototipo, en mobile: tarjetas de producto en dos columnas" loading="lazy" decoding="async"></figure>
+            </div>
+            <p class="nxs-cap"><b>Inicio.</b> Las tarjetas de producto son las de redirección del sistema: una sola estructura y un solo hover para todo el catálogo.</p>
+          </div>
+          <div class="nxs-item">
+            <div class="nxs-row">
+              <figure class="nxs-fig nxs-fig--d"><img src="../assets/img/nubix/sistema-servicio-desktop.webp" width="1920" height="1200" alt="Detalle de un servicio de Web Hosting en desktop: menú del servicio a la izquierda, pestañas y tarjetas de plan y uso de recursos" loading="lazy" decoding="async"></figure>
+              <figure class="nxs-fig nxs-fig--m"><img src="../assets/img/nubix/sistema-servicio-mobile.webp" width="720" height="1480" alt="Detalle de un servicio de Web Hosting en mobile: plan, estado y botón Renovar a ancho completo, y uso de recursos" loading="lazy" decoding="async"></figure>
+            </div>
+            <p class="nxs-cap"><b>Detalle de un servicio.</b> Navegación del servicio, pestañas y tarjetas de plan y de uso con los mismos componentes de las demás pantallas.</p>
+          </div>
+          <div class="nxs-item">
+            <div class="nxs-row">
+              <figure class="nxs-fig nxs-fig--d"><img src="../assets/img/nubix/sistema-listado-desktop.webp" width="1920" height="1200" alt="Listado de Web Hosting en desktop: buscador, orden y cantidad por página visibles arriba y una tarjeta por servicio con su estado" loading="lazy" decoding="async"></figure>
+              <figure class="nxs-fig nxs-fig--m"><img src="../assets/img/nubix/sistema-listado-mobile.webp" width="720" height="1480" alt="Listado de Web Hosting en mobile: acciones, buscador, orden y cantidad apilados, y las tarjetas de servicio" loading="lazy" decoding="async"></figure>
+            </div>
+            <p class="nxs-cap"><b>Listado.</b> Buscador, orden y cantidad a la vista; cada servicio en una tarjeta con su estado y su acción principal.</p>
+          </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Proceso y resultado real ===== -->
-    <section class="section section--white" aria-labelledby="proceso-title">
+    <section class="section section--dark on-dark" id="resultado" aria-labelledby="proceso-title">
       <div class="container case-text">
         <h2 class="case-h2" id="proceso-title">Proceso y resultado real</h2>
         <div class="process">
@@ -266,7 +957,7 @@
     </section>
 
     <!-- ===== Lo que aprendí ===== -->
-    <section class="section section--tint" aria-labelledby="aprendi-title">
+    <section class="section section--white" id="aprendizajes" aria-labelledby="aprendi-title">
       <div class="container case-text">
         <h2 class="case-h2" id="aprendi-title">Lo que aprendí</h2>
         <div class="learn">

@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="es-AR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex"><!-- BORRADOR: esta página es una prueba y no se enlaza desde ningún lado -->
+  <title>BORRADOR · Nubix, sistema de diseño para un panel de clientes</title>
+  <meta name="description" content="Audité un panel que había crecido a fuerza de parches, medí sus inconsistencias en el código y las contrasté con un benchmark y criterios WCAG para proponer un sistema de tokens y componentes.">
+  <meta name="theme-color" content="#0961c2">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Nubix, sistema de diseño para un panel de clientes">
+  <meta property="og:description" content="Auditoría de código, benchmark y criterios WCAG para proponer un sistema de tokens y componentes.">
+
+  <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/case-visuals.css">
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <script src="../js/analytics.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="../index.html">Gastón M. Mansilla</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="sr-only">Menú</span>
+        <img class="icon-menu" src="../assets/icons/menu.svg" alt="" width="16" height="16">
+        <img class="icon-close" src="../assets/icons/close.svg" alt="" width="16" height="16">
+      </button>
+
+      <nav class="nav" id="menu" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../index.html">Inicio</a></li>
+          <li><a class="nav__link" href="../index.html#casos" aria-current="true">Casos de estudio</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===== Portada del caso ===== -->
+    <section class="case-hero" aria-labelledby="case-title">
+      <div class="container case-hero__inner">
+        <a class="back-link" href="../index.html#casos">
+          <img src="../assets/icons/arrow-left-blue.svg" alt="" width="16" height="16">
+          <span>Todos los casos de estudio</span>
+        </a>
+
+        <div class="case-hero__row">
+          <div class="case-hero__text">
+            <div class="case-hero__intro">
+              <div class="case-hero__heading">
+                <p class="case-hero__eyebrow t-body-strong">Nubix</p>
+                <h1 class="case-hero__title t-display-4" id="case-title">Sistema de diseño para un panel de clientes</h1>
+              </div>
+              <p class="case-lead">Audité un panel que había crecido a fuerza de parches, medí sus inconsistencias en el código y las contrasté con un benchmark y criterios WCAG para proponer un sistema de tokens y componentes.</p>
+            </div>
+
+            <ul class="tag-list" aria-label="Disciplinas">
+              <li class="tag">Sistema de diseño</li>
+              <li class="tag">Auditoría de código</li>
+              <li class="tag">Benchmark</li>
+              <li class="tag">WCAG AA</li>
+            </ul>
+
+            <div class="case-hero__cta">
+              <a class="btn btn--primary" href="https://www.figma.com/design/0CzlrVLQqUHm38ricE3kHx/Nubix---Sistema-de-dise%C3%B1o?node-id=3110-10027" target="_blank" rel="noopener noreferrer">
+                <span>Ver en Figma<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+              </a>
+              <a class="btn btn--outline" href="../prototipos/sistema/componentes.html" target="_blank" rel="noopener noreferrer">
+                <span>Ver catálogo<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+              </a>
+              <a class="btn btn--outline" href="../prototipos/sistema/pantallas.html" target="_blank" rel="noopener noreferrer">
+                <span>Ver pantallas<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+              </a>
+              <a class="btn btn--outline" href="../assets/docs/Handoff-Sistema-de-diseno.pdf" target="_blank" rel="noopener noreferrer">
+                <span>Handoff<span class="sr-only"> (PDF, se abre en una pestaña nueva)</span></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Portada (466 × 356 en desktop; no se muestra en mobile) -->
+          <figure class="case-media case-media--bare case-hero__media">
+            <img src="../assets/img/nubix/portada.webp" alt="Pantalla de detalle de un plan de hosting dentro del panel Nubix, con el menú lateral, las pestañas y el uso de recursos" width="1047" height="800" fetchpriority="high" decoding="async">
+          </figure>
+        </div>
+
+        <div class="case-facts">
+          <dl class="meta">
+            <div class="meta__item">
+              <dt class="meta__label">Empresa</dt>
+              <dd class="meta__value">Hosting (confidencial)</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Rol</dt>
+              <dd class="meta__value">Diseñador UX/UI</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Duración</dt>
+              <dd class="meta__value">Más de 3 años</dd>
+            </div>
+            <div class="meta__item">
+              <dt class="meta__label">Equipo</dt>
+              <dd class="meta__value">9 a 12 personas</dd>
+            </div>
+          </dl>
+          <p class="case-note">Por un acuerdo de confidencialidad no menciono el nombre real de la empresa ni del producto. Las capturas son adaptaciones de lo que existe en producción.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== En pocas palabras ===== -->
+    <section class="section section--white" aria-labelledby="resumen-title">
+      <div class="container case-block">
+       <div class="case-split">
+        <div class="case-text">
+          <h2 class="case-h2" id="resumen-title">En pocas palabras</h2>
+          <div class="prose">
+            <p>El panel de clientes gestiona hosting, dominios, pagos y facturación para miles de usuarios, y su interfaz se fue armando proyecto por proyecto, sin un sistema de diseño detrás. Cuando lo audité encontré el problema real: <strong>no había una sola fuente de verdad</strong>. Convivían headers distintos en la misma app, el logo sacaba al usuario del producto y una misma tarjeta mezclaba datos que no se leen igual.</p>
+            <p>El pedido tenía dos partes: modernizar la estética, que vivía en un radio de borde plano de 4px sin jerarquía visual, y acercar el producto a la identidad de marketing, con el azul como color principal. <strong>Lo que llegó a producción fue parcial</strong>: cambiaron los radios de borde, pero la paleta de color y la nomenclatura nunca se corrigieron.</p>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-card__main">
+            <h3 class="summary-card__title t-h4">Qué hice yo</h3>
+            <p class="t-body is-muted">Auditar el producto real, contar los patrones en el código, contrastarlos con heurísticas, WCAG y un benchmark, y proponer el sistema. Lo hice por iniciativa propia: el UI-Kit nunca tuvo fecha de inicio ni de cierre, y Nubix es el trabajo de sistematizar decisiones que se habían tomado una por una.</p>
+          </div>
+          <div class="summary-card__team">
+            <p class="summary-card__label">Con quién trabajé</p>
+            <ul class="badge-list">
+              <li class="badge t-badge">1 diseñador (yo)</li>
+              <li class="badge t-badge">4 desarrolladores</li>
+              <li class="badge t-badge">Líder de desarrollo</li>
+              <li class="badge t-badge">Product Owner</li>
+              <li class="badge t-badge">QA</li>
+            </ul>
+          </div>
+        </div>
+       </div>
+
+        <!-- Cifras de la auditoría -->
+        <ul class="stats" aria-label="Cifras de la auditoría">
+          <li class="stat">
+            <p class="stat__num">0,6%</p>
+            <p class="stat__text">de más de 1000 botones relevados usa el color de marca. Aparece seis veces en todo el producto.</p>
+            <a class="stat__link" href="#h1-title">Identidad visual</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">47,7%</p>
+            <p class="stat__text">de los botones usa un color pensado para éxito o error como llamado a la acción.</p>
+            <a class="stat__link" href="#h1-title">Identidad visual</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">4</p>
+            <p class="stat__text">estructuras fijas distintas conviven para resolver “dónde estoy parado”.</p>
+            <a class="stat__link" href="#h3-title">Navegación</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">3</p>
+            <p class="stat__text">lugares tienen el logo, y una de las tres instancias ni siquiera coincide con las otras dos.</p>
+            <a class="stat__link" href="#h3-title">Navegación</a>
+          </li>
+        </ul>
+        <p class="case-note">Cifras de un relevamiento propio del código y de la interfaz en producción. No hubo research con usuarios.</p>
+      </div>
+    </section>
+
+    <!-- ===== Hallazgo 1 ===== -->
+    <section class="section section--tint" aria-labelledby="h1-title">
+      <div class="container case-block">
+        <div class="case-split">
+          <div class="case-text">
+            <h2 class="case-h2" id="h1-title">Identidad visual, un sistema a medias</h2>
+            <div class="prose">
+              <p>Color, tipografía, sombras e íconos tienen el mismo problema: valores definidos a mano, sin tokens que los conecten. Medí el código y el color de marca aparece en <strong>menos del 1% de los botones</strong>, mientras que un color pensado para éxito o error concentra <strong>casi la mitad de los llamados a la acción</strong>, sin cumplir contraste mínimo (WCAG 1.4.3) ni tamaño de objetivo (WCAG 2.5.8).</p>
+              <p>Un benchmark de cuatro productos del sector (Cloudflare, DigitalOcean, Hostinger y GoDaddy) mostró cómo lo resuelven otros: el color de marca casi nunca es el de acción primaria, cada uno lo reserva para acentos y usa un tono frío o neutro para operar.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 2 · identidad visual -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La propuesta</h3>
+          <p>Una paleta azul calibrada. Es el mismo azul que ya pedían para acercarse a la marca, ajustado para operar como color de acción y menos vívido que el de marketing, y ahí converge todo lo que hoy resuelve el color semántico por defecto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Hallazgo 2 ===== -->
+    <section class="section section--white" aria-labelledby="h2-title">
+      <div class="container case-block">
+        <div class="case-split case-split--flip">
+          <div class="case-text">
+            <h2 class="case-h2" id="h2-title">Componentes core, cada uno a su manera</h2>
+            <div class="prose">
+              <p>Inputs, tablas, paginación y stepper funcionan, pero cada uno resuelve el problema a su manera. Las tablas no tienen versión mobile y dependen <strong>100% del scroll horizontal</strong>, un buscador escondido detrás de un ícono reemplaza al selector de orden, la paginación se duplica en pantalla y las filas de servicios muestran dos badges que compiten por la atención, sin jerarquía.</p>
+              <p>El mismo patrón aparece en el detalle más chico. Relevé el código y encontré varias formas distintas de decir “esto está elegido”, <strong>ninguna con foco de teclado definido</strong>, algo que WCAG (2.4.7) exige.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 3 · componentes core -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La propuesta</h3>
+          <p>Una librería de componentes más consistente como base de los inputs, con floating labels donde aplica. Las tablas ganan una versión mobile real, con cada fila convertida en su propia tarjeta y sin scroll lateral. La paginación pasa a un único bloque y el buscador queda siempre visible. Un solo criterio de microinteracción rige toda tarjeta: sombra al pasar el mouse, borde más ícono cuando queda elegida y anillo de contorno para quien navega con teclado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Hallazgo 3 ===== -->
+    <section class="section section--tint" aria-labelledby="h3-title">
+      <div class="container case-block">
+        <div class="case-split">
+          <div class="case-text">
+            <h2 class="case-h2" id="h3-title">Navegación, varios headers y un logo que saca del producto</h2>
+            <div class="prose">
+              <p><strong>El hallazgo más fuerte.</strong> La plataforma resuelve “dónde estoy parado” con varias estructuras fijas distintas: el header del dashboard, un breadcrumb fijo repetido en decenas de pantallas, un título distinto para las listas y un navbar negro, sin sidebar, exclusivo del pago. El sidebar mezcla navegación con cuenta, notificaciones y promociones en el mismo componente, se colapsa solo sin que el usuario lo pida y el contador de notificaciones llega a duplicarse leyendo el mismo dato.</p>
+              <p>El logo, presente en tres lugares de la app, saca al usuario del producto y lo lleva al sitio de marketing (una de las tres instancias ni siquiera coincide con las otras dos). En el pago, alguien ya había parchado el problema con un link de texto aparte, al lado del logo. En Cloudflare y DigitalOcean el logo vuelve al home del dashboard, que es el comportamiento esperado.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 4 · navegación -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La propuesta</h3>
+          <p>Separar la navegación (el sidebar, solo eso) de la cuenta, las notificaciones y las promociones, que pasan a un único header consistente en toda la plataforma. El breadcrumb pasa al cuerpo de la página, y el pago usa el mismo header que el resto, como ya hacen Cloudflare y DigitalOcean en el benchmark, sin cambiar de estructura entre secciones.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Hallazgo 4 ===== -->
+    <section class="section section--white" aria-labelledby="h4-title">
+      <div class="container case-block">
+        <div class="case-split case-split--flip">
+          <div class="case-text">
+            <h2 class="case-h2" id="h4-title">Cards y modales con varios criterios de color</h2>
+            <div class="prose">
+              <p>Las cards con encabezado usan varios colores de fondo sin criterio, buena parte de los modales usan el color de marketing donde no debería aparecer y las cards de servicio reparten su contenido en columnas genéricas, sin distinguir qué dato importa más.</p>
+            </div>
+          </div>
+          <!-- IMAGEN 5 · cards y modales -->
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+        <div class="callout">
+          <h3 class="callout__title">La propuesta</h3>
+          <p>Un criterio único de color por tipo de card, y cards de servicio con jerarquía real: el estado y el vencimiento se distinguen del resto en lugar de competir con él, siguiendo el principio de similitud de la Gestalt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== El sistema aplicado ===== -->
+    <section class="section section--tint" aria-labelledby="sistema-title">
+      <div class="container case-block case-block--gallery">
+        <h2 class="case-h2" id="sistema-title">El sistema aplicado</h2>
+        <div class="case-gallery">
+          <!-- IMAGEN 6, 7 y 8 · pantallas con el sistema aplicado -->
+          <figure class="case-media" aria-hidden="true"></figure>
+          <figure class="case-media" aria-hidden="true"></figure>
+          <figure class="case-media" aria-hidden="true"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Proceso y resultado real ===== -->
+    <section class="section section--white" aria-labelledby="proceso-title">
+      <div class="container case-text">
+        <h2 class="case-h2" id="proceso-title">Proceso y resultado real</h2>
+        <div class="process">
+          <div class="process__row">
+            <h3 class="process__label">Alcance</h3>
+            <p>El contenido del panel prácticamente no cambia: el rediseño apunta a la estructura fija y deja lo que ya funcionaba.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Evidencia</h3>
+            <p><strong>No hubo research ni testing formal con usuarios</strong>, así que la evidencia que construí fue otra: una auditoría del código real y un benchmark competitivo. Varias decisiones venían definidas desde la dirección, y mi trabajo fue ejecutarlas lo mejor posible y buscar los espacios con margen para un criterio propio.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Estado real</h3>
+            <p>Lo que llegó a producción fue parcial: nuevos radios de borde, cambio de tipografía, ajustes de espaciado y menos ilustraciones. La librería de componentes se implementó a medias, y la iniciativa de darle más presencia al color de marca avanzó sin un cambio sistemático de paleta detrás. La separación de sidebar, header y cuenta, el rediseño de tablas mobile y las cards rediseñadas nunca llegaron a producción, así que este documento es, en gran parte, esa propuesta completa.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Motivos</h3>
+            <p>¿Por qué no llegó completo? Por capacidad: llegué a sostener un proyecto grande y dos chicos en simultáneo, siendo el único diseñador para cuatro desarrolladores, y la tarea de cuidar el sistema de diseño no tenía a nadie con tiempo asignado. Lo habitual era recibir pedidos puntuales del tipo “cambien los inputs”, y tocar algo tan estructural se replica en toda la plataforma, que funciona casi como un organismo vivo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Lo que aprendí ===== -->
+    <section class="section section--tint" aria-labelledby="aprendi-title">
+      <div class="container case-text">
+        <h2 class="case-h2" id="aprendi-title">Lo que aprendí</h2>
+        <div class="learn">
+          <blockquote class="pull-quote">
+            <p>“Auditar, contar y comparar no reemplaza un research con usuarios, pero alcanza para decidir sin que sea solo gusto personal.”</p>
+          </blockquote>
+          <div class="prose">
+            <p>De Nubix me llevo, sobre todo, la forma de construirlo: auditar el producto real, contar patrones en el código, apoyarse en heurísticas y estándares y mirar qué hace el resto del sector.</p>
+            <p>La otra lección está en el origen del proyecto: años de decisiones tomadas proyecto por proyecto, sin un criterio que las unificara, generaron estos problemas. Esa complejidad no se queda en el código y termina siendo una mala experiencia para quien usa el producto todos los días.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <p class="site-footer__name">Gastón M. Mansilla</p>
+        <p class="site-footer__role t-body-strong">PRODUCT DESIGNER</p>
+      </div>
+
+      <div class="site-footer__cols">
+        <nav class="footer-col" aria-labelledby="footer-links-title">
+          <p class="footer-col__title t-body-strong" id="footer-links-title">ENLACES</p>
+          <ul class="footer-list">
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../index.html#casos">Casos de estudio</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col">
+          <p class="footer-col__title t-body-strong">CONTACTO</p>
+          <ul class="footer-list footer-list--icons">
+            <li><a href="mailto:gmansilla24@gmail.com"><img src="../assets/icons/mail-white.svg" alt="" width="24" height="24"><span>gmansilla24@gmail.com</span></a></li>
+            <li><a href="https://wa.me/5491158978934" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/whatsapp-white.svg" alt="" width="24" height="24"><span>+54 9 11 58978934<span class="sr-only"> (WhatsApp, se abre en una pestaña nueva)</span></span></a></li>
+            <li><a href="https://www.linkedin.com/in/gmansilla24/" target="_blank" rel="noopener noreferrer"><img src="../assets/icons/linkedin-white.svg" alt="" width="24" height="24"><span>LinkedIn<span class="sr-only"> (se abre en una pestaña nueva)</span></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
