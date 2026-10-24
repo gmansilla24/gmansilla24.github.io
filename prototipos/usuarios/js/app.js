@@ -14,6 +14,7 @@
      ?integrantes=0..10                arranca con esa cantidad (1, 5 y 10 reproducen las pantallas de Figma)
      ?modal=reenviar|eliminar|eliminar-invitacion   abre ese modal en "Mi cuenta"
      ?modal=aceptar|rechazar|abandonar|eliminar-recibida   abre ese modal en "Asignado a otras cuentas"
+     ?pestana=otras   abre la pestaña "Asignado a otras cuentas" (sirve para incrustarla en el caso)
      ?cuentas=0|3                      cuentas ajenas al arrancar (3 = los ejemplos de Figma, por defecto)
      #otras-cuentas                    abre la pestaña "Asignado a otras cuentas"
      #agregar                          abre el formulario
@@ -767,7 +768,7 @@
     mConfirmar.textContent = spec.boton;
     mConfirmar.className = "btn btn--solid btn--" + spec.color;
     modal.showModal();
-    mCancelar.focus();              /* el foco arranca en la opción segura */
+    mCancelar.focus({ preventScroll: true });   /* el foco arranca en la opción segura */
   }
   mConfirmar.addEventListener("click", function () {
     var c = ctx;
@@ -986,6 +987,7 @@
   render(vistaActual(), false);
   var inicial = params.get("estado");
   if (inicial && vistaActual() === "agregar") aplicarEstado(inicial);
+  if (params.get("pestana") === "otras" && vistaActual() === "lista") elegirTab("otras", false);   /* ?pestana=otras abre "Asignado a otras cuentas" */
   var abierto = params.get("modal");
   if (abierto && vistaActual() === "lista" && DEMO[abierto]) {
     window.clearTimeout(cargaTimer);

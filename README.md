@@ -13,6 +13,7 @@ casos/referidos.html  Página del caso Referidos
 casos/usuarios.html   Página del caso Usuarios y permisos
 casos/nubix-hoy/      Réplica anonimizada del producto actual que el caso Nubix incrusta en iframes: `hoy.html` + `hoy.css` (cards, “elegido”, listas y modales; un fragmento por hash, p. ej. `#hosting`) y `sidebar.html` + `sidebar.css` (el sidebar: `#expandido`, `#colapsado`, `#mobile-abierto`, `#estados` con hover y foco forzados, `#referencia` e `#invitado`; con el mini-JS de la réplica: flecha, ítem padre, clic afuera, tema). El CSS es el compilado del producto recortado a lo que se usa. Lleva `noindex`
 css/styles.css        Estilos y tokens (variables al inicio del archivo)
+css/case-usuarios.css  Estilos del caso Usuarios y permisos (prefijo `usr-`)
 css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers —, Hallazgo 4 — sidebar, prefijo `nxsb-` — y Hallazgo 5 — cards, “elegido”, listas y modales; ojo: `nxb-` ya es el botón del catálogo)
 js/main.js            Menú móvil, sección activa, botón "Copiar correo" y aviso (toast)
 js/analytics.js       Estadísticas de visitas con GoatCounter (código gmansilla24; ver "Estadísticas de visitas")
@@ -58,9 +59,16 @@ y sacarle el `aria-hidden="true"` al `figure`. Tamaño recomendable: el doble de
 
 La portada ya tiene su imagen (`assets/img/referidos/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). En `casos/referidos.html` quedan 7 espacios reservados con un comentario `IMAGEN n`: 4 en los bloques (IMAGEN 2 a 5) y 3 en "Diseño final" (IMAGEN 6, 7 y 8). Se cargan igual que en Nubix (ver arriba), con `../assets/img/referidos/nombre.webp`.
 
-## Imágenes del caso Usuarios (pendiente)
+## Caso Usuarios y permisos (casos/usuarios.html)
 
-La portada ya tiene su imagen (`assets/img/usuarios/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). En `casos/usuarios.html` quedan 7 espacios reservados con un comentario `IMAGEN n`: 4 en los bloques (IMAGEN 2 a 5) y 3 en "Diseño final" (IMAGEN 6, 7 y 8). Se cargan igual que en Nubix (ver arriba), con `../assets/img/usuarios/nombre.webp`.
+Rehecho con el mismo criterio que Nubix: lenguaje de producto arriba, visuales en código y pantallas reales del prototipo incrustadas, sin imágenes reservadas. Estructura: En pocas palabras (con "Qué hice yo", "Con inteligencia artificial" y equipo), banda de cuatro cifras, "Personas" (Matías R. y Sofía M., del Figma "Imágenes", nodo 148-1960), cuatro decisiones (roles, invitaciones, cambio de cuenta, acceso restringido), "Cómo trabajé" (alcance, evidencia, cómo avanzó, estado real) y "Lo que aprendí". La sección "Probalo" se sacó (el botón "Ver prototipo" está arriba). Estilos propios en `css/case-usuarios.css` (prefijo `usr-`); reutiliza `nx-card`, `nxt-ph`, `nxh-shot` y `nxh-live` de `css/case-visuals.css`.
+- Las pantallas son iframes del prototipo con `?embed=1`, que oculta la herramienta "Probar estados". Desde 700 px se muestra la versión desktop (iframe de 1280 px escalado) y por debajo, una versión celular de 360 px (`usr-desk` / `usr-mob`).
+- Decisión 2 suma "Cada acción, con los datos a la vista": seis iframes de 320 px del prototipo con el modal abierto (`?modal=reenviar|eliminar|aceptar|rechazar|abandonar`) y la pantalla Editar integrante (`#editar/<email>`). Parámetro nuevo en `index.html`: `?pestana=otras` abre "Asignado a otras cuentas". En `app.js` el foco inicial del modal ahora usa `preventScroll`.
+- Los tres diagramas (estados de una invitación, gestionar usuarios, cambio de cuenta) están redibujados en SVG por código (`scratchpad`, no en el repo) a partir de los tableros de FigJam "Docu-p-porfolio" (nodos 41-2111, 44-2334 y 43-2166); las imágenes de Figma no se pudieron descargar. Son versiones simplificadas con los nombres finales de los roles y la pantalla de acceso restringido (en el FigJam es un modal y los roles se llaman Rol Técnico / Rol Pagos). En pantallas de menos de 700 px se reemplazan por una lista. Los diagramas originales no se publican.
+- La matriz de roles y permisos del Figma (nodo 156-2088) no se incluyó a propósito: el detalle de cada rol ya está en "Los roles, como se eligen al invitar".
+- Nombres de los roles: los del prototipo ("Factura y pagos", no "Facturación y pagos" como en Medium).
+- Personas: las del Figma son Matías R. (Titular) y Sofía M. (Colaboradora); en el prototipo la cuenta de ejemplo es Matías Roldán, titular y además invitado a otras tres cuentas, y eso se aclara en la página. Las fotos de las personas no se pudieron bajar de Figma: se usan iniciales. Ojo: el prototipo también tiene un integrante de ejemplo llamado "Sofía Paredes" (`js/app.js`), que no es la persona Sofía M.
+- Versión anterior de la página (con espacios `IMAGEN 2` a `8`): ya no existe en el repo.
 
 ## Publicar en GitHub Pages
 

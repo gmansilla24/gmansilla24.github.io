@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Caso Usuarios y permisos (prefijo usr-)
+   Se apoya en las clases de case-visuals.css (nx-card, nxt-ph, nxh-shot, nxh-live).
+   ========================================================================== */
+
+/* Roles */
+.usr-roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.usr-role { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 16px; background: var(--white); border: 1px solid var(--border-soft); border-radius: var(--radius-12); }
+.usr-role--owner { background: var(--primary-50); border-color: rgba(7, 78, 155, 0.2); }
+.usr-role__tag { align-self: flex-start; margin: 0; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; line-height: 1.5; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: var(--secondary-100); color: var(--secondary-800); }
+.usr-role--owner .usr-role__tag { background: var(--white); color: var(--primary-700); }
+.usr-role__name { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 600; color: var(--gray-900); }
+.usr-role__desc { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.usr-support { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--secondary-50); border-radius: var(--radius-12); }
+.usr-support p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.usr-support b { color: var(--gray-900); font-weight: 600; }
+.usr-switch { flex: none; position: relative; width: 44px; height: 24px; border-radius: 999px; background: var(--primary-500); }
+.usr-switch::after { content: ""; position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; }
+
+/* Estados de la invitación */
+.usr-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.usr-state { display: flex; flex-direction: column; gap: 14px; min-width: 0; padding: 16px; background: var(--white); border: 1px solid var(--border-soft); border-radius: var(--radius-12); }
+.usr-state__chip { align-self: flex-start; margin: 0; padding: 2px 10px; border-radius: 4px; font-size: 12px; line-height: 1.5; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.usr-state__chip--pend { background: #ffc107; color: #1c1d1f; }
+.usr-state__chip--act { background: #246a00; color: #fff; }
+.usr-state__chip--exp { background: #a60b1e; color: #fff; }
+.usr-state__when { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.usr-state__who { display: flex; flex-direction: column; gap: 6px; margin: 0; padding-top: 12px; border-top: 1px solid var(--border-soft); }
+.usr-state__who dt { font-size: 12px; line-height: 1.3; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.usr-state__who dd { margin: 0 0 8px; font-size: 15px; line-height: 1.4; font-weight: 600; color: var(--gray-900); }
+.usr-state__who dd:last-child { margin-bottom: 0; }
+
+/* Señales de contexto */
+.usr-signals { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; margin: 20px 0 0; padding: 0; list-style: none; counter-reset: usr; }
+@media (min-width: 768px) { .usr-signals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; } }
+.usr-signal { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 4px 12px; counter-increment: usr; }
+.usr-signal::before { content: counter(usr); grid-row: span 2; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--primary-500); color: #fff; font-size: 15px; font-weight: 700; }
+.usr-signal h4 { margin: 0; font-size: 16px; line-height: 1.4; font-weight: 600; color: var(--gray-900); }
+.usr-signal p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+
+/* Primera versión y versión final */
+.usr-vs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; margin: 0; }
+.usr-vs__col { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 16px; border-radius: var(--radius-12); background: var(--secondary-50); }
+.usr-vs__col--new { background: var(--primary-50); box-shadow: inset 0 0 0 1px rgba(7, 78, 155, 0.2); }
+.usr-vs__tag { margin: 0; font-size: 12px; line-height: 1.3; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.usr-vs__col--new .usr-vs__tag { color: var(--primary-600); }
+.usr-vs__t { margin: 0; font-size: 17px; line-height: 1.35; font-weight: 600; color: var(--gray-900); }
+.usr-vs__d { margin: 0; font-size: 14px; line-height: 1.5; color: var(--text-muted); }
+.usr-cases { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.usr-cases li { padding: 4px 12px; border-radius: 999px; font-size: 13px; line-height: 1.4; font-weight: 600; background: var(--white); color: var(--gray-900); box-shadow: inset 0 0 0 1px var(--border-soft); }
+
+
+/* Personas */
+.usr-personas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 24px; margin: 0; padding: 0; list-style: none; }
+.usr-persona { display: flex; flex-direction: column; gap: 16px; min-width: 0; padding: 24px; background: var(--white); border: 1px solid var(--border-soft); border-radius: var(--radius-12); }
+.usr-persona__head { display: flex; align-items: center; gap: 16px; }
+.usr-persona__av { flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--primary-500); color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
+.usr-persona__name { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; color: var(--gray-900); }
+.usr-persona__job { margin: 2px 0 0; font-size: 14px; line-height: 1.4; color: var(--text-muted); }
+.usr-persona__tag { align-self: flex-start; margin: 0; padding: 2px 10px; border-radius: 4px; font-size: 12px; line-height: 1.5; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: var(--secondary-100); color: var(--secondary-800); }
+.usr-persona__meta { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.4; color: var(--text-muted); }
+.usr-persona__meta b { font-weight: 600; color: var(--gray-900); }
+.usr-persona__quote { margin: 0; padding: 12px 16px; border-left: 3px solid var(--primary-500); background: var(--secondary-50); border-radius: 0 var(--radius-12) var(--radius-12) 0; font-size: 15px; line-height: 1.55; font-style: italic; color: var(--gray-900); }
+.usr-persona__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 16px 24px; }
+.usr-persona__h { margin: 0 0 8px; font-size: 12px; line-height: 1.3; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.usr-persona__list { list-style: disc; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0 0 0 18px; font-size: 14px; line-height: 1.5; color: var(--gray-900); }
+.usr-persona__insight { margin: 0; padding: 14px 16px; border-radius: var(--radius-12); background: var(--primary-50); box-shadow: inset 0 0 0 1px rgba(7, 78, 155, 0.2); }
+.usr-persona__insight .usr-persona__h { color: var(--primary-600); }
+.usr-persona__insight p:last-child { margin: 0; font-size: 14px; line-height: 1.55; color: var(--gray-900); }
+
+/* Diagramas dibujados en SVG */
+.usr-dg-wrap { overflow-x: auto; }
+.usr-dg { display: block; width: 100%; min-width: 760px; height: auto; }
+.usr-dg__n { stroke-width: 1.5; fill: #fff; stroke: #9aa7b4; }
+.usr-dg__n--ui { fill: #dff5f2; stroke: #2a9d8f; }
+.usr-dg__n--dec { fill: #fff1c2; stroke: #d9a300; }
+.usr-dg__n--act { fill: #d9ebff; stroke: #4a90e2; }
+.usr-dg__n--stop { fill: #fde4e1; stroke: #d9534f; }
+.usr-dg__n--ink { fill: #1d1e20; stroke: #1d1e20; }
+.usr-dg__n--pend { fill: #ffc107; stroke: #d9a300; }
+.usr-dg__n--ok { fill: #cdf3d4; stroke: #3dae5a; }
+.usr-dg__n--exp { fill: #dedede; stroke: #a3a3a3; }
+.usr-dg__t { font-size: 14px; fill: var(--gray-900); }
+.usr-dg__t--b { font-weight: 700; letter-spacing: 0.04em; }
+.usr-dg__t--sm { font-size: 13px; }
+.usr-dg__t--w { fill: #fff; font-size: 13px; font-weight: 600; }
+.usr-dg__s { font-size: 12px; fill: #3d4349; }
+.usr-dg__l { font-size: 12.5px; fill: var(--text-muted); paint-order: stroke; stroke: #fff; stroke-width: 5px; stroke-linejoin: round; }
+.usr-dg__e { fill: none; stroke: #3a3f45; stroke-width: 1.6; }
+.usr-dg__e--d { stroke: #6b7480; stroke-dasharray: 5 4; }
+.usr-dg__ah { fill: #3a3f45; }
+.usr-dg__dot { fill: #1d1e20; }
+.usr-dg-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.4; color: var(--text-muted); }
+.usr-dg-legend li { display: inline-flex; align-items: center; gap: 8px; }
+.usr-dg-key { width: 16px; height: 12px; border-radius: 3px; border: 1.5px solid; }
+.usr-dg-key--ui { background: #dff5f2; border-color: #2a9d8f; }
+.usr-dg-key--dec { background: #fff1c2; border-color: #d9a300; }
+.usr-dg-key--act { background: #d9ebff; border-color: #4a90e2; }
+.usr-dg-key--stop { background: #fde4e1; border-color: #d9534f; }
+
+/* Versión en lista de los diagramas, para pantallas chicas */
+.usr-trans { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0 0 0 20px; font-size: 14px; line-height: 1.55; color: var(--gray-900); }
+.usr-trans b { font-weight: 600; }
+
+/* Acciones con su modal */
+.usr-sub { margin: 8px 0 -4px; font-size: 13px; line-height: 1.3; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.usr-acts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 28px 24px; align-items: start; }
+.usr-acts .nxh-live { width: 320px; max-width: 100%; }
+.usr-acts .nxt-ph__cap { max-width: 320px; }
+
+/* Desktop en pantallas grandes, versión celular en pantallas chicas */
+.usr-mob { display: none; }
+@media (max-width: 699px) {
+  .usr-desk { display: none !important; }
+  .usr-mob { display: flex; }
+}

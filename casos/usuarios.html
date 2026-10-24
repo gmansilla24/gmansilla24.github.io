@@ -16,8 +16,12 @@
 
   <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/case-visuals.css">
+  <link rel="stylesheet" href="../css/case-usuarios.css">
   <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
   <script src="../js/analytics.js" defer></script>
+  <script src="../js/case-nav.js" defer></script>
+  <script src="../js/case-specimens.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -111,21 +115,42 @@
       </div>
     </section>
 
+    <!-- ===== Índice de la página (se queda fijo al hacer scroll) ===== -->
+    <nav class="case-nav" aria-label="En esta página">
+      <div class="container">
+        <ul class="case-nav__list">
+          <li><a href="#resumen">Resumen</a></li>
+          <li><a href="#perfiles">Personas</a></li>
+          <li><a href="#decision-1"><span class="case-nav__n">1</span>Roles</a></li>
+          <li><a href="#decision-2"><span class="case-nav__n">2</span>Invitaciones</a></li>
+          <li><a href="#decision-3"><span class="case-nav__n">3</span>Cambio de cuenta</a></li>
+          <li><a href="#decision-4"><span class="case-nav__n">4</span>Acceso restringido</a></li>
+          <li><a href="#resultado">Cómo trabajé</a></li>
+          <li><a href="#aprendizajes">Aprendizajes</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- ===== En pocas palabras ===== -->
-    <section class="section section--white" aria-labelledby="resumen-title">
-      <div class="container case-split">
+    <section class="section section--white" id="resumen" aria-labelledby="resumen-title">
+      <div class="container case-block">
+       <div class="case-split">
         <div class="case-text">
           <h2 class="case-h2" id="resumen-title">En pocas palabras</h2>
           <div class="prose">
-            <p>Buena parte de las cuentas de autogestión de la plataforma no las maneja una sola persona: hay dueños de agencia que reparten el trabajo entre empleados y freelancers que gestionan servidores de varios clientes. El panel no reflejaba eso, así que <strong>darle acceso a otra persona significaba entregarle la contraseña maestra</strong>, sin acceso parcial posible ni forma de saber quién había hecho qué.</p>
-            <p>El pedido vino de arriba y esperó a que cerráramos otros proyectos de seguridad, como el 2FA, antes de tocar algo tan sensible. Definí los roles y los flujos junto con el Product Owner y el analista de negocio, y el diseño cambió a partir de un caso borde que marcó el desarrollador. <strong>No tengo métricas de adopción</strong>: la empresa nunca me compartió datos.</p>
+            <p>Buena parte de las cuentas de la plataforma no las maneja una sola persona: hay dueños de agencia que reparten el trabajo entre empleados y freelancers que gestionan servidores de varios clientes. Hasta entonces, compartir el acceso significaba <strong>pasar la contraseña maestra</strong>, sin acceso parcial y sin saber quién había hecho qué.</p>
+            <p>El caso lo resuelve en cuatro decisiones: <strong>tres roles más un Titular</strong>, <strong>invitaciones con tres estados</strong> que vencen solas, <strong>un cambio de cuenta que deja claro dónde estás parado</strong> y <strong>una pantalla de acceso restringido</strong> que nombra el rol necesario. Todo se puede probar en el prototipo en código, en desktop y mobile.</p>
           </div>
         </div>
 
         <div class="summary-card">
           <div class="summary-card__main">
             <h3 class="summary-card__title t-h4">Qué hice yo</h3>
-            <p class="t-body is-muted">Diseñé la sección Usuarios y permisos, el flujo de invitación y el cambio de cuenta, y definí las reglas con el Product Owner y el analista de negocio.</p>
+            <p class="t-body is-muted">Diseñé la sección Usuarios y permisos, el flujo de invitación y el cambio de cuenta, en desktop y mobile, y definí las reglas junto con el Product Owner y el analista de negocio.</p>
+          </div>
+          <div class="summary-card__main">
+            <h3 class="summary-card__title t-h4">Con inteligencia artificial</h3>
+            <p class="t-body is-muted">Usé inteligencia artificial en el relevamiento del código, el armado de componentes, la tokenización, el prototipado en código y los arreglos de usabilidad, entre otras tareas. Todo fue validado por mí.</p>
           </div>
           <div class="summary-card__team">
             <p class="summary-card__label">Con quién trabajé</p>
@@ -138,139 +163,322 @@
             </ul>
           </div>
         </div>
+       </div>
       </div>
     </section>
 
-    <!-- ===== Bloque 1 ===== -->
-    <section class="section section--tint" aria-labelledby="h1-title">
+    <!-- ===== Cifras (banda oscura) ===== -->
+    <section class="section section--dark on-dark" id="cifras" aria-labelledby="cifras-title">
       <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
-            <h2 class="case-h2" id="h1-title">Tres niveles de acceso más el Titular</h2>
-            <div class="prose">
-              <p>Para definir los roles nos sentamos con el Product Owner y el analista de negocio a sectorizar qué se podía hacer dentro de la plataforma: había cosas de pago, cosas técnicas y otras de pura gestión de cuenta. De ahí salieron <strong>tres niveles de acceso</strong> (Administrador, Facturación y pagos, Gestión técnica) más el rol de Titular, que no se asigna por invitación porque es inherente a quien creó la cuenta. El acceso a soporte lo tratamos como una capacidad transversal que el Titular puede activar o desactivar sin importar el rol, y lo dejamos fuera de la matriz a propósito para no complicarla sin necesidad.</p>
+        <h2 class="case-h2" id="cifras-title">El diseño en cuatro cifras</h2>
+        <ul class="stats" aria-label="Cifras del diseño">
+          <li class="stat">
+            <p class="stat__num">3 + 1</p>
+            <h3 class="stat__title">Roles</h3>
+            <p class="stat__text">Administrador, Factura y pagos y Gestión técnica se asignan al invitar. El Titular es quien creó la cuenta.</p>
+            <a class="stat__link" href="#d1-title">Roles</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">3</p>
+            <h3 class="stat__title">Estados de invitación</h3>
+            <p class="stat__text">Pendiente, activo y expirado. Las invitaciones vencen solas para no acumular pendientes que no significan nada.</p>
+            <a class="stat__link" href="#d2-title">Invitaciones</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">10</p>
+            <h3 class="stat__title">Integrantes por cuenta</h3>
+            <p class="stat__text">El tope se ve desde el principio, con un indicador de cupo en la lista.</p>
+            <a class="stat__link" href="#d2-title">Invitaciones</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">4</p>
+            <h3 class="stat__title">Señales de contexto</h3>
+            <p class="stat__text">Menú, inicio, barra y menú de la cuenta cambian juntos al entrar a una cuenta invitada.</p>
+            <a class="stat__link" href="#d3-title">Cambio de cuenta</a>
+          </li>
+        </ul>
+        <p class="case-note">Cifras del diseño final, según el prototipo en código.</p>
+      </div>
+    </section>
+
+    <!-- ===== Personas ===== -->
+    <section class="section section--white" id="perfiles" aria-labelledby="perfiles-title">
+      <div class="container case-block">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Para quién</p>
+            <h2 class="case-h2" id="perfiles-title">Dos perfiles, dos necesidades</h2>
+          </div>
+          <div class="prose">
+            <p>Matías delega accesos dentro de su propia cuenta. Sofía opera dentro de cuentas ajenas que le asignaron. Cada decisión del caso responde a una de estas dos necesidades.</p>
+          </div>
+        </div>
+
+        <ul class="usr-personas">
+          <li class="usr-persona"><div class="usr-persona__head"><span class="usr-persona__av" aria-hidden="true">M</span><div><h3 class="usr-persona__name">Matías R.</h3><p class="usr-persona__job">Dueño de una agencia de diseño web</p></div></div><p class="usr-persona__tag">Rol: Titular</p><ul class="usr-persona__meta"><li><b>Edad:</b> 38 años</li><li><b>Ubicación:</b> Córdoba, AR</li><li><b>Equipo:</b> 4 personas</li><li><b>Clientes:</b> ~15 activos en Nubix</li></ul><blockquote class="usr-persona__quote"><p style="margin:0">“Necesito que mi equipo trabaje sin que yo esté presente para todo. Pero tampoco quiero que tengan acceso a todo.”</p></blockquote><div class="usr-persona__cols"><div><h4 class="usr-persona__h">Objetivos</h4><ul class="usr-persona__list"><li>Delegar acceso técnico sin exponer facturación ni pagos.</li><li>Delegar facturación sin exponer los servidores.</li><li>Revocar accesos sin cambiar la contraseña de toda la cuenta.</li></ul></div><div><h4 class="usr-persona__h">Frustraciones</h4><ul class="usr-persona__list"><li>No hay forma de dar acceso parcial: termina compartiendo la contraseña maestra.</li><li>Cuando alguien se va, hay que cambiar la contraseña de toda la cuenta.</li><li>No tiene visibilidad de qué hizo cada usuario.</li></ul></div></div><div class="usr-persona__insight"><p class="usr-persona__h">Insight clave</p><p>Compartir la contraseña maestra le pesa más allá de lo técnico: carga con un riesgo de seguridad que no siempre sabe nombrar. Busca, en el fondo, poder decir con precisión qué puede ver cada uno.</p></div></li>
+          <li class="usr-persona"><div class="usr-persona__head"><span class="usr-persona__av" aria-hidden="true">S</span><div><h3 class="usr-persona__name">Sofía M.</h3><p class="usr-persona__job">Desarrolladora backend freelance</p></div></div><p class="usr-persona__tag">Rol: Colaboradora</p><ul class="usr-persona__meta"><li><b>Edad:</b> 29 años</li><li><b>Ubicación:</b> Buenos Aires, AR</li><li><b>Nivel técnico:</b> Alto (servidores, DNS)</li><li><b>Clientes:</b> 3 en Nubix</li></ul><blockquote class="usr-persona__quote"><p style="margin:0">“Lo peor que me puede pasar es ejecutar algo en la cuenta equivocada, simplemente porque no me di cuenta de en qué cuenta estaba.”</p></blockquote><div class="usr-persona__cols"><div><h4 class="usr-persona__h">Objetivos</h4><ul class="usr-persona__list"><li>Saber en qué cuenta está operando sin revisar cada pantalla.</li><li>Aceptar o rechazar un acceso sabiendo qué implica antes de confirmar.</li><li>Salir de una cuenta ajena de forma simple, sin sesiones residuales.</li></ul></div><div><h4 class="usr-persona__h">Frustraciones</h4><ul class="usr-persona__list"><li>Las interfaces se ven idénticas: no siempre sabe en qué cuenta está.</li><li>Tuvo que pedir credenciales de nuevo por accesos vencidos sin aviso.</li><li>No sabe qué puede hacer en cada cuenta hasta intentarlo y fallar.</li></ul></div></div><div class="usr-persona__insight"><p class="usr-persona__h">Insight clave</p><p>Para Sofía, el riesgo más alto pasa por operar en el contexto equivocado. Necesita señales claras y persistentes de en qué cuenta está, porque las interfaces idénticas terminan siendo un riesgo operacional real.</p></div></li>
+        </ul>
+        <p class="case-note">En el prototipo uso una sola cuenta de ejemplo, Matías Roldán: es titular de la suya y está invitada a otras tres. En el producto, los dos lados conviven en la misma pantalla.</p>
+      </div>
+    </section>
+
+    <!-- ===== Decisión 1 ===== -->
+    <section class="section section--white" id="decision-1" aria-labelledby="d1-title">
+      <div class="container case-block">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 1 de 4</p>
+            <h2 class="case-h2" id="d1-title">Tres roles y un Titular</h2>
+          </div>
+          <div class="prose">
+              <p>Para definir los roles nos sentamos con el Product Owner y el analista de negocio a ordenar todo lo que se podía hacer en la plataforma: había cosas de pago, cosas técnicas y otras de pura gestión de la cuenta. De ahí salieron <strong>tres roles que se asignan al invitar</strong> y un cuarto, el Titular, que es inherente a quien creó la cuenta.</p><p>El acceso a soporte lo tratamos como una capacidad transversal y lo dejamos fuera de la matriz a propósito, para no complicarla sin necesidad.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Los roles, como se eligen al invitar</h3>
+              <p class="nx-card__note">Es el formulario del prototipo en código: cada rol dice en una línea qué puede y qué no.</p>
+            </div>
+            <ul class="usr-roles">
+              <li class="usr-role usr-role--owner"><p class="usr-role__tag">Inherente a la cuenta</p><h4 class="usr-role__name">Titular</h4><p class="usr-role__desc">Es quien creó la cuenta. No se asigna por invitación.</p></li>
+              <li class="usr-role"><p class="usr-role__tag">Se asigna al invitar</p><h4 class="usr-role__name">Administrador</h4><p class="usr-role__desc">Administra servicios y hace compras con los métodos de pago agregados.</p></li>
+              <li class="usr-role"><p class="usr-role__tag">Se asigna al invitar</p><h4 class="usr-role__name">Factura y pagos</h4><p class="usr-role__desc">Administra medios de pago y facturación. No puede modificar servicios.</p></li>
+              <li class="usr-role"><p class="usr-role__tag">Se asigna al invitar</p><h4 class="usr-role__name">Gestión técnica</h4><p class="usr-role__desc">Administra servicios. No puede realizar compras.</p></li>
+            </ul>
+            <div class="usr-support"><span class="usr-switch" aria-hidden="true"></span><p><b>El acceso a soporte es un interruptor aparte.</b> El Titular lo prende o lo apaga para cada integrante, sin importar su rol.</p></div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · invitar a un integrante</p><div class="nxh-shot" data-shot style="--h:880"><iframe src="../prototipos/usuarios/index.html?paso=1&vista=agregar&embed=1" title="Formulario Agregar integrante del prototipo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Email, rol y acceso a soporte en una sola pantalla.</b> Si el email no tiene cuenta, se crea cuando la persona acepta la invitación. Es el prototipo en código y se puede usar.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · invitar a un integrante</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:720px"><iframe src="../prototipos/usuarios/index.html?paso=1&vista=agregar&embed=1" title="Formulario Agregar integrante del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Email, rol y acceso a soporte en una sola pantalla.</b> Es el prototipo en código y se puede usar.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Tres roles que se asignan al invitar, un Titular que es inherente a la cuenta y el soporte como interruptor aparte. Cada rol se explica en una línea dentro del propio formulario, así quien invita no necesita una matriz para elegir. Y al sacar el soporte de los roles, el Titular lo prende o lo apaga para cada persona sin multiplicar las combinaciones.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== Decisión 2 ===== -->
+    <section class="section section--white" id="decision-2" aria-labelledby="d2-title">
+      <div class="container case-block">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 2 de 4</p>
+            <h2 class="case-h2" id="d2-title">Invitaciones que se ordenan solas</h2>
+          </div>
+          <div class="prose">
+              <p>Quien invita completa un formulario con el email y el rol. Cada invitación pasa por <strong>tres estados</strong> (pendiente, activo y expirado) y vence sola, para no acumular pendientes que no significan nada. Antes de gestionar usuarios hay un <strong>paso de autenticación de dos factores</strong>, el mismo que ya pedíamos en otras acciones sensibles.</p><p>La cuenta admite hasta <strong>diez integrantes</strong>. El tope se ve desde el principio, con un indicador de cupo: una primera versión recién lo mostraba al intentar sumar a la persona número once.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El ciclo de una invitación</h3>
+              <p class="nx-card__note">Cada estado muestra solo las acciones que tienen sentido, tanto para quien invita como para quien recibe.</p>
+            </div>
+            <div class="usr-desk"><div class="usr-dg-wrap"><svg class="usr-dg" viewBox="0 0 960 440" role="img" aria-label="Diagrama de estados de una invitación: el Titular la envía y queda pendiente; puede reenviarla, la persona puede aceptarla y pasa a activo, rechazarla o ser eliminada, o vencer y pasar a expirado; un activo se puede editar o revocar; un expirado se elimina." xmlns="http://www.w3.org/2000/svg"><defs><marker id="usr-est-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" class="usr-dg__ah"/></marker></defs><circle class="usr-dg__dot" cx="480" cy="26" r="11"/><path class="usr-dg__e" d="M480 38 L480 112" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="480" y="81.0">El Titular envía la invitación</tspan></text><rect class="usr-dg__n usr-dg__n--pend" x="345.0" y="112.0" width="270" height="80" rx="40.0"/><text class="usr-dg__t usr-dg__t--b" text-anchor="middle"><tspan x="480" y="147.0">PENDIENTE</tspan></text><text class="usr-dg__s" text-anchor="middle"><tspan x="480" y="171.0">El Titular reenvía: sigue pendiente</tspan></text><rect class="usr-dg__n usr-dg__n--ok" x="35.0" y="272.0" width="270" height="80" rx="40.0"/><text class="usr-dg__t usr-dg__t--b" text-anchor="middle"><tspan x="170" y="307.0">ACTIVO</tspan></text><text class="usr-dg__s" text-anchor="middle"><tspan x="170" y="331.0">El Titular edita el rol: sigue activo</tspan></text><rect class="usr-dg__n usr-dg__n--exp" x="655.0" y="272.0" width="270" height="80" rx="40.0"/><text class="usr-dg__t usr-dg__t--b" text-anchor="middle"><tspan x="790" y="317.0">EXPIRADO</tspan></text><path class="usr-dg__e" d="M345 152 L170 152 L170 272" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="258" y="157.0">La persona acepta</tspan></text><path class="usr-dg__e" d="M615 152 L790 152 L790 272" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="703" y="149.5">Vence el plazo</tspan><tspan x="703" y="164.5">sin respuesta</tspan></text><circle class="usr-dg__dot" cx="480" cy="412" r="11"/><path class="usr-dg__e" d="M480 192 L480 399" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="480" y="293.5">La persona rechaza</tspan><tspan x="480" y="308.5">o el Titular elimina</tspan></text><circle class="usr-dg__dot" cx="170" cy="412" r="11"/><path class="usr-dg__e" d="M170 352 L170 399" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="184" y="383.0">El Titular revoca el acceso</tspan></text><circle class="usr-dg__dot" cx="790" cy="412" r="11"/><path class="usr-dg__e" d="M790 352 L790 399" marker-end="url(#usr-est-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="804" y="383.0">El Titular elimina</tspan></text></svg></div></div>
+            <ol class="usr-trans usr-mob">
+              <li><b>El Titular envía la invitación</b> y queda pendiente.</li>
+              <li><b>Pendiente:</b> el Titular puede reenviarla y sigue pendiente. Si la persona acepta, pasa a activo. Si vence el plazo sin respuesta, pasa a expirado. Si la persona rechaza o el Titular la elimina, termina.</li>
+              <li><b>Activo:</b> el Titular puede editar el rol y sigue activo, o revocar el acceso y termina.</li>
+              <li><b>Expirado:</b> el Titular la elimina y termina.</li>
+            </ol>
+            <ul class="usr-states">
+              <li class="usr-state"><p class="usr-state__chip usr-state__chip--pend">Pendiente</p><p class="usr-state__when">La invitación se envió y todavía no tuvo respuesta.</p>
+                <dl class="usr-state__who"><dt>Quien invita</dt><dd>Reenviar · Eliminar</dd><dt>Quien recibe</dt><dd>Aceptar · Rechazar</dd></dl></li>
+              <li class="usr-state"><p class="usr-state__chip usr-state__chip--act">Activo</p><p class="usr-state__when">La persona aceptó y ya opera en la cuenta con el rol asignado.</p>
+                <dl class="usr-state__who"><dt>Quien invita</dt><dd>Editar rol · Eliminar</dd><dt>Quien recibe</dt><dd>Abandonar la cuenta</dd></dl></li>
+              <li class="usr-state"><p class="usr-state__chip usr-state__chip--exp">Expirado</p><p class="usr-state__when">Venció sin respuesta. No queda como un pendiente eterno.</p>
+                <dl class="usr-state__who"><dt>Quien invita</dt><dd>Eliminar</dd><dt>Quien recibe</dt><dd>Eliminar</dd></dl></li>
+            </ul>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">La lista del Titular, con el cupo a la vista</h3>
+              <p class="nx-card__note">Hasta diez integrantes por cuenta, con su rol, su acceso a soporte y su estado.</p>
+            </div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · cuenta con 10 de 10 integrantes</p><div class="nxh-shot" data-shot style="--h:640"><iframe src="../prototipos/usuarios/index.html?paso=1&integrantes=10&embed=1" title="Lista de integrantes del prototipo con el cupo completo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>El indicador “10 / 10” se ve antes de intentar sumar a alguien.</b> Con el cupo completo, Agregar integrante queda deshabilitado. Cada fila ofrece solo las acciones de su estado.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · cuenta con 10 de 10 integrantes</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/usuarios/index.html?paso=1&integrantes=10&embed=1" title="Lista de integrantes del prototipo con el cupo completo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>El indicador “10 / 10” se ve antes de intentar sumar a alguien.</b> Cada integrante muestra solo las acciones de su estado.</figcaption></figure>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Del otro lado: “Asignado a otras cuentas”</h3>
+              <p class="nx-card__note">La misma pantalla tiene una segunda pestaña para quien recibe invitaciones.</p>
+            </div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · invitaciones recibidas</p><div class="nxh-shot" data-shot style="--h:460"><iframe src="../prototipos/usuarios/index.html?paso=1&embed=1&pestana=otras" title="Pestaña Asignado a otras cuentas del prototipo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Cada invitación recibida se acepta, se rechaza o se abandona</b> cuando termina el trabajo, con el rol y el acceso a soporte a la vista.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · invitaciones recibidas</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:600px"><iframe src="../prototipos/usuarios/index.html?paso=1&embed=1&pestana=otras" title="Pestaña Asignado a otras cuentas del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Cada invitación recibida se acepta, se rechaza o se abandona</b> cuando termina el trabajo.</figcaption></figure>
+          </div>
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Cada acción, con los datos a la vista</h3>
+              <p class="nx-card__note">Reenviar, editar, eliminar, aceptar, rechazar o abandonar una cuenta: todo lo que cambia un acceso pide confirmar y muestra a quién afecta. Son los modales del prototipo en código.</p>
+            </div>
+            <h4 class="usr-sub">Quien invita</h4>
+            <div class="usr-acts">
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Reenviar invitación</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:470px"><iframe src="../prototipos/usuarios/index.html?paso=1&integrantes=5&embed=1&modal=reenviar" title="Modal Reenviar invitación del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Para una invitación pendiente.</b> Pide confirmar el reenvío; la invitación sigue pendiente.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Editar rol</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:700px"><iframe src="../prototipos/usuarios/index.html?paso=1&integrantes=5&embed=1#editar/federico.ibarra%40example.com" title="Pantalla Editar integrante del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Cambia el rol y el acceso a soporte</b> de alguien que ya está activo. El email no se edita.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Eliminar integrante</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:560px"><iframe src="../prototipos/usuarios/index.html?paso=1&integrantes=5&embed=1&modal=eliminar" title="Modal Eliminar integrante del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Avisa que la persona pierde el acceso</b> y muestra sus datos antes de confirmar.</figcaption></figure>
+            </div>
+            <h4 class="usr-sub">Quien recibe</h4>
+            <div class="usr-acts">
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Aceptar invitación</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:560px"><iframe src="../prototipos/usuarios/index.html?paso=1&embed=1&modal=aceptar" title="Modal Aceptar invitación del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Muestra de quién es la cuenta,</b> tu rol y si tenés acceso a soporte, antes de aceptar.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Rechazar invitación</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:520px"><iframe src="../prototipos/usuarios/index.html?paso=1&embed=1&modal=rechazar" title="Modal Rechazar invitación del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Muestra de quién es la cuenta.</b> Si cambiás de idea, hay que pedirle al Titular que te invite de nuevo.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Abandonar cuenta</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:560px"><iframe src="../prototipos/usuarios/index.html?paso=1&embed=1&modal=abandonar" title="Modal Abandonar cuenta del prototipo" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Avisa que perdés el acceso</b> y muestra el titular y tu rol.</figcaption></figure>
             </div>
           </div>
-          <!-- IMAGEN 2 · matriz de roles y permisos -->
-          <figure class="case-media" aria-hidden="true"></figure>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El recorrido completo de la sección</h3>
+              <p class="nx-card__note">Desde que se entra a Usuarios y permisos hasta que cada acción vuelve a la tabla.</p>
+            </div>
+            <div class="usr-desk"><div class="usr-dg-wrap"><svg class="usr-dg" viewBox="0 0 1240 350" role="img" aria-label="Flujo para gestionar usuarios: al entrar se pide tener el 2FA activo; si la cuenta no tiene integrantes se ve una vista vacía con la opción de agregar, y si tiene se ve la lista; desde la lista se invita con un formulario o se gestiona a alguien según su estado." xmlns="http://www.w3.org/2000/svg"><defs><marker id="usr-ges-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" class="usr-dg__ah"/></marker></defs><rect class="usr-dg__n usr-dg__n--ink" x="10.0" y="135.0" width="62" height="30" rx="15.0"/><text class="usr-dg__t usr-dg__t--w" text-anchor="middle"><tspan x="41" y="155.0">Inicio</tspan></text><path class="usr-dg__e" d="M72 150 L95 150" marker-end="url(#usr-ges-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="95.0" y="124.0" width="130" height="52" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="160" y="146.5">Entra a Gestión</tspan><tspan x="160" y="163.5">de usuarios</tspan></text><path class="usr-dg__e" d="M225 150 L240 150" marker-end="url(#usr-ges-a)"/><polygon class="usr-dg__n usr-dg__n--dec" points="300,106.0 360.0,150 300,194.0 240.0,150"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="300" y="147.0">¿Tiene el 2FA</tspan><tspan x="300" y="163.0">activo?</tspan></text><path class="usr-dg__e" d="M300 106 L300 80" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="312" y="113.0">No</tspan></text><rect class="usr-dg__n usr-dg__n--stop" x="225.0" y="24.0" width="150" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="300" y="48.5">Paso previo: hay</tspan><tspan x="300" y="65.5">que activar el 2FA</tspan></text><path class="usr-dg__e" d="M375 52 L420 52" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="398" y="45.0">Activa</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="420.0" y="24.0" width="190" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="515" y="48.5">Activa el 2FA en</tspan><tspan x="515" y="65.5">Configuración de cuenta</tspan></text><path class="usr-dg__e" d="M515 80 L515 106" marker-end="url(#usr-ges-a)"/><path class="usr-dg__e" d="M360 150 L450 150" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="405" y="143.0">Sí</tspan></text><polygon class="usr-dg__n usr-dg__n--dec" points="515,106.0 580.0,150 515,194.0 450.0,150"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="515" y="147.0">¿Tiene</tspan><tspan x="515" y="163.0">integrantes?</tspan></text><path class="usr-dg__e" d="M580 150 L620 150" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="600" y="143.0">Sí</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="620.0" y="117.0" width="160" height="66" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="700" y="138.0">Lista de usuarios</tspan><tspan x="700" y="155.0">con rol, estado,</tspan><tspan x="700" y="172.0">acciones y cupo</tspan></text><path class="usr-dg__e" d="M515 194 L515 262" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="527" y="227.0">No</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="420.0" y="262.0" width="190" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="515" y="286.5">Cuenta sin integrantes</tspan><tspan x="515" y="303.5">CTA: Agregar integrante</tspan></text><path class="usr-dg__e" d="M610 290 L675 290" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="642" y="281.0">Agrega</tspan></text><path class="usr-dg__e" d="M700 183 L700 262" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="712" y="210.0">Invita</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="675.0" y="262.0" width="170" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="760" y="286.5">Formulario: email,</tspan><tspan x="760" y="303.5">rol y acceso a soporte</tspan></text><path class="usr-dg__e" d="M845 290 L930 290" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="888" y="281.0">Envía</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="930.0" y="257.0" width="160" height="66" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1010" y="278.0">Tabla actualizada:</tspan><tspan x="1010" y="295.0">nuevo usuario Pendiente</tspan><tspan x="1010" y="312.0">y cupo al día</tspan></text><path class="usr-dg__e" d="M1090 290 L1110 290" marker-end="url(#usr-ges-a)"/><circle class="usr-dg__dot" cx="1122" cy="290" r="10"/><path class="usr-dg__e" d="M780 150 L835 150" marker-end="url(#usr-ges-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="808" y="143.0">Gestiona</tspan></text><polygon class="usr-dg__n usr-dg__n--dec" points="900,106.0 965.0,150 900,194.0 835.0,150"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="900" y="139.0">¿Qué acción</tspan><tspan x="900" y="155.0">toma sobre</tspan><tspan x="900" y="171.0">un usuario?</tspan></text><path class="usr-dg__e" d="M965 150 L995 150"/><path class="usr-dg__e" d="M995 34 L995 208"/><path class="usr-dg__e" d="M995 34 L1015 34" marker-end="url(#usr-ges-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="1020.0" y="11.0" width="200" height="46" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1120" y="30.5">Pendiente</tspan><tspan x="1120" y="47.5">Reenviar la invitación</tspan></text><path class="usr-dg__e" d="M995 92 L1015 92" marker-end="url(#usr-ges-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="1020.0" y="69.0" width="200" height="46" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1120" y="88.5">Activo</tspan><tspan x="1120" y="105.5">Editar el rol</tspan></text><path class="usr-dg__e" d="M995 150 L1015 150" marker-end="url(#usr-ges-a)"/><rect class="usr-dg__n usr-dg__n--stop" x="1020.0" y="127.0" width="200" height="46" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1120" y="146.5">Activo</tspan><tspan x="1120" y="163.5">Revocar el acceso</tspan></text><path class="usr-dg__e" d="M995 208 L1015 208" marker-end="url(#usr-ges-a)"/><rect class="usr-dg__n usr-dg__n--stop" x="1020.0" y="185.0" width="200" height="46" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1120" y="204.5">Cualquier estado</tspan><tspan x="1120" y="221.5">Eliminar</tspan></text></svg></div><ul class="usr-dg-legend"><li><span class="usr-dg-key usr-dg-key--ui" aria-hidden="true"></span>Pantalla</li><li><span class="usr-dg-key usr-dg-key--dec" aria-hidden="true"></span>Decisión</li><li><span class="usr-dg-key usr-dg-key--act" aria-hidden="true"></span>Paso previo</li><li><span class="usr-dg-key usr-dg-key--stop" aria-hidden="true"></span>Modal o bloqueo</li></ul></div>
+            <ol class="usr-trans usr-mob">
+              <li><b>Antes de entrar</b> se pide tener el 2FA activo; si no, un paso previo lleva a activarlo en Configuración de cuenta.</li>
+              <li><b>Si la cuenta no tiene integrantes,</b> una vista vacía invita a agregar el primero. Si los tiene, se ve la lista con rol, estado, acciones y cupo.</li>
+              <li><b>Para invitar,</b> un formulario con email, rol y acceso a soporte. Al enviarlo, la tabla muestra al nuevo usuario como pendiente.</li>
+              <li><b>Para gestionar a alguien:</b> reenviar (pendiente), editar el rol o revocar el acceso (activo) y eliminar (cualquier estado). Cada acción pasa por un modal y vuelve a la tabla.</li>
+            </ol>
+          </div>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Tres roles asignables por invitación, un Titular que no se asigna y el acceso a soporte como interruptor aparte, fuera de la matriz.</p>
-        </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Tres estados que vencen solos, con acciones distintas según quién los mira: quien invita reenvía, edita o elimina; quien recibe acepta, rechaza o abandona. El 2FA antes de gestionar usuarios reutiliza un paso que ya pedíamos en otras acciones sensibles. El cupo de diez integrantes se ve desde la lista, en vez de aparecer recién al querer sumar al número once. Y cada acción que cambia un acceso pide confirmar, con los datos de la persona a la vista.</p></div>
       </div>
     </section>
 
-    <!-- ===== Bloque 2 ===== -->
-    <section class="section section--white" aria-labelledby="h2-title">
+    <!-- ===== Decisión 3 ===== -->
+    <section class="section section--white" id="decision-3" aria-labelledby="d3-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h2-title">Dos perfiles, un mismo flujo de invitación</h2>
-            <div class="prose">
-              <p>No hice entrevistas formales para esto. Lo que tengo son <strong>cuatro años de tickets de mesa de ayuda</strong>, viendo qué problema traía cada perfil de cliente, y de ahí armé dos arquetipos: Matías, dueño de una agencia de diseño web, que necesita delegar sin perder el control, y Sofía, desarrolladora freelance que entra y sale de varias cuentas de clientes, para quien el riesgo real es operar sin darse cuenta en la cuenta equivocada. Son perfiles compuestos, no personas reales entrevistadas.</p>
-              <p>Lo diseñamos en etapas, sin lanzar nada a producción hasta que las secciones, muy relacionadas entre sí, estuvieran terminadas. La primera fue “Usuarios y permisos”, que antes no existía: con el analista y con aprobación del PO definimos qué podía hacer quien invita y quien recibe, y de ahí salió <strong>que las invitaciones expiren</strong>, para no acumular pendientes que no significan nada. Quien invita completa un formulario con el email y el rol (si el email no tiene cuenta, se le crea una al aceptar), la cuenta admite hasta diez integrantes y antes de gestionar usuarios hay un gate de 2FA, que ya exigíamos para otras acciones sensibles. Del lado de Sofía, una segunda pestaña, “Asignado a otras cuentas”, muestra cada invitación recibida para aceptarla, rechazarla o abandonarla cuando termina el trabajo.</p>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 3 de 4</p>
+            <h2 class="case-h2" id="d3-title">Cambiar de cuenta sin perder de vista dónde estás</h2>
+          </div>
+          <div class="prose">
+              <p>Quien entra a una cuenta ajena opera con un rol que no eligió, y el riesgo real es trabajar sin darse cuenta en la cuenta equivocada. Por eso el cambio de contexto es <strong>deliberado y visible en cuatro lugares a la vez</strong>: el menú, el inicio, una barra fija y el menú de la cuenta.</p><p>Con el producto ya en producción hubo una corrección: la indicación de que estás en una cuenta invitada estaba en el menú lateral y la rediseñé dentro de la sección que se abre desde el avatar del header, para que se vea de forma más evidente.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Elegís dónde querés estar</h3>
+              <p class="nx-card__note">Antes del inicio hay una pantalla de selección, pensada como los perfiles de Netflix.</p>
+            </div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · selección de cuentas</p><div class="nxh-shot" data-shot style="--h:640"><iframe src="../prototipos/usuarios/hub.html?embed=1" title="Pantalla de selección de cuentas del prototipo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Tu cuenta, las invitaciones pendientes y las cuentas con acceso</b>, cada una con tu rol y con el estado del soporte.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · selección de cuentas</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/usuarios/hub.html?embed=1" title="Pantalla de selección de cuentas del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Tu cuenta, las invitaciones pendientes y las cuentas con acceso</b>, cada una con tu rol y con el estado del soporte.</figcaption></figure>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Cuatro señales a la vez</h3>
+              <p class="nx-card__note">Dentro de una cuenta ajena, nada queda librado a la memoria de quien opera.</p>
+            </div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · dentro de una cuenta invitada</p><div class="nxh-shot" data-shot style="--h:560"><iframe src="../prototipos/usuarios/dashboard.html?cuenta=invitada&de=valeria&embed=1" title="Inicio de una cuenta invitada del prototipo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Es el prototipo en código, no una captura.</b> Probá el menú de la cuenta (arriba a la derecha): deja de mostrar tus datos y muestra en qué cuenta estás.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · dentro de una cuenta invitada</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/usuarios/dashboard.html?cuenta=invitada&de=valeria&embed=1" title="Inicio de una cuenta invitada del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Es el prototipo en código.</b> Probá el menú de la cuenta (arriba a la derecha): muestra en qué cuenta estás.</figcaption></figure>
+            <ol class="usr-signals">
+              <li class="usr-signal"><h4>El menú sigue al rol</h4><p>El menú lateral muestra solo lo que ese rol puede usar. Acá, sin Facturas y pagos ni Partners.</p></li>
+              <li class="usr-signal"><h4>El inicio es el de esa cuenta</h4><p>Solo aparecen los productos y los datos de la cuenta en la que estás.</p></li>
+              <li class="usr-signal"><h4>Una barra lo dice</h4><p>“Estás en una cuenta invitada” queda fija debajo del header.</p></li>
+              <li class="usr-signal"><h4>El menú de la cuenta cambia</h4><p>Deja de mostrar tus datos propios e indica en qué cuenta y con qué rol estás operando.</p></li>
+            </ol>
+          </div>
+
+          <div class="nx-card usr-desk">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Lo mismo, en mobile</h3>
+              <p class="nx-card__note">Las dos pantallas en un ancho de 360 px, también como prototipo en código.</p>
+            </div>
+            <div class="nxt-pair">
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Selección de cuentas</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:600px"><iframe src="../prototipos/usuarios/hub.html?embed=1" title="Pantalla de selección de cuentas del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>La elección de cuenta ocupa toda la pantalla.</b> Cada cuenta muestra el rol y el estado del soporte.</figcaption></figure>
+              <figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Dentro de una cuenta invitada</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:600px"><iframe src="../prototipos/usuarios/dashboard.html?cuenta=invitada&de=valeria&embed=1" title="Inicio de una cuenta invitada del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>La barra de cuenta invitada sigue fija</b> debajo del header, también en mobile.</figcaption></figure>
             </div>
           </div>
-          <!-- IMAGEN 3 · perfiles de Matías y Sofía, y diagrama de estados de la invitación -->
-          <figure class="case-media" aria-hidden="true"></figure>
-        </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Invitaciones con tres estados (pendiente, activo, expirado) que vencen solas, un gate de 2FA antes de gestionar usuarios y una pestaña propia para quien recibe.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Bloque 3 ===== -->
-    <section class="section section--tint" aria-labelledby="h3-title">
-      <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
-            <h2 class="case-h2" id="h3-title">Cambiar de cuenta sin perder de vista dónde estás</h2>
-            <div class="prose">
-              <p>La segunda etapa fue el cambio de cuenta en sí. Pensamos el hub como Netflix: elegís dónde querés estar. Sofía ve ahí la invitación, junto a su cuenta propia y las que le asignaron otros clientes, y pasa a operar en una cuenta que no es la suya, con un rol que no eligió. Por eso decidí que el cambio de contexto fuera <strong>deliberado y visible en cuatro lugares a la vez</strong>: el sidebar se adapta al rol asignado (a alguien con rol Técnico se le ocultan Pagos y Gestión de usuarios), el dashboard muestra solo lo que corresponde a esa cuenta, una barra explicita que se está en una cuenta invitada y el popup deja de mostrar los datos propios de Sofía para indicar en qué cuenta está operando.</p>
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El recorrido de quien trabaja en cuentas ajenas</h3>
+              <p class="nx-card__note">Desde el hub hasta volver a él, con los dos desvíos: responder una invitación y chocar con una sección que el rol no permite.</p>
             </div>
+            <div class="usr-desk"><div class="usr-dg-wrap"><svg class="usr-dg" viewBox="0 0 1240 470" role="img" aria-label="Flujo de cambio de cuenta: desde el hub se responde una invitación pendiente, aceptándola o rechazándola con un modal, o se elige una fila; la propia abre la cuenta con el menú completo y la ajena cambia el contexto según el rol asignado; si la persona intenta entrar a una sección que su rol no permite ve la pantalla de acceso restringido y vuelve al inicio de la cuenta; al terminar vuelve al hub." xmlns="http://www.w3.org/2000/svg"><defs><marker id="usr-cam-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" class="usr-dg__ah"/></marker></defs><rect class="usr-dg__n usr-dg__n--ink" x="10.0" y="247.0" width="62" height="30" rx="15.0"/><text class="usr-dg__t usr-dg__t--w" text-anchor="middle"><tspan x="41" y="267.0">Inicio</tspan></text><path class="usr-dg__e" d="M72 262 L105 262" marker-end="url(#usr-cam-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="105.0" y="230.0" width="170" height="64" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="190" y="258.5">Hub de cuentas:</tspan><tspan x="190" y="275.5">tu cuenta y las ajenas</tspan></text><path class="usr-dg__e" d="M190 230 L190 78" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="202" y="175.0">Si hay pendientes</tspan></text><rect class="usr-dg__n usr-dg__n--act" x="95.0" y="26.0" width="190" height="52" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="190" y="48.5">Banner “Responder</tspan><tspan x="190" y="65.5">invitaciones”</tspan></text><path class="usr-dg__e" d="M285 52 L335 52" marker-end="url(#usr-cam-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="335.0" y="26.0" width="170" height="52" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="420" y="48.5">Pestaña “Asignado</tspan><tspan x="420" y="65.5">a otras cuentas”</tspan></text><path class="usr-dg__e" d="M505 52 L535 52" marker-end="url(#usr-cam-a)"/><polygon class="usr-dg__n usr-dg__n--dec" points="600,12.0 665.0,52 600,92.0 535.0,52"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="600" y="49.0">¿Acepta o</tspan><tspan x="600" y="65.0">rechaza?</tspan></text><path class="usr-dg__e" d="M665 52 L730 52" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="697" y="45.0">Acepta</tspan></text><rect class="usr-dg__n usr-dg__n--stop" x="730.0" y="20.0" width="200" height="64" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="830" y="40.0">Modal con la cuenta y</tspan><tspan x="830" y="57.0">el rol asignado. Aviso</tspan><tspan x="830" y="74.0">y fila actualizada</tspan></text><path class="usr-dg__e" d="M600 92 L600 118" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="612" y="111.0">Rechaza</tspan></text><rect class="usr-dg__n usr-dg__n--stop" x="495.0" y="118.0" width="210" height="64" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="600" y="138.0">Modal “¿Rechazas la</tspan><tspan x="600" y="155.0">invitación?”. Aviso y</tspan><tspan x="600" y="172.0">fila oculta</tspan></text><path class="usr-dg__e" d="M275 262 L325 262" marker-end="url(#usr-cam-a)"/><polygon class="usr-dg__n usr-dg__n--dec" points="390,214.0 455.0,262 390,310.0 325.0,262"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="390" y="251.0">¿Sobre qué</tspan><tspan x="390" y="267.0">fila hace</tspan><tspan x="390" y="283.0">clic?</tspan></text><path class="usr-dg__e" d="M455 262 L520 262" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="487" y="255.0">Fila ajena</tspan></text><rect class="usr-dg__n usr-dg__n--act" x="520.0" y="234.0" width="170" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="605" y="258.5">El contexto cambia</tspan><tspan x="605" y="275.5">con el rol asignado</tspan></text><path class="usr-dg__e" d="M690 262 L730 262" marker-end="url(#usr-cam-a)"/><rect class="usr-dg__n usr-dg__n--ui" x="730.0" y="234.0" width="170" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="815" y="258.5">Opera en la cuenta</tspan><tspan x="815" y="275.5">ajena, según su rol</tspan></text><path class="usr-dg__e" d="M900 262 L935 262" marker-end="url(#usr-cam-a)"/><polygon class="usr-dg__n usr-dg__n--dec" points="1010,212.0 1085.0,262 1010,312.0 935.0,262"/><text class="usr-dg__t usr-dg__t--sm" text-anchor="middle"><tspan x="1010" y="251.0">¿Entra a una</tspan><tspan x="1010" y="267.0">sección que su</tspan><tspan x="1010" y="283.0">rol no permite?</tspan></text><path class="usr-dg__e" d="M1010 212 L1010 148" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="1022" y="177.5">Sí: link directo</tspan><tspan x="1022" y="192.5">o cambio de rol</tspan></text><rect class="usr-dg__n usr-dg__n--stop" x="915.0" y="96.0" width="190" height="52" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="1010" y="118.5">Acceso restringido:</tspan><tspan x="1010" y="135.5">nombra el rol necesario</tspan></text><path class="usr-dg__e" d="M915 122 L815 122 L815 234" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="827" y="153.5">Vuelve al inicio</tspan><tspan x="827" y="168.5">de la cuenta</tspan></text><path class="usr-dg__e" d="M390 310 L390 392 L470 392" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="start"><tspan x="402" y="345.0">Fila propia</tspan></text><rect class="usr-dg__n usr-dg__n--ui" x="470.0" y="364.0" width="200" height="56" rx="10"/><text class="usr-dg__t" text-anchor="middle"><tspan x="570" y="388.5">Opera en su cuenta con</tspan><tspan x="570" y="405.5">el menú completo (Titular)</tspan></text><path class="usr-dg__e usr-dg__e--d" d="M570 420 L570 446"/><path class="usr-dg__e usr-dg__e--d" d="M1085 262 L1150 262 L1150 446 L190 446 L190 294" marker-end="url(#usr-cam-a)"/><text class="usr-dg__l" text-anchor="middle"><tspan x="760" y="441.0">Termina y vuelve al hub</tspan></text><text class="usr-dg__l" text-anchor="middle"><tspan x="1118" y="255.0">No</tspan></text></svg></div><ul class="usr-dg-legend"><li><span class="usr-dg-key usr-dg-key--ui" aria-hidden="true"></span>Pantalla</li><li><span class="usr-dg-key usr-dg-key--dec" aria-hidden="true"></span>Decisión</li><li><span class="usr-dg-key usr-dg-key--act" aria-hidden="true"></span>Cambio de contexto</li><li><span class="usr-dg-key usr-dg-key--stop" aria-hidden="true"></span>Modal o bloqueo</li></ul></div>
+            <ol class="usr-trans usr-mob">
+              <li><b>El hub</b> muestra tu cuenta y las ajenas. Si hay invitaciones pendientes, un banner lo avisa.</li>
+              <li><b>Responder una invitación:</b> se acepta o se rechaza, las dos con un modal de confirmación y un aviso.</li>
+              <li><b>Fila propia:</b> se opera con el menú completo y se vuelve al hub.</li>
+              <li><b>Fila ajena:</b> el contexto cambia con el rol asignado y se opera con lo que ese rol permite.</li>
+              <li><b>Si se intenta una sección que el rol no permite</b> (por link directo o por un cambio de rol), aparece el acceso restringido con el rol necesario, y se vuelve al inicio de la cuenta.</li>
+            </ol>
           </div>
-          <!-- IMAGEN 4 · hub de cuentas, dashboard en cuenta invitada y sidebar según el rol -->
-          <figure class="case-media" aria-hidden="true"></figure>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>El contexto como información de primer nivel: cuatro señales simultáneas (sidebar, dashboard, barra y popup) para que nunca quede duda de en qué cuenta y con qué rol se está operando.</p>
-        </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>El contexto como información de primer nivel. Elegir la cuenta antes de entrar hace explícito el cambio y, una vez adentro, el menú, el inicio, la barra y el menú de la cuenta cambian juntos: una sola señal se puede pasar por alto, cuatro a la vez no. Ya en producción, la indicación de cuenta invitada pasó del menú lateral al menú del avatar, para que se vea de forma más evidente.</p></div>
       </div>
     </section>
 
-    <!-- ===== Bloque 4 ===== -->
-    <section class="section section--white" aria-labelledby="h4-title">
+    <!-- ===== Decisión 4 ===== -->
+    <section class="section section--white" id="decision-4" aria-labelledby="d4-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h4-title">El caso borde que ocultar no resolvía</h2>
-            <div class="prose">
-              <p>Mi primera versión de “no tenés permiso” era más simple: ocultar esas secciones del sidebar y nada más. Charlando con el desarrollador, marcó un caso borde real que no habíamos contemplado: entrar por un link externo, o que te cambien el rol con una sección ya abierta, donde ocultar no alcanzaba. <strong>De ahí salió el modal de Acceso Restringido</strong>: si Sofía igual entra a una sección que no le corresponde, por URL directa o con la sesión abierta antes del cambio de rol, se encuentra con una pantalla que nombra el rol necesario en vez de un error genérico.</p>
-            </div>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 4 de 4</p>
+            <h2 class="case-h2" id="d4-title">El caso borde que ocultar no resolvía</h2>
           </div>
-          <!-- IMAGEN 5 · modal de Acceso Restringido -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+              <p>Mi primera versión de “no tenés permiso” era la más simple: ocultar esas secciones del menú. Charlando con el desarrollador apareció un caso borde real, entrar por un link externo o que te cambien el rol con una sección abierta, donde ocultar no alcanzaba. De ahí salió la <strong>pantalla de acceso restringido</strong>.</p>
+          </div>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Un modal de Acceso Restringido que nombra el rol necesario y cubre los accesos por URL directa y los cambios de rol con la sesión abierta, donde ocultar la sección del sidebar no llegaba.</p>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">De ocultar a explicar</h3>
+              <p class="nx-card__note">Dos casos que el menú no alcanza a cubrir.</p>
+            </div>
+            <ul class="usr-cases"><li>Entrar por un link externo</li><li>Que te cambien el rol con una sección ya abierta</li></ul>
+            <div class="usr-vs">
+              <div class="usr-vs__col"><p class="usr-vs__tag">Primera versión</p><p class="usr-vs__t">Ocultar la sección en el menú</p><p class="usr-vs__d">Alcanza si la persona llega navegando desde el menú. No cubre los links directos ni los cambios de rol con la sesión abierta.</p></div>
+              <div class="usr-vs__col usr-vs__col--new"><p class="usr-vs__tag">Versión final</p><p class="usr-vs__t">Ocultar y, además, explicar</p><p class="usr-vs__d">Si la persona igual llega a una sección que no le corresponde, ve una pantalla que nombra el rol necesario en lugar de un error genérico.</p></div>
+            </div>
+            <figure class="nxt-ph nxh-wide usr-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · acceso restringido</p><div class="nxh-shot" data-shot style="--h:420"><iframe src="../prototipos/usuarios/sin-permiso.html?de=valeria&embed=1" title="Pantalla de acceso restringido del prototipo, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Nombra el rol necesario</b> (acá, Facturas y pagos) y ofrece una salida clara: volver al inicio de la cuenta.</figcaption></figure><figure class="nxt-ph usr-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · acceso restringido</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:420px"><iframe src="../prototipos/usuarios/sin-permiso.html?de=valeria&embed=1" title="Pantalla de acceso restringido del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Nombra el rol necesario</b> (acá, Facturas y pagos) y ofrece volver al inicio.</figcaption></figure>
+          </div>
         </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Ocultar y, además, explicar. El menú sigue escondiendo lo que el rol no puede usar, pero si la persona llega igual (por un link directo o porque le cambiaron el rol con la sesión abierta) ve una pantalla que nombra el rol necesario y le ofrece volver al inicio de la cuenta, en lugar de un error genérico.</p></div>
       </div>
     </section>
 
-    <!-- ===== Diseño final ===== -->
-    <section class="section section--tint" aria-labelledby="diseno-title">
-      <div class="container case-block case-block--gallery">
-        <h2 class="case-h2" id="diseno-title">Diseño final</h2>
-        <div class="case-gallery">
-          <!-- IMAGEN 6, 7 y 8 · tabla de usuarios con el indicador de cupo, formulario de invitación y pestaña "Asignado a otras cuentas" -->
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Impacto y métricas ===== -->
-    <section class="section section--white" aria-labelledby="impacto-title">
+    <!-- ===== Cómo trabajé ===== -->
+    <section class="section section--dark on-dark" id="resultado" aria-labelledby="proceso-title">
       <div class="container case-text">
-        <h2 class="case-h2" id="impacto-title">Impacto y métricas</h2>
+        <h2 class="case-h2" id="proceso-title">Cómo trabajé</h2>
         <div class="process">
           <div class="process__row">
+            <h3 class="process__label">Alcance</h3>
+            <p>Diseñé la sección Usuarios y permisos, el flujo de invitación y el cambio de cuenta, en desktop y mobile. El acceso a soporte quedó fuera de la matriz de roles a propósito, como un interruptor aparte.</p>
+          </div>
+          <div class="process__row">
             <h3 class="process__label">Evidencia</h3>
-            <p>No tengo métricas de este proyecto: la empresa nunca me compartió datos de adopción ni de uso. La dinámica ahí es lanzar a producción y ver después qué dicen los usuarios, algo que como UX no recomiendo, pero ahí llegan mis limitaciones. Tampoco hicimos un test de usabilidad formal.</p>
+            <p><strong>Cuatro años de tickets de la mesa de ayuda</strong> me mostraron qué problema traía cada perfil de cliente. De ahí armé dos perfiles: Matías, dueño de una agencia de diseño web, que necesita delegar sin perder el control, y Sofía, desarrolladora freelance que entra y sale de cuentas de clientes y corre el riesgo de operar en la equivocada. Los roles salieron de sesiones con el Product Owner y el analista de negocio, y el caso borde del acceso restringido, de revisar el diseño con el desarrollador.</p>
           </div>
           <div class="process__row">
-            <h3 class="process__label">Estado real e iteración</h3>
-            <p>Un ejemplo concreto de las idas y vueltas: el tope de diez integrantes era invisible hasta que el intento número 11 fallaba, y lo corregimos con un indicador de cupo visible desde el principio.</p>
+            <h3 class="process__label">Cómo avanzó</h3>
+            <p>El pedido vino de arriba y esperó a que se cerraran otros proyectos de seguridad, como el 2FA, antes de tocar algo tan sensible. Trabajé unos tres meses, en tandas, con un equipo de 9 a 12 personas. Lo fuimos armando en etapas, primero Usuarios y permisos y después el cambio de cuenta, porque las secciones están muy relacionadas entre sí.</p>
           </div>
           <div class="process__row">
-            <h3 class="process__label">Lo que no sé</h3>
-            <p>No sé si las invitaciones se aceptan o se dejan vencer, ni si el Acceso Restringido redujo las consultas a soporte. Además, Matías y Sofía son perfiles compuestos a partir de tickets, así que no puedo confirmar cuánto se parecen a los usuarios reales.</p>
-          </div>
-          <div class="process__row">
-            <h3 class="process__label">Qué medir</h3>
-            <p>Si tuviera los datos, mediría cuántas invitaciones se aceptan contra las que se dejan vencer, y cuántos tickets de soporte sobre “no encuentro tal sección” bajan una vez que el Acceso Restringido explica por qué.</p>
+            <h3 class="process__label">Estado real</h3>
+            <p>Se armó en etapas y salió todo junto a producción. Más tarde, ya en producción, hubo una corrección: la indicación de que estás en una cuenta invitada vivía en el menú lateral y la rediseñé dentro del menú del avatar, en el header, para que se vea de forma más evidente.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Lo que aprendí ===== -->
-    <section class="section section--tint" aria-labelledby="aprendi-title">
+    <section class="section section--white" id="aprendizajes" aria-labelledby="aprendi-title">
       <div class="container case-text">
         <h2 class="case-h2" id="aprendi-title">Lo que aprendí</h2>
         <div class="learn">
           <blockquote class="pull-quote">
-            <p>“El contexto (en qué cuenta estás, con qué rol) es información de primer nivel, no algo que se da por sabido.”</p>
+            <p>“El contexto es información de primer nivel, no algo que se da por sabido.”</p>
           </blockquote>
           <div class="prose">
-            <p>No alcanza con ocultar o mostrar secciones según el permiso si no hay además una señal clara de dónde estás parado, y ese punto ciego no siempre se ve solo: acá lo vio el desarrollador antes que yo.</p>
-            <p>También me llevo algo que terminé de ver al armar este caso: la evidencia real detrás de todo fueron esos tickets y las charlas de sectorización con negocio, una fuente de research atípica que funcionó. Diseñar para dos roles tan distintos dentro del mismo sistema me obligó a chequear cada decisión desde los dos lados, algo que no habría sido tan evidente pensando en un solo tipo de usuario.</p>
+            <p>No alcanza con mostrar u ocultar secciones según el permiso: hace falta además una señal clara de dónde está parado quien opera. Esa idea ordenó las cuatro decisiones del caso.</p>
+            <p>Diseñar para dos perfiles tan distintos dentro del mismo sistema me obligó a revisar cada decisión desde los dos lados. Y la mejor corrección del proyecto salió de mostrarle el diseño a quien lo iba a construir.</p>
           </div>
         </div>
       </div>
