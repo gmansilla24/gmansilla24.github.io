@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex"><!-- PRUEBA: sacar esta línea cuando se publique la versión final (ver README) -->
   <title>Programa de referidos para un panel de clientes · Gastón M. Mansilla</title>
   <meta name="description" content="Convertí la recomendación de boca en boca de una empresa de hosting en un programa de referidos para once países, con recompensa en dólares, una espera antifraude de 45 días y un historial que la vuelve visible.">
   <meta name="theme-color" content="#0961c2">
@@ -13,11 +12,21 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="Programa de referidos para un panel de clientes">
   <meta property="og:description" content="Un programa de referidos para once países, con recompensa en dólares, espera antifraude de 45 días y un historial que la hace visible.">
+  <meta property="og:url" content="https://gmansilla24.github.io/casos/referidos.html">
+  <meta property="og:image" content="https://gmansilla24.github.io/assets/img/og-referidos.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Programa de referidos para un panel de clientes: tarjeta del cupón con el enlace y los botones para compartir">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/case-visuals.css">
+  <link rel="stylesheet" href="../css/case-referidos.css">
   <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
   <script src="../js/analytics.js" defer></script>
+  <script src="../js/case-nav.js" defer></script>
+  <script src="../js/case-specimens.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -34,8 +43,8 @@
 
       <nav class="nav" id="menu" aria-label="Principal">
         <ul class="nav__list">
-          <li><a class="nav__link" href="../index.html">Inicio</a></li>
           <li><a class="nav__link" href="../index.html#casos" aria-current="true">Casos de estudio</a></li>
+          <li><a class="nav__link nav__link--cta" href="../index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -83,7 +92,7 @@
 
           <!-- Portada (466 × 356 en desktop; no se muestra en mobile) -->
           <figure class="case-media case-media--bare case-hero__media">
-            <img src="../assets/img/referidos/portada.webp" alt="Pantalla Referidos y recompensas del panel, con el cupón para compartir, los tres pasos y las opciones de servicio" width="1047" height="800" fetchpriority="high" decoding="async">
+            <img src="../assets/img/referidos/portada.webp" alt="Tarjeta del cupón de referidos: «Compártelo con tus contactos y gana hasta USD 250 por referido», con el enlace y los botones para copiar y compartir" width="932" height="712" fetchpriority="high" decoding="async">
           </figure>
         </div>
 
@@ -95,7 +104,7 @@
             </div>
             <div class="meta__item">
               <dt class="meta__label">Rol</dt>
-              <dd class="meta__value">Diseñador UX/UI</dd>
+              <dd class="meta__value">Product Designer (UX/UI)</dd>
             </div>
             <div class="meta__item">
               <dt class="meta__label">Duración</dt>
@@ -111,14 +120,31 @@
       </div>
     </section>
 
+    <!-- ===== Índice de la página (se queda fijo al hacer scroll) ===== -->
+    <nav class="case-nav" aria-label="En esta página">
+      <div class="container">
+        <ul class="case-nav__list">
+          <li><a href="#resumen">Resumen</a></li>
+          <li><a href="#perfiles">Personas</a></li>
+          <li><a href="#decision-1"><span class="case-nav__n">1</span>Incentivo</a></li>
+          <li><a href="#decision-2"><span class="case-nav__n">2</span>Visibilidad</a></li>
+          <li><a href="#decision-3"><span class="case-nav__n">3</span>Espera de 45 días</a></li>
+          <li><a href="#decision-4"><span class="case-nav__n">4</span>Cupón y cobro</a></li>
+          <li><a href="#resultado">Cómo trabajé</a></li>
+          <li><a href="#aprendizajes">Aprendizajes</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- ===== En pocas palabras ===== -->
-    <section class="section section--white" aria-labelledby="resumen-title">
-      <div class="container case-split">
+    <section class="section section--white" id="resumen" aria-labelledby="resumen-title">
+      <div class="container case-block">
+       <div class="case-split">
         <div class="case-text">
           <h2 class="case-h2" id="resumen-title">En pocas palabras</h2>
           <div class="prose">
             <p>Una gran parte de los clientes llegaba por recomendación de boca en boca, sin incentivo, sin beneficio visible y sin forma de rastrearla. El pedido de armar un programa de referidos vino de arriba, con una intención de negocio clara pero con las definiciones concretas completándose sobre la marcha. Con el Lean Canvas y el Value Proposition Canvas encontré el obstáculo real: <strong>la ausencia de un incentivo tangible y universal</strong>.</p>
-            <p>El programa se entregó en fecha y quedó funcionando en producción, pero <strong>la empresa nunca me compartió datos</strong> de cómo rinde. Lo que sí puedo mostrar es el proceso, las decisiones y qué medir si algún día hay acceso a esos números.</p>
+            <p>El caso lo resuelve en cuatro decisiones: <strong>una recompensa en dólares</strong> para los once países, <strong>un programa que se encuentra y se explica solo</strong>, <strong>una espera de 45 días que se ve en lugar de esconderse</strong> y <strong>un link único con un cupón editable</strong>. Todo se puede probar en el prototipo en código, en desktop y mobile.</p>
           </div>
         </div>
 
@@ -126,6 +152,10 @@
           <div class="summary-card__main">
             <h3 class="summary-card__title t-h4">Qué hice yo</h3>
             <p class="t-body is-muted">Diseñé la sección completa de Referidos: el flujo, las reglas que ve el usuario y las pantallas desktop y mobile. Fui completando las definiciones que faltaban sentándome con el analista de negocio.</p>
+          </div>
+          <div class="summary-card__main">
+            <h3 class="summary-card__title t-h4">Con inteligencia artificial</h3>
+            <p class="t-body is-muted">Usé inteligencia artificial en el relevamiento del código, el armado de componentes, la tokenización, el prototipado en código y los arreglos de usabilidad, entre otras tareas. Todo fue validado por mí.</p>
           </div>
           <div class="summary-card__team">
             <p class="summary-card__label">Con quién trabajé</p>
@@ -138,131 +168,270 @@
             </ul>
           </div>
         </div>
+       </div>
       </div>
     </section>
 
-    <!-- ===== Bloque 1 ===== -->
-    <section class="section section--tint" aria-labelledby="h1-title">
+    <!-- ===== Cifras (banda oscura) ===== -->
+    <section class="section section--dark on-dark" id="cifras" aria-labelledby="cifras-title">
       <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
-            <h2 class="case-h2" id="h1-title">Un incentivo universal para once países</h2>
-            <div class="prose">
-              <p>Armé el Lean Canvas y el Value Proposition Canvas, y mostraron que lo que faltaba era un <strong>incentivo tangible y universal</strong>. De las charlas con los analistas y el Product Owner salió la conclusión: una recompensa en moneda local implicaba once variantes de localización, mientras que en dólares el valor percibido se unifica y la volatilidad cambiaria queda resuelta de un plumazo. Esa decisión la charlamos entre todos, pero no siempre pasaba así. Mi contacto directo era el analista de negocio, el líder de desarrollo y QA, y la mitad de las decisiones venían de arriba ya cerradas, filtradas por el Product Owner, sin que viéramos el debate detrás ni pudiéramos cambiarlas desde el equipo.</p>
-            </div>
+        <h2 class="case-h2" id="cifras-title">El diseño en cuatro cifras</h2>
+        <ul class="stats" aria-label="Cifras del diseño">
+          <li class="stat">
+            <p class="stat__num">11</p>
+            <h3 class="stat__title">Países, una sola moneda</h3>
+            <p class="stat__text">La recompensa es en dólares: un valor percibido único, sin variantes de localización.</p>
+            <a class="stat__link" href="#d1-title">Incentivo</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">3</p>
+            <h3 class="stat__title">Pasos para empezar</h3>
+            <p class="stat__text">Copiar el cupón, compartirlo y cobrar la comisión, explicados en tres tarjetas sin jerga.</p>
+            <a class="stat__link" href="#d2-title">Visibilidad</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">45</p>
+            <h3 class="stat__title">Días de espera, a la vista</h3>
+            <p class="stat__text">La comisión se habilita 45 días después de la primera compra, y la fecha exacta está en la tabla.</p>
+            <a class="stat__link" href="#d3-title">Espera de 45 días</a>
+          </li>
+          <li class="stat">
+            <p class="stat__num">6</p>
+            <h3 class="stat__title">Estados de una comisión</h3>
+            <p class="stat__text">Pendiente, disponible, retenido, solicitado, pagado y cancelado, cada uno con su color y su nota.</p>
+            <a class="stat__link" href="#d3-title">Espera de 45 días</a>
+          </li>
+        </ul>
+        <p class="case-note">Cifras del diseño final, según el prototipo en código y el handoff.</p>
+      </div>
+    </section>
+
+    <!-- ===== Personas ===== -->
+    <section class="section section--white" id="perfiles" aria-labelledby="perfiles-title">
+      <div class="container case-block">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Para quién</p>
+            <h2 class="case-h2" id="perfiles-title">Quien refiere y quien recibe</h2>
           </div>
-          <!-- IMAGEN 2 · Lean Canvas y Value Proposition Canvas -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+            <p>Esta experiencia la viven dos personas distintas, pero <strong>la interfaz le habla solo a quien refiere</strong>, nunca a quien recibe la invitación. Matías opera dentro del panel. Valentina llega por su link: no usa esta pantalla, pero lo que vive en su primera compra decide si el programa funciona.</p>
+          </div>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Recompensa en dólares en los once países, definida en conjunto con los analistas y el Product Owner: un valor percibido único y sin variantes de localización por moneda.</p>
-        </div>
+
+        <ul class="ref-personas">
+          <li class="ref-persona"><div class="ref-persona__head"><span class="ref-persona__av" aria-hidden="true">M</span><div><h3 class="ref-persona__name">Matías R.</h3><p class="ref-persona__job">Freelance developer</p></div></div><p class="ref-persona__tag">Rol: invitador</p><ul class="ref-persona__meta"><li><b>Edad:</b> 34 años</li><li><b>Ubicación:</b> Rosario, AR</li><li><b>Nivel técnico:</b> Avanzado</li><li><b>Antigüedad:</b> +3 años · 2 dominios</li><li><b>Dispositivo:</b> 70% desktop</li></ul><blockquote class="ref-persona__quote"><p style="margin:0">“Recomendaría Nubix si me rinden algo a cambio. Yo ya sé que es bueno, ¿por qué hacerlo gratis?”</p></blockquote><div class="ref-persona__cols"><div><h4 class="ref-persona__h">Objetivos</h4><ul class="ref-persona__list"><li>Reducir su gasto mensual usando la comisión como saldo.</li><li>Ser referente tech en su círculo.</li><li>Ayudar a sus colegas a empezar con algo confiable.</li><li>Generar comisión para su próxima renovación.</li></ul></div><div><h4 class="ref-persona__h">Frustraciones</h4><ul class="ref-persona__list"><li>No saber si el referido usó el cupón ni cuándo cobra.</li><li>Procesos con código manual o formularios aparte.</li><li>No poder personalizar el cupón sin perder el historial.</li><li>Recomendar sin recibir nada a cambio.</li></ul></div></div><div class="ref-persona__insight"><p class="ref-persona__h">Insight clave</p><p>La incertidumbre sobre cuándo cobra le genera desconfianza. Personalizar el cupón es para él un gesto de identidad, y entra al programa con un objetivo concreto.</p></div></li>
+          <li class="ref-persona"><div class="ref-persona__head"><span class="ref-persona__av" aria-hidden="true">V</span><div><h3 class="ref-persona__name">Valentina S.</h3><p class="ref-persona__job">Emprendedora</p></div></div><p class="ref-persona__tag">Rol: invitada</p><ul class="ref-persona__meta"><li><b>Edad:</b> 27 años</li><li><b>Ubicación:</b> Córdoba, AR</li><li><b>Nivel técnico:</b> Básico</li><li><b>Antigüedad:</b> Primera vez en Nubix</li><li><b>Dispositivo:</b> 100% desktop</li></ul><blockquote class="ref-persona__quote"><p style="margin:0">“Mi amigo me dijo que era confiable y eso me alcanzó. Solo necesito que sea fácil de entender.”</p></blockquote><div class="ref-persona__cols"><div><h4 class="ref-persona__h">Objetivos</h4><ul class="ref-persona__list"><li>Publicar su tienda online.</li><li>Entender qué paga.</li><li>Tener soporte accesible.</li><li>No gastar de más en su primer mes.</li><li>Confiar en haber elegido bien.</li></ul></div><div><h4 class="ref-persona__h">Frustraciones</h4><ul class="ref-persona__list"><li>La jerga técnica.</li><li>No saber si el descuento del cupón se aplicó.</li><li>Miedo a que la tarjeta se use mal.</li><li>Un onboarding sin guía.</li></ul></div></div><div class="ref-persona__insight"><p class="ref-persona__h">Insight clave</p><p>La decisión ya viene tomada: el aval de su contacto reemplaza la investigación. Cualquier fricción en los primeros pasos rompe la confianza prestada.</p></div></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ===== Bloque 2 ===== -->
-    <section class="section section--white" aria-labelledby="h2-title">
+    <!-- ===== Decisión 1 ===== -->
+    <section class="section section--white" id="decision-1" aria-labelledby="d1-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h2-title">Dos personas, una sola interfaz</h2>
-            <div class="prose">
-              <p>Esta experiencia la viven dos personas distintas, pero la interfaz le habla solo a quien refiere, nunca a quien recibe la invitación. Casi cuatro años de tickets de soporte, sumados a las decisiones que llegaban de la mesa chica de la empresa, me dejaron ver cuenta por cuenta qué tipo de cliente usaba la plataforma. Con esa base armé dos perfiles, sin entrevistas con usuarios: Matías, quien refiere, y Valentina, quien recibe la invitación. Con Matías quedó claro que <strong>el enemigo del programa es el silencio del sistema</strong>, porque si no sabe si su amigo usó el cupón siente que recomendó en vano. Con Valentina, que la propuesta de valor tiene que explicarse en dos líneas y sin jerga.</p>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 1 de 4</p>
+            <h2 class="case-h2" id="d1-title">Un incentivo universal para once países</h2>
+          </div>
+          <div class="prose">
+              <p>Armé el Lean Canvas y el Value Proposition Canvas, y mostraron que lo que faltaba era un <strong>incentivo tangible y universal</strong>. De las charlas con los analistas y el Product Owner salió la conclusión: una recompensa en moneda local implicaba once variantes de localización, mientras que en dólares el valor percibido se unifica y la volatilidad cambiaria queda resuelta de un plumazo.</p>
+          </div>
+        </div>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El Lean Canvas, en una pantalla</h3>
+              <p class="nx-card__note">El invitador es el único actor que opera dentro de la plataforma; el invitado llega al sitio por su link.</p>
+            </div>
+<div class="ref-lean"><div class="ref-lean__cell"><h4 class="ref-lean__h">Problema</h4><dl class="ref-lean__dl"><dt>Clientes existentes</dt><dd>Sin incentivo económico para recomendar. Recomiendan informalmente, sin trazabilidad ni recompensa.</dd><dt>Nubix</dt><dd>Alto costo de adquisición, sin canal estructurado de referidos. Sección “Afiliados” enterrada y sin uso.</dd><dt>Nuevos clientes</dt><dd>Baja confianza en marcas sin aval social. Sin beneficio por llegar vía recomendación.</dd></dl></div><div class="ref-lean__cell ref-lean__cell--vp"><h4 class="ref-lean__h">Propuesta de valor</h4><p class="ref-lean__big">Recomendá Nubix.<br>Ganá en dólares.</p><p class="ref-lean__p">Cada cliente satisfecho se convierte en un canal de adquisición activo. El invitador gana comisiones en USD canjeables como saldo. El invitado llega con respaldo social y descuento real en su primera compra. Beneficio mutuo, medible y trazable desde Nubix.</p></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Segmentos</h4><dl class="ref-lean__dl"><dt>Early adopters</dt><dd>Clientes con +1 año, satisfechos y cómodos con la tecnología.</dd><dt>Invitador</dt><dd>Cliente activo que quiere monetizar su red. Único actor que interactúa con el programa dentro del panel.</dd><dt>Invitado</dt><dd>Emprendedor o freelancer que llega vía link al sitio de Nubix. No usa el panel en esta etapa.</dd><dt>Mercado</dt><dd>Base instalada LATAM (AR, MX, CL, CO, PE y más).</dd></dl></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Solución</h4><ul class="ref-lean__list"><li>Sección en Nubix con cupón único auto-generado, editable sin perder historial.</li><li>Botón para compartir en un clic.</li><li>Vista previa del programa para quienes no tienen servicios activos, como incentivo a contratar.</li><li>Comisión en USD disponible 45 días después de la primera compra.</li><li>Historial por estados y cobro a saldo Nubix.</li></ul></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Ventaja especial</h4><ul class="ref-lean__list"><li>Base de clientes activos con historial de pago verificado.</li><li>Confianza de marca de 20+ años en LATAM.</li><li>Política antifraude de 45 días: diferencial frente a programas sin validación.</li><li>Comisión aplicable como saldo a cualquier producto del portfolio.</li></ul></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Canales</h4><ul class="ref-lean__list"><li>WhatsApp y redes sociales.</li><li>Email directo.</li><li>Pill en el dashboard de Nubix.</li><li>Header visible desde el primer ingreso.</li><li>Email marketing transaccional.</li></ul></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Métricas</h4><ul class="ref-lean__list"><li>Tasa de adopción del cupón.</li><li>Ratio cupón compartido → conversión.</li><li>Tiempo promedio hasta el primer cobro.</li><li>Comisión total distribuida (USD).</li><li>Costo de adquisición: referido vs. canal pago.</li><li>Volumen mensual de comisiones acreditadas.</li></ul></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Estructura de costos</h4><ul class="ref-lean__list"><li>Comisión variable por conversión validada.</li><li>Desarrollo e integración (costo hundido, ya ejecutado).</li><li>Procesamiento de pagos y transferencias de canje.</li><li>Gestión del historial de comisiones.</li><li>Soporte al cliente ante dudas del programa.</li></ul></div><div class="ref-lean__cell"><h4 class="ref-lean__h">Impacto en el negocio</h4><ul class="ref-lean__list"><li>Clientes referidos con mayor valor a lo largo del tiempo.</li><li>Nuevas suscripciones atribuibles al programa.</li><li>Activación de clientes dormidos vía incentivo económico.</li><li>Quienes refieren son clientes más leales y conformes con el producto.</li><li>Efecto compuesto: red de referidos que crece orgánicamente.</li></ul></div></div>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Del dolor al alivio</h3>
+              <p class="nx-card__note">Lo que sale de cruzar los dolores de quien refiere con lo que entrega el producto, según el Value Proposition Canvas.</p>
+            </div>
+<ul class="ref-fit"><li class="ref-fit__row"><p class="ref-fit__pain"><span class="ref-fit__tag">Dolor</span>Recomendar sin recibir nada a cambio, o sin un beneficio trazable.</p><span class="ref-fit__arrow" aria-hidden="true">→</span><p class="ref-fit__fix"><span class="ref-fit__tag">Alivio</span>Una comisión real en USD, acreditable como saldo en cualquier servicio.</p></li><li class="ref-fit__row"><p class="ref-fit__pain"><span class="ref-fit__tag">Dolor</span>No saber si el referido usó el cupón ni cuándo cobra.</p><span class="ref-fit__arrow" aria-hidden="true">→</span><p class="ref-fit__fix"><span class="ref-fit__tag">Alivio</span>Una tabla con estados y fechas: se ve si compró y cuándo se cobra.</p></li><li class="ref-fit__row"><p class="ref-fit__pain"><span class="ref-fit__tag">Dolor</span>Procesos opacos y plazos escondidos en los términos y condiciones.</p><span class="ref-fit__arrow" aria-hidden="true">→</span><p class="ref-fit__fix"><span class="ref-fit__tag">Alivio</span>La comisión se habilita a los 45 días, sin formularios aparte, y el plazo está a la vista.</p></li><li class="ref-fit__row"><p class="ref-fit__pain"><span class="ref-fit__tag">Dolor</span>Múltiples pasos o links distintos para compartir según el servicio.</p><span class="ref-fit__arrow" aria-hidden="true">→</span><p class="ref-fit__fix"><span class="ref-fit__tag">Alivio</span>Un enlace único global: no hay que elegir link según el servicio.</p></li></ul>
+            <div class="ref-vs"><div class="ref-vs__col ref-vs__col--new"><p class="ref-vs__tag">Quien refiere</p><p class="ref-vs__t">Una comisión que se ve y se puede nombrar</p><p class="ref-vs__d">Comisión en USD cobrable como saldo en Nubix o por transferencia en moneda local. Un cupón con nombre propio, la fecha de uso y la de disponibilidad visibles, y el estado de cada referido y el total disponible a simple vista.</p></div><div class="ref-vs__col"><p class="ref-vs__tag">Quien recibe</p><p class="ref-vs__t">Respaldo social y un descuento concreto</p><p class="ref-vs__d">Llega con el aval de alguien en quien confía y un descuento real en su primera compra. La propuesta cierra así: el invitador ya confía en Nubix y quiere compartir esa confianza.</p></div></div>
+          </div>
+        </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Pagar la recompensa en dólares en los once países. En moneda local había once variantes de localización y un valor percibido distinto en cada mercado; en dólares el valor es el mismo para todos y la comisión se cobra como saldo en cualquier servicio, o por transferencia convertida a moneda local al momento del pago. El costo es que el diseño tiene que explicar el dólar y sus límites, el tope de USD 250 y el mínimo de cobro de USD 30, a la vista en el hero y en la barra de progreso.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== Decisión 2 ===== -->
+    <section class="section section--white" id="decision-2" aria-labelledby="d2-title">
+      <div class="container case-block">
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 2 de 4</p>
+            <h2 class="case-h2" id="d2-title">Un programa que se encuentra y se explica solo</h2>
+          </div>
+          <div class="prose">
               <p>Con los perfiles claros miré cómo lo resuelven DigitalOcean, SiteGround y Hostinger: dónde ponen el programa, qué tan bien lo explican, qué tan fácil es compartir el link y cómo manejan el fraude. <strong>Ninguno resuelve bien el primer paso</strong>: a DigitalOcean hay que ir a buscarlo y SiteGround lo trata como función secundaria. La política antifraude es lo más fuerte de los tres, pero SiteGround la esconde en los legales, un lugar poco accesible.</p>
-            </div>
           </div>
-          <!-- IMAGEN 3 · perfiles de Matías y Valentina, y tabla del benchmark -->
-          <figure class="case-media" aria-hidden="true"></figure>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Hablarle a las dos personas: explicar la propuesta en dos líneas y sin jerga, hacer visible el programa desde el dashboard y mostrar el estado real de cada referido.</p>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Cómo lo resuelven tres programas, y cómo lo resolvimos</h3>
+              <p class="nx-card__note">Relevamiento propio de DigitalOcean, SiteGround y Hostinger. La última columna es el diseño final.</p>
+            </div>
+<div style="overflow-x:auto"><table class="ref-bench"><thead><tr><th scope="col"><span class="sr-only">Criterio</span></th><th scope="col">DigitalOcean</th><th scope="col">SiteGround</th><th scope="col">Hostinger</th><th scope="col" class="ref-bench__us">Nubix</th></tr></thead><tbody><tr><th scope="row">Dónde aparece</th><td data-label="DigitalOcean">Escondido en el menú de perfil.</td><td data-label="SiteGround">Pestaña secundaria en la navegación principal.</td><td data-label="Hostinger">Badge destacado en el dashboard.</td><td data-label="Nubix" class="ref-bench__us">Chip en el header, visible desde el primer ingreso.</td></tr><tr><th scope="row">Explica de qué se trata</th><td data-label="DigitalOcean">No: asume que ya sabés.</td><td data-label="SiteGround">Sí, con tres pasos.</td><td data-label="Hostinger">Sí, con tres pasos y estadísticas globales.</td><td data-label="Nubix" class="ref-bench__us">Sí, con tres pasos y estadísticas globales.</td></tr><tr><th scope="row">Facilidad para compartir</th><td data-label="DigitalOcean">Un solo link.</td><td data-label="SiteGround">Modelo mixto, varios links.</td><td data-label="Hostinger">Modelo mixto: obliga a elegir el servicio primero.</td><td data-label="Nubix" class="ref-bench__us">Un solo link y un cupón, siempre el mismo.</td></tr><tr><th scope="row">Cómo previene el fraude</th><td data-label="DigitalOcean">Retiene hasta que el referido gaste más de USD 25.</td><td data-label="SiteGround">Retiene 30 días.</td><td data-label="Hostinger">Retiene 45 días.</td><td data-label="Nubix" class="ref-bench__us">Retiene 45 días, con la fecha a la vista en la tabla.</td></tr></tbody></table></div>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Se encuentra: un chip en el header</h3>
+              <p class="nx-card__note">Desde cualquier pantalla, sin tener que ir a buscarlo al menú del perfil.</p>
+            </div>
+<figure class="nxt-ph nxh-wide ref-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · el panel con el chip</p><div class="nxh-shot" data-shot style="--h:600"><iframe src="../prototipos/referidos/dashboard.html?etapa=con-compras&embed=1" title="Dashboard del prototipo con el chip de referidos en el header, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>El chip “Recomiéndanos y gana hasta USD 250” está en el header,</b> y lleva a Referidos y recompensas. Es el prototipo en código y se puede usar.</figcaption></figure><figure class="nxt-ph ref-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · el panel con el chip</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/referidos/dashboard.html?etapa=con-compras&embed=1" title="Dashboard del prototipo con el chip de referidos, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>En mobile el chip se resume,</b> pero sigue visible en el header.</figcaption></figure>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Se explica: tres pasos y lo que se gana con cada servicio</h3>
+              <p class="nx-card__note">La pantalla no asume que ya sabés cómo funciona un programa de referidos.</p>
+            </div>
+<figure class="nxt-ph nxh-wide ref-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · sin servicio activo</p><div class="nxh-shot" data-shot style="--h:1500"><iframe src="../prototipos/referidos/referidos.html?etapa=sin-compras&embed=1" title="Pantalla Referidos y recompensas del prototipo para quien todavía no tiene servicios, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Si todavía no hay un servicio activo, el hero invita a contratar</b> (“¡Comienza a referir!”) y la pantalla muestra igual cómo funciona y cuánto se puede ganar con cada servicio.</figcaption></figure><figure class="nxt-ph ref-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · sin servicio activo</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:1500px"><iframe src="../prototipos/referidos/referidos.html?etapa=sin-compras&embed=1" title="Pantalla Referidos y recompensas del prototipo para quien todavía no tiene servicios, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>La misma pantalla en mobile,</b> con las tarjetas en una sola columna.</figcaption></figure>
+          </div>
         </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Que el programa se encuentre desde cualquier pantalla y se explique solo. Un chip en el header en lugar de un lugar escondido en el menú del perfil, y tres pasos con la recompensa de cada servicio en lugar de asumir que la persona sabe cómo funciona un programa de referidos. Y la regla antifraude, que en los otros programas queda en los términos, se muestra como parte de la pantalla.</p></div>
       </div>
     </section>
 
-    <!-- ===== Bloque 3 ===== -->
-    <section class="section section--tint" aria-labelledby="h3-title">
+    <!-- ===== Decisión 3 ===== -->
+    <section class="section section--white" id="decision-3" aria-labelledby="d3-title">
       <div class="container case-block">
-        <div class="case-split">
-          <div class="case-text">
-            <h2 class="case-h2" id="h3-title">La espera de 45 días</h2>
-            <div class="prose">
-              <p>El flujo no salió armado de punta a punta: arrancó básico (quien refiere entra, agarra su link y lo comparte) y se fue complicando a medida que las reglas de negocio se completaban sobre la marcha. La parte más delicada la definió una charla con el analista de negocio: “¿cuánto tarda en hacerse efectivo esto? Cuarenta y cinco días… ¿y qué mostramos mientras tanto?”. Ahí quedó claro que <strong>el peor momento para quien refiere es la espera obligatoria por seguridad antifraude</strong>, porque si el sistema queda en silencio la persona interpreta que algo salió mal. Por eso expuse el estado de cada comisión en una tabla de historial, en vez de esconderlo en un texto legal como hace la competencia.</p>
-            </div>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 3 de 4</p>
+            <h2 class="case-h2" id="d3-title">La espera de 45 días, a la vista</h2>
           </div>
-          <!-- IMAGEN 4 · diagrama de flujo y tabla de historial -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+              <p>El flujo no salió armado de punta a punta: arrancó básico (quien refiere entra, agarra su link y lo comparte) y se fue complicando a medida que las reglas de negocio se completaban sobre la marcha. La parte más delicada la definió una charla con el analista de negocio: “¿cuánto tarda en hacerse efectivo esto? Cuarenta y cinco días… ¿y qué mostramos mientras tanto?”. Ahí quedó claro que <strong>el peor momento para quien refiere es la espera obligatoria por seguridad antifraude</strong>, porque si el sistema queda en silencio la persona interpreta que algo salió mal.</p>
+          </div>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Una pestaña de historial que muestra cada referido con su estado real y la fecha exacta en la que la comisión va a estar disponible.</p>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El recorrido de quien refiere, de punta a punta</h3>
+              <p class="nx-card__note">Catorce pasos, desde que entra a su cuenta hasta que el saldo se acredita. Dos de ellos pasan fuera del producto.</p>
+            </div>
+<ol class="ref-journey"><li class="ref-step ref-step--start">Matías entra a Mi Cuenta</li><li class="ref-step ref-step--screen">Ve el chip de referidos en el header</li><li class="ref-step ref-step--act">Hace clic en el chip</li><li class="ref-step ref-step--screen">Entra a Referidos y recompensas</li><li class="ref-step ref-step--screen">Ve su hero con el cupón activado</li><li class="ref-step ref-step--screen">Lee las condiciones y los servicios elegibles</li><li class="ref-step ref-step--act">Copia el link</li><li class="ref-step ref-step--act">Lo comparte con su contacto</li><li class="ref-step ref-step--ext">El contacto contrata un servicio</li><li class="ref-step ref-step--screen">Ve la comisión en Pendiente</li><li class="ref-step ref-step--ext">Pasan 45 días y el servicio sigue activo</li><li class="ref-step ref-step--screen">La comisión pasa a Disponible</li><li class="ref-step ref-step--act">Solicita el cobro a saldo en Nubix</li><li class="ref-step ref-step--end">Su saldo se acredita</li></ol><ul class="ref-dg-legend"><li><span class="ref-dg-key ref-dg-key--ink" aria-hidden="true"></span>Inicio</li><li><span class="ref-dg-key ref-dg-key--ui" aria-hidden="true"></span>Pantalla del producto</li><li><span class="ref-dg-key ref-dg-key--act" aria-hidden="true"></span>Acción de Matías</li><li><span class="ref-dg-key ref-dg-key--gry" aria-hidden="true"></span>Fuera del producto</li><li><span class="ref-dg-key ref-dg-key--grn" aria-hidden="true"></span>Resultado</li></ul>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Los seis estados de una comisión</h3>
+              <p class="nx-card__note">Cada comisión sigue este camino. Los colores son los mismos que ve quien refiere en la tabla.</p>
+            </div>
+<div class="ref-desk"><div class="ref-dg-wrap"><svg class="ref-dg" viewBox="0 0 1000 332" role="img" aria-label="Diagrama de los estados de una comisión: pendiente, que pasa a disponible a los 45 días o a cancelado si se reembolsa la compra; disponible, que pasa a solicitado al pedir el cobro o a retenido si el saldo está en el tope de USD 250; retenido vuelve a disponible al cobrar; solicitado pasa a pagado." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ref-com-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" class="ref-dg__ah"/></marker></defs><circle class="ref-dg__dot" cx="140" cy="22" r="10"/><path class="ref-dg__e" d="M140 33 L140 82" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="152" y="63.0">Un referido usa el cupón</tspan></text><rect class="ref-dg__n ref-dg__n--gry" x="45.0" y="82.0" width="190" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="140" y="105.0">PENDIENTE</tspan></text><text class="ref-dg__s" text-anchor="middle"><tspan x="140" y="129.0">Esperando los 45 días</tspan></text><rect class="ref-dg__n ref-dg__n--blu" x="325.0" y="82.0" width="190" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="420" y="105.0">DISPONIBLE</tspan></text><text class="ref-dg__s" text-anchor="middle"><tspan x="420" y="129.0">Suma al saldo cobrable</tspan></text><rect class="ref-dg__n ref-dg__n--cya" x="585.0" y="82.0" width="190" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="680" y="105.0">SOLICITADO</tspan></text><text class="ref-dg__s" text-anchor="middle"><tspan x="680" y="129.0">Cobro en curso</tspan></text><rect class="ref-dg__n ref-dg__n--grn" x="840.0" y="82.0" width="140" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="910" y="115.0">PAGADO</tspan></text><path class="ref-dg__e" d="M235 110 L325 110" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="280" y="107.5">Pasan</tspan><tspan x="280" y="122.5">45 días</tspan></text><path class="ref-dg__e" d="M515 110 L585 110" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="550" y="107.5">Pide</tspan><tspan x="550" y="122.5">cobrar</tspan></text><path class="ref-dg__e" d="M775 110 L840 110" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="808" y="107.5">Se</tspan><tspan x="808" y="122.5">acredita</tspan></text><rect class="ref-dg__n ref-dg__n--red" x="45.0" y="222.0" width="190" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="140" y="245.0">CANCELADO</tspan></text><text class="ref-dg__s" text-anchor="middle"><tspan x="140" y="269.0">Compra reembolsada</tspan></text><path class="ref-dg__e" d="M140 138 L140 222" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="152" y="177.5">Se reembolsa</tspan><tspan x="152" y="192.5">la compra</tspan></text><path class="ref-dg__e" d="M140 278 L140 300" marker-end="url(#ref-com-a)"/><circle class="ref-dg__dot" cx="140" cy="311" r="9"/><rect class="ref-dg__n ref-dg__n--yel" x="325.0" y="222.0" width="190" height="56" rx="28.0"/><text class="ref-dg__t ref-dg__t--b" text-anchor="middle"><tspan x="420" y="245.0">RETENIDO</tspan></text><text class="ref-dg__s" text-anchor="middle"><tspan x="420" y="269.0">Se libera al cobrar</tspan></text><path class="ref-dg__e" d="M395 138 L395 222" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="end"><tspan x="383" y="177.5">Saldo en el</tspan><tspan x="383" y="192.5">tope de USD 250</tspan></text><path class="ref-dg__e ref-dg__e--d" d="M445 222 L445 138" marker-end="url(#ref-com-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="457" y="177.5">Al cobrar,</tspan><tspan x="457" y="192.5">se libera</tspan></text><path class="ref-dg__e" d="M910 138 L910 196" marker-end="url(#ref-com-a)"/><circle class="ref-dg__dot" cx="910" cy="207" r="9"/></svg></div></div><ol class="ref-trans ref-mob"><li><b>Un referido usa el cupón</b> y la comisión queda pendiente, esperando los 45 días.</li><li><b>Pendiente:</b> pasados los 45 días, pasa a disponible. Si se reembolsa la compra dentro del período, pasa a cancelado y termina.</li><li><b>Disponible:</b> suma al saldo cobrable. Si se pide el cobro, pasa a solicitado; si el saldo está en el tope de USD 250, pasa a retenido.</li><li><b>Retenido:</b> se libera y vuelve a disponible cuando se cobra.</li><li><b>Solicitado:</b> el cobro está en curso; cuando se acredita, pasa a pagado y termina.</li></ol>
+            <ul class="ref-states ref-states--six"><li class="ref-state"><p class="ref-state__chip ref-state__chip--gry">Pendiente</p><p class="ref-state__when">Un referido usó el cupón y la comisión espera los 45 días.</p><p class="ref-state__next"><b>Sigue:</b> Disponible o Cancelado.</p></li><li class="ref-state"><p class="ref-state__chip ref-state__chip--blu">Disponible</p><p class="ref-state__when">Pasaron los 45 días y la comisión suma al saldo que se puede cobrar.</p><p class="ref-state__next"><b>Sigue:</b> Solicitado o Retenido.</p></li><li class="ref-state"><p class="ref-state__chip ref-state__chip--yel">Retenido</p><p class="ref-state__when">El saldo ya está en el tope de USD 250. La tabla lo aclara: “Se libera al cobrar”.</p><p class="ref-state__next"><b>Sigue:</b> Disponible, cuando se cobra.</p></li><li class="ref-state"><p class="ref-state__chip ref-state__chip--cya">Solicitado</p><p class="ref-state__when">Se pidió el cobro y está en curso.</p><p class="ref-state__next"><b>Sigue:</b> Pagado.</p></li><li class="ref-state"><p class="ref-state__chip ref-state__chip--grn">Pagado</p><p class="ref-state__when">El cobro se acreditó.</p><p class="ref-state__next"><b>Es un estado final.</b></p></li><li class="ref-state"><p class="ref-state__chip ref-state__chip--red">Cancelado</p><p class="ref-state__when">La compra se reembolsó dentro del período. La tabla lo aclara: “Compra reembolsada”.</p><p class="ref-state__next"><b>Es un estado final.</b></p></li></ul>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">La tabla de actividad, con la fecha exacta</h3>
+              <p class="nx-card__note">Cada fila muestra el estado y “Disponible desde”: la fecha en que se usó el cupón más 45 días.</p>
+            </div>
+<figure class="nxt-ph nxh-wide ref-desk"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · actividad de referidos</p><div class="nxh-shot" data-shot style="--h:1560"><iframe src="../prototipos/referidos/referidos.html?etapa=referidos&tab=actividad&embed=1" title="Pestaña Actividad y pagos del prototipo, con referidos en distintos estados, en desktop" loading="lazy"></iframe></div><figcaption class="nxt-ph__cap"><b>Los cinco estados conviven en la tabla,</b> con su nota cuando hace falta. Se puede buscar por cliente y paginar de a 5, 10 o 20.</figcaption></figure><figure class="nxt-ph ref-mob"><p class="nxt-ph__tag nxt-ph__tag--new">Con el sistema · actividad de referidos</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:900px"><iframe src="../prototipos/referidos/referidos.html?etapa=referidos&tab=actividad&embed=1" title="Pestaña Actividad y pagos del prototipo, en 360 píxeles de ancho" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>La misma información en mobile,</b> sin perder el estado ni la fecha.</figcaption></figure>
+          </div>
         </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Mostrar la espera en lugar de explicarla en los legales. Cada comisión muestra su estado y la fecha exacta en que se habilita, con seis estados de color y, donde hace falta, una nota: “Se libera al cobrar”, “Compra reembolsada”. Así la espera de 45 días no se lee como un error, y la regla antifraude pasa a ser parte de la pantalla y no de los términos y condiciones, que es donde la competencia la deja.</p></div>
       </div>
     </section>
 
-    <!-- ===== Bloque 4 ===== -->
-    <section class="section section--white" aria-labelledby="h4-title">
+    <!-- ===== Decisión 4 ===== -->
+    <section class="section section--white" id="decision-4" aria-labelledby="d4-title">
       <div class="container case-block">
-        <div class="case-split case-split--flip">
-          <div class="case-text">
-            <h2 class="case-h2" id="h4-title">Un link, un cupón editable y una salida a soporte</h2>
-            <div class="prose">
-              <p>Compartir tenía que ser lo más simple posible, sin elegir a quién invitar ni armar un mensaje desde cero: <strong>un solo link, siempre el mismo</strong>, que el sistema cruza con la compra por atrás. Con la edición del cupón me pasó lo que vi en el benchmark: Hostinger le pone un cartel de advertencia a quien cambia su link y genera ansiedad de más, así que acá el sistema apaga el cupón anterior y crea uno nuevo sin perder el historial, para personalizar el código sin miedo a romper nada. Las transferencias bancarias internacionales quedaron afuera de la primera versión por su complejidad operativa y regulatoria, así que dejé un botón “Solicitar transferencia bancaria” que redirige a soporte, sirve de salida para comisiones grandes y registra cuánta gente lo pide, el dato que falta para justificar sumarlas después.</p>
-              <p>El acceso se encuentra fácil: un badge chico en el dashboard (“Recomiéndanos y gana”) y un hero que cambia según el usuario, con su cupón listo para compartir si ya tiene servicios, o con la promesa de lo que puede sumar si todavía no compró. Debajo, tres tarjetas (copiar, compartir, recibir) explican qué ofrece y qué gana, sin asumir que conoce cómo funciona un programa de referidos.</p>
-            </div>
+        <div class="case-intro">
+          <div class="case-intro__head">
+            <p class="case-eyebrow">Decisión 4 de 4</p>
+            <h2 class="case-h2" id="d4-title">Un link, un cupón editable y una salida a soporte</h2>
           </div>
-          <!-- IMAGEN 5 · variantes del hero y modales "Cambiar cupón" y "Retiro de comisiones" -->
-          <figure class="case-media" aria-hidden="true"></figure>
+          <div class="prose">
+              <p>Compartir tenía que ser lo más simple posible, sin elegir a quién invitar ni armar un mensaje desde cero: <strong>un solo link, siempre el mismo</strong>, que el sistema cruza con la compra por atrás. Con la edición del cupón me pasó lo que vi en el benchmark: Hostinger le pone un cartel de advertencia a quien cambia su link y genera ansiedad de más, así que acá el sistema apaga el cupón anterior y crea uno nuevo sin perder el historial, para personalizar el código sin miedo a romper nada.</p>
+          </div>
         </div>
-        <div class="callout">
-          <h3 class="callout__title">La decisión</h3>
-          <p>Un link único, un cupón que se edita sin perder el historial y una salida a soporte para lo que quedó fuera de la primera versión.</p>
+
+        <div class="stage">
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Tres momentos de la misma pantalla</h3>
+              <p class="nx-card__note">El hero cambia según lo que la persona tiene: sin servicios, con un servicio y sin cupón, o con el cupón ya generado.</p>
+            </div>
+<div class="ref-acts"><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Sin servicio activo</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/referidos/referidos.html?etapa=sin-compras&embed=1" title="Hero de Referidos para quien no tiene servicios, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>“¡Comienza a referir!”</b> con la invitación a elegir un servicio.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Servicio activo, sin cupón</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/referidos/referidos.html?etapa=con-compras&embed=1" title="Hero de Referidos para quien tiene un servicio y no generó su cupón, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>“Tienes un servicio activo”:</b> el cupón se genera con un clic.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Cupón listo</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/referidos/referidos.html?etapa=cupon&embed=1" title="Hero de Referidos con el cupón generado, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>“Tu cupón ya está listo”,</b> con el link para copiar y el lápiz para editarlo.</figcaption></figure></div>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El cupón y el cobro, con los errores a la vista</h3>
+              <p class="nx-card__note">Las reglas del cupón se dicen antes de escribir, y cada error explica cómo corregirlo. Son los modales del prototipo en código.</p>
+            </div>
+<ul class="ref-cases"><li>Prefijo fijo “regalo-”</li><li>De 6 a 15 caracteres: letras minúsculas y números</li><li>Único en todo el programa</li><li>El anterior deja de funcionar; el historial queda</li></ul>
+            <div class="ref-acts"><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Formato inválido</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:600px"><iframe src="../prototipos/referidos/referidos.html?etapa=cupon&modal=cupon&estado=formato&embed=1" title="Modal Cambiar cupón con un error de formato, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>El error aparece junto al campo</b> y dice qué se espera: de 6 a 15 letras minúsculas o números.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Cupón ya en uso</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:600px"><iframe src="../prototipos/referidos/referidos.html?etapa=cupon&modal=cupon&estado=uso&embed=1" title="Modal Cambiar cupón con un cupón que ya existe, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Si el nombre ya lo usa otra persona,</b> el modal lo avisa y deja elegir otro.</figcaption></figure><figure class="nxt-ph"><p class="nxt-ph__tag nxt-ph__tag--new">Retiro de comisiones</p><div class="nxt-ph__fit"><div class="nxh-live" data-nxt-phone style="height:640px"><iframe src="../prototipos/referidos/referidos.html?etapa=referidos&modal=cobro&estado=revision&embed=1" title="Modal Retiro de comisiones, en 360 píxeles" loading="lazy"></iframe></div></div><figcaption class="nxt-ph__cap"><b>Revisar antes de confirmar:</b> el monto y el método del cobro a saldo en Nubix.</figcaption></figure></div>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">Dos formas de cobrar</h3>
+              <p class="nx-card__note">Las transferencias bancarias internacionales quedaron afuera de la primera versión por su complejidad operativa y regulatoria.</p>
+            </div>
+<div class="ref-vs"><div class="ref-vs__col ref-vs__col--new"><p class="ref-vs__tag">Dentro del producto</p><p class="ref-vs__t">Cobrar como saldo en Nubix</p><p class="ref-vs__d">Un modal “Retiro de comisiones” para revisar y confirmar. Una vez confirmado no se puede cancelar. Se habilita al llegar al mínimo de USD 30.</p></div><div class="ref-vs__col"><p class="ref-vs__tag">Fuera de la primera versión</p><p class="ref-vs__t">Cobrar por transferencia bancaria</p><p class="ref-vs__d">Deriva a la mesa de ayuda. Sirve de salida para comisiones grandes y registra cuánta gente la pide, el dato que falta para justificar sumarla después. La conversión a moneda local se hace al momento del pago.</p></div></div>
+          </div>
+
+          <div class="nx-card">
+            <div class="nx-card__head">
+              <h3 class="nx-card__title">El recorrido completo del programa</h3>
+              <p class="nx-card__note">Desde el chip del header hasta el cobro, con los desvíos: el cupón inválido y el saldo por debajo del mínimo.</p>
+            </div>
+<div class="ref-desk"><div class="ref-dg-wrap"><svg class="ref-dg" viewBox="0 0 1280 690" role="img" aria-label="Flujo completo del programa de referidos: desde el chip del header se llega a la pantalla Referidos y recompensas con dos pestañas; en Recomendar y ganar, quien no tiene servicio activo va al flujo de compra y quien lo tiene ve el hero con el cupón, que puede copiar o cambiar mediante un modal con validación; en Actividad y pagos, si llega al cobro mínimo de USD 30 puede cobrar como saldo, con un modal de confirmación, o por transferencia, que deriva a la mesa de ayuda." xmlns="http://www.w3.org/2000/svg"><defs><marker id="ref-prg-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10z" class="ref-dg__ah"/></marker></defs><rect class="ref-dg__n ref-dg__n--ink" x="20.0" y="25.0" width="84" height="30" rx="15.0"/><text class="ref-dg__t ref-dg__t--w" text-anchor="middle"><tspan x="62" y="45.0">Dashboard</tspan></text><path class="ref-dg__e" d="M104 40 L135 40" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--ui" x="135.0" y="8.0" width="230" height="64" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="250" y="28.0">Chip del header</tspan><tspan x="250" y="45.0">“Recomiéndanos y gana</tspan><tspan x="250" y="62.0">hasta USD 250”</tspan></text><path class="ref-dg__e" d="M365 40 L425 40" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="395" y="33.0">Clic</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="425.0" y="15.0" width="190" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="520" y="36.5">Pantalla Referidos</tspan><tspan x="520" y="53.5">y recompensas</tspan></text><path class="ref-dg__e" d="M520 65 L520 90 L290 90 L290 108" marker-end="url(#ref-prg-a)"/><path class="ref-dg__e" d="M520 90 L1000 90 L1000 108" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--tab" x="165.0" y="108.0" width="250" height="40" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="290" y="133.0">Pestaña Recomendar y ganar</tspan></text><rect class="ref-dg__n ref-dg__n--tab" x="875.0" y="108.0" width="250" height="40" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="1000" y="133.0">Pestaña Actividad y pagos</tspan></text><path class="ref-dg__e" d="M290 148 L290 169" marker-end="url(#ref-prg-a)"/><polygon class="ref-dg__n ref-dg__n--dec" points="290,169.0 390.0,214 290,259.0 190.0,214"/><text class="ref-dg__t ref-dg__t--sm" text-anchor="middle"><tspan x="290" y="211.0">¿Tiene un servicio</tspan><tspan x="290" y="227.0">activo?</tspan></text><path class="ref-dg__e" d="M390 214 L475 214" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="432" y="207.0">No</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="475.0" y="189.0" width="170" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="560" y="210.5">“Comienza a referir”</tspan><tspan x="560" y="227.5">CTA Elegir servicio</tspan></text><path class="ref-dg__e" d="M560 239 L560 292" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--ui" x="485.0" y="294.0" width="150" height="44" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="560" y="321.0">Flujo de compra</tspan></text><path class="ref-dg__e" d="M290 259 L290 306" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="302" y="289.0">Sí</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="175.0" y="306.0" width="230" height="56" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="290" y="330.5">Hero con el cupón y el</tspan><tspan x="290" y="347.5">bloque para compartir</tspan></text><path class="ref-dg__e" d="M290 362 L290 388 L170 388 L170 412" marker-end="url(#ref-prg-a)"/><path class="ref-dg__e" d="M290 388 L410 388 L410 412" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--act" x="95.0" y="412.0" width="150" height="44" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="170" y="439.0">Copia el cupón</tspan></text><rect class="ref-dg__n ref-dg__n--act" x="325.0" y="412.0" width="170" height="44" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="410" y="439.0">Cambia el cupón</tspan></text><path class="ref-dg__e" d="M170 456 L170 496" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--stop" x="85.0" y="496.0" width="170" height="48" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="170" y="516.5">Aviso “Link copiado”.</tspan><tspan x="170" y="533.5">Fin del flujo</tspan></text><path class="ref-dg__e" d="M410 456 L410 496" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--stop" x="325.0" y="496.0" width="170" height="48" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="410" y="525.0">Modal Cambiar cupón</tspan></text><path class="ref-dg__e" d="M410 544 L410 569" marker-end="url(#ref-prg-a)"/><polygon class="ref-dg__n ref-dg__n--dec" points="410,569.0 505.0,614 410,659.0 315.0,614"/><text class="ref-dg__t ref-dg__t--sm" text-anchor="middle"><tspan x="410" y="611.0">¿El cupón es</tspan><tspan x="410" y="627.0">válido?</tspan></text><path class="ref-dg__e" d="M315 614 L260 614" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="288" y="607.0">Sí</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="40.0" y="589.0" width="220" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="150" y="610.5">Se cierra el modal y el</tspan><tspan x="150" y="627.5">hero muestra el nuevo cupón</tspan></text><path class="ref-dg__e" d="M505 614 L550 614" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="527" y="607.0">No</tspan></text><rect class="ref-dg__n ref-dg__n--stop" x="550.0" y="589.0" width="220" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="660" y="610.5">Error en línea: 6 a 15 letras</tspan><tspan x="660" y="627.5">o números. Se corrige</tspan></text><path class="ref-dg__e ref-dg__e--d" d="M660 589 L660 520 L495 520" marker-end="url(#ref-prg-a)"/><path class="ref-dg__e" d="M1000 148 L1000 169" marker-end="url(#ref-prg-a)"/><polygon class="ref-dg__n ref-dg__n--dec" points="1000,169.0 1100.0,214 1000,259.0 900.0,214"/><text class="ref-dg__t ref-dg__t--sm" text-anchor="middle"><tspan x="1000" y="211.0">¿Llega al cobro</tspan><tspan x="1000" y="227.0">mínimo (USD 30)?</tspan></text><path class="ref-dg__e" d="M900 214 L845 214" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="872" y="207.0">No</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="695.0" y="189.0" width="150" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="770" y="210.5">Botones de cobro</tspan><tspan x="770" y="227.5">deshabilitados</tspan></text><path class="ref-dg__e" d="M1000 259 L1000 284 L900 284 L900 312" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="1012" y="280.0">Sí</tspan></text><path class="ref-dg__e" d="M1000 284 L1140 284 L1140 312" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--act" x="805.0" y="312.0" width="190" height="44" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="900" y="339.0">Cobrar como saldo</tspan></text><rect class="ref-dg__n ref-dg__n--act" x="1035.0" y="312.0" width="210" height="44" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="1140" y="339.0">Cobrar por transferencia</tspan></text><path class="ref-dg__e" d="M900 356 L900 400" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--stop" x="805.0" y="400.0" width="190" height="48" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="900" y="420.5">Modal Retiro de</tspan><tspan x="900" y="437.5">comisiones</tspan></text><path class="ref-dg__e" d="M900 448 L900 486" marker-end="url(#ref-prg-a)"/><polygon class="ref-dg__n ref-dg__n--dec" points="900,486.0 975.0,524 900,562.0 825.0,524"/><text class="ref-dg__t ref-dg__t--sm" text-anchor="middle"><tspan x="900" y="529.0">¿Confirma?</tspan></text><path class="ref-dg__e" d="M975 524 L1035 524" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="middle"><tspan x="1005" y="517.0">No</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="1035.0" y="499.0" width="130" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="1100" y="520.5">Se cierra</tspan><tspan x="1100" y="537.5">sin cambios</tspan></text><path class="ref-dg__e" d="M900 562 L900 596" marker-end="url(#ref-prg-a)"/><text class="ref-dg__l" text-anchor="start"><tspan x="912" y="585.0">Sí</tspan></text><rect class="ref-dg__n ref-dg__n--ui" x="800.0" y="597.0" width="200" height="50" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="900" y="618.5">Cobro solicitado. La</tspan><tspan x="900" y="635.5">pantalla se actualiza</tspan></text><path class="ref-dg__e" d="M1140 356 L1140 400" marker-end="url(#ref-prg-a)"/><rect class="ref-dg__n ref-dg__n--ui" x="1035.0" y="400.0" width="210" height="48" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="1140" y="429.0">Deriva a la mesa de ayuda</tspan></text><rect class="ref-dg__n ref-dg__n--note" x="1025.0" y="602.0" width="230" height="64" rx="10"/><text class="ref-dg__t" text-anchor="middle"><tspan x="1140" y="622.0">Siempre visibles: actividad de</tspan><tspan x="1140" y="639.0">referidos y movimientos de</tspan><tspan x="1140" y="656.0">cobros, con su estado vacío</tspan></text></svg></div><ul class="ref-dg-legend"><li><span class="ref-dg-key ref-dg-key--ui" aria-hidden="true"></span>Pantalla o resultado</li><li><span class="ref-dg-key ref-dg-key--tab" aria-hidden="true"></span>Pestaña</li><li><span class="ref-dg-key ref-dg-key--dec" aria-hidden="true"></span>Decisión</li><li><span class="ref-dg-key ref-dg-key--act" aria-hidden="true"></span>Acción de quien refiere</li><li><span class="ref-dg-key ref-dg-key--stop" aria-hidden="true"></span>Modal o aviso</li></ul></div><ol class="ref-trans ref-mob"><li><b>Desde el dashboard,</b> el chip del header lleva a Referidos y recompensas, que tiene dos pestañas.</li><li><b>Recomendar y ganar:</b> sin servicio activo, la pantalla invita a contratar y lleva al flujo de compra. Con servicio activo, muestra el hero con el cupón y el bloque para compartir.</li><li><b>Con el cupón:</b> se copia (aviso “Link copiado”) o se cambia desde un modal. Si el cupón no es válido, el error aparece en línea y se corrige; si lo es, el hero muestra el cupón nuevo.</li><li><b>Actividad y pagos:</b> con menos de USD 30 los botones de cobro quedan deshabilitados. Con el mínimo, se cobra como saldo (modal de confirmación) o por transferencia, que deriva a la mesa de ayuda.</li><li><b>Siempre visibles:</b> la actividad de referidos y los movimientos de cobros, con su estado vacío.</li></ol>
+          </div>
         </div>
+
+        <div class="callout"><h3 class="callout__title">La decisión</h3><p>Un solo link, un cupón con nombre propio y una salida a soporte. El cupón se edita sin perder el historial de comisiones: el anterior deja de funcionar, pero lo ganado queda, así que personalizarlo no da miedo. Y el cobro por transferencia, que quedó fuera de la primera versión, no desaparece: deriva a la mesa de ayuda y suma un dato nuevo, cuánta gente lo pide.</p></div>
       </div>
     </section>
 
-    <!-- ===== Diseño final ===== -->
-    <section class="section section--tint" aria-labelledby="diseno-title">
-      <div class="container case-block case-block--gallery">
-        <h2 class="case-h2" id="diseno-title">Diseño final</h2>
-        <div class="case-gallery">
-          <!-- IMAGEN 6, 7 y 8 · pantalla final de desktop, actividad e historial, modal de retiro de comisiones -->
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
-          <figure class="case-media" aria-hidden="true"></figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Impacto y métricas ===== -->
-    <section class="section section--white" aria-labelledby="impacto-title">
+    <!-- ===== Cómo trabajé ===== -->
+    <section class="section section--dark on-dark" id="resultado" aria-labelledby="proceso-title">
       <div class="container case-text">
-        <h2 class="case-h2" id="impacto-title">Impacto y métricas</h2>
+        <h2 class="case-h2" id="proceso-title">Cómo trabajé</h2>
         <div class="process">
           <div class="process__row">
+            <h3 class="process__label">Alcance</h3>
+            <p>Diseñé la sección completa de Referidos: el chip del header, la pantalla de recomendar y ganar, la actividad y los cobros, y los modales del cupón y del retiro, en desktop y mobile. Las transferencias bancarias internacionales quedaron afuera de la primera versión y se derivan a soporte.</p>
+          </div>
+          <div class="process__row">
             <h3 class="process__label">Evidencia</h3>
-            <p>No hubo research ni testing de usabilidad con usuarios, porque la empresa no me dio ese recurso. La evidencia que construí fueron los canvas, los perfiles armados desde soporte, el benchmark de tres competidores y las charlas con los analistas y el Product Owner.</p>
+            <p><strong>Casi cuatro años de tickets de la mesa de ayuda</strong> me dejaron ver qué tipo de cliente usaba la plataforma, y de ahí armé los dos perfiles. Después trabajé con el Lean Canvas y el Value Proposition Canvas, el benchmark de DigitalOcean, SiteGround y Hostinger, y las charlas con los analistas y el Product Owner.</p>
+          </div>
+          <div class="process__row">
+            <h3 class="process__label">Cómo avanzó</h3>
+            <p>Trabajé dos meses con un equipo de 9 a 12 personas. Mi contacto directo era el analista de negocio, el líder de desarrollo y QA, y parte de las decisiones llegaban ya cerradas a través del Product Owner. Las reglas de negocio se fueron completando sobre la marcha, y el flujo con ellas.</p>
           </div>
           <div class="process__row">
             <h3 class="process__label">Estado real</h3>
-            <p>El programa <strong>se entregó en fecha, quedó funcionando en producción</strong> y no volvió a aparecer en un pedido de cambio.</p>
+            <p>El programa <strong>se entregó en fecha y quedó funcionando en producción</strong>. No volvió a aparecer en un pedido de cambio.</p>
           </div>
           <div class="process__row">
-            <h3 class="process__label">Lo que no sé</h3>
-            <p>Siendo sincero, la empresa <strong>nunca me compartió datos reales</strong>, por más que los pedí varias veces. No puedo saber si el silencio sobre el programa significa que funciona bien, que nadie lo usa o que los problemas se resuelven puertas adentro sin llegar a mí.</p>
-          </div>
-          <div class="process__row">
-            <h3 class="process__label">Qué medir</h3>
-            <p>Desde el Lean Canvas quedó definido qué medir si algún día hay acceso: cuántos copian su cupón, cuántos usos exitosos salen de cada link, cuánto tarda la primera comisión y cuánto se acredita por mes.</p>
+            <h3 class="process__label">Qué se mide</h3>
+            <p>Desde el Lean Canvas quedó definido qué medir: la tasa de adopción del cupón, cuántos cupones compartidos terminan en una compra, cuánto tarda el primer cobro, cuánta comisión se distribuye, cuánto cuesta un cliente referido frente a uno de un canal pago y el volumen mensual de comisiones acreditadas.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Lo que aprendí ===== -->
-    <section class="section section--tint" aria-labelledby="aprendi-title">
+    <section class="section section--white" id="aprendizajes" aria-labelledby="aprendi-title">
       <div class="container case-text">
         <h2 class="case-h2" id="aprendi-title">Lo que aprendí</h2>
         <div class="learn">
@@ -290,7 +459,9 @@
           <p class="footer-col__title t-body-strong" id="footer-links-title">ENLACES</p>
           <ul class="footer-list">
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="../index.html#casos">Casos de estudio</a></li>
+            <li><a href="referidos.html">Programa de referidos</a></li>
+            <li><a href="nubix.html">Nubix: sistema de diseño</a></li>
+            <li><a href="usuarios.html">Usuarios y permisos</a></li>
           </ul>
         </nav>
 

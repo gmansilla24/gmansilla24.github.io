@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex"><!-- PRUEBA: sacar esta línea cuando se publique la versión final (ver README) -->
   <title>Gastón M. Mansilla · Product Designer</title>
   <meta name="description" content="Product Designer. Diseño productos digitales con mucha lógica de negocio por detrás: sistemas de diseño, flujos complejos y decisiones compartidas con ingeniería.">
   <meta name="theme-color" content="#0961c2">
@@ -13,6 +12,12 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="Gastón M. Mansilla · Product Designer">
   <meta property="og:description" content="Diseño sistemas y flujos complejos para que se usen sin esfuerzo">
+  <meta property="og:url" content="https://gmansilla24.github.io/">
+  <meta property="og:image" content="https://gmansilla24.github.io/assets/img/og-gaston.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Gastón M. Mansilla, Product Designer UX/UI: retrato y la frase «Diseño sistemas y flujos complejos para que se usen sin esfuerzo»">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preload" href="fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
@@ -47,8 +52,8 @@
 
       <nav class="nav" id="menu" aria-label="Principal">
         <ul class="nav__list">
-          <li><a class="nav__link" href="#inicio" aria-current="true">Inicio</a></li>
           <li><a class="nav__link" href="#casos">Casos de estudio</a></li>
+          <li><a class="nav__link nav__link--cta" href="#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -63,10 +68,11 @@
           <div class="hero__content">
             <div class="hero__intro">
               <div class="hero__heading">
-                <p class="hero__eyebrow t-body-strong">Hola, soy Gastón M. Mansilla</p>
+                <p class="hero__eyebrow t-body-strong">Product Designer · UX/UI</p>
                 <h1 class="hero__title t-display-4" id="hero-title">Diseño sistemas y flujos complejos para que se usen sin esfuerzo</h1>
               </div>
-              <p class="hero__lead t-body-large is-muted">Soy Product Designer y me enfoco en productos con mucha lógica de negocio<span class="only-wide"> por detrás</span>, donde cada decisión tiene que ser clara para quien lo usa y viable para quien lo construye. <span class="only-wide">Entiendo el problema, diseño la solución y la acompaño hasta que llega a producción.</span><span class="only-narrow">Acompaño la solución desde el problema hasta producción.</span></p>
+              <p class="hero__lead t-body-large is-muted">Me enfoco en productos con mucha lógica de negocio<span class="only-wide"> por detrás</span>, donde cada decisión tiene que ser clara para quien lo usa y viable para quien lo construye. <span class="only-wide">Entiendo el problema, diseño la solución y la acompaño hasta que llega a producción.</span><span class="only-narrow">Acompaño la solución desde el problema hasta producción.</span></p>
+              <p class="hero__status t-small"><span class="hero__dot" aria-hidden="true"></span>Disponible para proyectos freelance y para sumarme a un equipo</p>
             </div>
             <div class="hero__actions">
               <a class="btn btn--primary" href="#casos">
@@ -80,31 +86,30 @@
             </div>
           </div>
           <div class="hero__photo">
-            <img src="assets/img/hero-gaston.webp" alt="Retrato de Gastón Mansilla" width="320" height="320" fetchpriority="high" decoding="async">
+            <div class="hero__photo-frame">
+              <img src="assets/img/hero-gaston.webp" alt="Retrato de Gastón Mansilla" width="800" height="800" fetchpriority="high" decoding="async">
+            </div>
           </div>
         </div>
 
-        <ul class="feature-grid">
-          <li class="feature-card">
-            <div class="feature-card__icon"><img src="assets/icons/glyph-diversity.svg" alt="" width="32" height="32"></div>
-            <div class="feature-card__body">
-              <h2 class="feature-card__title t-h4">Diseño con desarrollo</h2>
-              <p class="t-body is-muted">Decisiones compartidas con producto e ingeniería desde el primer día.</p>
-            </div>
+        <ul class="proof" aria-label="Datos de los casos de estudio">
+          <li>
+            <a class="proof__item" href="casos/referidos.html#cifras">
+              <span class="proof__num">11</span>
+              <span class="proof__text"><b>países, una sola moneda</b>Una recompensa en dólares para toda la región<span class="proof__case">Programa de referidos</span></span>
+            </a>
           </li>
-          <li class="feature-card">
-            <div class="feature-card__icon"><img src="assets/icons/glyph-grid.svg" alt="" width="32" height="32"></div>
-            <div class="feature-card__body">
-              <h2 class="feature-card__title t-h4">Sistemas de diseño</h2>
-              <p class="t-body is-muted">Una base común para que la interfaz siga coherente a medida que crece.</p>
-            </div>
+          <li>
+            <a class="proof__item" href="casos/nubix.html#cifras">
+              <span class="proof__num">3+</span>
+              <span class="proof__text"><b>años dentro del mismo sistema</b>De decisiones sueltas a tokens y componentes<span class="proof__case">Nubix, sistema de diseño</span></span>
+            </a>
           </li>
-          <li class="feature-card">
-            <div class="feature-card__icon"><img src="assets/icons/glyph-sparkles.svg" alt="" width="32" height="32"></div>
-            <div class="feature-card__body">
-              <h2 class="feature-card__title t-h4">Proceso con IA</h2>
-              <p class="t-body is-muted">IA para lo repetitivo, criterio propio para las decisiones de diseño.</p>
-            </div>
+          <li>
+            <a class="proof__item" href="casos/usuarios.html#cifras">
+              <span class="proof__num">4</span>
+              <span class="proof__text"><b>señales a la vez para saber en qué cuenta estás</b>Menú, inicio, barra y menú de la cuenta<span class="proof__case">Usuarios y permisos</span></span>
+            </a>
           </li>
         </ul>
       </div>
@@ -121,43 +126,46 @@
         <div class="case-grid">
           <article class="case-card">
             <div class="case-card__media">
-              <img src="assets/img/caso-referidos.webp" alt="Pantalla de Referidos y recompensas con el enlace personal para compartir" width="368" height="300" loading="lazy" decoding="async">
+              <img src="assets/img/caso-referidos.webp" alt="Detalle de Referidos y recompensas: el cupón listo para copiar y compartir, con el mensaje “Compártelo con tus contactos y gana hasta USD 250 por referido”" width="368" height="300" loading="lazy" decoding="async">
             </div>
             <div class="case-card__body">
-              <span class="badge t-badge">Nueva funcionalidad</span>
-              <div>
-                <p class="case-card__eyebrow t-small">Panel de clientes · 2 meses</p>
-                <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/referidos.html">Programa de referidos</a></h3>
-              </div>
+              <span class="badge t-badge">Crecimiento y referidos</span>
+              <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/referidos.html">Programa de referidos</a></h3>
               <p class="t-body is-muted">Diseñé de punta a punta un programa de referidos para once países: un solo link para compartir, recompensa en dólares y un historial que muestra el estado de cada comisión durante la espera.</p>
+              <div class="case-card__foot">
+                <p class="case-card__meta t-small">Panel de clientes · 2 meses</p>
+                <span class="case-card__cta" aria-hidden="true">Ver caso<img src="assets/icons/arrow-right-blue.svg" alt="" width="20" height="20"></span>
+              </div>
             </div>
           </article>
 
           <article class="case-card">
             <div class="case-card__media">
-              <img src="assets/img/caso-nubix.webp" alt="Pantalla de detalle de un plan de hosting dentro del panel Nubix" width="368" height="300" loading="lazy" decoding="async">
+              <img src="assets/img/caso-nubix.webp" alt="Escala de colores del sistema de diseño Nubix: primary, secondary, brand, info, success, warning y danger, con su valor" width="368" height="300" loading="lazy" decoding="async">
             </div>
             <div class="case-card__body">
               <span class="badge t-badge">Sistema de diseño</span>
-              <div>
-                <p class="case-card__eyebrow t-small">Panel de clientes · Más de 3 años</p>
-                <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/nubix.html">Nubix: de decisiones sueltas a un sistema de diseño</a></h3>
+              <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/nubix.html">Nubix: de decisiones sueltas a un sistema de diseño</a></h3>
+              <p class="t-body is-muted">Siete piezas distintas hacían de header en el mismo panel. Audité el código, lo contrasté con un benchmark y criterios WCAG, y propuse un sistema de tokens y componentes.</p>
+              <div class="case-card__foot">
+                <p class="case-card__meta t-small">Panel de clientes · Más de 3 años</p>
+                <span class="case-card__cta" aria-hidden="true">Ver caso<img src="assets/icons/arrow-right-blue.svg" alt="" width="20" height="20"></span>
               </div>
-              <p class="t-body is-muted">Audité el panel, medí sus inconsistencias en el código y las contrasté con un benchmark y criterios WCAG para proponer un sistema de tokens y componentes.</p>
             </div>
           </article>
 
           <article class="case-card">
             <div class="case-card__media">
-              <img src="assets/img/caso-usuarios.webp" alt="Pantalla de Usuarios y permisos con la lista de integrantes de la cuenta" width="368" height="300" loading="lazy" decoding="async">
+              <img src="assets/img/caso-usuarios.webp" alt="Selector de rol del formulario Agregar integrante: Administrador, Factura y pagos y Gestión técnica" width="368" height="300" loading="lazy" decoding="async">
             </div>
             <div class="case-card__body">
-              <span class="badge t-badge">Roles y permisos</span>
-              <div>
-                <p class="case-card__eyebrow t-small">Panel de clientes · 3 meses, en tandas</p>
-                <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/usuarios.html">Usuarios y permisos</a></h3>
-              </div>
+              <span class="badge t-badge">Permisos y cuentas</span>
+              <h3 class="case-card__title t-h4"><a class="case-card__link" href="casos/usuarios.html">Usuarios y permisos</a></h3>
               <p class="t-body is-muted">Operar una cuenta entre varias personas implicaba pasarse la contraseña maestra. Diseñé roles, invitaciones y un cambio de cuenta que deja siempre visible en cuál estás operando y con qué permisos.</p>
+              <div class="case-card__foot">
+                <p class="case-card__meta t-small">Panel de clientes · 3 meses</p>
+                <span class="case-card__cta" aria-hidden="true">Ver caso<img src="assets/icons/arrow-right-blue.svg" alt="" width="20" height="20"></span>
+              </div>
             </div>
           </article>
         </div>
@@ -175,19 +183,32 @@
         <div class="ia__content">
           <p class="ia__lead t-body-large is-muted">Incorporé Claude y ChatGPT a mi proceso para ganar velocidad en lo mecánico y dedicarle más atención a las decisiones de diseño, que siguen siendo mías.</p>
           <ul class="feature-grid feature-grid--tight">
-            <li class="feature-card feature-card--center">
-              <div class="feature-card__icon"><img src="assets/icons/glyph-sparkles.svg" alt="" width="32" height="32"></div>
-              <p class="t-body is-muted">Relevamientos con heurísticas de Nielsen y criterios de accesibilidad WCAG.</p>
+            <li class="feature-card feature-card--col">
+              <div class="feature-card__icon"><img src="assets/icons/glyph-grid.svg" alt="" width="32" height="32"></div>
+              <div class="feature-card__body">
+                <h3 class="feature-card__title t-h4">Prototipos que se pueden usar</h3>
+                <p class="t-body is-muted">Los armé en código, con IA, para que quien los mire pueda probar los estados reales en lugar de imaginarlos.</p>
+              </div>
             </li>
-            <li class="feature-card feature-card--center">
+            <li class="feature-card feature-card--col">
               <div class="feature-card__icon"><img src="assets/icons/glyph-sparkles.svg" alt="" width="32" height="32"></div>
-              <p class="t-body is-muted">Detección y corrección de inconsistencias dentro de Figma con agentes de IA.</p>
+              <div class="feature-card__body">
+                <h3 class="feature-card__title t-h4">Relevamientos con criterio</h3>
+                <p class="t-body is-muted">Auditorías del código y del diseño con heurísticas de Nielsen y criterios WCAG, y detección de inconsistencias dentro de Figma.</p>
+              </div>
             </li>
-            <li class="feature-card feature-card--center">
-              <div class="feature-card__icon"><img src="assets/icons/glyph-sparkles.svg" alt="" width="32" height="32"></div>
-              <p class="t-body is-muted">Documentación de componentes y tokens de Figma a ingeniería con Figma MCP.</p>
+            <li class="feature-card feature-card--col">
+              <div class="feature-card__icon"><img src="assets/icons/glyph-diversity.svg" alt="" width="32" height="32"></div>
+              <div class="feature-card__body">
+                <h3 class="feature-card__title t-h4">De Figma a ingeniería</h3>
+                <p class="t-body is-muted">Documentación de componentes y tokens para que desarrollo los implemente sin adivinar, con Figma MCP.</p>
+              </div>
             </li>
           </ul>
+          <a class="btn btn--text ia__link" href="prototipos/referidos/dashboard.html" target="_blank" rel="noopener noreferrer">
+            <span>Probar el prototipo de Referidos<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
+            <img src="assets/icons/arrow-right-blue.svg" alt="" width="24" height="24">
+          </a>
         </div>
       </div>
     </section>
@@ -206,6 +227,18 @@
         <div class="case-grid">
           <article class="rec-card">
             <header>
+              <h3 class="rec-card__name t-h4">Silvana Catalano</h3>
+              <p class="t-body-medium is-muted">Senior Product Designer · Compañera de equipo</p>
+            </header>
+            <hr class="rec-card__rule">
+            <blockquote class="rec-card__quote">
+              <img src="assets/icons/quote.svg" alt="" width="32" height="32">
+              <p class="t-body-large is-muted">Si tuviera que definirlo rápido, diría que es de esas personas que querés tener sí o sí en tu equipo de UX: impecable en el detalle, prolijo como pocos y con una capacidad analítica enorme para entender y resolver problemas complejos de diseño.</p>
+            </blockquote>
+          </article>
+
+          <article class="rec-card">
+            <header>
               <h3 class="rec-card__name t-h4">Mauro Lazzarino</h3>
               <p class="t-body-medium is-muted">Líder UX · Mi líder directo</p>
             </header>
@@ -218,20 +251,8 @@
 
           <article class="rec-card">
             <header>
-              <h3 class="rec-card__name t-h4">Silvana Catalano</h3>
-              <p class="t-body-medium is-muted">Senior Product Designer · Mismo equipo</p>
-            </header>
-            <hr class="rec-card__rule">
-            <blockquote class="rec-card__quote">
-              <img src="assets/icons/quote.svg" alt="" width="32" height="32">
-              <p class="t-body-large is-muted">Si tuviera que definirlo rápido, diría que es de esas personas que querés tener sí o sí en tu equipo de UX: impecable en el detalle, prolijo como pocos y con una capacidad analítica enorme para entender y resolver problemas complejos de diseño.</p>
-            </blockquote>
-          </article>
-
-          <article class="rec-card">
-            <header>
               <h3 class="rec-card__name t-h4">Eugenia García Martín</h3>
-              <p class="t-body-medium is-muted">Product Designer · Mismo equipo</p>
+              <p class="t-body-medium is-muted">Product Designer · Compañera de equipo</p>
             </header>
             <hr class="rec-card__rule">
             <blockquote class="rec-card__quote">
@@ -249,7 +270,7 @@
         <div class="cta on-dark">
           <div class="cta__text">
             <h2 class="t-h2" id="cta-title">¿Hablamos?</h2>
-            <p class="t-body-large-medium">Si tenés un producto con mucha lógica de negocio y buscás a alguien que lo diseñe de punta a punta, escribime. Me encantaría conversar sobre cómo sumar mi experiencia a tu equipo.</p>
+            <p class="t-body-large-medium">Estoy disponible para proyectos freelance y para sumarme a un equipo en relación de dependencia. Si tenés un producto con mucha lógica de negocio, escribime y lo charlamos.</p>
           </div>
           <div class="cta__actions">
             <button class="btn btn--light" type="button" data-copy-email>
@@ -264,11 +285,8 @@
               <img src="assets/icons/whatsapp-white.svg" alt="" width="24" height="24">
               <span>WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></span>
             </a>
-            <a class="btn btn--ghost-light" href="assets/docs/CV-Gaston-Mansilla.pdf" target="_blank" rel="noopener noreferrer">
-              <img src="assets/icons/download-white.svg" alt="" width="24" height="24">
-              <span>Descargar CV<span class="sr-only"> (PDF, se abre en una pestaña nueva)</span></span>
-            </a>
           </div>
+          <p class="cta__more t-body">¿Preferís leerme primero? <a href="assets/docs/CV-Gaston-Mansilla.pdf" target="_blank" rel="noopener noreferrer">Descargá mi CV<span class="sr-only"> (PDF, se abre en una pestaña nueva)</span></a>.</p>
         </div>
       </div>
     </section>
@@ -287,7 +305,9 @@
           <p class="footer-col__title t-body-strong" id="footer-links-title">ENLACES</p>
           <ul class="footer-list">
             <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#casos">Casos de estudio</a></li>
+            <li><a href="casos/referidos.html">Programa de referidos</a></li>
+            <li><a href="casos/nubix.html">Nubix: sistema de diseño</a></li>
+            <li><a href="casos/usuarios.html">Usuarios y permisos</a></li>
           </ul>
         </nav>
 

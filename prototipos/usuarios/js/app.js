@@ -74,7 +74,7 @@
     m("Federico Ibarra", "facturacion", false, "activo"),
     m("Nicolás Aguirre", "administrador", false, "pendiente"),
     JUAN,
-    m("Sofía Paredes", "facturacion", true, "pendiente"),
+    m("Carolina Paredes", "facturacion", true, "pendiente"),
     m("Gonzalo Acosta", "administrador", false, "activo"),
     m("Julieta Navarro", "tecnica", true, "pendiente"),
     m("Ramiro Vega", "facturacion", false, "expirado"),

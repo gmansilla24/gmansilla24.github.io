@@ -38,11 +38,11 @@ y abrí http://localhost:8000. También sirve la extensión Live Server de VS Co
 
 ## Antes de publicar
 
-1. **Imágenes**: ya están las reales en `assets/img/` (WebP). Están a tamaño 1x (320 × 320 la foto y 368 × 300 las capturas), así que en pantallas retina se ven algo blandas. Para mejorarlo, exportar de Figma al doble (640 × 640 y 736 × 600), guardar con el mismo nombre y duplicar `width`/`height` no hace falta: el HTML ya mantiene la proporción.
+1. **Imágenes**: ya están las reales en `assets/img/` (WebP). La foto es de 800 × 800 px, las miniaturas de las tarjetas de 736 × 600 y las portadas de los casos de 932 × 712: todas al doble de lo que se muestra, para que se vean nítidas en pantallas retina.
 2. **CV público** (actualizado, ya lista `https://gmansilla24.github.io` como portfolio): `assets/docs/CV-Gaston-Mansilla.pdf` es la versión sin referencias; incluye la fecha de nacimiento por decisión de Gastón. Ojo: el PDF de un repositorio público lo puede descargar cualquiera, así que cualquier dato personal que tenga queda visible.
 3. **Handoffs de los prototipos** (`assets/docs/Handoff-Usuarios-y-permisos.pdf`, `assets/docs/Handoff-Programa-de-referidos.pdf` y `assets/docs/Handoff-Sistema-de-diseno.pdf`, botón "Handoff" en el hero de `casos/usuarios.html`, `casos/referidos.html` y `casos/nubix.html`, se abren en una pestaña nueva como el CV): son los PDF exportados de los documentos de handoff. Si un documento cambia, volver a exportarlo (A4, sin fecha ni firma) y reemplazar el archivo con el mismo nombre. Si se agrega un prototipo con handoff en otro caso, repetir el mismo botón.
 4. **Estadísticas de visitas**: ya está conectado el código `gmansilla24` de GoatCounter en `js/analytics.js`. Después de publicar, entrar una vez al sitio publicado y confirmar que la visita aparece en `https://gmansilla24.goatcounter.com` (detalle en "Estadísticas de visitas").
-5. **`noindex` de prueba**: `index.html` y los tres archivos de `casos/` llevan `<meta name="robots" content="noindex">` para que Google no indexe la versión de prueba. Cuando se publique la versión final, borrar esa línea (está marcada con el comentario `PRUEBA`) en las cuatro páginas. Los prototipos (`prototipos/`) tienen su propio `noindex` y se quedan así. Con el `noindex`, la página sigue abierta para quien tenga el enlace.
+5. **Indexación**: se quitó el `noindex` de `index.html` y de los tres archivos de `casos/`, así que Google puede indexar el sitio. Los prototipos (`prototipos/`) y las réplicas (`casos/nubix-hoy/`) conservan su propio `noindex` a propósito: son demos con datos de ejemplo y no deberían aparecer en buscadores.
 6. Revisar el enlace de "Leer completas en LinkedIn" (`index.html`, busca `details/recommendations`) y confirmar con las tres personas que están de acuerdo con que se publiquen sus recomendaciones.
 
 ## Imágenes del caso Nubix (pendiente)
@@ -55,9 +55,18 @@ La portada ya tiene su imagen (`assets/img/nubix/portada.webp`, 1047 × 800, PNG
 
 y sacarle el `aria-hidden="true"` al `figure`. Tamaño recomendable: el doble del que se ve (932 × 712 para los hallazgos, 714 × 712 para las tres de abajo), en WebP. La imagen se recorta desde arriba a la izquierda (`object-fit: cover`), así que conviene que lo importante quede arriba.
 
-## Imágenes del caso Referidos (pendiente)
+## Caso Referidos (casos/referidos.html)
 
-La portada ya tiene su imagen (`assets/img/referidos/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). En `casos/referidos.html` quedan 7 espacios reservados con un comentario `IMAGEN n`: 4 en los bloques (IMAGEN 2 a 5) y 3 en "Diseño final" (IMAGEN 6, 7 y 8). Se cargan igual que en Nubix (ver arriba), con `../assets/img/referidos/nombre.webp`.
+Rehecho con el mismo criterio que Nubix y Usuarios: lenguaje de producto arriba, visuales en código y pantallas del prototipo incrustadas, sin imágenes reservadas (la portada es `assets/img/referidos/portada.webp`). Estructura: En pocas palabras (con "Qué hice yo", "Con inteligencia artificial" y equipo), banda de cuatro cifras, "Personas" (Matías R. invitador y Valentina S. invitada, del Figma "Imágenes", nodo 123-1940), cuatro decisiones, "Cómo trabajé" (alcance, evidencia, cómo avanzó, estado real, qué se mide) y "Lo que aprendí". Estilos en `css/case-referidos.css` (prefijo `ref-`; copia los bloques de personas, diagramas y escritorio/mobile de `case-usuarios.css`).
+
+- Decisión 1 (incentivo en dólares): el Lean Canvas (nodo 99-1919) se rearmó en código como una grilla de nueve bloques con el texto del Figma, y el Value Proposition Canvas (nodo 128-4140) como pares "dolor → alivio" y una comparación de lo que gana cada lado.
+- Decisión 2 (visibilidad): benchmark de DigitalOcean, SiteGround y Hostinger (nodo 99-2424) como tabla con una cuarta columna para Nubix (por debajo de 900 px se vuelve tarjetas con `data-label`), más el dashboard con el chip y la pantalla sin servicio activo como prototipo incrustado.
+- Decisión 3 (espera de 45 días): el recorrido de 14 pasos (FigJam 3-553) como grilla de 7 columnas (lista en una columna en mobile), el diagrama de estados de la comisión dibujado en SVG (el SVG está dentro del HTML), seis tarjetas de estados y la tabla de Actividad en vivo.
+- Decisión 4 (cupón y cobro): tres momentos del hero, los modales del cupón y del retiro (`?modal=cupon&estado=formato|uso`, `?modal=cobro&estado=revision`), las dos formas de cobrar y el flujo completo del programa (FigJam 3-472) dibujado en SVG. Cada diagrama tiene una versión en lista para mobile (`ref-desk` / `ref-mob`).
+- Las imágenes de Figma no se pudieron descargar desde el entorno de trabajo, así que todo lo que venía de Figma está redibujado en código. Si preferís las originales, exportarlas (PNG o SVG) a `assets/img/referidos/` y reemplazar la pieza correspondiente.
+- Para que las pantallas incrustadas no muestren la herramienta "Probar estados", `dashboard.html` y `referidos.html` aceptan `?embed=1` (agrega la clase `is-embed` al `<html>`; ver `css/producto.css`).
+- Diferencias entre fuentes que conviene saber: el recorrido de FigJam dice "Marcos" y el perfil dice "Matías" (se usa Matías); FigJam menciona cinco estados de comisión y el handoff define seis (se usan seis, con Retenido); el nombre "Matías R." también aparece en el caso Usuarios con otro perfil (dueño de agencia, 38 años); la columna de Nubix del benchmark sale del prototipo y del handoff, no del Figma; el texto de "Con inteligencia artificial" repite el de Usuarios.
+- Texto del prototipo para revisar: el hero dice "gana hasta USD 250 por cada referido", pero el handoff (4.4) distingue el máximo por referido (USD 150) del tope de acumulación (USD 250). El caso cuenta los dos límites por separado.
 
 ## Caso Usuarios y permisos (casos/usuarios.html)
 
@@ -69,6 +78,17 @@ Rehecho con el mismo criterio que Nubix: lenguaje de producto arriba, visuales e
 - Nombres de los roles: los del prototipo ("Factura y pagos", no "Facturación y pagos" como en Medium).
 - Personas: las del Figma son Matías R. (Titular) y Sofía M. (Colaboradora); en el prototipo la cuenta de ejemplo es Matías Roldán, titular y además invitado a otras tres cuentas, y eso se aclara en la página. Las fotos de las personas no se pudieron bajar de Figma: se usan iniciales. Ojo: el prototipo también tiene un integrante de ejemplo llamado "Sofía Paredes" (`js/app.js`), que no es la persona Sofía M.
 - Versión anterior de la página (con espacios `IMAGEN 2` a `8`): ya no existe en el repo.
+
+## Home (index.html)
+
+- **Franja de datos** bajo el hero (`.proof`): 3 cifras que enlazan a `#cifras` de cada caso. Si cambian los números en un caso, actualizar también acá.
+- **Disponibilidad**: la "píldora" verde del hero (`.hero__status`) y el texto de Contacto dicen que buscás proyectos freelance y relación de dependencia. Si cambia tu situación, editá ambos textos; la píldora se puede borrar sin romper nada.
+- **Tarjetas de casos**: miniaturas de 736×600 px (se muestran a 368×300, así se ven nítidas en pantallas retina) en `assets/img/caso-*.webp`. Son recortes de los prototipos; el script que las genera no está en el repo, así que para cambiarlas hay que exportar un recorte nuevo con esas medidas.
+- **Foto del hero**: recorte más cerrado (`transform: scale(1.12)`) y bloque azul desplazado detrás (`.hero__photo::before`). En mobile (menos de 768 px) va arriba del texto, a 112 px; de 768 px en adelante pasa a la derecha (200 px, y 280 px desde 1024 px). La imagen (`assets/img/hero-gaston.webp`) es de 800×800 px, suficiente para pantallas retina; si la cambiás, mantené el mismo nombre y una resolución de 640 px o más.
+- **Menú**: "Casos de estudio" y "Contacto" (este último con estilo de botón, clase `nav__link--cta`). El mismo menú y el mismo footer están en las tres páginas de casos.
+- **Rol**: "Product Designer (UX/UI)" en los tres casos; el hero usa "Product Designer · UX/UI".
+- **Vista previa al compartir** (LinkedIn, WhatsApp, etc.): 1200 × 630 px en JPG a propósito, porque algunas redes no leen WebP. La home usa `assets/img/og-gaston.jpg` (tu foto) y cada caso la suya: `og-referidos.jpg`, `og-nubix.jpg` y `og-usuarios.jpg` (título del caso más el mismo recorte del hero). Se declaran con `og:image` y `twitter:card` en el `<head>` de cada página. Si cambiás la foto, el titular o el título de un caso, hay que rehacer la imagen correspondiente. Las redes guardan en caché la vista previa: para refrescarla, usá el Post Inspector de LinkedIn o el depurador de compartidos de Facebook.
+- **CV**: botón en el hero y enlace de texto al final de Contacto (`.cta__more`).
 
 ## Publicar en GitHub Pages
 

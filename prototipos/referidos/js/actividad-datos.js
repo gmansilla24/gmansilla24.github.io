@@ -29,7 +29,7 @@
   var MAIL = "ejemplo@email.com";
   var REF = [
     { id: 1, nombre: "Martín Suárez", uso: "2026-03-15", disp: "2026-04-29", estado: "disponible", monto: 45 },
-    { id: 2, nombre: "Sofía Ramírez", uso: "2026-03-22", disp: "2026-05-06", estado: "pendiente", monto: 90 },
+    { id: 2, nombre: "Florencia Ramírez", uso: "2026-03-22", disp: "2026-05-06", estado: "pendiente", monto: 90 },
     { id: 3, nombre: "Diego Fernández", uso: "2026-03-28", disp: "2026-05-12", estado: "solicitado", monto: 15 },
     { id: 4, nombre: "Valentina Pereyra", uso: "2026-04-02", disp: "2026-05-17", estado: "pagado", monto: 60 },
     { id: 5, nombre: "Nicolás Bianchi", uso: "2026-04-09", disp: "2026-05-24", estado: "cancelado", monto: 22, nota: "Compra reembolsada" },

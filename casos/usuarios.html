@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex"><!-- PRUEBA: sacar esta línea cuando se publique la versión final (ver README) -->
   <title>Gestión de usuarios y cuentas vinculadas · Gastón M. Mansilla</title>
   <meta name="description" content="Diseñé cómo varias personas operan una misma cuenta de autogestión sin pasarse la contraseña: roles con acceso parcial, invitaciones que expiran y un cambio de cuenta que deja claro dónde estás parado.">
   <meta name="theme-color" content="#0961c2">
@@ -13,6 +12,12 @@
   <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="Gestión de usuarios y cuentas vinculadas">
   <meta property="og:description" content="Roles con acceso parcial, invitaciones que expiran y un cambio de cuenta que deja claro dónde estás parado, para operar una misma cuenta entre varias personas.">
+  <meta property="og:url" content="https://gmansilla24.github.io/casos/usuarios.html">
+  <meta property="og:image" content="https://gmansilla24.github.io/assets/img/og-usuarios.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Gestión de usuarios y cuentas vinculadas: selector de rol al invitar a una persona">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preload" href="../fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/styles.css">
@@ -38,8 +43,8 @@
 
       <nav class="nav" id="menu" aria-label="Principal">
         <ul class="nav__list">
-          <li><a class="nav__link" href="../index.html">Inicio</a></li>
           <li><a class="nav__link" href="../index.html#casos" aria-current="true">Casos de estudio</a></li>
+          <li><a class="nav__link nav__link--cta" href="../index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -87,7 +92,7 @@
 
           <!-- Portada (466 × 356 en desktop; no se muestra en mobile) -->
           <figure class="case-media case-media--bare case-hero__media">
-            <img src="../assets/img/usuarios/portada.webp" alt="Pantalla Usuarios y permisos del panel, con la tabla de integrantes de la cuenta, sus roles y sus estados" width="1047" height="800" fetchpriority="high" decoding="async">
+            <img src="../assets/img/usuarios/portada.webp" alt="Selector de rol al invitar a una persona: administrador, facturación y pagos, o gestión técnica" width="932" height="712" fetchpriority="high" decoding="async">
           </figure>
         </div>
 
@@ -99,7 +104,7 @@
             </div>
             <div class="meta__item">
               <dt class="meta__label">Rol</dt>
-              <dd class="meta__value">Diseñador UX/UI</dd>
+              <dd class="meta__value">Product Designer (UX/UI)</dd>
             </div>
             <div class="meta__item">
               <dt class="meta__label">Duración</dt>
@@ -498,7 +503,9 @@
           <p class="footer-col__title t-body-strong" id="footer-links-title">ENLACES</p>
           <ul class="footer-list">
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="../index.html#casos">Casos de estudio</a></li>
+            <li><a href="referidos.html">Programa de referidos</a></li>
+            <li><a href="nubix.html">Nubix: sistema de diseño</a></li>
+            <li><a href="usuarios.html">Usuarios y permisos</a></li>
           </ul>
         </nav>
 
