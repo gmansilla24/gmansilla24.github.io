@@ -11,14 +11,14 @@ index.html            Contenido de la página
 casos/nubix.html      Página del caso Nubix (plantilla para los otros casos)
 casos/referidos.html  Página del caso Referidos
 casos/usuarios.html   Página del caso Usuarios y permisos
-casos/nubix-hoy/      Réplica anonimizada del producto actual (cards, “elegido” y listas) que el caso Nubix incrusta en iframes: `hoy.html` (un fragmento por hash, p. ej. `#hosting`) y `hoy.css` (CSS compilado del producto recortado a lo que se usa). Lleva `noindex`
+casos/nubix-hoy/      Réplica anonimizada del producto actual que el caso Nubix incrusta en iframes: `hoy.html` + `hoy.css` (cards, “elegido”, listas y modales; un fragmento por hash, p. ej. `#hosting`) y `sidebar.html` + `sidebar.css` (el sidebar: `#expandido`, `#colapsado`, `#mobile-abierto`, `#estados` con hover y foco forzados, `#referencia` e `#invitado`; con el mini-JS de la réplica: flecha, ítem padre, clic afuera, tema). El CSS es el compilado del producto recortado a lo que se usa. Lleva `noindex`
 css/styles.css        Estilos y tokens (variables al inicio del archivo)
-css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers — y Hallazgo 4 — cards, “elegido”, listas y modales)
+css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers —, Hallazgo 4 — cards, “elegido”, listas y modales — y Hallazgo 5 — sidebar, prefijo `nxsb-`; ojo: `nxb-` ya es el botón del catálogo)
 js/main.js            Menú móvil, sección activa, botón "Copiar correo" y aviso (toast)
 js/analytics.js       Estadísticas de visitas con GoatCounter (código gmansilla24; ver "Estadísticas de visitas")
 js/case-nav.js        Índice fijo de la página del caso (Nubix): resalta la sección que se está leyendo
 js/case-specimens.js  Muestras interactivas del caso (Nubix): configurador de botones, tablas que ordenan y se seleccionan, ajuste de los marcos de celular, de las pantallas del prototipo y de los iframes con alto automático
-fonts/                Nunito (autoalojada, licencia OFL) y un subconjunto de Material Icons (licencia Apache 2.0) para la réplica de las tablas de producción (`nx-old-icons`) y de las cards y listas (`nx-hoy-*`, solo los íconos que se usan)
+fonts/                Nunito (autoalojada, licencia OFL) y un subconjunto de Material Icons (licencia Apache 2.0) para la réplica de las tablas de producción (`nx-old-icons`) y de las cards, listas y sidebar (`nx-hoy-*` y `nx-sb-*`, solo los íconos que se usan; la fuente de íconos usa la feature `rlig`, así que al hacer otro subconjunto hay que conservarla)
 assets/icons/         Íconos SVG exportados de Figma
 assets/img/           Foto del hero y capturas de los casos
 assets/docs/          CV y handoffs de los prototipos y del sistema de diseño (Usuarios y permisos, Programa de referidos, Sistema de diseño), en PDF (ver "Antes de publicar")
@@ -46,7 +46,7 @@ y abrí http://localhost:8000. También sirve la extensión Live Server de VS Co
 
 ## Imágenes del caso Nubix (pendiente)
 
-La portada ya tiene su imagen (`assets/img/nubix/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). "El sistema aplicado" ya tiene capturas reales del prototipo (`assets/img/nubix/sistema-{inicio,servicio,listado}-{desktop,mobile}.webp`, sacadas de `prototipos/sistema/*.html?embed=1` con el navegador a 1280 × 800 y 360 × 740; si cambia el prototipo hay que volver a sacarlas). Los hallazgos 1 a 4 se arman con piezas en código, no con imágenes. En `casos/nubix.html` puede quedar algún espacio reservado (celeste) con un comentario `IMAGEN n`. Para cargar una, dentro del `<figure class="case-media">` correspondiente:
+La portada ya tiene su imagen (`assets/img/nubix/portada.webp`, 1047 × 800, PNG con fondo transparente convertido a WebP). "El sistema aplicado" ya tiene capturas reales del prototipo (`assets/img/nubix/sistema-{inicio,servicio,listado}-{desktop,mobile}.webp`, sacadas de `prototipos/sistema/*.html?embed=1` con el navegador a 1280 × 800 y 360 × 740; si cambia el prototipo hay que volver a sacarlas). Los hallazgos 1 a 5 se arman con piezas en código, no con imágenes. En `casos/nubix.html` puede quedar algún espacio reservado (celeste) con un comentario `IMAGEN n`. Para cargar una, dentro del `<figure class="case-media">` correspondiente:
 
 ```
 <img src="../assets/img/nubix/nombre.webp" alt="Descripción de la captura" width="932" height="712" loading="lazy" decoding="async">
@@ -135,3 +135,39 @@ Réplicas de los prototipos de Figma hechas en HTML, CSS y JS, con datos fictici
   - Las tablas de "Actividad y pagos" se ven como tabla desde 900 px de ancho del contenedor y como tarjetas por debajo; las pestañas se manejan con flechas, Inicio y Fin; los modales son `<dialog>` nativos (un clic en el fondo no los cierra; Esc los cierra salvo mientras se está guardando).
   - Documentación completa de reglas, estados, textos, API y criterios de aceptación: el handoff (`assets/docs/Handoff-Programa-de-referidos.pdf`).
 - Íconos: Material Icons (Apache License 2.0), inyectados como sprite desde `js/icons.js`. La licencia está en `assets/`.
+
+## Notas técnicas retiradas de la página (casos/nubix.html)
+
+La página del caso quedó con una capa para lectura rápida: porcentajes, imágenes y frases sin jerga. El detalle técnico vive acá, en el catálogo y en el handoff. Los fragmentos y estilos que la página ya no usa se dejan por si hacen falta (`sidebar.html#estados`).
+
+### Hallazgo 5 · sidebar
+
+- **Template de hoy**: 234 líneas, siete ítems de primer nivel (“Mesa de ayuda” condicional) y dos submenús de 17 candidatos (34 en total). Suma barra mobile, notificaciones, promos (texto y link desde un CMS), bloque de cuenta, “Cerrar sesión”, “Cambiar cuenta” y la flecha. `sidebar.component.scss` tiene 0 líneas; el estilo está en `_sidebar.scss` (319).
+- **Pantallas**: 24 declaraciones `showSidebar: false` (ingreso 12, verificación 5, soporte 3, compras 2, acceso remoto 1, cuentas vinculadas 1). Con sidebar, unas 219 de 243 (~90 %): orden de magnitud, una pantalla puede tener más de una declaración.
+- **Cierre**: clic afuera (todos los anchos), overlay (<768 px) y cada `NavigationStart`, con debounce de 100 ms. Lo abren la flecha (≥768), la hamburguesa (<768) y un ítem padre. Arranca colapsado; solo se persiste el tema. `BreakpointObserver` está inyectado y no se usa; un único corte CSS a 767,98 px.
+- **Semántica hoy**: 0 `<nav>`, 0 `aria-expanded`, 0 `aria-current`; `div role="button"` sin `tabindex` (flecha, bloque de usuario, número de cliente); el nombre del ícono (“home”, “apps”) es texto del DOM. Paradas de Tab: 19 colapsado (8 invisibles) y 21 expandido (4 invisibles). Con el menú mobile cerrado, 17 de 20 paradas quedan fuera de pantalla (85 %; réplica con 4 + 4 hijos, con datos reales cambia).
+- **Semántica prototipo** (Playwright, Chromium, 1280 y 360 px): `<aside aria-label="Menú principal">`, no `<nav>`; `aria-expanded`/`aria-controls` en las secciones y en el botón de expandir; `aria-current="page"`; 14 de 14 íconos SVG con `aria-hidden`; 8 paradas de Tab colapsado y 8 expandido, ninguna invisible; mobile cerrado 0 paradas; abierto 9 (7 ítems, logo, cerrar) con Tab en bucle. El foco inicial va al botón de cerrar (que está al final del orden de Tab aunque se ve arriba). Esc cierra y devuelve el foco a `.header__menu`; fondo `inert`. Estado por pestaña en `sessionStorage` (`nubix-proto-sidebar`).
+- **Contraste**: hoy #ff8431 sobre blanco 2,44:1 (texto 15,43:1); contador rojo 4,53:1 y, en la barra mobile, naranja 2,44:1; 16 de 133 combinaciones fallan (12 %) y 9 de 36 pares. Prototipo: actual #053A74 sobre #E6EFF9 9,7:1; hover #161719 sobre #F0F1F2 15,86:1; contador blanco sobre #AD0014 7,54:1; **anillo de foco global azul al 40 % = 1,89:1 contra blanco (no llega a 3:1, WCAG 1.4.11)**.
+- **Tamaños**: hoy ítems 39,1 × 40 colapsado y 203 × 40 expandido; flecha 50 × 50 en CSS, pero el menú la tapa y solo responde una franja de 18 × 50 (verificado en la réplica con `elementFromPoint`; en producción es inferencia). Prototipo: 40 × 40 colapsado, 216 × 40 expandido, botón de expandir 15 × 48 (no medí la excepción de espaciado de 2.5.8).
+- **Aviso**: el prototipo usa `<aside>` con nombre, no `<nav>`. Las paradas de Tab de hoy y del prototipo no son comparables uno a uno (cuenta, notificaciones y promos están dentro del sidebar hoy y en el header en el prototipo); por eso la fila se sacó de la página.
+- **No pude verificar**: tooltips, popovers y offcanvas de ng-bootstrap y si el offcanvas atrapa el foco; qué hace `Logout` con “Cambiar cuenta”; qué gana en `verify-identity` (despacha dos veces `ShowSidebar`); datos reales de submenús y notificaciones; contraste del anillo de foco del navegador. Sin lector de pantalla ni Safari/Firefox.
+- **Pendientes del prototipo**: los subítems del catálogo y de varios servicios no navegan; guardado por pestaña, acordeón exclusivo y Esc son decisiones mías que Figma no define.
+- **Detalles menores del producto**: `text-secondary_` sin efecto, `content-wrapper--expanded` sin CSS, `--bs-back` mal tipeado, tres familias de íconos, “Perfíl” con la tilde mal puesta.
+
+### Hallazgo 4 · cards, “elegido”, modales y listas
+
+- Componentes de la card: `nbx-list-item` (19 templates), `nbx-list-item-pending` (12) y `nbx-cloud-list-item` (1). 34 de 90 combinaciones fallan (38 %).
+- “Elegido”: 14 patrones con tres colores (#ff8431, #2d8600, #198754). Borde naranja 2,24:1 contra #f5f5f6; anillo de foco del radio naranja al 25 % (1,25:1). De los nueve mostrados, cuatro no llegan a 3:1 (borde naranja de etiqueta y de tarjeta, sombra 1,09:1, radio sin cambio de caja 1,30:1).
+- En todo el código: 35 `role="button"` sin `tabindex`, 96 `(click)` sobre elementos no interactivos y ningún `aria-checked`, `aria-pressed`, `aria-selected` ni `aria-current`.
+- Modales: `tabindex="-1"` en 41 de 53 `btn-close` y en los 19 enlaces con ícono (60 de 72 = 83 %); 62 de 134 sin cierre (46 %); 32 azules y 102 blancos. Solo 2 de 53 `btn-close` son azules.
+- Paginación: 13 de 20 listas la repiten (65 %), sin `<nav>` ni `aria-label`; la página actual es un botón deshabilitado en vez de `aria-current`; en 9 de 15 listas el menú de orden tiene una sola opción (60 %). Lupa y X sin `aria-label` ni `aria-expanded`. En el prototipo la paginación va en `<nav aria-label="Paginación">`.
+
+### Otros hallazgos
+
+- H2: 54 de 73 tablas con 2 a 4 columnas (74 %); íconos de acción 18 px en 55 casos y 24 px en 11 (83 % / 17 %).
+- H1: los chips “Antes” ya no muestran la clase de Bootstrap (`bg-warning`, `text-info`, etc.); el fondo `#f8f9fa` pasó a “un gris casi blanco”.
+- H3: `fullWidth` solo pone `margin-left: 0`; botones `outline-secondary` y `btn-success`.
+
+### Datos de las réplicas “Hoy” (casos/nubix-hoy/)
+
+Decisión de Gastón (23/10): las réplicas del producto actual usan los mismos datos de ejemplo que los prototipos y el Figma, sin anonimizar aparte. Cuenta: Matías Roldán, Nº cliente 204817 (colaborador: Juan Medina). Servicios de las cards: “Servidor de base de datos” (482917, Corporativo, Windows, vencido), “Sitio institucional” (507316, Corporativo, Linux), “Landing de campaña” (544630) y “Blog de recetas” (551092). Complementos con los nombres del prototipo: Backup diario, WordPress Stage, Cloudflare, Reportes de correo. Catálogo del sidebar: SitioListo, FlowMail, Escudo Web (+ “Email Transaccional”, para conservar los 4 hijos con los que se midieron las paradas de Tab). “Cloud & IaaS” pasó a “Cloud”. Dominio de ejemplo: midominio.com. Segunda pasada (23/10): los ítems del sidebar “Hoy” usan los nombres de la propuesta, uno a uno (Mis productos, Catálogo, Facturas y pagos, Centro de ayuda, Documentación, Partners), y los textos de producción que quedaban en las réplicas pasaron a genéricos o a los del prototipo (“Renovar”, “Creá tu sitio sin escribir código”, “Plantilla de ejemplo”, “Opción de ejemplo”, etiquetas del dominio, pestañas de Cloud). Se dejaron los textos de botón de los headers de lista del Hallazgo 3 (“Nuevo SSL”, “Nuevo Host”, etc.) porque son el dato del hallazgo. Quedan dominios `example.*` solo en la réplica de Cloud (host e IP de ejemplo) y en el nombre largo que prueba el truncado.

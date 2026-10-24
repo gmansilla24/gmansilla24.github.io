@@ -1059,3 +1059,20 @@ html { scroll-padding-top: calc(var(--header-h) + 49px); }
   .nxs-fig--m { max-width: none; margin: 0; }
 }
 @media (min-width: 1024px) { .nxs-row { gap: 28px; } }
+/* ==== nxsb · hallazgo 5 (sidebar) ==== */
+.nxsb-win { position: relative; width: calc(var(--w) * var(--z, 1) * 1px); max-width: 100%; height: calc(var(--h) * var(--z, 1) * 1px); margin-inline: auto; overflow: hidden; border-radius: 12px; background: #f5f5f6; box-shadow: 0 0 0 1px rgba(7, 78, 155, 0.16); }
+.nxsb-win--new { background: #fff; }
+.nxsb-win iframe { position: absolute; top: 0; left: 0; width: 1280px; height: calc(var(--h) * 1px); border: 0; transform-origin: 0 0; transform: scale(var(--z, 1)); }
+.nxsb-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px 40px; align-items: start; }
+.nxsb-flow__col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.nxsb-flow .nxt-ph__tag { text-align: left; }
+.nxsb-flow__steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 10px; }
+.nxsb-flow__steps li { counter-increment: s; position: relative; margin: 0; padding: 12px 14px 12px 52px; min-height: 48px; border-radius: 10px; background: var(--secondary-50); color: var(--gray-900); font-size: 15px; line-height: 1.5; }
+.nxsb-flow__steps li::before { content: counter(s); position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--secondary-300); color: var(--secondary-700); font-size: 13px; line-height: 24px; font-weight: 700; text-align: center; }
+.nxsb-flow__steps li.is-pain { background: var(--danger-50); }
+.nxsb-flow__steps li.is-pain::before { box-shadow: 0 0 0 1px var(--danger-500); color: var(--danger-600); }
+.nxsb-flow__col--new .nxsb-flow__steps li { background: #eef4fb; }
+.nxsb-flow__col--new .nxsb-flow__steps li::before { box-shadow: 0 0 0 1px var(--primary-300); color: var(--primary-800); }
+.nxsb-flow__sum { margin: 2px 0 0; font-size: 15px; line-height: 1.5; color: var(--text-muted); }
+.nxsb-flow__sum b { color: var(--gray-900); }
+/* ==== /nxsb ==== */
