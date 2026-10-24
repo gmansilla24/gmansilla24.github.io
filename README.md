@@ -13,7 +13,7 @@ casos/referidos.html  Página del caso Referidos
 casos/usuarios.html   Página del caso Usuarios y permisos
 casos/nubix-hoy/      Réplica anonimizada del producto actual que el caso Nubix incrusta en iframes: `hoy.html` + `hoy.css` (cards, “elegido”, listas y modales; un fragmento por hash, p. ej. `#hosting`) y `sidebar.html` + `sidebar.css` (el sidebar: `#expandido`, `#colapsado`, `#mobile-abierto`, `#estados` con hover y foco forzados, `#referencia` e `#invitado`; con el mini-JS de la réplica: flecha, ítem padre, clic afuera, tema). El CSS es el compilado del producto recortado a lo que se usa. Lleva `noindex`
 css/styles.css        Estilos y tokens (variables al inicio del archivo)
-css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers —, Hallazgo 4 — cards, “elegido”, listas y modales — y Hallazgo 5 — sidebar, prefijo `nxsb-`; ojo: `nxb-` ya es el botón del catálogo)
+css/case-visuals.css  Visuales de los casos hechos en código (Nubix: tarjetas de cifras, Hallazgo 1 — benchmark, botones, paleta, radios, badges —, Hallazgo 2 — tablas —, Hallazgo 3 — headers —, Hallazgo 4 — sidebar, prefijo `nxsb-` — y Hallazgo 5 — cards, “elegido”, listas y modales; ojo: `nxb-` ya es el botón del catálogo)
 js/main.js            Menú móvil, sección activa, botón "Copiar correo" y aviso (toast)
 js/analytics.js       Estadísticas de visitas con GoatCounter (código gmansilla24; ver "Estadísticas de visitas")
 js/case-nav.js        Índice fijo de la página del caso (Nubix): resalta la sección que se está leyendo
@@ -140,7 +140,7 @@ Réplicas de los prototipos de Figma hechas en HTML, CSS y JS, con datos fictici
 
 La página del caso quedó con una capa para lectura rápida: porcentajes, imágenes y frases sin jerga. El detalle técnico vive acá, en el catálogo y en el handoff. Los fragmentos y estilos que la página ya no usa se dejan por si hacen falta (`sidebar.html#estados`).
 
-### Hallazgo 5 · sidebar
+### Hallazgo 4 · sidebar
 
 - **Template de hoy**: 234 líneas, siete ítems de primer nivel (“Mesa de ayuda” condicional) y dos submenús de 17 candidatos (34 en total). Suma barra mobile, notificaciones, promos (texto y link desde un CMS), bloque de cuenta, “Cerrar sesión”, “Cambiar cuenta” y la flecha. `sidebar.component.scss` tiene 0 líneas; el estilo está en `_sidebar.scss` (319).
 - **Pantallas**: 24 declaraciones `showSidebar: false` (ingreso 12, verificación 5, soporte 3, compras 2, acceso remoto 1, cuentas vinculadas 1). Con sidebar, unas 219 de 243 (~90 %): orden de magnitud, una pantalla puede tener más de una declaración.
@@ -154,7 +154,17 @@ La página del caso quedó con una capa para lectura rápida: porcentajes, imág
 - **Pendientes del prototipo**: los subítems del catálogo y de varios servicios no navegan; guardado por pestaña, acordeón exclusivo y Esc son decisiones mías que Figma no define.
 - **Detalles menores del producto**: `text-secondary_` sin efecto, `content-wrapper--expanded` sin CSS, `--bs-back` mal tipeado, tres familias de íconos, “Perfíl” con la tilde mal puesta.
 
-### Hallazgo 4 · cards, “elegido”, modales y listas
+- Hallazgo 4 (sidebar), párrafo retirado del callout "La propuesta": "Lo que el prototipo todavía no resuelve": el anillo de foco es demasiado tenue (1,89:1, mínimo 3:1) y el botón para expandir el menú es angosto (15 px). Son pendientes reales del prototipo.
+
+### Hallazgo 1 · detalle retirado de la página
+- Links que hacen de botón: el hecho de los 31 íconos clicables sueltos (sin foco de teclado ni nombre accesible; 18 son el ojo de la contraseña) y los criterios WCAG 2.1.1, 4.1.2 y 2.4.4; la nota de método (análisis del HTML de la rama development, sin ejecutar la app).
+- Benchmark: la fila "Estilo" de cada producto (Cloudflare minimalista; DigitalOcean utilitario con ilustraciones y mascota; Hostinger mixto; GoDaddy muy minimalista).
+- Roles semánticos: quedan 6 de 12. Fuera: acción principal hover (#074E9B, 8,2:1) y active (#053A74, 11,3:1), texto secundario (#565E64, 6,6:1), éxito (#246A00, 6,7:1), advertencia (#9B4600, 6,4:1) e información (#0B5D73, 7,4:1).
+- Escalas primitivas: Info, Success, Warning, Danger y Secondary pasaron a tiras de color sin hex ni contraste por paso (Primary y Brand conservan el detalle). Clase `nx-steps--mini` en `css/case-visuals.css`.
+- El componente completo: bloque "Y también en el catálogo" (solo ícono, cierre, segmented control, button group, split button).
+- Badges: el hecho "5 formas de anular las mayúsculas" (estilo en línea, clases, SCSS y reglas forzadas; «ACTIVO» y «Activo» en el mismo flujo), 3 de las 5 filas del estilo suave (Ahorrás 20 %, Vence hoy, Inactivo), la grilla "La familia completa" (7 colores × solid/light × 2 tamaños, todos AA o más) y "Contadores" (círculos de 18 o 24 px en danger y primary, definidos dos veces: sidebar y notificaciones).
+
+### Hallazgo 5 · cards, “elegido”, modales y listas
 
 - Componentes de la card: `nbx-list-item` (19 templates), `nbx-list-item-pending` (12) y `nbx-cloud-list-item` (1). 34 de 90 combinaciones fallan (38 %).
 - “Elegido”: 14 patrones con tres colores (#ff8431, #2d8600, #198754). Borde naranja 2,24:1 contra #f5f5f6; anillo de foco del radio naranja al 25 % (1,25:1). De los nueve mostrados, cuatro no llegan a 3:1 (borde naranja de etiqueta y de tarjeta, sombra 1,09:1, radio sin cambio de caja 1,30:1).
@@ -171,3 +181,11 @@ La página del caso quedó con una capa para lectura rápida: porcentajes, imág
 ### Datos de las réplicas “Hoy” (casos/nubix-hoy/)
 
 Decisión de Gastón (23/10): las réplicas del producto actual usan los mismos datos de ejemplo que los prototipos y el Figma, sin anonimizar aparte. Cuenta: Matías Roldán, Nº cliente 204817 (colaborador: Juan Medina). Servicios de las cards: “Servidor de base de datos” (482917, Corporativo, Windows, vencido), “Sitio institucional” (507316, Corporativo, Linux), “Landing de campaña” (544630) y “Blog de recetas” (551092). Complementos con los nombres del prototipo: Backup diario, WordPress Stage, Cloudflare, Reportes de correo. Catálogo del sidebar: SitioListo, FlowMail, Escudo Web (+ “Email Transaccional”, para conservar los 4 hijos con los que se midieron las paradas de Tab). “Cloud & IaaS” pasó a “Cloud”. Dominio de ejemplo: midominio.com. Segunda pasada (23/10): los ítems del sidebar “Hoy” usan los nombres de la propuesta, uno a uno (Mis productos, Catálogo, Facturas y pagos, Centro de ayuda, Documentación, Partners), y los textos de producción que quedaban en las réplicas pasaron a genéricos o a los del prototipo (“Renovar”, “Creá tu sitio sin escribir código”, “Plantilla de ejemplo”, “Opción de ejemplo”, etiquetas del dominio, pestañas de Cloud). Se dejaron los textos de botón de los headers de lista del Hallazgo 3 (“Nuevo SSL”, “Nuevo Host”, etc.) porque son el dato del hallazgo. Quedan dominios `example.*` solo en la réplica de Cloud (host e IP de ejemplo) y en el nombre largo que prueba el truncado.
+
+### Introducciones de los hallazgos (acortadas)
+Orden de los hallazgos: 1 identidad visual, 2 tablas, 3 headers, 4 sidebar, 5 cards y modales (header y sidebar van seguidos por estar relacionados). Cada intro pasó de ~175-200 palabras a ~80. Datos que quedaron fuera de la página (el resto sigue en las tarjetas y visuales):
+- H5 (cards y modales): el 24 % de los headers de modal es azul y el 76 % blanco, y el color no depende del tipo de modal; ninguna acción de la card de servicio llega a los 44 px de alto recomendados para tocar en mobile.
+- H1: contraste 3,98:1 del azul de los botones con forma de link y falta de tamaño mínimo de toque (siguen en la tarjeta "Links que hacen de botón").
+- H2: 24 celdas con columnas ocultas según ancho; solo 3 encabezados ordenables.
+- H3: las siete piezas enumeradas (barra naranja mobile, barra oscura en 3 pantallas, breadcrumb en 34, header de listas en 16 templates, header de Cloud, título de sección en 77 usos, menú contextual en 20), dos botones de color distinto para crear según la lista, breadcrumb con estilo en línea reimplementado en 18 archivos.
+- H4 (sidebar): el template único que mezcla navegación, notificaciones, promociones, cuenta y cierre de sesión; el naranja del ítem actual demasiado claro; el teclado que recorre links fuera de pantalla en mobile cerrado (el 85 % sigue en la tarjeta de cifras).
