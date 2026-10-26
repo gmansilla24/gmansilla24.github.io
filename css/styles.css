@@ -569,6 +569,10 @@ button { font: inherit; color: inherit; }
 .feature-card--col { flex-direction: column; align-items: flex-start; gap: 16px; }
 
 /* ---------- Recomendaciones ---------- */
+/* Con cuatro recomendaciones, 2 × 2 en escritorio (tres columnas dejarían una tarjeta sola en la segunda fila). */
+@media (min-width: 1024px) {
+  .case-grid--rec { grid-template-columns: repeat(2, 1fr); }
+}
 .rec-card {
   display: flex;
   flex-direction: column;
