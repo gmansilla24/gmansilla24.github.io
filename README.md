@@ -19,7 +19,7 @@ js/main.js            Menú móvil, sección activa, botón "Copiar correo" y av
 js/analytics.js       Estadísticas de visitas con GoatCounter (código gmansilla24; ver "Estadísticas de visitas")
 js/case-nav.js        Índice fijo de la página del caso (Nubix): resalta la sección que se está leyendo
 js/case-specimens.js  Muestras interactivas del caso (Nubix): configurador de botones, tablas que ordenan y se seleccionan, ajuste de los marcos de celular, de las pantallas del prototipo y de los iframes con alto automático
-fonts/                Nunito (autoalojada, licencia OFL) y un subconjunto de Material Icons (licencia Apache 2.0) para la réplica de las tablas de producción (`nx-old-icons`) y de las cards, listas y sidebar (`nx-hoy-*` y `nx-sb-*`, solo los íconos que se usan; la fuente de íconos usa la feature `rlig`, así que al hacer otro subconjunto hay que conservarla)
+fonts/                Nunito y Roboto Mono (autoalojadas, variables, licencia OFL; Roboto Mono la usan las clases `.t-mono*` del sistema de diseño y se declara en `prototipos/sistema/css/producto.css`) y un subconjunto de Material Icons (licencia Apache 2.0) para la réplica de las tablas de producción (`nx-old-icons`) y de las cards, listas y sidebar (`nx-hoy-*` y `nx-sb-*`, solo los íconos que se usan; la fuente de íconos usa la feature `rlig`, así que al hacer otro subconjunto hay que conservarla)
 assets/icons/         Íconos SVG exportados de Figma
 assets/img/           Foto del hero y capturas de los casos
 assets/docs/          CV y handoffs de los prototipos y del sistema de diseño (Usuarios y permisos, Programa de referidos, Sistema de diseño), en PDF (ver "Antes de publicar")
